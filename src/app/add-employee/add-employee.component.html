@@ -1,0 +1,27 @@
+<form #form='ngForm' (ngSubmit)='submitForm()'>
+  <div class="form-group">
+    <label>Imię: </label>
+    <input type="text" class="form-control"
+           name="firstName" [(ngModel)]="firstName"
+           required/>
+  </div>
+  <div class="form-group">
+    <labeL>Nazwisko: </labeL>
+    <input type="text" class="form-control"
+           name="lastName" [(ngModel)]="lastName"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Email: </label>
+    <input type="email" class="form-control"
+           name="email" [(ngModel)]="email"
+           required email/>
+  </div>
+  <div class="form-group">
+    <label>Rola: </label>
+    <select name="role" [(ngModel)]="role" required>
+      <option *ngFor="let r of roles" [value]="r">{{r}}</option>
+    </select>
+  </div>
+  <button type='submit' [disabled]="form.invalid">Submit</button>
+</form>

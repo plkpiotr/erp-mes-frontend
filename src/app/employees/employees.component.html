@@ -1,0 +1,8 @@
+<div>
+  <div *ngFor="let employee of employees">
+    <br>{{employee.id}} {{employee.firstName}} {{employee.lastName}} {{employee.email}} {{employee.role}} {{employee.passwordValid}}
+    <button (click)="fetchEmployee(employee.id)">Zobacz</button>
+    <br>
+  </div>
+  <button (click)="addEmployee()">Dodaj pracownika</button>
+</div>

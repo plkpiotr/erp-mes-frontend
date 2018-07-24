@@ -1,0 +1,9 @@
+<div *ngFor="let team of teams">
+  <br>{{team.id}} {{team.role}} {{team.manager.id}} {{team.manager.role}}
+  <div *ngFor="let employee of team.employees">
+    <br>{{employee.id}} {{employee.role}}
+  </div>
+  <br><button (click)="seeTeam(team.id)">Zobacz zespół</button>
+  <br>
+</div>
+<button (click)="addTeam()">Dodaj zespół</button>

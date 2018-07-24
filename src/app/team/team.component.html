@@ -1,0 +1,8 @@
+<div>
+  <br>{{team.role}}
+  <br>{{team.manager.id}} {{team.manager.role}}
+  <div *ngFor="let employee of team.employees">
+    <br>{{employee.id}} {{employee.role}}
+  </div>
+  <br><button (click)="deleteTeam()">Usuń zespół</button>
+</div>
