@@ -16,6 +16,8 @@ import {EmployeeService} from "../app/employee.service";
 describe('AddTeamComponent', () => {
   let component: AddTeamComponent;
   let fixture: ComponentFixture<AddTeamComponent>;
+  let employeeService: EmployeeService;
+  let teamService: TeamService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,10 +45,35 @@ describe('AddTeamComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddTeamComponent);
     component = fixture.componentInstance;
+    employeeService = TestBed.get(EmployeeService);
+    teamService = TestBed.get(TeamService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call employeeService.fetchAllManagers()', () => {
+    spyOn(employeeService, 'fetchAllManagers').and.callThrough();
+    component.ngOnInit();
+    expect(employeeService.fetchAllManagers).toHaveBeenCalled();
+  });
+
+  it('should call employeeService.fetchAllNonManagers()', () => {
+    spyOn(employeeService, 'fetchAllNonManagers').and.callThrough();
+    component.ngOnInit();
+    expect(employeeService.fetchAllNonManagers).toHaveBeenCalled();
+  });
+
+  describe('when form is submitted', () => {
+    beforeEach(() => {
+      spyOn(teamService, 'addTeam').and.callThrough();
+      component.submitForm();
+    });
+
+    it('should call teamService.addTeam()', () => {
+      expect(teamService.addTeam).toHaveBeenCalled();
+    });
   });
 });

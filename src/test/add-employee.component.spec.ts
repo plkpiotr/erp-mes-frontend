@@ -15,6 +15,7 @@ import {TeamComponent} from "../app/team/team.component";
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
   let fixture: ComponentFixture<AddEmployeeComponent>;
+  let service: EmployeeService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,10 +40,22 @@ describe('AddEmployeeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddEmployeeComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(EmployeeService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('when form is submitted', () => {
+    beforeEach(() => {
+      spyOn(service, 'addEmployee').and.callThrough();
+      component.submitForm();
+    });
+
+    it('should call employeeService.addEmployee()', () => {
+      expect(service.addEmployee).toHaveBeenCalled();
+    });
   });
 });

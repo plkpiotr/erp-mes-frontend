@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="isLoaded">
   <br>{{team.role}}
   <br>{{team.manager.id}} {{team.manager.role}}
   <div *ngFor="let employee of team.employees">

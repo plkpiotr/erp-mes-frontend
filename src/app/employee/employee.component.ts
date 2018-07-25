@@ -11,16 +11,25 @@ import {ActivatedRoute} from "@angular/router";
 export class EmployeeComponent implements OnInit {
 
   private employee: Employee;
+  private isLoaded = false;
 
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute) { }
+  constructor(private employeeService: EmployeeService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.fetchEmployee();
   }
 
   fetchEmployee() {
-    this.employeeService.fetchOneEmployee((this.route.snapshot.params['id'])).subscribe(
-      res => this.employee = res
+    this.employeeService.fetchOneEmployee(this.route.snapshot.params['id']).subscribe(
+      res => {
+        this.employee = res;
+      }, err => {
+        console.log(err);
+      },
+      () => {
+        this.isLoaded = true;
+      }
     );
   }
 

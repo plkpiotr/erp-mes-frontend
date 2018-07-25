@@ -11,13 +11,22 @@ import {Team} from "../types";
 export class TeamComponent implements OnInit {
 
   private team: Team;
+  private isLoaded = false;
 
   constructor(private teamService: TeamService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.teamService.fetchOneTeam(this.route.snapshot.params[('id')])
-      .subscribe(res => this.team = res);
+      .subscribe(res => {
+        this.team = res;
+      },
+        err => {
+        console.log(err);
+        },
+        () => {
+        this.isLoaded = true;
+        });
   }
 
   deleteTeam() {
