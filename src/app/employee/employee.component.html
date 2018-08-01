@@ -1,7 +1,37 @@
-<div *ngIf="isLoaded">
+<div *ngIf="isLoaded()">
   <br>{{employee.firstName}} {{employee.lastName}}
   <br>{{employee.email}}
   <br>{{employee.role}}
   <br>{{employee.passwordValid}}
+  <div *ngFor="let holiday of holidays">
+    <br>{{holiday.startDate}}
+    <br> {{holiday.duration}}
+    <br> {{holiday.holidayType}}
+    <br> {{holiday.approvalState}}
+  </div>
+  <div *ngIf="isManager()"><br>
+    <button (click)="showRequests = !showRequests">Zarządzaj urlopami podwładnych</button>
+    <div *ngIf="showRequests" class="requests">
+      <div *ngIf="hasRequests(); else noRequests">
+        <div *ngFor="let holiday of holidayRequests">
+          <br> {{holiday.employee.firstName}} {{holiday.employee.lastName}}
+          <br> {{holiday.employee.role}}
+          <br>{{holiday.startDate}}
+          <br> {{holiday.duration}}
+          <br> {{holiday.holidayType}}
+          <br> {{holiday.approvalState}}
+          <div *ngIf="holiday.approvalState == 'PENDING'">
+            <button (click)="approve(holiday.id, holiday.employee.id)">Zaakceptuj</button>
+            <button (click)="decline(holiday.id, holiday.employee.id)">Odrzuć</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><button (click)="addHolidayRequest()">Zgłoś urlop</button>
   <br><button (click)="deleteEmployee()">Usuń pracownika</button>
 </div>
+
+<ng-template #noRequests>
+  Nie ma żadnych zgłoszeń!
+</ng-template>

@@ -8,10 +8,12 @@ import {EmployeesComponent} from "../app/employees/employees.component";
 import {AddEmployeeComponent} from "../app/add-employee/add-employee.component";
 import {EmployeeComponent} from "../app/employee/employee.component";
 import {TeamsComponent} from "../app/teams/teams.component";
-import {AddTeamComponent} from "../app/add-team/add-team.component";
 import {TeamComponent} from "../app/team/team.component";
 import {FormsModule} from "@angular/forms";
 import {Role} from "../app/types";
+import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
+import {HolidayService} from "../app/holiday.service";
+import {TeamService} from "../app/team.service";
 
 const mockEmployees = [
   {
@@ -21,7 +23,7 @@ const mockEmployees = [
     email: 'ala.makota@gmail.com',
     role: Role.ACCOUNTANT,
     password: 'aaa333aa',
-    isPasswordValid: false
+    passwordValid: false
   },
   {
     id: 2,
@@ -30,7 +32,7 @@ const mockEmployees = [
     email: 'ola.mapsa@gmail.com',
     role: Role.HR,
     password: 'ooo333oo',
-    isPasswordValid: false
+    passwordValid: false
   }
 ];
 
@@ -42,7 +44,7 @@ const mockManagers = [
     email: 'ala.makota@gmail.com',
     role: Role.ADMIN_ACCOUNTANT,
     password: 'aaa333aa',
-    isPasswordValid: false
+    passwordValid: false
   },
   {
     id: 2,
@@ -51,7 +53,7 @@ const mockManagers = [
     email: 'ola.mapsa@gmail.com',
     role: Role.ADMIN_HR,
     password: 'ooo333oo',
-    isPasswordValid: false
+    passwordValid: false
   }
 ];
 
@@ -69,19 +71,23 @@ describe('EmployeeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes(appRoutes),
-        FormsModule
+        RouterTestingModule.withRoutes(appRoutes)
       ],
       declarations: [
         AddEmployeeComponent,
+        AddHolidayComponent,
         EmployeeComponent,
         EmployeesComponent,
-        TeamsComponent,
-        AddTeamComponent,
-        TeamComponent
+        TeamComponent,
+        TeamsComponent
       ],
-      providers: [EmployeeService]
+      providers: [
+        EmployeeService,
+        HolidayService,
+        TeamService
+      ]
     });
     service = TestBed.get(EmployeeService);
     httpMock = TestBed.get(HttpTestingController);

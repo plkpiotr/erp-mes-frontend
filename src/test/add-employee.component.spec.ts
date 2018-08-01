@@ -9,8 +9,10 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {EmployeeComponent} from "../app/employee/employee.component";
 import {EmployeesComponent} from "../app/employees/employees.component";
 import {TeamsComponent} from "../app/teams/teams.component";
-import {AddTeamComponent} from "../app/add-team/add-team.component";
 import {TeamComponent} from "../app/team/team.component";
+import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
+import {HolidayService} from "../app/holiday.service";
+import {TeamService} from "../app/team.service";
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
@@ -26,13 +28,17 @@ describe('AddEmployeeComponent', () => {
       ],
       declarations: [
         AddEmployeeComponent,
+        AddHolidayComponent,
         EmployeeComponent,
         EmployeesComponent,
-        TeamsComponent,
-        AddTeamComponent,
-        TeamComponent
+        TeamComponent,
+        TeamsComponent
       ],
-      providers: [EmployeeService]
+      providers: [
+        EmployeeService,
+        HolidayService,
+        TeamService
+      ]
     })
       .compileComponents();
   }));

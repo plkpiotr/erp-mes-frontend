@@ -9,9 +9,11 @@ import {appRoutes} from "../app/app.routing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {TeamsComponent} from "../app/teams/teams.component";
-import {AddTeamComponent} from "../app/add-team/add-team.component";
 import {TeamComponent} from "../app/team/team.component";
 import {Role} from "../app/types";
+import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
+import {EmployeeService} from "../app/employee.service";
+import {HolidayService} from "../app/holiday.service";
 
 const mockTeams = [
   {
@@ -24,7 +26,7 @@ const mockTeams = [
       email: 'ola.mapsa@gmail.com',
       role: Role.ADMIN_HR,
       password: 'ooo333oo',
-      isPasswordValid: false
+      passwordValid: false
     },
     employees: [
       {
@@ -34,7 +36,7 @@ const mockTeams = [
         email: 'ala.makota@gmail.com',
         role: Role.HR,
         password: 'aaa333aa',
-        isPasswordValid: false
+        passwordValid: false
       },
       {
         id: 3,
@@ -43,7 +45,7 @@ const mockTeams = [
         email: 'ola.mapsa@gmail.com',
         role: Role.HR,
         password: 'ooo333oo',
-        isPasswordValid: false
+        passwordValid: false
       }
     ]
   },
@@ -57,7 +59,7 @@ const mockTeams = [
       email: 'ola.mapsa@gmail.com',
       role: Role.ADMIN_ACCOUNTANT,
       password: 'ooo333oo',
-      isPasswordValid: false
+      passwordValid: false
     },
     employees: [
       {
@@ -67,7 +69,7 @@ const mockTeams = [
         email: 'ala.makota@gmail.com',
         role: Role.ACCOUNTANT,
         password: 'aaa333aa',
-        isPasswordValid: false
+        passwordValid: false
       },
       {
         id: 6,
@@ -76,17 +78,11 @@ const mockTeams = [
         email: 'ola.mapsa@gmail.com',
         role: Role.ACCOUNTANT,
         password: 'ooo333oo',
-        isPasswordValid: false
+        passwordValid: false
       }
     ]
   }
 ];
-
-const mockTeamRequest = {
-  role: Role.WAREHOUSE,
-  managerId: 1,
-  employeeIds: [2, 3, 4]
-};
 
 describe('TeamService', () => {
   let service: TeamService;
@@ -95,19 +91,23 @@ describe('TeamService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes(appRoutes),
-        FormsModule
+        RouterTestingModule.withRoutes(appRoutes)
       ],
       declarations: [
         AddEmployeeComponent,
+        AddHolidayComponent,
         EmployeeComponent,
         EmployeesComponent,
-        TeamsComponent,
-        AddTeamComponent,
-        TeamComponent
+        TeamComponent,
+        TeamsComponent
       ],
-      providers: [TeamService]
+      providers: [
+        EmployeeService,
+        HolidayService,
+        TeamService
+      ]
     });
     service = TestBed.get(TeamService);
     httpMock = TestBed.get(HttpTestingController);
@@ -146,35 +146,6 @@ describe('TeamService', () => {
         const req = httpMock.expectOne('http://localhost:8080/teams/1');
         expect(req.request.method).toBe("GET");
         req.flush(mockTeams[0]);
-
-        httpMock.verify();
-      });
-    });
-  });
-
-  describe('given addTeam method', () => {
-    describe('when called', () => {
-
-      it('should hit "/teams/add" with POST', () => {
-        service.addTeam(mockTeamRequest).subscribe(() => {
-        });
-
-        const req = httpMock.expectOne('http://localhost:8080/teams');
-        expect(req.request.method).toBe("POST");
-
-        httpMock.verify();
-      });
-    });
-  });
-
-  describe('given deleteTeam method', () => {
-    describe('when called', () => {
-
-      it('should hit "/teams/2" with DELETE', () => {
-        service.deleteTeam(2);
-
-        const req = httpMock.expectOne('http://localhost:8080/teams/2');
-        expect(req.request.method).toBe("DELETE");
 
         httpMock.verify();
       });

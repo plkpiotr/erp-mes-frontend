@@ -10,6 +10,20 @@ export enum Role {
   ADMIN_WAREHOUSE = 'ADMIN_WAREHOUSE'
 }
 
+export enum HolidayType {
+  VACATION = 'VACATION',
+  SICK_LEAVE = 'SICK_LEAVE',
+  PARENTAL_LEAVE = 'PARENTAL_LEAVE',
+  BEREAVEMENT = 'BEREAVEMENT',
+  EMERGENCY_CHILD_CARE = 'EMERGENCY_CHILD_CARE'
+}
+
+export enum ApprovalState {
+  APPROVED = 'APPROVED',
+  DECLINED = 'DECLINED',
+  PENDING = 'PENDING'
+}
+
 export interface Employee {
   id: number;
   firstName: string;
@@ -30,12 +44,21 @@ export interface EmployeeRequest {
 export interface Team {
   id: number;
   role: Role;
-  manager: Employee;
-  employees: Employee[];
+  manager?: Employee;
+  employees?: Employee[];
 }
 
-export interface TeamRequest {
-  role: Role;
-  managerId: number;
-  employeeIds: number[];
+export interface Holiday {
+  id: number;
+  startDate: Date;
+  duration: number;
+  holidayType: HolidayType;
+  approvalState: ApprovalState;
+  employee: Employee;
+}
+
+export interface HolidayRequest {
+  startDate: Date;
+  duration: number;
+  holidayType: HolidayType;
 }

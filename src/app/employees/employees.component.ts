@@ -10,7 +10,7 @@ import {Employee} from "../types";
 })
 export class EmployeesComponent implements OnInit {
 
-  private employees: Array<Employee>;
+  employees: Array<Employee>;
 
   constructor(private employeeService: EmployeeService, private router: Router) { }
 

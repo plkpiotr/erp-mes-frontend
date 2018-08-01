@@ -8,11 +8,13 @@ import {appRoutes} from "../app/app.routing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {EmployeesComponent} from "../app/employees/employees.component";
-import {AddTeamComponent} from "../app/add-team/add-team.component";
 import {TeamComponent} from "../app/team/team.component";
 import {TeamService} from "../app/team.service";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
+import {EmployeeService} from "../app/employee.service";
+import {HolidayService} from "../app/holiday.service";
 
 describe('TeamsComponent', () => {
   let component: TeamsComponent;
@@ -24,19 +26,23 @@ describe('TeamsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes(appRoutes),
-        FormsModule
+        RouterTestingModule.withRoutes(appRoutes)
       ],
       declarations: [
         AddEmployeeComponent,
+        AddHolidayComponent,
         EmployeeComponent,
         EmployeesComponent,
-        TeamsComponent,
-        AddTeamComponent,
-        TeamComponent
+        TeamComponent,
+        TeamsComponent
       ],
-      providers: [TeamService]
+      providers: [
+        EmployeeService,
+        HolidayService,
+        TeamService
+      ]
     })
       .compileComponents();
   }));
@@ -70,19 +76,6 @@ describe('TeamsComponent', () => {
       expect(router.navigate).toHaveBeenCalled();
       tick(50);
       expect(location.path()).toBe('/teams/1');
-    }));
-  });
-
-  describe('When "Dodaj zespół" button is clicked', () => {
-    beforeEach(() => {
-      spyOn(router, 'navigate').and.callThrough();
-    });
-
-    it('should call router.navigate()', fakeAsync(() => {
-      component.addTeam();
-      expect(router.navigate).toHaveBeenCalled();
-      tick(50);
-      expect(location.path()).toBe('/teams/add');
     }));
   });
 });
