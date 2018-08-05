@@ -1,19 +1,19 @@
 import {TestBed} from '@angular/core/testing';
 
 import {EmployeeService} from '../app/employee.service';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {appRoutes} from "../app/app.routing";
-import {EmployeesComponent} from "../app/employees/employees.component";
-import {AddEmployeeComponent} from "../app/add-employee/add-employee.component";
-import {EmployeeComponent} from "../app/employee/employee.component";
-import {TeamsComponent} from "../app/teams/teams.component";
-import {TeamComponent} from "../app/team/team.component";
-import {FormsModule} from "@angular/forms";
-import {Role} from "../app/types";
-import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
-import {HolidayService} from "../app/holiday.service";
-import {TeamService} from "../app/team.service";
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {appRoutes} from '../app/app.routing';
+import {EmployeesComponent} from '../app/employees/employees.component';
+import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
+import {EmployeeComponent} from '../app/employee/employee.component';
+import {TeamsComponent} from '../app/teams/teams.component';
+import {TeamComponent} from '../app/team/team.component';
+import {FormsModule} from '@angular/forms';
+import {Role} from '../app/types';
+import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
+import {HolidayService} from '../app/holiday.service';
+import {TeamService} from '../app/team.service';
 
 const mockEmployees = [
   {
@@ -106,7 +106,7 @@ describe('EmployeeService', () => {
           expect(employees).toEqual(mockEmployees);
 
           const req = httpMock.expectOne('http://localhost:8080/employees');
-          expect(req.request.method).toBe("GET");
+          expect(req.request.method).toBe('GET');
           req.flush(mockEmployees);
 
           httpMock.verify();
@@ -124,7 +124,7 @@ describe('EmployeeService', () => {
           expect(managers).toEqual(mockEmployees);
 
           const req = httpMock.expectOne('http://localhost:8080/employees?privilege=admin');
-          expect(req.request.method).toBe("GET");
+          expect(req.request.method).toBe('GET');
           req.flush(mockManagers);
 
           httpMock.verify();
@@ -142,7 +142,7 @@ describe('EmployeeService', () => {
           expect(employees).toEqual(mockEmployees);
 
           const req = httpMock.expectOne('http://localhost:8080/employees?privilege=user');
-          expect(req.request.method).toBe("GET");
+          expect(req.request.method).toBe('GET');
           req.flush(mockEmployees);
 
           httpMock.verify();
@@ -160,7 +160,7 @@ describe('EmployeeService', () => {
         });
 
         const req = httpMock.expectOne('http://localhost:8080/employees/1');
-        expect(req.request.method).toBe("GET");
+        expect(req.request.method).toBe('GET');
         req.flush(mockEmployees[0]);
 
         httpMock.verify();
@@ -175,7 +175,7 @@ describe('EmployeeService', () => {
         service.addEmployee(employeeRequest).subscribe(() => {});
 
         const req = httpMock.expectOne('http://localhost:8080/employees');
-        expect(req.request.method).toBe("POST");
+        expect(req.request.method).toBe('POST');
 
         httpMock.verify();
       });
@@ -189,7 +189,7 @@ describe('EmployeeService', () => {
         service.deleteEmployee(2);
 
         const req = httpMock.expectOne('http://localhost:8080/employees/2');
-        expect(req.request.method).toBe("DELETE");
+        expect(req.request.method).toBe('DELETE');
 
         httpMock.verify();
       });

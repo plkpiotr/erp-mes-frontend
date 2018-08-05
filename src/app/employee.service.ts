@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Employee, EmployeeRequest} from './types';
 import {Router} from '@angular/router';
-import {Observable} from "rxjs/index";
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class EmployeeService {
@@ -15,34 +15,34 @@ export class EmployeeService {
   }
 
   fetchAllEmployees(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(`http://localhost:8080/employees`, {headers: this.httpHeaders});
+    return this.http.get<Array<Employee>>('http://localhost:8080/employees', {headers: this.httpHeaders});
   }
 
   fetchAllManagers(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(`http://localhost:8080/employees`, {
+    return this.http.get<Array<Employee>>('http://localhost:8080/employees', {
       headers: this.httpHeaders,
       params: {
-        privilege: "admin"
+        privilege: 'admin'
       }
     });
   }
 
   fetchAllNonManagers(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(`http://localhost:8080/employees`, {
+    return this.http.get<Array<Employee>>('http://localhost:8080/employees', {
       headers: this.httpHeaders,
       params: {
-        privilege: "user"
+        privilege: 'user'
       }
     });
 
   }
 
   fetchOneEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`http://localhost:8080/employees/` + id, {headers: this.httpHeaders});
+    return this.http.get<Employee>('http://localhost:8080/employees/' + id, {headers: this.httpHeaders});
   }
 
   addEmployee(request: EmployeeRequest): Observable<Employee> {
-    return this.http.post<Employee>(`http://localhost:8080/employees`, request,
+    return this.http.post<Employee>('http://localhost:8080/employees', request,
       {headers: this.httpHeaders});
   }
 

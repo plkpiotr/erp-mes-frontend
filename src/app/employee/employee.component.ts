@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {EmployeeService} from "../employee.service";
-import {Employee, Holiday} from "../types";
-import {ActivatedRoute, Router} from "@angular/router";
-import {HolidayService} from "../holiday.service";
+import {EmployeeService} from '../employee.service';
+import {Employee, Holiday} from '../types';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HolidayService} from '../holiday.service';
 
 @Component({
   selector: 'app-employee',
@@ -39,10 +39,10 @@ export class EmployeeComponent implements OnInit {
       },
       () => {
         this.isEmployeeLoaded = true;
-        if(this.isManager()) {
+        if (this.isManager()) {
           this.holidayService.fetchHolidaysToApprove(this.route.snapshot.params['id']).subscribe(
             res => {
-              this.holidayRequests = res
+              this.holidayRequests = res;
             }, err => {
               console.log(err);
             }, () => {
@@ -90,7 +90,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   hasRequests(): boolean {
-    return this.holidayRequests.length != 0;
+    return this.holidayRequests.length !== 0;
   }
 
   approve(holidayId: number, employeeId: number) {
@@ -106,7 +106,7 @@ export class EmployeeComponent implements OnInit {
           this.fetchEmployee();
           this.fetchHolidays();
         }
-      )
+      );
   }
 
   decline(holidayId: number, employeeId: number) {
@@ -122,6 +122,6 @@ export class EmployeeComponent implements OnInit {
           this.fetchEmployee();
           this.fetchHolidays();
         }
-      )
+      );
   }
 }

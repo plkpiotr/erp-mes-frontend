@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HolidayService} from "../holiday.service";
-import {ActivatedRoute} from "@angular/router";
-import {HolidayType} from "../types";
+import {HolidayService} from '../holiday.service';
+import {ActivatedRoute} from '@angular/router';
+import {HolidayType} from '../types';
 
 @Component({
   selector: 'app-add-holiday',
