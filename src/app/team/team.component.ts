@@ -10,8 +10,8 @@ import {Team} from "../types";
 })
 export class TeamComponent implements OnInit {
 
-  private team: Team;
-  private isLoaded = false;
+  team: Team;
+  isLoaded = false;
 
   constructor(private teamService: TeamService,
               private route: ActivatedRoute) { }
@@ -28,9 +28,4 @@ export class TeamComponent implements OnInit {
         this.isLoaded = true;
         });
   }
-
-  deleteTeam() {
-    this.teamService.deleteTeam(this.route.snapshot.params[('id')]);
-  }
-
 }

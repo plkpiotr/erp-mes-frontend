@@ -1,25 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeamComponent } from '../app/team/team.component';
-import {TeamsComponent} from "../app/teams/teams.component";
-import {EmployeesComponent} from "../app/employees/employees.component";
-import {EmployeeComponent} from "../app/employee/employee.component";
+import { AddHolidayComponent } from '../app/add-holiday/add-holiday.component';
 import {AddEmployeeComponent} from "../app/add-employee/add-employee.component";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {appRoutes} from "../app/app.routing";
 import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule} from "@angular/forms";
-import {TeamService} from "../app/team.service";
-import {ActivatedRoute} from "@angular/router";
+import {EmployeeComponent} from "../app/employee/employee.component";
+import {EmployeesComponent} from "../app/employees/employees.component";
+import {TeamComponent} from "../app/team/team.component";
+import {TeamsComponent} from "../app/teams/teams.component";
 import {EmployeeService} from "../app/employee.service";
-import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
 import {HolidayService} from "../app/holiday.service";
+import {TeamService} from "../app/team.service";
 
-describe('TeamComponent', () => {
-  let component: TeamComponent;
-  let fixture: ComponentFixture<TeamComponent>;
-  let service: TeamService;
-  let route: ActivatedRoute;
+describe('AddHolidayComponent', () => {
+  let component: AddHolidayComponent;
+  let fixture: ComponentFixture<AddHolidayComponent>;
+  let service: HolidayService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,10 +44,9 @@ describe('TeamComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TeamComponent);
+    fixture = TestBed.createComponent(AddHolidayComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(TeamService);
-    route = TestBed.get(ActivatedRoute);
+    service = TestBed.get(HolidayService);
     fixture.detectChanges();
   });
 
@@ -57,9 +54,14 @@ describe('TeamComponent', () => {
     expect(component).toBeTruthy();
   });
 
-   it('should call teamService.fetchOneTeam()', () => {
-    spyOn(service, 'fetchOneTeam').and.callThrough();
-    component.ngOnInit();
-    expect(service.fetchOneTeam).toHaveBeenCalledWith(route.snapshot.params['id']);
+  describe('when form is submitted', () => {
+    beforeEach(() => {
+      spyOn(service, 'addHoliday').and.callThrough();
+      component.submitForm();
+    });
+
+    it('should call holidayService.addHoliday()', () => {
+      expect(service.addHoliday).toHaveBeenCalled();
+    });
   });
 });

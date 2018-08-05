@@ -1,8 +1,11 @@
 <div *ngIf="isLoaded">
   <br>{{team.role}}
-  <br>{{team.manager.id}} {{team.manager.role}}
-  <div *ngFor="let employee of team.employees">
-    <br>{{employee.id}} {{employee.role}}
+  <div *ngIf="team.manager">
+    {{team.manager.id}} {{team.manager.lastName}}
   </div>
-  <br><button (click)="deleteTeam()">Usuń zespół</button>
+  <div *ngIf="team.employees">
+    <div *ngFor="let employee of team.employees">
+      <br>{{employee.id}} {{employee.lastName}}
+    </div>
+  </div>
 </div>

@@ -10,12 +10,12 @@ import {Router} from "@angular/router";
 })
 export class AddEmployeeComponent implements OnInit {
 
-  private employeeRequest;
-  private firstName: string;
-  private lastName: string;
-  private email: string;
-  private role: Role;
-  private roles;
+  employeeRequest;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: Role;
+  roles;
 
   constructor(private employeeService: EmployeeService,
               private router: Router) {

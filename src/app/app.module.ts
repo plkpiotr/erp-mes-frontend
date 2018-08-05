@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
@@ -13,9 +12,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import {EmployeeService} from "./employee.service";
 import { TeamsComponent } from './teams/teams.component';
 import { TeamComponent } from './team/team.component';
-import { AddTeamComponent } from './add-team/add-team.component';
 import {TeamService} from "./team.service";
-
+import { AddHolidayComponent } from './add-holiday/add-holiday.component';
+import {HolidayService} from "./holiday.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import {TeamService} from "./team.service";
     EmployeeComponent,
     TeamsComponent,
     TeamComponent,
-    AddTeamComponent
+    AddHolidayComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +33,11 @@ import {TeamService} from "./team.service";
     routing,
     FormsModule
   ],
-  providers: [EmployeeService, TeamService],
+  providers: [
+    EmployeeService,
+    TeamService,
+    HolidayService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

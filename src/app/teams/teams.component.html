@@ -1,9 +1,16 @@
-<div *ngFor="let team of teams">
-  <br>{{team.id}} {{team.role}} {{team.manager.id}} {{team.manager.role}}
-  <div *ngFor="let employee of team.employees">
-    <br>{{employee.id}} {{employee.role}}
+<div *ngIf="isLoaded">
+  <div *ngFor="let team of teams">
+    <br>{{team.id}} {{team.role}}
+    <div *ngIf="team.manager">
+      {{team.manager.id}} {{team.manager.lastName}}
+    </div>
+    <div *ngIf="team.employees">
+      <div *ngFor="let employee of team.employees">
+        <br>{{employee.id}} {{employee.lastName}}
+      </div>
+    </div>
+    <br>
+    <button (click)="seeTeam(team.id)">Zobacz zespół</button>
+    <br>
   </div>
-  <br><button (click)="seeTeam(team.id)">Zobacz zespół</button>
-  <br>
 </div>
-<button (click)="addTeam()">Dodaj zespół</button>

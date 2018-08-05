@@ -10,21 +10,23 @@ import {Team} from "../types";
 })
 export class TeamsComponent implements OnInit {
 
-  private teams: Array<Team>;
+  teams: Array<Team>;
+  isLoaded = false;
 
   constructor(private router: Router,
               private teamService: TeamService) { }
 
   ngOnInit() {
-    this.teamService.fetchAllTeams().subscribe(res => this.teams = res);
+    this.teamService.fetchAllTeams().subscribe(res => {
+      this.teams = res;
+    }, err => {
+      console.log(err);
+    }, () => {
+      this.isLoaded = true;
+    });
   }
 
   seeTeam(id: number) {
     this.router.navigate(["/teams", id]);
   }
-
-  addTeam() {
-    this.router.navigate(["/teams/add"]);
-  }
-
 }
