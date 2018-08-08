@@ -30,6 +30,30 @@ export enum Category {
   DONE = 'DONE'
 }
 
+export enum ExpenseType {
+  SHIPPING = 'SHIPPING',
+  BILLS = 'BILLS',
+  RENT = 'RENT',
+  SALARIES = 'SALARIES',
+  STOCK = 'STOCK',
+  SOCIAL_FUND = 'SOCIAL_FUND',
+  UNEXPECTED = 'UNEXPECTED',
+  TAXES = 'TAXES'
+}
+
+export interface Contract {
+  id: number;
+  accountNumber: string;
+  daysOffPerYear: number;
+  salary: number;
+}
+
+export interface ContractRequest {
+  accountNumber: string;
+  daysOffPerYear: number;
+  salary: number;
+}
+
 export interface Employee {
   id: number;
   firstName: string;
@@ -38,6 +62,7 @@ export interface Employee {
   role: Role;
   password: string;
   passwordValid: boolean;
+  contract: Contract;
 }
 
 export interface EmployeeRequest {
@@ -45,6 +70,7 @@ export interface EmployeeRequest {
   lastName: string;
   email: string;
   role: Role;
+  contractRequest: ContractRequest;
 }
 
 export interface Team {
@@ -92,3 +118,60 @@ export interface TaskRequest {
   estimatedTimeInMinutes: number;
   deadline: Date;
 }
+
+export interface EstimatedCosts {
+  id: number;
+  estimatedIncome: number;
+  estimatedShippingCosts: number;
+  estimatedBills: number;
+  rent: number;
+  salaries: number;
+  stockCosts: number;
+  socialFund: number;
+  unexpected: number;
+  taxes: number;
+}
+
+export interface EstimatesCostsRequest {
+  estimatedIncome: number;
+  estimatedShippingCosts: number;
+  estimatedBills: number;
+  rent: number;
+  salaries: number;
+  stockCosts: number;
+  socialFund: number;
+  unexpected: number;
+  taxes: number;
+}
+
+export interface Expense {
+  id: number;
+  expenseType: ExpenseType;
+  amount: number;
+}
+
+export interface ExpenseRequest {
+  expenseType: ExpenseType;
+  amount: number;
+}
+
+export interface MonthlyReport {
+  id: number;
+  expenses: Expense[];
+  income: number[];
+  startDate: Date;
+  overallExpenses: number;
+  overallIncome: number;
+  balance: number;
+  estimatedCosts: EstimatedCosts;
+}
+
+export interface CurrentReport {
+  id: number;
+  expenses: Expense[];
+  income: number;
+  estimatedCosts: EstimatedCosts;
+  startDate: Date;
+}
+
+

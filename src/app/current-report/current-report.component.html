@@ -1,0 +1,33 @@
+<div *ngIf="isReportLoaded">
+  <div *ngFor="let expense of currentReport.expenses">
+    {{expense.id}} {{expense.expenseType}} {{expense.amount}}
+  </div>
+  <div *ngFor="let inc of currentReport.income">
+    {{inc}}
+  </div>
+  <br> {{currentReport.startDate}}
+  <br> {{currentReport.estimatedCosts.estimatedIncome}}
+  <br> {{currentReport.estimatedCosts.estimatedShippingCosts}}
+  <br> {{currentReport.estimatedCosts.rent}}
+  <br> {{currentReport.estimatedCosts.salaries}}
+  <br> {{currentReport.estimatedCosts.socialFund}}
+  <br> {{currentReport.estimatedCosts.stockCosts}}
+  <br> {{currentReport.estimatedCosts.taxes}}
+  <br> {{currentReport.estimatedCosts.unexpected}}
+</div>
+<br>
+<button (click)="showAddIncome = !showAddIncome">Dodaj zysk</button>
+<div *ngIf="showAddIncome">
+  <form #form='ngForm' (ngSubmit)='addIncome()'>
+    <div class="form-group">
+      <labeL>Ilość: </labeL>
+      <input type="number" class="form-control"
+             name="income" [(ngModel)]="income"
+             required min="0"/>
+    </div>
+    <button type='submit' [disabled]="form.invalid">Dodaj</button>
+  </form>
+</div>
+
+<!-- addExpense! -->
+<!-- recalculate EstimatedCosts!!! -->

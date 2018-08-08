@@ -13,6 +13,7 @@ import {TaskService} from '../task.service';
 export class EmployeeComponent implements OnInit {
 
   employee: Employee;
+  subordinates: Employee[];
   tasks: Task[];
   holidays: Holiday[];
   holidayRequests: Holiday[];
@@ -20,6 +21,7 @@ export class EmployeeComponent implements OnInit {
   areTasksLoaded = false;
   areHolidaysLoaded = false;
   areRequestsLoaded = false;
+  areSubordinatesLoaded = false;
   showRequests = false;
 
   constructor(private employeeService: EmployeeService,
@@ -54,6 +56,14 @@ export class EmployeeComponent implements OnInit {
               this.areRequestsLoaded = true;
             }
           );
+
+          this.employeeService.fetchSubordinates(this.route.snapshot.params['id']).subscribe(res => {
+            this.subordinates = res;
+          }, err => {
+            console.log(err);
+          }, () => {
+            this.areSubordinatesLoaded = true;
+          })
         } else {
           this.areRequestsLoaded = true;
         }
@@ -141,5 +151,9 @@ export class EmployeeComponent implements OnInit {
           this.fetchHolidays();
         }
       );
+  }
+
+  hasSubordinates(): boolean {
+    return this.areSubordinatesLoaded && this.subordinates.length > 0;
   }
 }

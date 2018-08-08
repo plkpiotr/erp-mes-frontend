@@ -1,0 +1,6 @@
+<div *ngIf="areReportsLoaded">
+  <div *ngFor="let report of reports">
+    {{report.id}} {{report.startDate}}
+    <button (click)="seeReport(report.id)">Zobacz</button>
+  </div>
+</div>

@@ -15,6 +15,9 @@ export class AddEmployeeComponent implements OnInit {
   lastName: string;
   email: string;
   role: Role;
+  accountNumber: string;
+  daysOffPerYear: number;
+  salary: number;
   roles;
 
   constructor(private employeeService: EmployeeService,
@@ -30,7 +33,12 @@ export class AddEmployeeComponent implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      role: this.role
+      role: this.role,
+      contractRequest: {
+        accountNumber: this.accountNumber,
+        daysOffPerYear: this.daysOffPerYear,
+        salary: this.salary
+      }
     };
     let employee: Employee;
     this.employeeService.addEmployee(this.employeeRequest)

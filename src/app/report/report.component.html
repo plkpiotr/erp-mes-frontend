@@ -1,0 +1,20 @@
+<div *ngIf="isReportLoaded">
+  <div *ngFor="let expense of report.expenses">
+    {{expense.id}} {{expense.expenseType}} {{expense.amount}}
+  </div>
+  <div *ngFor="let inc of report.income">
+    {{inc}}
+  </div>
+  <br> {{report.startDate}}
+  <br> {{report.overallExpenses}}
+  <br> {{report.overallIncome}}
+  <br> {{report.balance}}
+  <br> {{report.estimatedCosts.estimatedIncome}}
+  <br> {{report.estimatedCosts.estimatedShippingCosts}}
+  <br> {{report.estimatedCosts.rent}}
+  <br> {{report.estimatedCosts.salaries}}
+  <br> {{report.estimatedCosts.socialFund}}
+  <br> {{report.estimatedCosts.stockCosts}}
+  <br> {{report.estimatedCosts.taxes}}
+  <br> {{report.estimatedCosts.unexpected}}
+</div>
