@@ -7,6 +7,17 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {appRoutes} from '../app/app.routing';
+import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
+import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
+import {EmployeeComponent} from '../app/employee/employee.component';
+import {EmployeesComponent} from '../app/employees/employees.component';
+import {TeamComponent} from '../app/team/team.component';
+import {TeamsComponent} from '../app/teams/teams.component';
+import {TasksComponent} from '../app/tasks/tasks.component';
+import {EmployeeService} from '../app/employee.service';
+import {HolidayService} from '../app/holiday.service';
+import {TeamService} from '../app/team.service';
+import {AddTaskComponent} from '../app/add-task/add-task.component';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -21,8 +32,23 @@ describe('TaskComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule.withRoutes(appRoutes)
       ],
-      declarations: [TaskComponent],
-      providers: [TaskService]
+      declarations: [
+        AddEmployeeComponent,
+        AddHolidayComponent,
+        AddTaskComponent,
+        EmployeeComponent,
+        EmployeesComponent,
+        TeamComponent,
+        TeamsComponent,
+        TasksComponent,
+        TaskComponent
+      ],
+      providers: [
+        EmployeeService,
+        HolidayService,
+        TeamService,
+        TaskService
+      ]
     })
     .compileComponents();
   }));

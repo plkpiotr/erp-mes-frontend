@@ -15,6 +15,10 @@ import {Location} from '@angular/common';
 import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
 import {HolidayService} from '../app/holiday.service';
 import {TeamService} from '../app/team.service';
+import {TasksComponent} from '../app/tasks/tasks.component';
+import {TaskService} from '../app/task.service';
+import {TaskComponent} from '../app/task/task.component';
+import {AddTaskComponent} from '../app/add-task/add-task.component';
 
 describe('EmployeesComponent', () => {
   let component: EmployeesComponent;
@@ -33,15 +37,19 @@ describe('EmployeesComponent', () => {
       declarations: [
         AddEmployeeComponent,
         AddHolidayComponent,
+        AddTaskComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
-        TeamsComponent
+        TeamsComponent,
+        TasksComponent,
+        TaskComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
-        TeamService
+        TeamService,
+        TaskService
       ]
     })
       .compileComponents();

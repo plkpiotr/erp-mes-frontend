@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
 import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskComponent} from '../app/task/task.component';
+import {AddTaskComponent} from '../app/add-task/add-task.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,6 +23,7 @@ describe('AppComponent', () => {
         AppComponent,
         AddEmployeeComponent,
         AddHolidayComponent,
+        AddTaskComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamsComponent,

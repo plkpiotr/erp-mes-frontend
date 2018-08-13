@@ -14,6 +14,10 @@ import {TeamsComponent} from '../app/teams/teams.component';
 import {EmployeeService} from '../app/employee.service';
 import {TeamService} from '../app/team.service';
 import {ApprovalState, HolidayType, Role} from '../app/types';
+import {TasksComponent} from '../app/tasks/tasks.component';
+import {TaskService} from '../app/task.service';
+import {TaskComponent} from '../app/task/task.component';
+import {AddTaskComponent} from '../app/add-task/add-task.component';
 
 const mockEmployee = {
   id: 1,
@@ -73,15 +77,19 @@ describe('HolidayService', () => {
       declarations: [
         AddEmployeeComponent,
         AddHolidayComponent,
+        AddTaskComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
-        TeamsComponent
+        TeamsComponent,
+        TasksComponent,
+        TaskComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
-        TeamService
+        TeamService,
+        TaskService
       ]
     });
     service = TestBed.get(HolidayService);

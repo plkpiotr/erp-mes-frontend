@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TeamComponent} from '../app/team/team.component';
 import {TeamsComponent} from '../app/teams/teams.component';
@@ -14,6 +14,10 @@ import {ActivatedRoute} from '@angular/router';
 import {EmployeeService} from '../app/employee.service';
 import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
 import {HolidayService} from '../app/holiday.service';
+import {TasksComponent} from '../app/tasks/tasks.component';
+import {TaskService} from '../app/task.service';
+import {TaskComponent} from '../app/task/task.component';
+import {AddTaskComponent} from '../app/add-task/add-task.component';
 
 describe('TeamComponent', () => {
   let component: TeamComponent;
@@ -31,15 +35,19 @@ describe('TeamComponent', () => {
       declarations: [
         AddEmployeeComponent,
         AddHolidayComponent,
+        AddTaskComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
-        TeamsComponent
+        TeamsComponent,
+        TasksComponent,
+        TaskComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
-        TeamService
+        TeamService,
+        TaskService
       ]
     })
     .compileComponents();
