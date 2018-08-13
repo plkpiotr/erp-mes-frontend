@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Holiday, HolidayRequest} from "./types";
-import {Observable} from "rxjs/index";
+import {Router} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Holiday, HolidayRequest} from './types';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +27,10 @@ export class HolidayService {
       .subscribe(() => {
         },
         err => {
-          console.log(err)
+          console.log(err);
         },
         () => {
-          this.router.navigate(['/employees', employeeId])
+          this.router.navigate(['/employees', employeeId]);
         });
   }
 

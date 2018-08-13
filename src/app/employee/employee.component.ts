@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {EmployeeService} from "../employee.service";
-import {Employee, Holiday} from "../types";
-import {ActivatedRoute, Router} from "@angular/router";
-import {HolidayService} from "../holiday.service";
+import {EmployeeService} from '../employee.service';
+import {Employee, Holiday, Task} from '../types';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HolidayService} from '../holiday.service';
+import {TaskService} from '../task.service';
 
 @Component({
   selector: 'app-employee',
@@ -11,15 +12,18 @@ import {HolidayService} from "../holiday.service";
 })
 export class EmployeeComponent implements OnInit {
 
-  private employee: Employee;
-  private holidays: Holiday[];
-  private holidayRequests: Holiday[];
-  private isEmployeeLoaded = false;
-  private areHolidaysLoaded = false;
-  private areRequestsLoaded = false;
-  private showRequests = false;
+  employee: Employee;
+  tasks: Task[];
+  holidays: Holiday[];
+  holidayRequests: Holiday[];
+  isEmployeeLoaded = false;
+  areTasksLoaded = false;
+  areHolidaysLoaded = false;
+  areRequestsLoaded = false;
+  showRequests = false;
 
   constructor(private employeeService: EmployeeService,
+              private tasksService: TaskService,
               private holidayService: HolidayService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -27,6 +31,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchEmployee();
+    this.fetchTasksByAssignee();
     this.fetchHolidays();
   }
 
@@ -39,10 +44,10 @@ export class EmployeeComponent implements OnInit {
       },
       () => {
         this.isEmployeeLoaded = true;
-        if(this.isManager()) {
+        if (this.isManager()) {
           this.holidayService.fetchHolidaysToApprove(this.route.snapshot.params['id']).subscribe(
             res => {
-              this.holidayRequests = res
+              this.holidayRequests = res;
             }, err => {
               console.log(err);
             }, () => {
@@ -69,6 +74,19 @@ export class EmployeeComponent implements OnInit {
     );
   }
 
+  fetchTasksByAssignee() {
+    this.tasksService.fetchTasksByAssignee(this.route.snapshot.params['id']).subscribe(
+      res => {
+        this.tasks = res;
+      }, err => {
+        console.log(err);
+      },
+      () => {
+        this.areTasksLoaded = true;
+      }
+    );
+  }
+
   isManager(): boolean {
     return this.employee.role.toLocaleString().includes('ADMIN');
   }
@@ -90,7 +108,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   hasRequests(): boolean {
-    return this.holidayRequests.length != 0;
+    return this.holidayRequests.length !== 0;
   }
 
   approve(holidayId: number, employeeId: number) {
@@ -106,7 +124,7 @@ export class EmployeeComponent implements OnInit {
           this.fetchEmployee();
           this.fetchHolidays();
         }
-      )
+      );
   }
 
   decline(holidayId: number, employeeId: number) {
@@ -122,6 +140,6 @@ export class EmployeeComponent implements OnInit {
           this.fetchEmployee();
           this.fetchHolidays();
         }
-      )
+      );
   }
 }

@@ -24,6 +24,12 @@ export enum ApprovalState {
   PENDING = 'PENDING'
 }
 
+export enum Category {
+  TODO = 'TODO',
+  DOING = 'DOING',
+  DONE = 'DONE'
+}
+
 export interface Employee {
   id: number;
   firstName: string;
@@ -61,4 +67,28 @@ export interface HolidayRequest {
   startDate: Date;
   duration: number;
   holidayType: HolidayType;
+}
+
+export interface Task {
+  id: number;
+  name: string;
+  category: Category;
+  assignee?: Employee;
+  precedingTasks: Task[];
+  details: string;
+  estimatedTimeInMinutes: number;
+  deadline: Date;
+  creationTime: Date;
+  startTime?: Date;
+  endTime?: Date;
+}
+
+export interface TaskRequest {
+  name: string;
+  category: Category;
+  assigneeId?: number;
+  precedingTaskIds: number[];
+  details: string;
+  estimatedTimeInMinutes: number;
+  deadline: Date;
 }

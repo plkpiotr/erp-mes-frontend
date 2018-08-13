@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee, Role} from "../types";
-import {EmployeeService} from "../employee.service";
-import {Router} from "@angular/router";
+import {Employee, Role} from '../types';
+import {EmployeeService} from '../employee.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',

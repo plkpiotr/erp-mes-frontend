@@ -1,18 +1,18 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
-import {FormsModule} from "@angular/forms";
-import {EmployeeService} from "../app/employee.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {appRoutes} from "../app/app.routing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {EmployeeComponent} from "../app/employee/employee.component";
-import {EmployeesComponent} from "../app/employees/employees.component";
-import {TeamsComponent} from "../app/teams/teams.component";
-import {TeamComponent} from "../app/team/team.component";
-import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
-import {HolidayService} from "../app/holiday.service";
-import {TeamService} from "../app/team.service";
+import {FormsModule} from '@angular/forms';
+import {EmployeeService} from '../app/employee.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {appRoutes} from '../app/app.routing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {EmployeeComponent} from '../app/employee/employee.component';
+import {EmployeesComponent} from '../app/employees/employees.component';
+import {TeamsComponent} from '../app/teams/teams.component';
+import {TeamComponent} from '../app/team/team.component';
+import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
+import {HolidayService} from '../app/holiday.service';
+import {TeamService} from '../app/team.service';
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;

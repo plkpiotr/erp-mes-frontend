@@ -1,19 +1,19 @@
 import {TestBed} from '@angular/core/testing';
 
 import {TeamService} from '../app/team.service';
-import {EmployeesComponent} from "../app/employees/employees.component";
-import {EmployeeComponent} from "../app/employee/employee.component";
-import {AddEmployeeComponent} from "../app/add-employee/add-employee.component";
-import {FormsModule} from "@angular/forms";
-import {appRoutes} from "../app/app.routing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {TeamsComponent} from "../app/teams/teams.component";
-import {TeamComponent} from "../app/team/team.component";
-import {Role} from "../app/types";
-import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
-import {EmployeeService} from "../app/employee.service";
-import {HolidayService} from "../app/holiday.service";
+import {EmployeesComponent} from '../app/employees/employees.component';
+import {EmployeeComponent} from '../app/employee/employee.component';
+import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
+import {FormsModule} from '@angular/forms';
+import {appRoutes} from '../app/app.routing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {TeamsComponent} from '../app/teams/teams.component';
+import {TeamComponent} from '../app/team/team.component';
+import {Role} from '../app/types';
+import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
+import {EmployeeService} from '../app/employee.service';
+import {HolidayService} from '../app/holiday.service';
 
 const mockTeams = [
   {
@@ -126,7 +126,7 @@ describe('TeamService', () => {
           expect(teams).toEqual(mockTeams);
 
           const req = httpMock.expectOne('http://localhost:8080/teams');
-          expect(req.request.method).toBe("GET");
+          expect(req.request.method).toBe('GET');
           req.flush(mockTeams);
 
           httpMock.verify();
@@ -144,7 +144,7 @@ describe('TeamService', () => {
         });
 
         const req = httpMock.expectOne('http://localhost:8080/teams/1');
-        expect(req.request.method).toBe("GET");
+        expect(req.request.method).toBe('GET');
         req.flush(mockTeams[0]);
 
         httpMock.verify();

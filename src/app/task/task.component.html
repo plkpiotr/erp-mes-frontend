@@ -1,0 +1,18 @@
+<div *ngIf="isLoaded">
+  {{task.id}} <br>
+  {{task.category}} <br>
+  {{task.name}} <br>
+  {{task.details}} <br>
+  {{task.assignee.firstName}} <br>
+  {{task.assignee.lastName}} <br>
+  {{task.estimatedTimeInMinutes}} <br>
+  {{task.deadline}} <br>
+  {{task.creationTime}} <br>
+  {{task.startTime}} <br>
+  {{task.endTime}}
+  <div *ngIf="task.precedingTasks">
+    <div *ngFor="let p of task.precedingTasks">
+      {{p.id}} {{p.name}}
+    </div>
+  </div>
+</div>

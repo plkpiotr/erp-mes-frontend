@@ -1,19 +1,19 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {HolidayService} from '../app/holiday.service';
-import {AddHolidayComponent} from "../app/add-holiday/add-holiday.component";
-import {AddEmployeeComponent} from "../app/add-employee/add-employee.component";
-import {appRoutes} from "../app/app.routing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {FormsModule} from "@angular/forms";
-import {EmployeeComponent} from "../app/employee/employee.component";
-import {EmployeesComponent} from "../app/employees/employees.component";
-import {TeamComponent} from "../app/team/team.component";
-import {TeamsComponent} from "../app/teams/teams.component";
-import {EmployeeService} from "../app/employee.service";
-import {TeamService} from "../app/team.service";
-import {ApprovalState, HolidayType, Role} from "../app/types";
+import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
+import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
+import {appRoutes} from '../app/app.routing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {FormsModule} from '@angular/forms';
+import {EmployeeComponent} from '../app/employee/employee.component';
+import {EmployeesComponent} from '../app/employees/employees.component';
+import {TeamComponent} from '../app/team/team.component';
+import {TeamsComponent} from '../app/teams/teams.component';
+import {EmployeeService} from '../app/employee.service';
+import {TeamService} from '../app/team.service';
+import {ApprovalState, HolidayType, Role} from '../app/types';
 
 const mockEmployee = {
   id: 1,
@@ -101,7 +101,7 @@ describe('HolidayService', () => {
           expect(holidays).toEqual(mockHolidays);
 
           const req = httpMock.expectOne('http://localhost:8080/employees/1/holidays');
-          expect(req.request.method).toBe("GET");
+          expect(req.request.method).toBe('GET');
           req.flush(mockHolidays);
 
           httpMock.verify();
@@ -117,7 +117,7 @@ describe('HolidayService', () => {
         service.addHoliday(mockHolidayRequest, 1);
 
         const req = httpMock.expectOne('http://localhost:8080/employees/1/holidays');
-        expect(req.request.method).toBe("POST");
+        expect(req.request.method).toBe('POST');
 
         httpMock.verify();
       });
@@ -133,7 +133,7 @@ describe('HolidayService', () => {
           expect(holidays).toEqual(mockHolidays);
 
           const req = httpMock.expectOne('http://localhost:8080/employees/1/subordinates/holiday-requests');
-          expect(req.request.method).toBe("GET");
+          expect(req.request.method).toBe('GET');
           req.flush(mockHolidays);
 
           httpMock.verify();
@@ -146,12 +146,12 @@ describe('HolidayService', () => {
     describe('when called', () => {
 
       it('should hit "/employees/{managerId}/subordinates/{subordinateId}/holidays" with POST', () => {
-        service.manageHolidays(1,2,1,'true').subscribe(holiday => {
+        service.manageHolidays(1, 2, 1, 'true').subscribe(holiday => {
           expect(holiday.approvalState).toBe(ApprovalState.APPROVED);
           expect(holiday).toEqual(mockApprovedHoliday);
 
           const req = httpMock.expectOne('http://localhost:8080/employees/1/subordinates/2/holidays');
-          expect(req.request.method).toBe("POST");
+          expect(req.request.method).toBe('POST');
           req.flush(mockApprovedHoliday);
 
           httpMock.verify();
