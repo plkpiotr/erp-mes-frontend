@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../task.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Category, Task} from '../types';
 
 @Component({
@@ -13,7 +13,7 @@ export class TasksComponent implements OnInit {
   tasks: Array<Task>;
   isLoaded = false;
 
-  constructor(private taskService: TaskService, private router: ActivatedRoute) { }
+  constructor(private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
     this.taskService.fetchAllTasks().subscribe(res => {
@@ -25,8 +25,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  fetchTasks() {
-    this.taskService.fetchAllTasks().subscribe(res => this.tasks = res);
+  seeTask(id: number) {
+    this.router.navigate(['/tasks', id]);
   }
-
 }

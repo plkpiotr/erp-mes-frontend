@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeamComponent } from '../app/team/team.component';
+import {TeamComponent} from '../app/team/team.component';
 import {TeamsComponent} from '../app/teams/teams.component';
 import {EmployeesComponent} from '../app/employees/employees.component';
 import {EmployeeComponent} from '../app/employee/employee.component';

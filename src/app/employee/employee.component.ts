@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from '../employee.service';
-import {Employee, Holiday} from '../types';
+import {Employee, Holiday, Task} from '../types';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HolidayService} from '../holiday.service';
+import {TaskService} from '../task.service';
 
 @Component({
   selector: 'app-employee',
@@ -12,14 +13,17 @@ import {HolidayService} from '../holiday.service';
 export class EmployeeComponent implements OnInit {
 
   employee: Employee;
+  tasks: Task[];
   holidays: Holiday[];
   holidayRequests: Holiday[];
   isEmployeeLoaded = false;
+  areTasksLoaded = false;
   areHolidaysLoaded = false;
   areRequestsLoaded = false;
   showRequests = false;
 
   constructor(private employeeService: EmployeeService,
+              private tasksService: TaskService,
               private holidayService: HolidayService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -27,6 +31,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchEmployee();
+    this.fetchTasksByAssignee();
     this.fetchHolidays();
   }
 
@@ -65,6 +70,19 @@ export class EmployeeComponent implements OnInit {
       },
       () => {
         this.areHolidaysLoaded = true;
+      }
+    );
+  }
+
+  fetchTasksByAssignee() {
+    this.tasksService.fetchTasksByAssignee(this.route.snapshot.params['id']).subscribe(
+      res => {
+        this.tasks = res;
+      }, err => {
+        console.log(err);
+      },
+      () => {
+        this.areTasksLoaded = true;
       }
     );
   }

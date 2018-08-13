@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddHolidayComponent } from '../app/add-holiday/add-holiday.component';
+import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
 import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
 import {appRoutes} from '../app/app.routing';
 import {RouterTestingModule} from '@angular/router/testing';
