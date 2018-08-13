@@ -15,6 +15,10 @@ import {TeamComponent} from './team/team.component';
 import {TeamService} from './team.service';
 import {AddHolidayComponent} from './add-holiday/add-holiday.component';
 import {HolidayService} from './holiday.service';
+import {AddTaskComponent} from './add-task/add-task.component';
+import {TaskComponent} from './task/task.component';
+import {TasksComponent} from './tasks/tasks.component';
+import {TaskService} from './task.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import {HolidayService} from './holiday.service';
     EmployeeComponent,
     TeamsComponent,
     TeamComponent,
-    AddHolidayComponent
+    AddHolidayComponent,
+    AddTaskComponent,
+    TaskComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,8 @@ import {HolidayService} from './holiday.service';
   providers: [
     EmployeeService,
     TeamService,
-    HolidayService
+    HolidayService,
+    TaskService,
   ],
   bootstrap: [AppComponent]
 })

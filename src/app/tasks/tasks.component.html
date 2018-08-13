@@ -1,0 +1,11 @@
+<div *ngIf="isLoaded">
+  <div *ngFor="let t of tasks">
+    {{t.id}} {{t.category}} {{t.name}} {{t.details}} {{t.assignee.firstName}} {{t.assignee.lastName}}
+    {{t.estimatedTimeInMinutes}} {{t.deadline}} {{t.creationTime}} {{t.startTime}} {{t.endTime}}
+    <div *ngIf="t.precedingTasks">
+      <div *ngFor="let p of t.precedingTasks">
+        {{p.id}} {{p.name}}
+      </div>
+    </div>
+  </div>
+</div>

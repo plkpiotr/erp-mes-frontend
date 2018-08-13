@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {TeamService} from "../team.service";
-import {Team} from "../types";
+import {Router} from '@angular/router';
+import {TeamService} from '../team.service';
+import {Team} from '../types';
 
 @Component({
   selector: 'app-teams',
@@ -27,6 +27,6 @@ export class TeamsComponent implements OnInit {
   }
 
   seeTeam(id: number) {
-    this.router.navigate(["/teams", id]);
+    this.router.navigate(['/teams', id]);
   }
 }

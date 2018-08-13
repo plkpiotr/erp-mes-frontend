@@ -11,13 +11,13 @@ import {HolidayService} from '../holiday.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  private employee: Employee;
-  private holidays: Holiday[];
-  private holidayRequests: Holiday[];
-  private isEmployeeLoaded = false;
-  private areHolidaysLoaded = false;
-  private areRequestsLoaded = false;
-  private showRequests = false;
+  employee: Employee;
+  holidays: Holiday[];
+  holidayRequests: Holiday[];
+  isEmployeeLoaded = false;
+  areHolidaysLoaded = false;
+  areRequestsLoaded = false;
+  showRequests = false;
 
   constructor(private employeeService: EmployeeService,
               private holidayService: HolidayService,

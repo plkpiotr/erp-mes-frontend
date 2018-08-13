@@ -6,7 +6,7 @@
            required/>
   </div>
   <div class="form-group">
-    <labeL>Nazwisko: </labeL>
+    <label>Nazwisko: </label>
     <input type="text" class="form-control"
            name="lastName" [(ngModel)]="lastName"
            required/>
@@ -23,5 +23,5 @@
       <option *ngFor="let r of roles" [value]="r">{{r}}</option>
     </select>
   </div>
-  <button type='submit' [disabled]="form.invalid">Submit</button>
+  <button type='submit' [disabled]="form.invalid">Dodaj pracownika</button>
 </form>
