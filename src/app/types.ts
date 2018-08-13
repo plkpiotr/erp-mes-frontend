@@ -132,7 +132,7 @@ export interface EstimatedCosts {
   taxes: number;
 }
 
-export interface EstimatesCostsRequest {
+export interface EstimatedCostsRequest {
   estimatedIncome: number;
   estimatedShippingCosts: number;
   estimatedBills: number;
@@ -141,7 +141,6 @@ export interface EstimatesCostsRequest {
   stockCosts: number;
   socialFund: number;
   unexpected: number;
-  taxes: number;
 }
 
 export interface Expense {

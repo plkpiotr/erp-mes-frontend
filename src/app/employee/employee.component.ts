@@ -63,7 +63,7 @@ export class EmployeeComponent implements OnInit {
             console.log(err);
           }, () => {
             this.areSubordinatesLoaded = true;
-          })
+          });
         } else {
           this.areRequestsLoaded = true;
         }

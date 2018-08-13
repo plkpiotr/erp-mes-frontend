@@ -8,9 +8,9 @@ import {AddHolidayComponent} from './add-holiday/add-holiday.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskComponent} from './task/task.component';
 import {AddTaskComponent} from './add-task/add-task.component';
-import {ReportsComponent} from "./reports/reports.component";
-import {ReportComponent} from "./report/report.component";
-import {CurrentReportComponent} from "./current-report/current-report.component";
+import {ReportsComponent} from './reports/reports.component';
+import {ReportComponent} from './report/report.component';
+import {CurrentReportComponent} from './current-report/current-report.component';
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},

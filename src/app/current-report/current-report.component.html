@@ -28,6 +28,77 @@
     <button type='submit' [disabled]="form.invalid">Dodaj</button>
   </form>
 </div>
-
-<!-- addExpense! -->
-<!-- recalculate EstimatedCosts!!! -->
+<br><br>
+<button (click)="showAddExpense = !showAddExpense">Dodaj wydatek</button>
+<div *ngIf="showAddExpense">
+  <form #form='ngForm' (ngSubmit)='addExpense()'>
+    <div class="form-group">
+      <label>Typ: </label>
+      <select name="expenseType" [(ngModel)]="expenseType" required>
+        <option *ngFor="let t of types" [value]="t">{{t}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <labeL>Ilość: </labeL>
+      <input type="number" class="form-control"
+             name="expenseAmount" [(ngModel)]="expenseAmount"
+             required min="0"/>
+    </div>
+    <button type='submit' [disabled]="form.invalid">Dodaj</button>
+  </form>
+</div>
+<br><br>
+<button (click)="showReestimate = !showReestimate">Przelicz prognozowane koszty</button>
+<div *ngIf="showReestimate && areRecommendationsLoaded">
+  <form #form='ngForm' (ngSubmit)='reestimate()'>
+    <div class="form-group">
+      <labeL>Zysk: </labeL>
+      <input type="number" class="form-control"
+             name="estimatedIncome" [(ngModel)]="estimatedIncome"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Dostawy: </labeL>
+      <input type="number" class="form-control"
+             name="estimatedShipping" [(ngModel)]="estimatedShipping"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Rachunki: </labeL>
+      <input type="number" class="form-control"
+             name="estimatedBills" [(ngModel)]="estimatedBills"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Czynsz: </labeL>
+      <input type="number" class="form-control"
+             name="rent" [(ngModel)]="rent"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Wypłaty: </labeL>
+      <input type="number" class="form-control"
+             name="salaries" [(ngModel)]="salaries"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Towar: </labeL>
+      <input type="number" class="form-control"
+             name="stockCosts" [(ngModel)]="stockCosts"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Fundusz socjalny: </labeL>
+      <input type="number" class="form-control"
+             name="socialFund" [(ngModel)]="socialFund"
+             required min="0"/>
+    </div>
+    <div class="form-group">
+      <labeL>Niespodziewane wydatki: </labeL>
+      <input type="number" class="form-control"
+             name="unexpected" [(ngModel)]="unexpected"
+             required min="0"/>
+    </div>
+    <button type='submit' [disabled]="form.invalid">Dodaj</button>
+  </form>
+</div>

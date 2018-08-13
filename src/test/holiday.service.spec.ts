@@ -96,7 +96,7 @@ describe('HolidayService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
-  it('should be created', inject([HolidayService], (service: HolidayService) => {
+  it('should be created', inject([HolidayService], () => {
     expect(service).toBeTruthy();
   }));
 

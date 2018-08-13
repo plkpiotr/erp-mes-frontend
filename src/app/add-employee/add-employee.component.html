@@ -23,7 +23,6 @@
       <option *ngFor="let r of roles" [value]="r">{{r}}</option>
     </select>
   </div>
-  <button type='submit' [disabled]="form.invalid">Dodaj pracownika</button>
   <br>
   <div class="form-group">
     <label>Numer konta: </label>
@@ -43,5 +42,5 @@
            name="salary" [(ngModel)]="salary"
            required/>
   </div>
-  <button type='submit' [disabled]="form.invalid">Submit</button>
+  <button type='submit' [disabled]="form.invalid">Dodaj pracownika</button>
 </form>

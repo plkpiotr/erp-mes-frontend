@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs/index";
-import {CurrentReport, EstimatesCostsRequest, ExpenseRequest, MonthlyReport} from "./types";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/index';
+import {CurrentReport, EstimatedCostsRequest, ExpenseRequest, MonthlyReport} from './types';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class ReportService {
       {headers: this.httpHeaders});
   }
 
-  recalculateCosts(request: EstimatesCostsRequest): Observable<CurrentReport> {
+  recalculateCosts(request: EstimatedCostsRequest): Observable<CurrentReport> {
     return this.http.put<CurrentReport>('http://localhost:8080/current-report', request,
       {headers: this.httpHeaders});
   }
@@ -42,6 +42,11 @@ export class ReportService {
 
   addExpense(request: ExpenseRequest): Observable<CurrentReport> {
     return this.http.post<CurrentReport>('http://localhost:8080/current-report/expense', request,
+      {headers: this.httpHeaders});
+  }
+
+  fetchRecommendations(): Observable<EstimatedCostsRequest> {
+    return this.http.get<EstimatedCostsRequest>('http://localhost:8080/current-report/recommended-recalculations',
       {headers: this.httpHeaders});
   }
 }

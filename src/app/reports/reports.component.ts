@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ReportService} from "../report.service";
-import {Router} from "@angular/router";
-import {MonthlyReport} from "../types";
+import {ReportService} from '../report.service';
+import {Router} from '@angular/router';
+import {MonthlyReport} from '../types';
 
 @Component({
   selector: 'app-reports',
@@ -27,7 +27,7 @@ export class ReportsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areReportsLoaded = true;
-    })
+    });
   }
 
   seeReport(id: number) {
