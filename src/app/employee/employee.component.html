@@ -6,6 +6,10 @@
   <div *ngFor="let t of tasks">
     <br>{{t.category}} {{t.name}} {{t.details}} {{t.deadline}}
   </div>
+  <br>
+  <br>{{employee.contract.accountNumber}}
+  <br>{{employee.contract.daysOffPerYear}}
+  <br>{{employee.contract.salary}}
   <div *ngFor="let holiday of holidays">
     <br>{{holiday.startDate}}
     <br>{{holiday.duration}}
@@ -29,6 +33,12 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div *ngIf="hasSubordinates()">
+    <div *ngFor="let employee of subordinates">
+      <br>{{employee.firstName}} {{employee.lastName}}
+      <br>{{employee.email}}
     </div>
   </div>
   <br><button (click)="addHolidayRequest()">Zgłoś urlop</button>

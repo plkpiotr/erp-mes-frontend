@@ -17,6 +17,10 @@ import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
 import {AddEmployeeComponent} from '../app/add-employee/add-employee.component';
 import {TaskComponent} from '../app/task/task.component';
 import {EmployeesComponent} from '../app/employees/employees.component';
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportComponent} from "../app/report/report.component";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {ReportService} from "../app/report.service";
 
 describe('AddTaskComponent', () => {
   let component: AddTaskComponent;
@@ -39,13 +43,17 @@ describe('AddTaskComponent', () => {
         TeamComponent,
         TeamsComponent,
         TasksComponent,
-        TaskComponent
+        TaskComponent,
+        CurrentReportComponent,
+        ReportComponent,
+        ReportsComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
-        TaskService
+        TaskService,
+        ReportService
       ]
     })
     .compileComponents();

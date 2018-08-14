@@ -18,6 +18,23 @@ import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {TaskComponent} from '../app/task/task.component';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
+import {ReportService} from "../app/report.service";
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportComponent} from "../app/report/report.component";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
+
+const mockContract = {
+    id: 1,
+    accountNumber: '11111111111111111111111111',
+    daysOffPerYear: 26,
+    salary: 3000.00
+};
+
+const mockContractRequest = {
+  accountNumber: '11111111111111111111111111',
+  daysOffPerYear: 26,
+  salary: 3000.00
+};
 
 const mockEmployees = [
   {
@@ -27,7 +44,8 @@ const mockEmployees = [
     email: 'ala.makota@gmail.com',
     role: Role.ACCOUNTANT,
     password: 'aaa333aa',
-    passwordValid: false
+    passwordValid: false,
+    contract: mockContract
   },
   {
     id: 2,
@@ -36,7 +54,8 @@ const mockEmployees = [
     email: 'ola.mapsa@gmail.com',
     role: Role.HR,
     password: 'ooo333oo',
-    passwordValid: false
+    passwordValid: false,
+    contract: mockContract
   }
 ];
 
@@ -48,7 +67,8 @@ const mockManagers = [
     email: 'ala.makota@gmail.com',
     role: Role.ADMIN_ACCOUNTANT,
     password: 'aaa333aa',
-    passwordValid: false
+    passwordValid: false,
+    contract: mockContract
   },
   {
     id: 2,
@@ -57,7 +77,8 @@ const mockManagers = [
     email: 'ola.mapsa@gmail.com',
     role: Role.ADMIN_HR,
     password: 'ooo333oo',
-    passwordValid: false
+    passwordValid: false,
+    contract: mockContract
   }
 ];
 
@@ -65,7 +86,8 @@ const employeeRequest = {
   firstName: 'Jola',
   lastName: 'Makanarka',
   email: 'jola.makanarka@gmail.com',
-  role: Role.WAREHOUSE
+  role: Role.WAREHOUSE,
+  contractRequest: mockContractRequest
 };
 
 describe('EmployeeService', () => {
@@ -88,13 +110,17 @@ describe('EmployeeService', () => {
         TeamComponent,
         TeamsComponent,
         TasksComponent,
-        TaskComponent
+        TaskComponent,
+        CurrentReportComponent,
+        ReportComponent,
+        ReportsComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
-        TaskService
+        TaskService,
+        ReportService
       ]
     });
     service = TestBed.get(EmployeeService);

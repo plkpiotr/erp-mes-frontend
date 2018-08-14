@@ -57,4 +57,9 @@ export class EmployeeService {
           this.router.navigate(['/employees']);
         });
   }
+
+  fetchSubordinates(id: number): Observable<Array<Employee>> {
+    return this.http.get<Array<Employee>>('http://localhost:8080/employees/' + id + '/subordinates',
+      {headers: this.httpHeaders});
+  }
 }

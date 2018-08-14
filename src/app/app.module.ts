@@ -19,6 +19,10 @@ import {AddTaskComponent} from './add-task/add-task.component';
 import {TaskComponent} from './task/task.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskService} from './task.service';
+import {ReportService} from './report.service';
+import { ReportsComponent } from './reports/reports.component';
+import { ReportComponent } from './report/report.component';
+import { CurrentReportComponent } from './current-report/current-report.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import {TaskService} from './task.service';
     AddHolidayComponent,
     AddTaskComponent,
     TaskComponent,
-    TasksComponent
+    TasksComponent,
+    ReportsComponent,
+    ReportComponent,
+    CurrentReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +52,7 @@ import {TaskService} from './task.service';
     TeamService,
     HolidayService,
     TaskService,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })

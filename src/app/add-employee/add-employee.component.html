@@ -23,5 +23,24 @@
       <option *ngFor="let r of roles" [value]="r">{{r}}</option>
     </select>
   </div>
+  <br>
+  <div class="form-group">
+    <label>Numer konta: </label>
+    <input type="number" class="form-control"
+           name="accountNumber" [(ngModel)]="accountNumber"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Ilość dni wolnych w roku: </label>
+    <input type="number" class="form-control"
+           name="daysOffPerYear" [(ngModel)]="daysOffPerYear"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Wynagrodzenie: </label>
+    <input type="number" class="form-control"
+           name="salary" [(ngModel)]="salary"
+           required/>
+  </div>
   <button type='submit' [disabled]="form.invalid">Dodaj pracownika</button>
 </form>

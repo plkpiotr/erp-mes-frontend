@@ -12,6 +12,9 @@ import {AddHolidayComponent} from '../app/add-holiday/add-holiday.component';
 import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskComponent} from '../app/task/task.component';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportComponent} from "../app/report/report.component";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,7 +32,10 @@ describe('AppComponent', () => {
         TeamsComponent,
         TeamComponent,
         TasksComponent,
-        TaskComponent
+        TaskComponent,
+        ReportsComponent,
+        ReportComponent,
+        CurrentReportComponent
       ],
     }).compileComponents();
   }));
