@@ -168,7 +168,7 @@ export interface MonthlyReport {
 export interface CurrentReport {
   id: number;
   expenses: Expense[];
-  income: number;
+  income: number[];
   estimatedCosts: EstimatedCosts;
   startDate: Date;
 }

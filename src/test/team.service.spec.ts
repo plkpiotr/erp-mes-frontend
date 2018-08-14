@@ -18,6 +18,17 @@ import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {TaskComponent} from '../app/task/task.component';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
+import {ReportService} from "../app/report.service";
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportComponent} from "../app/report/report.component";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
+
+const mockContract = {
+  id: 1,
+  accountNumber: '11111111111111111111111111',
+  daysOffPerYear: 26,
+  salary: 3000.00
+};
 
 const mockTeams = [
   {
@@ -30,7 +41,8 @@ const mockTeams = [
       email: 'ola.mapsa@gmail.com',
       role: Role.ADMIN_HR,
       password: 'ooo333oo',
-      passwordValid: false
+      passwordValid: false,
+      contract: mockContract
     },
     employees: [
       {
@@ -40,7 +52,8 @@ const mockTeams = [
         email: 'ala.makota@gmail.com',
         role: Role.HR,
         password: 'aaa333aa',
-        passwordValid: false
+        passwordValid: false,
+        contract: mockContract
       },
       {
         id: 3,
@@ -49,7 +62,8 @@ const mockTeams = [
         email: 'ola.mapsa@gmail.com',
         role: Role.HR,
         password: 'ooo333oo',
-        passwordValid: false
+        passwordValid: false,
+        contract: mockContract
       }
     ]
   },
@@ -63,7 +77,8 @@ const mockTeams = [
       email: 'ola.mapsa@gmail.com',
       role: Role.ADMIN_ACCOUNTANT,
       password: 'ooo333oo',
-      passwordValid: false
+      passwordValid: false,
+      contract: mockContract
     },
     employees: [
       {
@@ -73,7 +88,8 @@ const mockTeams = [
         email: 'ala.makota@gmail.com',
         role: Role.ACCOUNTANT,
         password: 'aaa333aa',
-        passwordValid: false
+        passwordValid: false,
+        contract: mockContract
       },
       {
         id: 6,
@@ -82,7 +98,8 @@ const mockTeams = [
         email: 'ola.mapsa@gmail.com',
         role: Role.ACCOUNTANT,
         password: 'ooo333oo',
-        passwordValid: false
+        passwordValid: false,
+        contract: mockContract
       }
     ]
   }
@@ -108,13 +125,17 @@ describe('TeamService', () => {
         TeamComponent,
         TeamsComponent,
         TasksComponent,
-        TaskComponent
+        TaskComponent,
+        CurrentReportComponent,
+        ReportComponent,
+        ReportsComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
-        TaskService
+        TaskService,
+        ReportService
       ]
     });
     service = TestBed.get(TeamService);

@@ -18,6 +18,17 @@ import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {TaskComponent} from '../app/task/task.component';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
+import {ReportService} from "../app/report.service";
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportComponent} from "../app/report/report.component";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
+
+const mockContract = {
+  id: 1,
+  accountNumber: '11111111111111111111111111',
+  daysOffPerYear: 26,
+  salary: 3000.00
+};
 
 const mockEmployee = {
   id: 1,
@@ -26,7 +37,8 @@ const mockEmployee = {
   email: 'ala.makota@gmail.com',
   role: Role.ACCOUNTANT,
   password: 'aaa333aa',
-  passwordValid: false
+  passwordValid: false,
+  contract: mockContract
 };
 
 const mockHolidays = [
@@ -83,13 +95,17 @@ describe('HolidayService', () => {
         TeamComponent,
         TeamsComponent,
         TasksComponent,
-        TaskComponent
+        TaskComponent,
+        CurrentReportComponent,
+        ReportComponent,
+        ReportsComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
-        TaskService
+        TaskService,
+        ReportService
       ]
     });
     service = TestBed.get(HolidayService);

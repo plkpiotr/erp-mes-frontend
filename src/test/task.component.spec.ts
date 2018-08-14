@@ -18,6 +18,10 @@ import {EmployeeService} from '../app/employee.service';
 import {HolidayService} from '../app/holiday.service';
 import {TeamService} from '../app/team.service';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
+import {ReportService} from "../app/report.service";
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportComponent} from "../app/report/report.component";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -41,13 +45,17 @@ describe('TaskComponent', () => {
         TeamComponent,
         TeamsComponent,
         TasksComponent,
-        TaskComponent
+        TaskComponent,
+        CurrentReportComponent,
+        ReportComponent,
+        ReportsComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
-        TaskService
+        TaskService,
+        ReportService
       ]
     })
     .compileComponents();
