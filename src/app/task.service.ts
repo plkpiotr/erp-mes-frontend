@@ -18,12 +18,12 @@ export class TaskService {
     return this.http.get<Array<Task>>('http://localhost:8080/tasks', {headers: this.httpHeaders});
   }
 
-  fetchOneTask(taskId: number): Observable<Task> {
-    return this.http.get<Task>('http://localhost:8080/tasks/' + taskId, {headers: this.httpHeaders});
+  fetchOneTask(id: number): Observable<Task> {
+    return this.http.get<Task>('http://localhost:8080/tasks/' + id, {headers: this.httpHeaders});
   }
 
-  fetchTasksByAssignee(assigneeId: number): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>('http://localhost:8080/employees/' + assigneeId + '/tasks', {headers: this.httpHeaders});
+  fetchTasksByAssignee(id: number): Observable<Array<Task>> {
+    return this.http.get<Array<Task>>('http://localhost:8080/employees/' + id + '/tasks', {headers: this.httpHeaders});
   }
 
   addTask(request: TaskRequest): Observable<Task> {

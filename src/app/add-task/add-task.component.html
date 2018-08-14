@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <label>Osoba odpowiedzialna:
-      <select name="assigneeId" [(ngModel)]="assigneeId" required>
+      <select name="assigneeId" [(ngModel)]="assigneeId">
         <option *ngFor="let a of assignees" [value]="a.id">{{a.firstName}} {{a.lastName}}</option>
       </select>
     </label>

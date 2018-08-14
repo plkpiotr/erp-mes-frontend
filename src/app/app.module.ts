@@ -20,9 +20,9 @@ import {TaskComponent} from './task/task.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskService} from './task.service';
 import {ReportService} from './report.service';
-import { ReportsComponent } from './reports/reports.component';
-import { ReportComponent } from './report/report.component';
-import { CurrentReportComponent } from './current-report/current-report.component';
+import {ReportsComponent} from './reports/reports.component';
+import {ReportComponent} from './report/report.component';
+import {CurrentReportComponent} from './current-report/current-report.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { CurrentReportComponent } from './current-report/current-report.componen
     TasksComponent,
     ReportsComponent,
     ReportComponent,
-    CurrentReportComponent,
+    CurrentReportComponent
   ],
   imports: [
     BrowserModule,
