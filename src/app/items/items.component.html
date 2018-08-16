@@ -1,0 +1,8 @@
+<div *ngIf="areItemsLoaded">
+  <div *ngFor="let item of items">
+    <br>{{item.id}} {{item.name}} {{item.quantity}} {{item.stockPrice}} {{item.originalPrice}} {{item.currentPrice}}
+    <button (click)="fetchItem(item.id)">Zobacz</button>
+    <br>
+  </div>
+  <button (click)="addItem()">Dodaj przedmiot</button>
+</div>

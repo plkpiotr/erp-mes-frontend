@@ -173,4 +173,42 @@ export interface CurrentReport {
   startDate: Date;
 }
 
+export interface Item {
+  id: number;
+  name: string;
+  quantity: number;
+  stockPrice: number;
+  originalPrice: number;
+  currentPrice: number;
+}
+
+export interface ItemRequest {
+  name: string;
+  stockPrice: number;
+  price: number;
+}
+
+export interface DeliveryItem {
+  id: number;
+  item: Item;
+  quantity: number;
+}
+
+export interface DeliveryItemRequest {
+  itemId: number;
+  quantity: number;
+}
+
+export interface Delivery {
+  id: number;
+  deliveryItems: DeliveryItem[];
+  scheduledFor: Date;
+  value: number;
+}
+
+export interface DeliveryRequest {
+  deliveryItemRequests: DeliveryItemRequest[];
+  scheduledFor: Date;
+}
+
 

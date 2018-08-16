@@ -1,0 +1,10 @@
+<div *ngIf="isDeliveryLoaded">
+  <div *ngFor="let deliveryItem of delivery.deliveryItems">
+    {{deliveryItem.item.name}} {{deliveryItem.quantity}}
+  </div>
+  {{delivery.scheduledFor}}
+  {{delivery.value}}
+  <div *ngIf="canConfirmDelivery()">
+    <button (click)="confirmDelivery()">Potwierdź</button>
+  </div>
+</div>

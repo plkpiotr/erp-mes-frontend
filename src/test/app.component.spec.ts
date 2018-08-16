@@ -15,6 +15,12 @@ import {AddTaskComponent} from '../app/add-task/add-task.component';
 import {ReportsComponent} from "../app/reports/reports.component";
 import {ReportComponent} from "../app/report/report.component";
 import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {DeliveriesComponent} from "../app/deliveries/deliveries.component";
+import {DeliveryComponent} from "../app/delivery/delivery.component";
+import {ItemComponent} from "../app/item/item.component";
+import {ItemsComponent} from "../app/items/items.component";
+import {AddItemComponent} from "../app/add-item/add-item.component";
+import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,15 +33,21 @@ describe('AppComponent', () => {
         AddEmployeeComponent,
         AddHolidayComponent,
         AddTaskComponent,
+        AddDeliveryComponent,
+        AddItemComponent,
         EmployeeComponent,
         EmployeesComponent,
-        TeamsComponent,
         TeamComponent,
+        TeamsComponent,
         TasksComponent,
         TaskComponent,
-        ReportsComponent,
+        CurrentReportComponent,
         ReportComponent,
-        CurrentReportComponent
+        ReportsComponent,
+        ItemsComponent,
+        ItemComponent,
+        DeliveryComponent,
+        DeliveriesComponent
       ],
     }).compileComponents();
   }));
