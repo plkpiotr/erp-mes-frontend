@@ -18,10 +18,10 @@ import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {TaskComponent} from '../app/task/task.component';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
-import {ReportService} from "../app/report.service";
-import {ReportsComponent} from "../app/reports/reports.component";
-import {ReportComponent} from "../app/report/report.component";
-import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {ReportService} from '../app/report.service';
+import {ReportsComponent} from '../app/reports/reports.component';
+import {ReportComponent} from '../app/report/report.component';
+import {CurrentReportComponent} from '../app/current-report/current-report.component';
 
 const mockContract = {
     id: 1,
@@ -188,7 +188,7 @@ describe('EmployeeService', () => {
   describe('given fetchOneEmployee method', () => {
     describe('when called', () => {
 
-      it('should hit "/empployees/1" with GET and return employee', () => {
+      it('should hit "/employees/1" with GET and return employee', () => {
         service.fetchOneEmployee(1).subscribe(employee => {
           expect(employee).toEqual(mockEmployees[0]);
         });

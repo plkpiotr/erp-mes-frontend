@@ -17,10 +17,10 @@ import {TaskComponent} from '../app/task/task.component';
 import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
-import {ReportService} from "../app/report.service";
-import {CurrentReportComponent} from "../app/current-report/current-report.component";
-import {ReportComponent} from "../app/report/report.component";
-import {ReportsComponent} from "../app/reports/reports.component";
+import {ReportService} from '../app/report.service';
+import {CurrentReportComponent} from '../app/current-report/current-report.component';
+import {ReportComponent} from '../app/report/report.component';
+import {ReportsComponent} from '../app/reports/reports.component';
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
