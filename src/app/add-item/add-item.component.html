@@ -1,0 +1,21 @@
+<form #form='ngForm' (ngSubmit)='submitForm()'>
+  <div class="form-group">
+    <label>Nazwa: </label>
+    <input type="text" class="form-control"
+           name="name" [(ngModel)]="name"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Cena magazynowa: </label>
+    <input type="number" class="form-control"
+           name="stockPrice" [(ngModel)]="stockPrice"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Cena: </label>
+    <input type="number" class="form-control"
+           name="price" [(ngModel)]="price"
+           required/>
+  </div>
+  <button type='submit' [disabled]="form.invalid">Dodaj przedmiot</button>
+</form>

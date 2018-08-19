@@ -22,6 +22,14 @@ import {ReportComponent} from "../app/report/report.component";
 import {FormsModule} from "@angular/forms";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {ExpenseType} from "../app/types";
+import {DeliveryService} from "../app/delivery.service";
+import {ItemService} from "../app/item.service";
+import {DeliveriesComponent} from "../app/deliveries/deliveries.component";
+import {DeliveryComponent} from "../app/delivery/delivery.component";
+import {ItemComponent} from "../app/item/item.component";
+import {ItemsComponent} from "../app/items/items.component";
+import {AddItemComponent} from "../app/add-item/add-item.component";
+import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
 
 const mockEstimatedCosts = {
   "id": 1,
@@ -131,6 +139,8 @@ describe('ReportService', () => {
         AddEmployeeComponent,
         AddHolidayComponent,
         AddTaskComponent,
+        AddDeliveryComponent,
+        AddItemComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
@@ -139,14 +149,20 @@ describe('ReportService', () => {
         TaskComponent,
         CurrentReportComponent,
         ReportComponent,
-        ReportsComponent
+        ReportsComponent,
+        ItemsComponent,
+        ItemComponent,
+        DeliveryComponent,
+        DeliveriesComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
         TaskService,
-        ReportService
+        ReportService,
+        ItemService,
+        DeliveryService
       ]
     });
     service = TestBed.get(ReportService);

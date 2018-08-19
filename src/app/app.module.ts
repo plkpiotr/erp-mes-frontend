@@ -23,6 +23,14 @@ import {ReportService} from './report.service';
 import { ReportsComponent } from './reports/reports.component';
 import { ReportComponent } from './report/report.component';
 import { CurrentReportComponent } from './current-report/current-report.component';
+import {ItemService} from "./item.service";
+import {DeliveryService} from "./delivery.service";
+import { ItemsComponent } from './items/items.component';
+import { ItemComponent } from './item/item.component';
+import { AddItemComponent } from './add-item/add-item.component';
+import { DeliveriesComponent } from './deliveries/deliveries.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +47,12 @@ import { CurrentReportComponent } from './current-report/current-report.componen
     ReportsComponent,
     ReportComponent,
     CurrentReportComponent,
+    ItemsComponent,
+    ItemComponent,
+    AddItemComponent,
+    DeliveriesComponent,
+    DeliveryComponent,
+    AddDeliveryComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +66,9 @@ import { CurrentReportComponent } from './current-report/current-report.componen
     TeamService,
     HolidayService,
     TaskService,
-    ReportService
+    ReportService,
+    ItemService,
+    DeliveryService
   ],
   bootstrap: [AppComponent]
 })
