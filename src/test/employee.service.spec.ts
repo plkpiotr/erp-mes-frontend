@@ -60,7 +60,7 @@ const mockEmployees = [
     firstName: 'Ola',
     lastName: 'Mapsa',
     email: 'ola.mapsa@gmail.com',
-    role: Role.HR,
+    role: Role.ANALYST,
     password: 'ooo333oo',
     passwordValid: false,
     contract: mockContract
@@ -83,7 +83,7 @@ const mockManagers = [
     firstName: 'Ola',
     lastName: 'Mapsa',
     email: 'ola.mapsa@gmail.com',
-    role: Role.ADMIN_HR,
+    role: Role.ADMIN_ANALYST,
     password: 'ooo333oo',
     passwordValid: false,
     contract: mockContract

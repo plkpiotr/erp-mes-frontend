@@ -41,13 +41,13 @@ const mockContract = {
 const mockTeams = [
   {
     id: 1,
-    role: Role.HR,
+    role: Role.ANALYST,
     manager: {
       id: 1,
       firstName: 'Ola',
       lastName: 'Mapsa',
       email: 'ola.mapsa@gmail.com',
-      role: Role.ADMIN_HR,
+      role: Role.ADMIN_ANALYST,
       password: 'ooo333oo',
       passwordValid: false,
       contract: mockContract
@@ -58,7 +58,7 @@ const mockTeams = [
         firstName: 'Ala',
         lastName: 'Makota',
         email: 'ala.makota@gmail.com',
-        role: Role.HR,
+        role: Role.ANALYST,
         password: 'aaa333aa',
         passwordValid: false,
         contract: mockContract
@@ -68,7 +68,7 @@ const mockTeams = [
         firstName: 'Ola',
         lastName: 'Niemapsa',
         email: 'ola.mapsa@gmail.com',
-        role: Role.HR,
+        role: Role.ANALYST,
         password: 'ooo333oo',
         passwordValid: false,
         contract: mockContract
