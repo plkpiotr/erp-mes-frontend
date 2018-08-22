@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {routing} from './app.routing';
@@ -31,6 +31,11 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { DeliveriesComponent } from './deliveries/deliveries.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+import { LoginComponent } from './login/login.component';
+import {LoginService} from "./login.service";
+import {Token} from "./token";
+import {Interceptor} from "./interceptor";
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +58,8 @@ import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
     DeliveriesComponent,
     DeliveryComponent,
     AddDeliveryComponent,
+    LoginComponent,
+    ValidateComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +75,12 @@ import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
     TaskService,
     ReportService,
     ItemService,
-    DeliveryService
+    DeliveryService,
+    LoginService,
+    Token,
+    {provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi : true}
   ],
   bootstrap: [AppComponent]
 })

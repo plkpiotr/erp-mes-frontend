@@ -29,6 +29,8 @@ import {ItemService} from "../app/item.service";
 import {DeliveryService} from "../app/delivery.service";
 import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
 import {AddItemComponent} from "../app/add-item/add-item.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
@@ -60,7 +62,9 @@ describe('AddEmployeeComponent', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,

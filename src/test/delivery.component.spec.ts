@@ -30,6 +30,8 @@ import {AddItemComponent} from "../app/add-item/add-item.component";
 import {EmployeeComponent} from "../app/employee/employee.component";
 import {EmployeesComponent} from "../app/employees/employees.component";
 import {ActivatedRoute} from "@angular/router";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 const mockDelivery = {
   "id": 1,
@@ -96,7 +98,9 @@ describe('DeliveryComponent', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,

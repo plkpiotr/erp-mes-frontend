@@ -29,6 +29,8 @@ import {appRoutes} from "../app/app.routing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {FormsModule} from "@angular/forms";
+import {ValidateComponent} from "../app/validate/validate.component";
+import {LoginComponent} from "../app/login/login.component";
 
 const mockItems = [
   {
@@ -92,7 +94,9 @@ describe('ItemService', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,

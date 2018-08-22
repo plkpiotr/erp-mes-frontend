@@ -30,6 +30,8 @@ import {ItemsComponent} from "../app/items/items.component";
 import {DeliveryService} from "../app/delivery.service";
 import {AddItemComponent} from "../app/add-item/add-item.component";
 import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -62,7 +64,9 @@ describe('TaskComponent', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,

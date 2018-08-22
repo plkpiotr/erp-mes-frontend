@@ -31,6 +31,8 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Location} from '@angular/common';
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 describe('DeliveriesComponent', () => {
   let component: DeliveriesComponent;
@@ -64,7 +66,9 @@ describe('DeliveriesComponent', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,

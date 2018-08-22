@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {Token} from "./token";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,14 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {}
+  constructor(private token: Token, private router: Router) {
+    if (!this.isUserLoggedIn()) {
+      this.router.navigate(['login']);
+    }
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.token.getToken() != null;
+  }
 
 }

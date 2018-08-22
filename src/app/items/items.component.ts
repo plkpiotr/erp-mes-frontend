@@ -27,7 +27,7 @@ export class ItemsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areItemsLoaded = true;
-    })
+    });
   }
 
   fetchItem(id: number) {
