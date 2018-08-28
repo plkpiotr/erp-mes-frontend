@@ -1,9 +1,13 @@
-<div>
+<div *ngIf="isUserLoggedIn()">
   <a routerLink="/employees" routerLinkActive="active">Employees</a><br>
   <a routerLink="/teams" routerLinkActive="active">Teams</a><br>
   <a routerLink="/tasks" routerLinkActive="active">/tasks</a><br>
   <a routerLink="/tasks/add" routerLinkActive="active">/tasks/add</a><br>
   <a routerLink="/reports" routerLinkActive="active">Reports</a><br>
   <a routerLink="/current-report" routerLinkActive="active">Current Report</a><br>
+  <a routerLink="/items" routerLinkActive="active">Items</a><br>
+  <a routerLink="/deliveries" routerLinkActive="active">Deliveries</a><br>
+</div>
+<div>
   <router-outlet></router-outlet>
 </div>

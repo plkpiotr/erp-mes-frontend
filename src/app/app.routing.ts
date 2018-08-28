@@ -11,11 +11,20 @@ import {AddTaskComponent} from './add-task/add-task.component';
 import {ReportsComponent} from './reports/reports.component';
 import {ReportComponent} from './report/report.component';
 import {CurrentReportComponent} from './current-report/current-report.component';
+import {DeliveriesComponent} from "./deliveries/deliveries.component";
+import {DeliveryComponent} from "./delivery/delivery.component";
+import {AddDeliveryComponent} from "./add-delivery/add-delivery.component";
+import {ItemsComponent} from "./items/items.component";
+import {ItemComponent} from "./item/item.component";
+import {AddItemComponent} from "./add-item/add-item.component";
+import {LoginComponent} from "./login/login.component";
+import {ValidateComponent} from "./validate/validate.component";
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
   {path: 'employees/add', component: AddEmployeeComponent},
   {path: 'employees/:id', component: EmployeeComponent},
+  {path: 'employees/:id/validate', component: ValidateComponent},
   {path: 'teams', component: TeamsComponent},
   {path: 'teams/:id', component: TeamComponent},
   {path: 'holidays/add', component: AddHolidayComponent},
@@ -24,7 +33,14 @@ export const appRoutes: Routes = [
   {path: 'tasks/:id', component: TaskComponent},
   {path: 'reports', component: ReportsComponent},
   {path: 'reports/:id', component: ReportComponent},
-  {path: 'current-report', component: CurrentReportComponent}
+  {path: 'current-report', component: CurrentReportComponent},
+  {path: 'deliveries', component: DeliveriesComponent},
+  {path: 'deliveries/add', component: AddDeliveryComponent},
+  {path: 'deliveries/:id', component: DeliveryComponent},
+  {path: 'items', component: ItemsComponent},
+  {path: 'items/add', component: AddItemComponent},
+  {path: 'items/:id', component: ItemComponent},
+  {path: 'login', component: LoginComponent}
   ];
 
 export const routing = RouterModule.forRoot(appRoutes);

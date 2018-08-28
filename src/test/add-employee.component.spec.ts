@@ -17,10 +17,20 @@ import {TaskComponent} from '../app/task/task.component';
 import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
-import {ReportService} from '../app/report.service';
-import {CurrentReportComponent} from '../app/current-report/current-report.component';
-import {ReportComponent} from '../app/report/report.component';
-import {ReportsComponent} from '../app/reports/reports.component';
+import {ReportService} from "../app/report.service";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {ReportComponent} from "../app/report/report.component";
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ItemsComponent} from "../app/items/items.component";
+import {ItemComponent} from "../app/item/item.component";
+import {DeliveryComponent} from "../app/delivery/delivery.component";
+import {DeliveriesComponent} from "../app/deliveries/deliveries.component";
+import {ItemService} from "../app/item.service";
+import {DeliveryService} from "../app/delivery.service";
+import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
+import {AddItemComponent} from "../app/add-item/add-item.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
@@ -38,6 +48,8 @@ describe('AddEmployeeComponent', () => {
         AddEmployeeComponent,
         AddHolidayComponent,
         AddTaskComponent,
+        AddDeliveryComponent,
+        AddItemComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
@@ -46,14 +58,22 @@ describe('AddEmployeeComponent', () => {
         TaskComponent,
         CurrentReportComponent,
         ReportComponent,
-        ReportsComponent
+        ReportsComponent,
+        ItemsComponent,
+        ItemComponent,
+        DeliveryComponent,
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
         TaskService,
-        ReportService
+        ReportService,
+        ItemService,
+        DeliveryService
       ]
     })
       .compileComponents();

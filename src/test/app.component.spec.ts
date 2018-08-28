@@ -15,11 +15,22 @@ import {AddTaskComponent} from '../app/add-task/add-task.component';
 import {ReportsComponent} from "../app/reports/reports.component";
 import {ReportComponent} from "../app/report/report.component";
 import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {DeliveriesComponent} from "../app/deliveries/deliveries.component";
+import {DeliveryComponent} from "../app/delivery/delivery.component";
+import {ItemComponent} from "../app/item/item.component";
+import {ItemsComponent} from "../app/items/items.component";
+import {AddItemComponent} from "../app/add-item/add-item.component";
+import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
+import {Token} from "../app/token";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(appRoutes),
+        HttpClientTestingModule,
         FormsModule
       ],
       declarations: [
@@ -27,16 +38,27 @@ describe('AppComponent', () => {
         AddEmployeeComponent,
         AddHolidayComponent,
         AddTaskComponent,
+        AddDeliveryComponent,
+        AddItemComponent,
         EmployeeComponent,
         EmployeesComponent,
-        TeamsComponent,
         TeamComponent,
+        TeamsComponent,
         TasksComponent,
         TaskComponent,
-        ReportsComponent,
+        CurrentReportComponent,
         ReportComponent,
-        CurrentReportComponent
+        ReportsComponent,
+        ItemsComponent,
+        ItemComponent,
+        DeliveryComponent,
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
+      providers: [
+        Token
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

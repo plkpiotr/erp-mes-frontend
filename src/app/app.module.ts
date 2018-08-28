@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {routing} from './app.routing';
@@ -20,9 +20,22 @@ import {TaskComponent} from './task/task.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskService} from './task.service';
 import {ReportService} from './report.service';
-import {ReportsComponent} from './reports/reports.component';
-import {ReportComponent} from './report/report.component';
-import {CurrentReportComponent} from './current-report/current-report.component';
+import { ReportsComponent } from './reports/reports.component';
+import { ReportComponent } from './report/report.component';
+import { CurrentReportComponent } from './current-report/current-report.component';
+import {ItemService} from "./item.service";
+import {DeliveryService} from "./delivery.service";
+import { ItemsComponent } from './items/items.component';
+import { ItemComponent } from './item/item.component';
+import { AddItemComponent } from './add-item/add-item.component';
+import { DeliveriesComponent } from './deliveries/deliveries.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+import { LoginComponent } from './login/login.component';
+import {LoginService} from "./login.service";
+import {Token} from "./token";
+import {Interceptor} from "./interceptor";
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +51,15 @@ import {CurrentReportComponent} from './current-report/current-report.component'
     TasksComponent,
     ReportsComponent,
     ReportComponent,
-    CurrentReportComponent
+    CurrentReportComponent,
+    ItemsComponent,
+    ItemComponent,
+    AddItemComponent,
+    DeliveriesComponent,
+    DeliveryComponent,
+    AddDeliveryComponent,
+    LoginComponent,
+    ValidateComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +73,14 @@ import {CurrentReportComponent} from './current-report/current-report.component'
     TeamService,
     HolidayService,
     TaskService,
-    ReportService
+    ReportService,
+    ItemService,
+    DeliveryService,
+    LoginService,
+    Token,
+    {provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi : true}
   ],
   bootstrap: [AppComponent]
 })

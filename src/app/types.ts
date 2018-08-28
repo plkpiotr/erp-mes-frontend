@@ -2,10 +2,8 @@ export enum Role {
   ADMIN = 'ADMIN',
   ACCOUNTANT = 'ACCOUNTANT',
   ADMIN_ACCOUNTANT = 'ADMIN_ACCOUNTANT',
-  HR = 'HR',
-  ADMIN_HR = 'ADMIN_HR',
-  SUPPLY_CHAIN = 'SUPPLY_CHAIN',
-  ADMIN_SUPPLY_CHAIN = 'ADMIN_SUPPLY_CHAIN',
+  ANALYST = 'ANALYST',
+  ADMIN_ANALYST = 'ADMIN_ANALYST',
   WAREHOUSE = 'WAREHOUSE',
   ADMIN_WAREHOUSE = 'ADMIN_WAREHOUSE'
 }
@@ -60,9 +58,9 @@ export interface Employee {
   lastName: string;
   email: string;
   role: Role;
-  password: string;
-  passwordValid: boolean;
-  contract: Contract;
+  password?: string;
+  passwordValid?: boolean;
+  contract?: Contract;
 }
 
 export interface EmployeeRequest {
@@ -171,6 +169,44 @@ export interface CurrentReport {
   income: number[];
   estimatedCosts: EstimatedCosts;
   startDate: Date;
+}
+
+export interface Item {
+  id: number;
+  name: string;
+  quantity: number;
+  stockPrice: number;
+  originalPrice: number;
+  currentPrice: number;
+}
+
+export interface ItemRequest {
+  name: string;
+  stockPrice: number;
+  price: number;
+}
+
+export interface DeliveryItem {
+  id: number;
+  item: Item;
+  quantity: number;
+}
+
+export interface DeliveryItemRequest {
+  itemId: number;
+  quantity: number;
+}
+
+export interface Delivery {
+  id: number;
+  deliveryItems: DeliveryItem[];
+  scheduledFor: Date;
+  value: number;
+}
+
+export interface DeliveryRequest {
+  deliveryItemRequests: DeliveryItemRequest[];
+  scheduledFor: Date;
 }
 
 

@@ -1,0 +1,30 @@
+<div *ngIf="areItemsLoaded">
+  <form #form='ngForm' (ngSubmit)='addDeliveryItem()'>
+    <div class="form-group">
+      <label>Przedmiot: </label>
+      <select name="itemid" [(ngModel)]="itemId" required>
+        <option *ngFor="let i of items" [value]="i.id">{{i.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Ilość: </label>
+      <input type="number" class="form-control"
+             name="quantity" [(ngModel)]="quantity"
+             required/>
+    </div>
+    <button type='submit' [disabled]="itemId == null || quantity == null">Dodaj</button>
+  </form>
+
+  <div *ngFor="let itemRequest of deliveryItemRequests">
+    {{itemRequest.itemId}} {{itemRequest.quantity}}
+  </div>
+  <form #form='ngForm' (ngSubmit)='addDelivery()'>
+    <div class="form-group">
+      <label>Data: </label>
+      <input type="date" class="form-control"
+             name="scheduledFor" [(ngModel)]="scheduledFor"
+             required/>
+    </div>
+    <button type='submit' [disabled]="scheduledFor == null || deliveryItemRequests.length == 0">Zatwierdź</button>
+  </form>
+</div>

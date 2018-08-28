@@ -23,6 +23,16 @@ import {ReportService} from "../app/report.service";
 import {ReportsComponent} from "../app/reports/reports.component";
 import {ReportComponent} from "../app/report/report.component";
 import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {DeliveryService} from "../app/delivery.service";
+import {ItemService} from "../app/item.service";
+import {DeliveriesComponent} from "../app/deliveries/deliveries.component";
+import {DeliveryComponent} from "../app/delivery/delivery.component";
+import {ItemComponent} from "../app/item/item.component";
+import {ItemsComponent} from "../app/items/items.component";
+import {AddItemComponent} from "../app/add-item/add-item.component";
+import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 describe('TeamsComponent', () => {
   let component: TeamsComponent;
@@ -42,6 +52,8 @@ describe('TeamsComponent', () => {
         AddEmployeeComponent,
         AddHolidayComponent,
         AddTaskComponent,
+        AddDeliveryComponent,
+        AddItemComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
@@ -50,14 +62,22 @@ describe('TeamsComponent', () => {
         TaskComponent,
         CurrentReportComponent,
         ReportComponent,
-        ReportsComponent
+        ReportsComponent,
+        ItemsComponent,
+        ItemComponent,
+        DeliveryComponent,
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,
         HolidayService,
         TeamService,
         TaskService,
-        ReportService
+        ReportService,
+        ItemService,
+        DeliveryService
       ]
     })
       .compileComponents();
