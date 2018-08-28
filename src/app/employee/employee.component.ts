@@ -4,6 +4,7 @@ import {Employee, Holiday, Task} from '../types';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HolidayService} from '../holiday.service';
 import {TaskService} from '../task.service';
+import {LoginService} from "../login.service";
 
 @Component({
   selector: 'app-employee',
@@ -23,18 +24,27 @@ export class EmployeeComponent implements OnInit {
   areRequestsLoaded = false;
   areSubordinatesLoaded = false;
   showRequests = false;
+  isUserLoggedIn = false;
 
   constructor(private employeeService: EmployeeService,
               private tasksService: TaskService,
               private holidayService: HolidayService,
+              private loginService: LoginService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.fetchEmployee();
-    this.fetchTasksByAssignee();
-    this.fetchHolidays();
+    this.loginService.fetchUser().subscribe(res => {
+      if (res.id.toString() === this.route.snapshot.params['id']) {
+        this.fetchEmployee();
+        this.fetchTasksByAssignee();
+        this.isUserLoggedIn = true;
+      } else {
+        this.fetchProfile();
+      }
+      this.fetchHolidays();
+    });
   }
 
   fetchEmployee() {
@@ -67,6 +77,29 @@ export class EmployeeComponent implements OnInit {
         } else {
           this.areRequestsLoaded = true;
         }
+      }
+    );
+  }
+
+  fetchProfile() {
+    this.employeeService.fetchProfile(this.route.snapshot.params['id']).subscribe(
+      res => {
+        this.employee = res;
+      }, err => {
+        console.log(err);
+      },
+      () => {
+        this.isEmployeeLoaded = true;
+        if (this.isManager()) {
+          this.employeeService.fetchSubordinates(this.route.snapshot.params['id']).subscribe(res => {
+            this.subordinates = res;
+          }, err => {
+            console.log(err);
+          }, () => {
+            this.areSubordinatesLoaded = true;
+          });
+        }
+        this.areRequestsLoaded = true;
       }
     );
   }

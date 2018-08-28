@@ -62,4 +62,9 @@ export class EmployeeService {
     return this.http.get<Array<Employee>>('http://localhost:8080/employees/' + id + '/subordinates',
       {headers: this.httpHeaders});
   }
+
+  fetchProfile(id: number): Observable<Employee> {
+    return this.http.get<Employee>('http://localhost:8080/profiles/' + id,
+      {headers: this.httpHeaders});
+  }
 }

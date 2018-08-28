@@ -58,9 +58,9 @@ export interface Employee {
   lastName: string;
   email: string;
   role: Role;
-  password: string;
-  passwordValid: boolean;
-  contract: Contract;
+  password?: string;
+  passwordValid?: boolean;
+  contract?: Contract;
 }
 
 export interface EmployeeRequest {

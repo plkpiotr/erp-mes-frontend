@@ -1,0 +1,15 @@
+<form #form='ngForm' (ngSubmit)='login()'>
+  <div class="form-group">
+    <label>Email: </label>
+    <input type="email" class="form-control"
+           name="email" [(ngModel)]="email"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Hasło: </label>
+    <input type="text" class="form-control"
+           name="password" [(ngModel)]="password"
+           required/>
+  </div>
+  <button type='submit' [disabled]="form.invalid">Zaloguj</button>
+</form>

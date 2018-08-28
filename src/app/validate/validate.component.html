@@ -1,0 +1,9 @@
+<form #form='ngForm' (ngSubmit)='submit()'>
+  <div class="form-group">
+    <label>Hasło: </label>
+    <input type="text" class="form-control"
+           name="password" [(ngModel)]="password"
+           required/>
+  </div>
+  <button type='submit' [disabled]="form.invalid">Zatwierdź</button>
+</form>

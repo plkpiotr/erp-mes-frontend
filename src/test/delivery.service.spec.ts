@@ -29,6 +29,8 @@ import {TeamsComponent} from "../app/teams/teams.component";
 import {TasksComponent} from "../app/tasks/tasks.component";
 import {TaskComponent} from "../app/task/task.component";
 import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
 
 const mockDeliveries = [
   {
@@ -122,7 +124,9 @@ describe('DeliveryService', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,

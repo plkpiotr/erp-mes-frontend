@@ -30,11 +30,15 @@ import {ItemsComponent} from "../app/items/items.component";
 import {AddItemComponent} from "../app/add-item/add-item.component";
 import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
 import {ItemComponent} from "../app/item/item.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
+import {LoginService} from "../app/login.service";
 
 describe('EmployeeComponent', () => {
   let component: EmployeeComponent;
   let fixture: ComponentFixture<EmployeeComponent>;
   let service: EmployeeService;
+  let loginService: LoginService;
   let holidayService: HolidayService;
   let route: ActivatedRoute;
 
@@ -63,7 +67,9 @@ describe('EmployeeComponent', () => {
         ItemsComponent,
         ItemComponent,
         DeliveryComponent,
-        DeliveriesComponent
+        DeliveriesComponent,
+        ValidateComponent,
+        LoginComponent
       ],
       providers: [
         EmployeeService,
@@ -72,7 +78,8 @@ describe('EmployeeComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        LoginService
       ]
     })
       .compileComponents();
@@ -82,6 +89,7 @@ describe('EmployeeComponent', () => {
     fixture = TestBed.createComponent(EmployeeComponent);
     component = fixture.componentInstance;
     service = TestBed.get(EmployeeService);
+    loginService = TestBed.get(LoginService);
     holidayService = TestBed.get(HolidayService);
     route = TestBed.get(ActivatedRoute);
     fixture.detectChanges();
@@ -91,20 +99,10 @@ describe('EmployeeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call employeeService.fetchOneEmployee()', () => {
-    spyOn(component, 'fetchEmployee').and.callThrough();
-    spyOn(service, 'fetchOneEmployee').and.callThrough();
+  it('should call loginService.fetchUser()', () => {
+    spyOn(loginService, 'fetchUser').and.callThrough();
     component.ngOnInit();
-    expect(component.fetchEmployee).toHaveBeenCalled();
-    expect(service.fetchOneEmployee).toHaveBeenCalledWith(route.snapshot.params['id']);
-  });
-
-  it('should call holidayService.fetchHolidays()', () => {
-    spyOn(component, 'fetchHolidays').and.callThrough();
-    spyOn(holidayService, 'fetchHolidays').and.callThrough();
-    component.ngOnInit();
-    expect(component.fetchHolidays).toHaveBeenCalled();
-    expect(holidayService.fetchHolidays).toHaveBeenCalledWith(route.snapshot.params['id']);
+    expect(loginService.fetchUser).toHaveBeenCalled();
   });
 
   it('should load all necessary data', () => {
