@@ -39,7 +39,7 @@ export class PlanningComponent {
       console.log(err);
     }, () => {
       this.isDailyPlanLoaded = true;
-    })
+    });
   }
 
   fetchOrders() {
@@ -62,7 +62,7 @@ export class PlanningComponent {
             break;
         }
       }, err => {
-        console.log(err)
+        console.log(err);
       }, () => {
         switch (when) {
           case 'today':
@@ -76,7 +76,7 @@ export class PlanningComponent {
             break;
         }
       }
-    )
+    );
   }
 
   updateDailyPlan() {
@@ -84,16 +84,16 @@ export class PlanningComponent {
   }
 
   tomorrowSpecialPlan() {
-    this.day = new Date()
+    this.day = new Date();
     this.day.setDate(this.day.getDate() + 1);
     this.showAddSpecialPlan = true;
     console.log(this.day);
   }
 
   inTwoDaysSpecialPlan() {
-    this.day = new Date()
+    this.day = new Date();
     this.day.setDate(this.day.getDate() + 2);
-    this.day = this.day
+    this.day = this.day;
     this.showAddSpecialPlan = true;
     console.log(this.day);
   }
@@ -127,7 +127,7 @@ export class PlanningComponent {
         this.isDailyPlanLoaded = false;
         this.fetchDailyPlan();
         this.fetchOrders();
-      })
+      });
   }
 
 }
