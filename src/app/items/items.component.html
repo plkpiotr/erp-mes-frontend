@@ -4,5 +4,24 @@
     <button (click)="fetchItem(item.id)">Zobacz</button>
     <br>
   </div>
-  <button (click)="addItem()">Dodaj przedmiot</button>
+  <button (click)="addItem()">Dodaj przedmiot</button><br><br>
+  <button (click)="showAddSpecialOffer = !showAddSpecialOffer">Wprowadź ofertę specjalną</button>
+  <div *ngIf="showAddSpecialOffer">
+    <form #form='ngForm' (ngSubmit)='addSpecialOffer()'>
+      <div class="form-group">
+        <label>Ilość % obniżki: </label>
+        <input type="number" class="form-control"
+               name="percentOff" [(ngModel)]="percentOff"
+               required/>
+      </div>
+      <div class="form-group">
+        <label>Produkty (opcjonalnie): </label>
+        <input type="text" class="form-control"
+               name="query" [(ngModel)]="query"/>
+      </div>
+      <button type='submit' [disabled]="form.invalid">Zatwierdź</button>
+    </form>
+  </div>
+  <br>
+  <button (click)="cancelSpecialOffer()">Anuluj ofertę specjalną</button>
 </div>

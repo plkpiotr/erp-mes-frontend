@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs/index";
-import {Delivery, DeliveryRequest} from "./types";
+import {Delivery, DeliveryItemRequest, DeliveryRequest} from "./types";
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,8 @@ export class DeliveryService {
     return this.http.post<Delivery>('http://localhost:8080/deliveries', request, {headers: this.httpHeaders});
   }
 
-  getRecommendations(): Observable<DeliveryRequest> {
-    return this.http.get<DeliveryRequest>('http://localhost:8080/deliveries/recommended-delivery',
+  getRecommendations(): Observable<Array<DeliveryItemRequest>> {
+    return this.http.get<Array<DeliveryItemRequest>>('http://localhost:8080/deliveries/recommended-delivery',
       {headers: this.httpHeaders});
   }
 }

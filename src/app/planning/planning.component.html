@@ -1,0 +1,79 @@
+<div *ngIf="isDailyPlanLoaded">
+  **********************************************<br>
+  Plan dzienny<br>
+  {{dailyPlan.id}} {{dailyPlan.employeesPerDay}} {{dailyPlan.ordersPerDay}} {{dailyPlan.returnsPerDay}}
+  {{dailyPlan.complaintsResolvedPerDay}}
+  <button (click)="updateDailyPlan()">Update</button>
+  <br>
+</div>
+<div *ngIf="isDailyPlanLoaded && isTodayLoaded">
+  **********************************************<br>
+  Dzisiaj - ilość zamówień do skompletowania: {{ordersToday}}
+</div>
+<div *ngIf="isDailyPlanLoaded && isTomorrowLoaded">
+  **********************************************<br>
+  Jutro - ilość zamówień do skompletowania: {{ordersTomorrow}}
+  <div *ngIf="ordersTomorrow > dailyPlan.ordersPerDay">
+    <button (click)="tomorrowSpecialPlan()">Wprowadź specjalny plan</button>
+  </div>
+  <br>
+</div>
+<div *ngIf="isDailyPlanLoaded && isInTwoDaysLoaded">
+  **********************************************<br>
+  Pojutrze - ilość zamówień do skompletowania: {{ordersInTwoDays}}
+  <div *ngIf="ordersInTwoDays > dailyPlan.ordersPerDay">
+    <button (click)="inTwoDaysSpecialPlan()">Wprowadź plan specjalny</button>
+  </div>
+  <br>
+</div>
+<div *ngIf="isDailyPlanLoaded && isInTwoDaysLoaded">
+  **********************************************<br>
+  <button (click)="showAddSpecialPlan = !showAddSpecialPlan">Dodaj plan specjalny</button>
+  <br>
+</div>
+<div *ngIf="showAddSpecialPlan">
+  **********************************************<br>
+  <form #form='ngForm' (ngSubmit)='submitForm()'>
+    <div class="form-group">
+      <label>Opis </label>
+      <input type="text" class="form-control"
+             name="description" [(ngModel)]="description"
+             required/>
+    </div>
+    <div *ngIf="day == null" class="form-group">
+      <label>Data </label>
+      <input type="date" class="form-control"
+             name="day" [(ngModel)]="day"
+             required/>
+    </div>
+    <div *ngIf="day != null">
+    {{day}}
+    </div>
+    <div class="form-group">
+      <label>Ilość pracowników </label>
+      <input type="number" class="form-control"
+             name="employeesPerDay" [(ngModel)]="employeesPerDay"
+             required/>
+    </div>
+    <div class="form-group">
+      <label>Ilość zamówień: </label>
+      <input type="number" class="form-control"
+             name="ordersPerDay" [(ngModel)]="ordersPerDay"
+             required/>
+    </div>
+    <div class="form-group">
+      <label>Ilość zwrotów: </label>
+      <input type="number" class="form-control"
+             name="returnsPerDay" [(ngModel)]="returnsPerDay"
+             required/>
+    </div>
+    <div class="form-group">
+      <label>Ilość obsłużonych zwrotów: </label>
+      <input type="number" class="form-control"
+             name="complaintsResolvedPerDay" [(ngModel)]="complaintsResolvedPerDay"
+             required/>
+    </div>
+    <button type='submit' [disabled]="form.invalid">Aktualizuj plan</button>
+  </form>
+  **********************************************
+</div>

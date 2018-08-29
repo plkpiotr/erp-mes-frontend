@@ -31,6 +31,10 @@ import {TaskComponent} from "../app/task/task.component";
 import {CurrentReportComponent} from "../app/current-report/current-report.component";
 import {LoginComponent} from "../app/login/login.component";
 import {ValidateComponent} from "../app/validate/validate.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 
 const mockDeliveries = [
   {
@@ -95,6 +99,17 @@ const mockDeliveryRequest = {
   "scheduledFor": new Date('2018-08-15'),
 };
 
+const mockDeliveryItemRequests = [
+  {
+    "itemId": 3,
+    "quantity": 25
+  },
+  {
+    "itemId": 5,
+    "quantity": 16
+  }
+];
+
 describe('DeliveryService', () => {
   let service: DeliveryService;
   let httpMock: HttpTestingController;
@@ -126,7 +141,10 @@ describe('DeliveryService', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -135,7 +153,8 @@ describe('DeliveryService', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     });
     service = TestBed.get(DeliveryService);
@@ -200,13 +219,13 @@ describe('DeliveryService', () => {
     describe('when called', () => {
 
       it('should hit "/deliveries/recommended-delivery" with GET and return recommendations', () => {
-        service.getRecommendations().subscribe(request => {
-          expect(request).toEqual(mockDeliveryRequest);
+        service.getRecommendations().subscribe(deliveryItemRequests => {
+          expect(deliveryItemRequests).toEqual(mockDeliveryItemRequests);
         });
 
         const req = httpMock.expectOne('http://localhost:8080/deliveries/recommended-delivery');
         expect(req.request.method).toBe('GET');
-        req.flush(mockDeliveryRequest);
+        req.flush(mockDeliveryItemRequests);
 
         httpMock.verify();
       });

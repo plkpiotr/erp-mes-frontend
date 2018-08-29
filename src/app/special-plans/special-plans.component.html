@@ -1,0 +1,8 @@
+<div *ngIf="arePlansLoaded">
+  <div *ngFor="let plan of specialPlans">
+    <br>{{plan.id}} {{plan.description}} {{plan.day}} {{plan.employeesPerDay}}
+    {{plan.ordersPerDay}} {{plan.returnsPerDay}} {{plan.complaintsResolvedPerDay}}
+    <button (click)="fetchItem(item.id)">Zobacz</button>
+    <br>
+  </div>
+</div>

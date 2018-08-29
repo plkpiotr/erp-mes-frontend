@@ -31,6 +31,10 @@ import {HttpClientTestingModule, HttpTestingController} from "@angular/common/ht
 import {FormsModule} from "@angular/forms";
 import {ValidateComponent} from "../app/validate/validate.component";
 import {LoginComponent} from "../app/login/login.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 
 const mockItems = [
   {
@@ -96,7 +100,10 @@ describe('ItemService', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -105,7 +112,8 @@ describe('ItemService', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     });
     service = TestBed.get(ItemService);
@@ -194,6 +202,38 @@ describe('ItemService', () => {
         const req = httpMock.expectOne('http://localhost:8080/items/1/buy');
         expect(req.request.method).toBe('POST');
         req.flush(mockItems[0]);
+
+        httpMock.verify();
+      });
+    });
+  });
+
+  describe('given setSpecialOffer method', () => {
+    describe('when called', () => {
+
+      it('should hit "/set-special-offer" with POST', () => {
+        service.setSpecialOffer("10", "xd").subscribe(items => {
+          expect(items).toEqual(mockItems);
+        });
+
+        const req = httpMock.expectOne('http://localhost:8080/set-special-offer?percentOff=10&query=xd');
+        expect(req.request.method).toBe('POST');
+        req.flush(mockItems);
+
+        httpMock.verify();
+      });
+    });
+  });
+
+  describe('given cancelSpecialOffer method', () => {
+    describe('when called', () => {
+
+      it('should hit "/cancel-special-offer" with POST', () => {
+        service.cancelSpecialOffer().subscribe(items => {
+        });
+
+        const req = httpMock.expectOne('http://localhost:8080/cancel-special-offer');
+        expect(req.request.method).toBe('POST');
 
         httpMock.verify();
       });

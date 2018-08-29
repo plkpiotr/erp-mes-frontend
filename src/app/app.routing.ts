@@ -19,6 +19,10 @@ import {ItemComponent} from "./item/item.component";
 import {AddItemComponent} from "./add-item/add-item.component";
 import {LoginComponent} from "./login/login.component";
 import {ValidateComponent} from "./validate/validate.component";
+import {PlanningService} from "./planning.service";
+import {SpecialPlansComponent} from "./special-plans/special-plans.component";
+import {PlanningComponent} from "./planning/planning.component";
+import {UpdateDailyPlanComponent} from "./update-daily-plan/update-daily-plan.component";
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -40,6 +44,9 @@ export const appRoutes: Routes = [
   {path: 'items', component: ItemsComponent},
   {path: 'items/add', component: AddItemComponent},
   {path: 'items/:id', component: ItemComponent},
+  {path: 'planning', component: PlanningComponent},
+  {path: 'planning/update', component: UpdateDailyPlanComponent},
+  {path: 'special-plans', component: SpecialPlansComponent},
   {path: 'login', component: LoginComponent}
   ];
 

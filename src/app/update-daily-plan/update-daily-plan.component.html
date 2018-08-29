@@ -1,0 +1,27 @@
+<form #form='ngForm' (ngSubmit)='submitForm()'>
+  <div class="form-group">
+    <label>Ilość pracowników </label>
+    <input type="number" class="form-control"
+           name="employeesPerDay" [(ngModel)]="employeesPerDay"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Ilość zamówień: </label>
+    <input type="number" class="form-control"
+           name="ordersPerDay" [(ngModel)]="ordersPerDay"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Ilość zwrotów: </label>
+    <input type="number" class="form-control"
+           name="returnsPerDay" [(ngModel)]="returnsPerDay"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Ilość obsłużonych zwrotów: </label>
+    <input type="number" class="form-control"
+           name="complaintsResolvedPerDay" [(ngModel)]="complaintsResolvedPerDay"
+           required/>
+  </div>
+  <button type='submit' [disabled]="form.invalid">Aktualizuj plan</button>
+</form>
