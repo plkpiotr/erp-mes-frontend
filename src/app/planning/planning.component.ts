@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PlanningService} from "../planning.service";
 import {DailyPlan, SpecialPlanRequest} from "../types";
 import {Router} from "@angular/router";
@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   templateUrl: './planning.component.html',
   styleUrls: ['./planning.component.css']
 })
-export class PlanningComponent {
+export class PlanningComponent implements OnInit {
 
   dailyPlan: DailyPlan;
   ordersToday: number;
@@ -28,6 +28,9 @@ export class PlanningComponent {
   showAddSpecialPlan = false;
 
   constructor(private planningService: PlanningService, private router: Router) {
+  }
+
+  ngOnInit() {
     this.fetchDailyPlan();
     this.fetchOrders();
   }
@@ -87,7 +90,6 @@ export class PlanningComponent {
     this.day = new Date();
     this.day.setDate(this.day.getDate() + 1);
     this.showAddSpecialPlan = true;
-    console.log(this.day);
   }
 
   inTwoDaysSpecialPlan() {
@@ -95,7 +97,6 @@ export class PlanningComponent {
     this.day.setDate(this.day.getDate() + 2);
     this.day = this.day;
     this.showAddSpecialPlan = true;
-    console.log(this.day);
   }
 
   submitForm() {
