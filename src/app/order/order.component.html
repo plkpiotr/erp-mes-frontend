@@ -1,0 +1,17 @@
+<div *ngIf="isOrderLoaded">
+  {{order.id}}<br>
+  {{order.status}}<br>
+  {{order.firstName}}<br>
+  {{order.lastName}}<br>
+  {{order.email}}<br>
+  {{order.phoneNumber}}<br>
+  {{order.street}}<br>
+  {{order.houseNumber}}<br>
+  {{order.city}}<br>
+  {{order.postalCode}}<br>
+  {{order.scheduledFor}}<br>
+  {{order.value}}<br>
+  <div *ngFor="let deliveryItem of order.deliveryItems">
+    {{deliveryItem.item.name}} {{deliveryItem.quantity}}<br>
+  </div>
+</div>

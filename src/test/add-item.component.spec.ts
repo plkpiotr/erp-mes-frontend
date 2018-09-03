@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddItemComponent } from '../app/add-item/add-item.component';
+import {AddItemComponent} from '../app/add-item/add-item.component';
 import {DeliveryService} from "../app/delivery.service";
 import {ItemService} from "../app/item.service";
 import {ReportService} from "../app/report.service";
@@ -79,7 +79,13 @@ describe('AddItemComponent', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        OrderComponent,
+        OrdersComponent,
+        NotificationComponent,
+        NotificationsComponent,
+        SuggestionComponent,
+        SuggestionsComponent
       ],
       providers: [
         EmployeeService,
@@ -89,12 +95,6 @@ describe('AddItemComponent', () => {
         ReportService,
         ItemService,
         DeliveryService,
-        OrderComponent,
-        OrdersComponent,
-        NotificationComponent,
-        NotificationsComponent,
-        SuggestionComponent,
-        SuggestionsComponent,
         OrderService,
         NotificationService,
         SuggestionService

@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/employee.service';
 import {HolidayService} from '../app/holiday.service';
 import {TeamService} from '../app/team.service';
 import {ReportService} from '../app/report.service';
-import {Category, Role} from '../app/types';
+import {Category, Phase, Role} from '../app/types';
 import {DeliveriesComponent} from '../app/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/add-item/add-item.component';
 import {ValidateComponent} from '../app/validate/validate.component';
@@ -44,6 +44,7 @@ import {NotificationComponent} from '../app/notification/notification.component'
 import {NotificationsComponent} from '../app/notifications/notifications.component';
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
+
 
 const mockTasks = [
   {
@@ -75,6 +76,33 @@ const mockTasks = [
   },
   {
     id: 2,
+    name: 'Wysłać przesyłkę nr 1410',
+    category: Category.TODO,
+    assignee: {
+      id: 2,
+      firstName: 'Michał',
+      lastName: 'Nowak',
+      email: 'michal.nowak@domain.com',
+      role: Role.ADMIN,
+      password: 'wxqvvvde',
+      contract: {
+        id: 1,
+        accountNumber: '75139348924923829450242727',
+        daysOffPerYear: 26,
+        salary: 2000.00
+      },
+      passwordValid: false
+    },
+    precedingTasks: [],
+    details: 'Zmienić sposób dostarczenia na list priorytetowy',
+    estimatedTimeInMinutes: 17,
+    deadline: new Date('October 15, 2014 08:00:00'),
+    creationTime: new Date('October 13, 2014 11:13:00'),
+    startTime: null,
+    endTime: null
+  },
+  {
+    id: 3,
     name: 'Wysłać przesyłkę nr 1490',
     category: Category.TODO,
     assignee: {
@@ -101,7 +129,7 @@ const mockTasks = [
     endTime: null
   },
   {
-    id: 3,
+    id: 4,
     name: 'Wysłać przesyłkę nr 1429',
     category: Category.TODO,
     assignee: {
@@ -208,38 +236,11 @@ const mockTasks = [
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
     endTime: null
-  },
-  {
-    id: 4,
-    name: 'Wysłać przesyłkę nr 1410',
-    category: Category.TODO,
-    assignee: {
-      id: 2,
-      firstName: 'Michał',
-      lastName: 'Nowak',
-      email: 'michal.nowak@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqvvvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348924923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 17,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
   }
 ];
 
-describe('TaskService', () => {
-  let taskService: TaskService;
+describe('OrderService', () => {
+  let service: TaskService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -293,18 +294,18 @@ describe('TaskService', () => {
         SuggestionService
       ]
     });
-    taskService = TestBed.get(TaskService);
+    service = TestBed.get(TaskService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
   it('should be created', () => {
-    expect(taskService).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 
   describe('given fetchAllTasks method', () => {
     describe('when called', () => {
       it('should hit "/tasks" with GET and return tasks', () => {
-        taskService.fetchAllTasks().subscribe(tasks => {
+        service.fetchAllTasks().subscribe(tasks => {
           expect(tasks.length).toBe(4);
           expect(tasks).toEqual(mockTasks);
           const req = httpMock.expectOne('http://localhost:8080/tasks/');
@@ -319,7 +320,7 @@ describe('TaskService', () => {
   describe('given fetchOneTask method', () => {
     describe('when called', () => {
       it('should hit "tasks/1" with GET and return task', () => {
-        taskService.fetchOneTask(1).subscribe(task => {
+        service.fetchOneTask(1).subscribe(task => {
           expect(task).toEqual(mockTasks[0]);
         });
         const req = httpMock.expectOne('http://localhost:8080/tasks/1');
@@ -333,11 +334,12 @@ describe('TaskService', () => {
   describe('given fetchTasksByAssignee method', () => {
     describe('when called', () => {
       it('should hit "/employees/1/tasks" with GET and return tasks by assignee', () => {
-        taskService.fetchTasksByAssignee(1).subscribe(tasks => {
+        service.fetchTasksByAssignee(1).subscribe(tasks => {
           expect(tasks.length).toBe(3);
+          expect(tasks).toEqual(mockTasks);
           const req = httpMock.expectOne('http://localhost:8080/employees/1/tasks');
           expect(req.request.method).toBe('GET');
-          req.flush(mockTasks.slice(0, 3));
+          req.flush(mockTasks[0]);
           httpMock.verify();
         });
       });
