@@ -23,8 +23,8 @@ import {ReportService} from './report.service';
 import { ReportsComponent } from './reports/reports.component';
 import { ReportComponent } from './report/report.component';
 import { CurrentReportComponent } from './current-report/current-report.component';
-import {ItemService} from "./item.service";
-import {DeliveryService} from "./delivery.service";
+import {ItemService} from './item.service';
+import {DeliveryService} from './delivery.service';
 import { ItemsComponent } from './items/items.component';
 import { ItemComponent } from './item/item.component';
 import { AddItemComponent } from './add-item/add-item.component';
@@ -32,10 +32,22 @@ import { DeliveriesComponent } from './deliveries/deliveries.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
 import { LoginComponent } from './login/login.component';
-import {LoginService} from "./login.service";
-import {Token} from "./token";
-import {Interceptor} from "./interceptor";
+import {LoginService} from './login.service';
+import {Token} from './token';
+import {Interceptor} from './interceptor';
 import { ValidateComponent } from './validate/validate.component';
+import { AddOrderComponent } from './add-order/add-order.component';
+import { AddSuggestionComponent } from './add-suggestion/add-suggestion.component';
+import { AddNotificationComponent } from './add-notification/add-notification.component';
+import { OrderComponent } from './order/order.component';
+import { OrdersComponent } from './orders/orders.component';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { SuggestionComponent } from './suggestion/suggestion.component';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
+import {OrderService} from './order.service';
+import {SuggestionService} from './suggestion.service';
+import {NotificationService} from './notification.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +72,15 @@ import { ValidateComponent } from './validate/validate.component';
     AddDeliveryComponent,
     LoginComponent,
     ValidateComponent,
+    AddOrderComponent,
+    AddSuggestionComponent,
+    AddNotificationComponent,
+    NotificationComponent,
+    NotificationsComponent,
+    OrderComponent,
+    OrdersComponent,
+    SuggestionComponent,
+    SuggestionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +98,9 @@ import { ValidateComponent } from './validate/validate.component';
     ItemService,
     DeliveryService,
     LoginService,
+    OrderService,
+    NotificationService,
+    SuggestionService,
     Token,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

@@ -35,7 +35,7 @@ export class AddTaskComponent implements OnInit {
   submitForm() {
     this.taskRequest = {
       name: this.name,
-      category: this.category,
+      category: Category.TODO,
       assigneeId: this.assigneeId,
       precedingTaskIds: this.precedingTaskIds,
       details: this.details,

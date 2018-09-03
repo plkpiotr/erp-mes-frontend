@@ -31,6 +31,18 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {appRoutes} from "../app/app.routing";
 import {LoginComponent} from "../app/login/login.component";
 import {ValidateComponent} from "../app/validate/validate.component";
+import {NotificationService} from '../app/notification.service';
+import {SuggestionService} from '../app/suggestion.service';
+import {OrderService} from '../app/order.service';
+import {AddOrderComponent} from '../app/add-order/add-order.component';
+import {AddNotificationComponent} from '../app/add-notification/add-notification.component';
+import {AddSuggestionComponent} from '../app/add-suggestion/add-suggestion.component';
+import {OrderComponent} from '../app/order/order.component';
+import {OrdersComponent} from '../app/orders/orders.component';
+import {NotificationComponent} from '../app/notification/notification.component';
+import {NotificationsComponent} from '../app/notifications/notifications.component';
+import {SuggestionComponent} from '../app/suggestion/suggestion.component';
+import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
 
 describe('AddItemComponent', () => {
   let component: AddItemComponent;
@@ -50,6 +62,9 @@ describe('AddItemComponent', () => {
         AddTaskComponent,
         AddDeliveryComponent,
         AddItemComponent,
+        AddOrderComponent,
+        AddNotificationComponent,
+        AddSuggestionComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
@@ -73,7 +88,16 @@ describe('AddItemComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        OrderComponent,
+        OrdersComponent,
+        NotificationComponent,
+        NotificationsComponent,
+        SuggestionComponent,
+        SuggestionsComponent,
+        OrderService,
+        NotificationService,
+        SuggestionService
       ]
     })
     .compileComponents();

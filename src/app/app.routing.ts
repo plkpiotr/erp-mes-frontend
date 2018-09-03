@@ -19,6 +19,15 @@ import {ItemComponent} from "./item/item.component";
 import {AddItemComponent} from "./add-item/add-item.component";
 import {LoginComponent} from "./login/login.component";
 import {ValidateComponent} from "./validate/validate.component";
+import {AddOrderComponent} from './add-order/add-order.component';
+import {AddNotificationComponent} from './add-notification/add-notification.component';
+import {AddSuggestionComponent} from './add-suggestion/add-suggestion.component';
+import {OrderComponent} from './order/order.component';
+import {OrdersComponent} from './orders/orders.component';
+import {NotificationComponent} from './notification/notification.component';
+import {NotificationsComponent} from './notifications/notifications.component';
+import {SuggestionComponent} from './suggestion/suggestion.component';
+import {SuggestionsComponent} from './suggestions/suggestions.component';
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -40,7 +49,16 @@ export const appRoutes: Routes = [
   {path: 'items', component: ItemsComponent},
   {path: 'items/add', component: AddItemComponent},
   {path: 'items/:id', component: ItemComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'notifications', component: NotificationsComponent},
+  {path: 'notifications/add', component: AddNotificationComponent},
+  {path: 'notifications/:id', component: NotificationComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'orders/add', component: AddOrderComponent},
+  {path: 'orders/:id', component: OrderComponent},
+  {path: 'suggestions', component: SuggestionsComponent},
+  {path: 'suggestions/add', component: AddSuggestionComponent},
+  {path: 'suggestions/:id', component: SuggestionComponent},
   ];
 
 export const routing = RouterModule.forRoot(appRoutes);

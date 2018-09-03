@@ -1,0 +1,13 @@
+<div *ngIf="areSuggestionsLoaded">
+  <div *ngFor="let s of suggestions">
+    <hr> {{s.id}} {{s.phase}} {{s.name}} {{s.description}} {{s.creationTime}}
+    <div *ngIf="s.author">
+      {{s.author.firstName}} {{s.author.firstName}}
+    </div>
+    <div *ngFor="let r of s.recipients">
+      {{r.id}} {{r.firstName}} {{r.lastName}}
+    </div>
+  <button (click)="seeSuggestion(s.id)">Zobacz</button>
+  </div>
+  <button (click)="addSuggestion()">Dodaj sugestię</button>
+</div>

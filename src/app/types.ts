@@ -39,6 +39,33 @@ export enum ExpenseType {
   TAXES = 'TAXES'
 }
 
+export enum Status {
+  WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
+  IN_PROGRESS = 'IN_PROGRESS',
+  SENT = 'SENT',
+  DECLINED = 'DECLINED'
+}
+
+export enum State {
+  REPORTED = 'REPORTED',
+  ACCEPTED = 'ACCEPTED',
+  SOLVED = 'SOLVED'
+}
+
+export enum Phase {
+  REPORTED = 'REPORTED',
+  IN_IMPLEMENTATION = 'IN_IMPLEMENTATION',
+  IMPLEMENTED = 'IMPLEMENTED',
+  ABANDONED = 'ABANDONED'
+}
+
+export enum Type {
+  DELIVERY = 'DELIVERY',
+  ORDER = 'ORDER',
+  COMPLAINT = 'COMPLAINT',
+  RETURN = 'RETURN'
+}
+
 export interface Contract {
   id: number;
   accountNumber: string;
@@ -207,6 +234,74 @@ export interface Delivery {
 export interface DeliveryRequest {
   deliveryItemRequests: DeliveryItemRequest[];
   scheduledFor: Date;
+}
+
+export interface Order {
+  id: number;
+  status: Status;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  street: string;
+  houseNumber: string;
+  city: string;
+  postalCode: string;
+  deliveryItems: DeliveryItem[];
+  scheduledFor: Date;
+  value: number;
+}
+
+export interface OrderRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  street: string;
+  houseNumber: string;
+  city: string;
+  postalCode: string;
+  deliveryItemRequests: DeliveryItemRequest[];
+  scheduledFor: Date;
+}
+
+export interface Notification {
+  id: number;
+  state: State;
+  instruction: string;
+  description?: string;
+  notifier: Employee;
+  transferee?: Employee;
+  consignees: Employee[];
+  creationTime: Date;
+  type?: Type;
+  reference?: number;
+}
+
+export interface NotificationRequest {
+  instruction: string;
+  description?: string;
+  notifierId?: number;
+  consigneeIds: number[];
+  type?: Type;
+  reference?: number;
+}
+
+export interface Suggestion {
+  id: number;
+  phase: Phase;
+  name: string;
+  description: string;
+  author?: Employee;
+  recipients: Employee[];
+  creationTime: Date;
+}
+
+export interface SuggestionRequest {
+  name: String;
+  description: String;
+  authorId?: number;
+  recipientIds: number[];
 }
 
 

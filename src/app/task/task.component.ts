@@ -11,20 +11,22 @@ import {Task} from '../types';
 export class TaskComponent implements OnInit {
 
   task: Task;
-  isLoaded = false;
+  isTaskLoaded = false;
 
   constructor(private taskService: TaskService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.fetchTask();
+  }
+
+  fetchTask() {
     this.taskService.fetchOneTask(this.route.snapshot.params[('id')])
       .subscribe(res => {
         this.task = res;
-      },
-        err => {
-          console.log(err);
-        },
-        () => {
-        this.isLoaded = true;
-        });
+      }, err => {
+        console.log(err);
+      }, () => {
+        this.isTaskLoaded = true;
+      });
   }
 }
