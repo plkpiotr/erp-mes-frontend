@@ -32,6 +32,10 @@ import {EmployeesComponent} from "../app/employees/employees.component";
 import {ActivatedRoute} from "@angular/router";
 import {LoginComponent} from "../app/login/login.component";
 import {ValidateComponent} from "../app/validate/validate.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 
 const mockDelivery = {
   "id": 1,
@@ -100,7 +104,10 @@ describe('DeliveryComponent', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -109,7 +116,8 @@ describe('DeliveryComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     })
     .compileComponents();

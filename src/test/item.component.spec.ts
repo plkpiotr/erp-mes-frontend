@@ -32,6 +32,10 @@ import {FormsModule} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {LoginComponent} from "../app/login/login.component";
 import {ValidateComponent} from "../app/validate/validate.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 
 describe('ItemComponent', () => {
   let component: ItemComponent;
@@ -66,7 +70,10 @@ describe('ItemComponent', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -75,7 +82,8 @@ describe('ItemComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     })
     .compileComponents();

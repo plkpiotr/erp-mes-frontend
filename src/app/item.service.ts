@@ -37,4 +37,19 @@ export class ItemService {
     return this.http.post<Item>('http://localhost:8080/items/' + id + '/buy',
       quantity, {headers: this.httpHeaders});
   }
+
+  setSpecialOffer(percentOff: string, query: string): Observable<Array<Item>> {
+    return this.http.post<Array<Item>>('http://localhost:8080/set-special-offer', "", {
+      headers: this.httpHeaders,
+      params: {
+        percentOff: percentOff,
+        query: query
+      }
+    });
+  }
+
+  cancelSpecialOffer(): Observable<Array<Item>> {
+    return this.http.post<Array<Item>>('http://localhost:8080/cancel-special-offer', "",
+      {headers: this.httpHeaders});
+  }
 }

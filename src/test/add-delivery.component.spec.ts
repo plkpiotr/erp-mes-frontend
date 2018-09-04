@@ -31,6 +31,10 @@ import {FormsModule} from "@angular/forms";
 import {AddItemComponent} from "../app/add-item/add-item.component";
 import {ValidateComponent} from "../app/validate/validate.component";
 import {LoginComponent} from "../app/login/login.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningService} from "../app/planning.service";
 
 describe('AddDeliveryComponent', () => {
   let component: AddDeliveryComponent;
@@ -64,7 +68,10 @@ describe('AddDeliveryComponent', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -73,7 +80,8 @@ describe('AddDeliveryComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     })
     .compileComponents();
@@ -90,10 +98,10 @@ describe('AddDeliveryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fetch all items', () => {
-    spyOn(component, 'fetchItems').and.callThrough();
+  it('should fetch recommended items', () => {
+    spyOn(service, 'getRecommendations').and.callThrough();
     component.ngOnInit();
-    expect(component.fetchItems).toHaveBeenCalled();
+    expect(service.getRecommendations).toHaveBeenCalled();
   });
 
   describe('when form is submitted', () => {

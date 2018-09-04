@@ -1,9 +1,21 @@
 <div *ngIf="areItemsLoaded">
+  Rekomendowane przedmioty:
+  <div *ngFor="let rec of recommendedDeliveryItems">
+    {{rec.itemId}}
+    <label>Ilość: </label>
+    <input type="number" class="form-control"
+           name="rec.quantity" [(ngModel)]="rec.quantity"
+           required/>
+    <button (click)="addRecommendedItem(rec.itemId, rec.quantity)">Dodaj</button>
+    <br>
+  </div>
+  <br><br>
+  Pozostałe przedmioty:
   <form #form='ngForm' (ngSubmit)='addDeliveryItem()'>
     <div class="form-group">
       <label>Przedmiot: </label>
       <select name="itemid" [(ngModel)]="itemId" required>
-        <option *ngFor="let i of items" [value]="i.id">{{i.name}}</option>
+        <option *ngFor="let i of remainingItems" [value]="i.id">{{i.name}}</option>
       </select>
     </div>
     <div class="form-group">
@@ -14,7 +26,7 @@
     </div>
     <button type='submit' [disabled]="itemId == null || quantity == null">Dodaj</button>
   </form>
-
+<br>
   <div *ngFor="let itemRequest of deliveryItemRequests">
     {{itemRequest.itemId}} {{itemRequest.quantity}}
   </div>

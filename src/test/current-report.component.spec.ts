@@ -31,6 +31,10 @@ import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
 import {AddItemComponent} from "../app/add-item/add-item.component";
 import {LoginComponent} from "../app/login/login.component";
 import {ValidateComponent} from "../app/validate/validate.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 
 describe('CurrentReportComponent', () => {
   let component: CurrentReportComponent;
@@ -64,7 +68,10 @@ describe('CurrentReportComponent', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -73,7 +80,8 @@ describe('CurrentReportComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     })
     .compileComponents();

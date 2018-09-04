@@ -33,6 +33,10 @@ import {Router} from "@angular/router";
 import {Location} from '@angular/common';
 import {LoginComponent} from "../app/login/login.component";
 import {ValidateComponent} from "../app/validate/validate.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 
 describe('DeliveriesComponent', () => {
   let component: DeliveriesComponent;
@@ -68,7 +72,10 @@ describe('DeliveriesComponent', () => {
         DeliveryComponent,
         DeliveriesComponent,
         ValidateComponent,
-        LoginComponent
+        LoginComponent,
+        UpdateDailyPlanComponent,
+        PlanningComponent,
+        SpecialPlansComponent
       ],
       providers: [
         EmployeeService,
@@ -77,7 +84,8 @@ describe('DeliveriesComponent', () => {
         TaskService,
         ReportService,
         ItemService,
-        DeliveryService
+        DeliveryService,
+        PlanningService
       ]
     })
     .compileComponents();

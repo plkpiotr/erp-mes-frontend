@@ -209,4 +209,38 @@ export interface DeliveryRequest {
   scheduledFor: Date;
 }
 
+export interface DailyPlan {
+  id: number;
+  employeesPerDay: number;
+  ordersPerDay: number;
+  returnsPerDay: number;
+  complaintsResolvedPerDay: number;
+}
+
+export interface DailyPlanRequest {
+  employeesPerDay: number;
+  ordersPerDay: number;
+  returnsPerDay: number;
+  complaintsResolvedPerDay: number;
+}
+
+export interface SpecialPlan {
+  id: number;
+  description: string;
+  day: Date;
+  employeesPerDay: number;
+  ordersPerDay: number;
+  returnsPerDay: number;
+  complaintsResolvedPerDay: number;
+}
+
+export interface SpecialPlanRequest {
+  description: string;
+  day: string;
+  employeesPerDay: number;
+  ordersPerDay: number;
+  returnsPerDay: number;
+  complaintsResolvedPerDay: number;
+}
+
 

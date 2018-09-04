@@ -36,6 +36,10 @@ import {LoginService} from "./login.service";
 import {Token} from "./token";
 import {Interceptor} from "./interceptor";
 import { ValidateComponent } from './validate/validate.component';
+import { PlanningComponent } from './planning/planning.component';
+import { SpecialPlansComponent } from './special-plans/special-plans.component';
+import {PlanningService} from "./planning.service";
+import { UpdateDailyPlanComponent } from './update-daily-plan/update-daily-plan.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,9 @@ import { ValidateComponent } from './validate/validate.component';
     AddDeliveryComponent,
     LoginComponent,
     ValidateComponent,
+    PlanningComponent,
+    SpecialPlansComponent,
+    UpdateDailyPlanComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +84,7 @@ import { ValidateComponent } from './validate/validate.component';
     ItemService,
     DeliveryService,
     LoginService,
+    PlanningService,
     Token,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
