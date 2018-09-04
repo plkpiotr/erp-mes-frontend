@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/employee.service';
 import {HolidayService} from '../app/holiday.service';
 import {TeamService} from '../app/team.service';
 import {ReportService} from '../app/report.service';
-import {Category, Phase, Role} from '../app/types';
+import {Category, Role, State} from '../app/types';
 import {DeliveriesComponent} from '../app/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/add-item/add-item.component';
 import {ValidateComponent} from '../app/validate/validate.component';
@@ -45,201 +45,134 @@ import {NotificationsComponent} from '../app/notifications/notifications.compone
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
 
-const mockTasks = [
+const mockNotifications = [
   {
     id: 1,
-    name: 'Zapakować przesyłkę nr 1444',
-    category: Category.TODO,
-    assignee: {
+    state: State.REPORTED,
+    instruction: 'Uszkodzona przesyłka podczas transportu',
+    description: 'Przesłać uwagi przełożonemu',
+    notifier: {
       id: 1,
       firstName: 'Jakub',
       lastName: 'Kowalski',
       email: 'jakub.kowalski@domain.com',
       role: Role.ADMIN,
-      password: 'wxqhwvde',
+      password: 'nsofbdie',
       contract: {
         id: 1,
-        accountNumber: '75139348954923829450242727',
+        accountNumber: '75139348954923829450242711',
         daysOffPerYear: 26,
-        salary: 2000.00
+        salary: 2700.00
       },
       passwordValid: false
     },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 15,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
-  },
-  {
-    id: 2,
-    name: 'Wysłać przesyłkę nr 1410',
-    category: Category.TODO,
-    assignee: {
-      id: 2,
-      firstName: 'Michał',
-      lastName: 'Nowak',
-      email: 'michal.nowak@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqvvvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348924923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 17,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
-  },
-  {
-    id: 3,
-    name: 'Wysłać przesyłkę nr 1490',
-    category: Category.TODO,
-    assignee: {
-      id: 1,
-      firstName: 'Jakub',
-      lastName: 'Kowalski',
-      email: 'jakub.kowalski@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqhwvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348954923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list ekonomiczny',
-    estimatedTimeInMinutes: 19,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
-  },
-  {
-    id: 4,
-    name: 'Wysłać przesyłkę nr 1429',
-    category: Category.TODO,
-    assignee: {
-      id: 1,
-      firstName: 'Jakub',
-      lastName: 'Kowalski',
-      email: 'jakub.kowalski@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqhwvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348954923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [
-      {
-        id: 1,
-        name: 'Zapakować przesyłkę nr 1444',
-        category: Category.TODO,
-        assignee: {
-          id: 1,
-          firstName: 'Jakub',
-          lastName: 'Kowalski',
-          email: 'jakub.kowalski@domain.com',
-          role: Role.ADMIN,
-          password: 'wxqhwvde',
-          contract: {
-            id: 1,
-            accountNumber: '75139348954923829450242727',
-            daysOffPerYear: 26,
-            salary: 2000.00
-          },
-          passwordValid: false
-        },
-        precedingTasks: [],
-        details: 'Zmienić sposób dostarczenia na list priorytetowy',
-        estimatedTimeInMinutes: 15,
-        deadline: new Date('October 15, 2014 08:00:00'),
-        creationTime: new Date('October 13, 2014 11:13:00'),
-        startTime: null,
-        endTime: null
-      },
+    transferee: null,
+    creationTime: new Date('December 30, 2016 07:25:00'),
+    consignees: [
       {
         id: 2,
-        name: 'Wysłać przesyłkę nr 1410',
-        category: Category.TODO,
-        assignee: {
-          id: 1,
-          firstName: 'Jakub',
-          lastName: 'Kowalski',
-          email: 'jakub.kowalski@domain.com',
-          role: Role.ADMIN,
-          password: 'wxqhwvde',
-          contract: {
-            id: 1,
-            accountNumber: '75139348954923829450242727',
-            daysOffPerYear: 26,
-            salary: 2000.00
-          },
-          passwordValid: false
+        firstName: 'Hubert',
+        lastName: 'Wojciechowski',
+        email: 'hubert.wojciechowski@hubwoj.pl',
+        role: Role.ADMIN,
+        password: 'ssdbager',
+        contract: {
+          id: 2,
+          accountNumber: '83139348954923829450242727',
+          daysOffPerYear: 26,
+          salary: 3000.00
         },
-        precedingTasks: [],
-        details: 'Zmienić sposób dostarczenia na list priorytetowy',
-        estimatedTimeInMinutes: 17,
-        deadline: new Date('October 15, 2014 08:00:00'),
-        creationTime: new Date('October 13, 2014 11:13:00'),
-        startTime: null,
-        endTime: null
+        passwordValid: false
       },
       {
         id: 3,
-        name: 'Wysłać przesyłkę nr 1490',
-        category: Category.TODO,
-        assignee: {
-          id: 1,
-          firstName: 'Jakub',
-          lastName: 'Kowalski',
-          email: 'jakub.kowalski@domain.com',
-          role: Role.ADMIN,
-          password: 'wxqhwvde',
-          contract: {
-            id: 1,
-            accountNumber: '75139348954923829450242727',
-            daysOffPerYear: 26,
-            salary: 2000.00
-          },
-          passwordValid: false
+        firstName: 'Anna',
+        lastName: 'Koniecpolska',
+        email: 'anna.koniecpolska@annak.pl',
+        role: Role.ADMIN,
+        password: 'aawerbds',
+        contract: {
+          id: 3,
+          accountNumber: '75139348951123829450241127',
+          daysOffPerYear: 26,
+          salary: 2400.00
         },
-        precedingTasks: [],
-        details: 'Zmienić sposób dostarczenia na list ekonomiczny',
-        estimatedTimeInMinutes: 19,
-        deadline: new Date('October 15, 2014 08:00:00'),
-        creationTime: new Date('October 13, 2014 11:13:00'),
-        startTime: null,
-        endTime: null
+        passwordValid: false
       }
     ],
-    details: 'Nakleić informację: Uwaga! Szkło',
-    estimatedTimeInMinutes: 13,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
+    type: null,
+    reference: null
+  },
+  {
+    id: 1,
+    state: State.REPORTED,
+    instruction: 'Brak jednego z przedmiotów do wysłania zamówienia',
+    description: 'Zadzwonić do odbiorcy',
+    notifier: {
+      id: 1,
+      firstName: 'Jakub',
+      lastName: 'Kowalski',
+      email: 'jakub.kowalski@domain.com',
+      role: Role.ADMIN,
+      password: 'nsofbdie',
+      contract: {
+        id: 1,
+        accountNumber: '75139348954923829450242711',
+        daysOffPerYear: 26,
+        salary: 2700.00
+      },
+      passwordValid: false
+    },
+    transferee: null,
+    creationTime: new Date('December 30, 2016 07:25:00'),
+    consignees: [
+      {
+        id: 2,
+        firstName: 'Hubert',
+        lastName: 'Wojciechowski',
+        email: 'hubert.wojciechowski@hubwoj.pl',
+        role: Role.ADMIN,
+        password: 'ssdbager',
+        contract: {
+          id: 2,
+          accountNumber: '83139348954923829450242727',
+          daysOffPerYear: 26,
+          salary: 3000.00
+        },
+        passwordValid: false
+      },
+      {
+        id: 3,
+        firstName: 'Anna',
+        lastName: 'Koniecpolska',
+        email: 'anna.koniecpolska@annak.pl',
+        role: Role.ADMIN,
+        password: 'aawerbds',
+        contract: {
+          id: 3,
+          accountNumber: '75139348951123829450241127',
+          daysOffPerYear: 26,
+          salary: 2400.00
+        },
+        passwordValid: false
+      }
+    ],
+    type: null,
+    reference: null
   }
 ];
 
+const mockNotificationRequest = {
+  instruction: 'Brak kopert dla listów poleconych',
+  description: null,
+  notifierId: null,
+  consigneeIds: [2, 3],
+  type: null,
+  reference: null,
+};
+
 describe('NotificationService', () => {
-  let service: TaskService;
+  let notificationService: NotificationService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -293,54 +226,66 @@ describe('NotificationService', () => {
         SuggestionService
       ]
     });
-    service = TestBed.get(TaskService);
+    notificationService = TestBed.get(NotificationService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(notificationService).toBeTruthy();
   });
 
-  describe('given fetchAllTasks method', () => {
+  describe('given fetchNotifications method', () => {
     describe('when called', () => {
-      it('should hit "/tasks" with GET and return tasks', () => {
-        service.fetchAllTasks().subscribe(tasks => {
-          expect(tasks.length).toBe(4);
-          expect(tasks).toEqual(mockTasks);
-          const req = httpMock.expectOne('http://localhost:8080/tasks/');
+      it('should hit "/notifications" with GET and return notifications', () => {
+        notificationService.fetchAllNotifications().subscribe(notifications => {
+          expect(notifications.length).toBe(2);
+          expect(notifications).toEqual(mockNotifications);
+          const req = httpMock.expectOne('http://localhost:8080/notifications/');
           expect(req.request.method).toBe('GET');
-          req.flush(mockTasks);
+          req.flush(mockNotifications);
           httpMock.verify();
         });
       });
     });
   });
 
-  describe('given fetchOneTask method', () => {
+  describe('given fetchOneNotification method', () => {
     describe('when called', () => {
-      it('should hit "tasks/1" with GET and return task', () => {
-        service.fetchOneTask(1).subscribe(task => {
-          expect(task).toEqual(mockTasks[0]);
+      it('should hit "notifications/1" with GET and return notification', () => {
+        notificationService.fetchOneNotification(1).subscribe(notification => {
+          expect(notification).toEqual(mockNotifications[0]);
         });
-        const req = httpMock.expectOne('http://localhost:8080/tasks/1');
+        const req = httpMock.expectOne('http://localhost:8080/notifications/1');
         expect(req.request.method).toBe('GET');
-        req.flush(mockTasks[0]);
+        req.flush(mockNotifications[0]);
         httpMock.verify();
       });
     });
   });
 
-  describe('given fetchTasksByAssignee method', () => {
+  describe('given fetchNotificationsByRecipient method', () => {
     describe('when called', () => {
-      it('should hit "/employees/1/tasks" with GET and return tasks by assignee', () => {
-        service.fetchTasksByAssignee(1).subscribe(tasks => {
-          expect(tasks.length).toBe(3);
-          expect(tasks).toEqual(mockTasks);
-          const req = httpMock.expectOne('http://localhost:8080/employees/1/tasks');
+      it('should hit "/employees/1/notifications" with GET and return notifications by recipient', () => {
+        notificationService.fetchNotificationsByRecipient(2).subscribe(notifications => {
+          expect(notifications.length).toBe(2);
+          expect(notifications).toEqual(mockNotifications);
+          const req = httpMock.expectOne('http://localhost:8080/employees/2/notifications');
           expect(req.request.method).toBe('GET');
-          req.flush(mockTasks[0]);
+          req.flush(mockNotifications);
           httpMock.verify();
         });
+      });
+    });
+  });
+
+  describe('given addNotification method', () => {
+    describe('when called', () => {
+      it('should hit "/notifications/add" with POST', () => {
+        notificationService.addNotification(mockNotificationRequest).subscribe(() => {
+        });
+        const req = httpMock.expectOne('http://localhost:8080/notifications');
+        expect(req.request.method).toBe('POST');
+        httpMock.verify();
       });
     });
   });

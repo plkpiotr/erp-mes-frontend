@@ -24,7 +24,7 @@ export class OrderService {
     return this.http.get<Order>('http://localhost:8080/orders/' + id, {headers: this.httpHeaders});
   }
 
-  addNewOrder(orderRequest: OrderRequest): Observable<Order> {
+  addOneOrder(orderRequest: OrderRequest): Observable<Order> {
     return this.http.post<Order>('http://localhost:8080/orders', orderRequest, {headers: this.httpHeaders});
   }
 

@@ -47,6 +47,7 @@ import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
 describe('AddNotificationComponent', () => {
   let component: AddNotificationComponent;
   let fixture: ComponentFixture<AddNotificationComponent>;
+  let service: NotificationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -105,10 +106,22 @@ describe('AddNotificationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddNotificationComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(NotificationService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('when form is submitted', () => {
+    beforeEach(() => {
+      spyOn(service, 'addNotification').and.callThrough();
+      component.submitForm();
+    });
+
+    it('should call notificationService.addNotification()', () => {
+      expect(service.addNotification).toHaveBeenCalled();
+    });
   });
 });

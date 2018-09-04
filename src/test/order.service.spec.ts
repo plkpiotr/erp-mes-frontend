@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/employee.service';
 import {HolidayService} from '../app/holiday.service';
 import {TeamService} from '../app/team.service';
 import {ReportService} from '../app/report.service';
-import {Category, Phase, Role} from '../app/types';
+import {Status} from '../app/types';
 import {DeliveriesComponent} from '../app/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/add-item/add-item.component';
 import {ValidateComponent} from '../app/validate/validate.component';
@@ -45,202 +45,97 @@ import {NotificationsComponent} from '../app/notifications/notifications.compone
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
 
-
-const mockTasks = [
+const mockOrders = [
   {
     id: 1,
-    name: 'Zapakować przesyłkę nr 1444',
-    category: Category.TODO,
-    assignee: {
-      id: 1,
-      firstName: 'Jakub',
-      lastName: 'Kowalski',
-      email: 'jakub.kowalski@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqhwvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348954923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 15,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
-  },
-  {
-    id: 2,
-    name: 'Wysłać przesyłkę nr 1410',
-    category: Category.TODO,
-    assignee: {
-      id: 2,
-      firstName: 'Michał',
-      lastName: 'Nowak',
-      email: 'michal.nowak@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqvvvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348924923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 17,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
-  },
-  {
-    id: 3,
-    name: 'Wysłać przesyłkę nr 1490',
-    category: Category.TODO,
-    assignee: {
-      id: 1,
-      firstName: 'Jakub',
-      lastName: 'Kowalski',
-      email: 'jakub.kowalski@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqhwvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348954923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [],
-    details: 'Zmienić sposób dostarczenia na list ekonomiczny',
-    estimatedTimeInMinutes: 19,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
-  },
-  {
-    id: 4,
-    name: 'Wysłać przesyłkę nr 1429',
-    category: Category.TODO,
-    assignee: {
-      id: 1,
-      firstName: 'Jakub',
-      lastName: 'Kowalski',
-      email: 'jakub.kowalski@domain.com',
-      role: Role.ADMIN,
-      password: 'wxqhwvde',
-      contract: {
-        id: 1,
-        accountNumber: '75139348954923829450242727',
-        daysOffPerYear: 26,
-        salary: 2000.00
-      },
-      passwordValid: false
-    },
-    precedingTasks: [
+    status: Status.WAITING_FOR_PAYMENT,
+    firstName: 'Piotr',
+    lastName: 'Piątek',
+    email: 'piotr@piatek.pl',
+    phoneNumber: null,
+    street: 'ul. Łukasza Cieplińskiego',
+    houseNumber: '44a',
+    city: 'Piotrków Trybunalski',
+    postalCode: '19-402',
+    deliveryItems: [
       {
         id: 1,
-        name: 'Zapakować przesyłkę nr 1444',
-        category: Category.TODO,
-        assignee: {
+        item: {
           id: 1,
-          firstName: 'Jakub',
-          lastName: 'Kowalski',
-          email: 'jakub.kowalski@domain.com',
-          role: Role.ADMIN,
-          password: 'wxqhwvde',
-          contract: {
-            id: 1,
-            accountNumber: '75139348954923829450242727',
-            daysOffPerYear: 26,
-            salary: 2000.00
-          },
-          passwordValid: false
+          name: 'Piłka',
+          quantity: 2,
+          stockPrice: 5,
+          originalPrice: 5,
+          currentPrice: 7
         },
-        precedingTasks: [],
-        details: 'Zmienić sposób dostarczenia na list priorytetowy',
-        estimatedTimeInMinutes: 15,
-        deadline: new Date('October 15, 2014 08:00:00'),
-        creationTime: new Date('October 13, 2014 11:13:00'),
-        startTime: null,
-        endTime: null
+        quantity: 8
       },
       {
         id: 2,
-        name: 'Wysłać przesyłkę nr 1410',
-        category: Category.TODO,
-        assignee: {
-          id: 1,
-          firstName: 'Jakub',
-          lastName: 'Kowalski',
-          email: 'jakub.kowalski@domain.com',
-          role: Role.ADMIN,
-          password: 'wxqhwvde',
-          contract: {
-            id: 1,
-            accountNumber: '75139348954923829450242727',
-            daysOffPerYear: 26,
-            salary: 2000.00
-          },
-          passwordValid: false
+        item: {
+          id: 2,
+          name: 'Zabawka',
+          quantity: 1,
+          stockPrice: 25,
+          originalPrice: 26,
+          currentPrice: 27
         },
-        precedingTasks: [],
-        details: 'Zmienić sposób dostarczenia na list priorytetowy',
-        estimatedTimeInMinutes: 17,
-        deadline: new Date('October 15, 2014 08:00:00'),
-        creationTime: new Date('October 13, 2014 11:13:00'),
-        startTime: null,
-        endTime: null
-      },
-      {
-        id: 3,
-        name: 'Wysłać przesyłkę nr 1490',
-        category: Category.TODO,
-        assignee: {
-          id: 1,
-          firstName: 'Jakub',
-          lastName: 'Kowalski',
-          email: 'jakub.kowalski@domain.com',
-          role: Role.ADMIN,
-          password: 'wxqhwvde',
-          contract: {
-            id: 1,
-            accountNumber: '75139348954923829450242727',
-            daysOffPerYear: 26,
-            salary: 2000.00
-          },
-          passwordValid: false
-        },
-        precedingTasks: [],
-        details: 'Zmienić sposób dostarczenia na list ekonomiczny',
-        estimatedTimeInMinutes: 19,
-        deadline: new Date('October 15, 2014 08:00:00'),
-        creationTime: new Date('October 13, 2014 11:13:00'),
-        startTime: null,
-        endTime: null
+        quantity: 1
       }
     ],
-    details: 'Nakleić informację: Uwaga! Szkło',
-    estimatedTimeInMinutes: 13,
-    deadline: new Date('October 15, 2014 08:00:00'),
-    creationTime: new Date('October 13, 2014 11:13:00'),
-    startTime: null,
-    endTime: null
+    scheduledFor: new Date('2018-09-03'),
+    value: 105
+  },
+  {
+    id: 2,
+    status: Status.WAITING_FOR_PAYMENT,
+    firstName: 'Katarzyna',
+    lastName: 'Tracz',
+    email: 'katarzyna@tracz.pl',
+    phoneNumber: '312209232',
+    street: 'ul. Fiodora Dostojewskiego',
+    houseNumber: '2',
+    city: 'Chorzów',
+    postalCode: '43-120',
+    deliveryItems: [
+      {
+        id: 3,
+        item: {
+          id: 3,
+          name: 'Maskotka',
+          quantity: 25,
+          stockPrice: 10,
+          originalPrice: 20,
+          currentPrice: 20
+        },
+        quantity: 25
+      }
+    ],
+    scheduledFor: new Date('2018-09-03'),
+    value: 250
   }
 ];
 
+const mockDeliveryItemRequest = {
+  firstName: 'Jan',
+  lastName: 'Krauze',
+  email: 'jan@krauze.pl',
+  phoneNumber: null,
+  street: 'ul. Armii Krajowej',
+  houseNumber: '225',
+  city: 'Wisła',
+  postalCode: '77-106',
+  deliveryItemRequests: [
+    {
+      itemId: 3,
+      quantity: 25
+    }
+  ],
+  scheduledFor: new Date('2018-09-03'),
+};
+
 describe('OrderService', () => {
-  let service: TaskService;
+  let orderService: OrderService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -294,54 +189,51 @@ describe('OrderService', () => {
         SuggestionService
       ]
     });
-    service = TestBed.get(TaskService);
+    orderService = TestBed.get(OrderService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(orderService).toBeTruthy();
   });
 
-  describe('given fetchAllTasks method', () => {
+  describe('given fetchAllOrders method', () => {
     describe('when called', () => {
-      it('should hit "/tasks" with GET and return tasks', () => {
-        service.fetchAllTasks().subscribe(tasks => {
-          expect(tasks.length).toBe(4);
-          expect(tasks).toEqual(mockTasks);
-          const req = httpMock.expectOne('http://localhost:8080/tasks/');
+      it('should hit "/orders" with GET and return orders', () => {
+        orderService.fetchAllOrders().subscribe(orders => {
+          expect(orders.length).toBe(2);
+          expect(orders).toEqual(mockOrders);
+          const req = httpMock.expectOne('http://localhost:8080/orders');
           expect(req.request.method).toBe('GET');
-          req.flush(mockTasks);
+          req.flush(mockOrders);
           httpMock.verify();
         });
       });
     });
   });
 
-  describe('given fetchOneTask method', () => {
+  describe('given fetchOneOrder method', () => {
     describe('when called', () => {
-      it('should hit "tasks/1" with GET and return task', () => {
-        service.fetchOneTask(1).subscribe(task => {
-          expect(task).toEqual(mockTasks[0]);
+      it('should hit "/orders/1" with GET and return order', () => {
+        orderService.fetchOneOrder(1).subscribe(order => {
+          expect(order).toEqual(mockOrders[0]);
         });
-        const req = httpMock.expectOne('http://localhost:8080/tasks/1');
+        const req = httpMock.expectOne('http://localhost:8080/orders/1');
         expect(req.request.method).toBe('GET');
-        req.flush(mockTasks[0]);
+        req.flush(mockOrders[0]);
         httpMock.verify();
       });
     });
   });
 
-  describe('given fetchTasksByAssignee method', () => {
+  describe('given addOneOrder method', () => {
     describe('when called', () => {
-      it('should hit "/employees/1/tasks" with GET and return tasks by assignee', () => {
-        service.fetchTasksByAssignee(1).subscribe(tasks => {
-          expect(tasks.length).toBe(3);
-          expect(tasks).toEqual(mockTasks);
-          const req = httpMock.expectOne('http://localhost:8080/employees/1/tasks');
-          expect(req.request.method).toBe('GET');
-          req.flush(mockTasks[0]);
-          httpMock.verify();
+      it('should hit "/orders/add" with POST', () => {
+        orderService.addOneOrder(mockDeliveryItemRequest).subscribe(() => {
         });
+        const req = httpMock.expectOne('http://localhost:8080/orders');
+        expect(req.request.method).toBe('POST');
+        httpMock.verify();
       });
     });
   });

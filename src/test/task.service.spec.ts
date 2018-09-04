@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/employee.service';
 import {HolidayService} from '../app/holiday.service';
 import {TeamService} from '../app/team.service';
 import {ReportService} from '../app/report.service';
-import {Category, Role} from '../app/types';
+import {Category, Role, Type} from '../app/types';
 import {DeliveriesComponent} from '../app/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/add-item/add-item.component';
 import {ValidateComponent} from '../app/validate/validate.component';
@@ -71,7 +71,10 @@ const mockTasks = [
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
-    endTime: null
+    endTime: null,
+    type: null,
+    reference: null,
+    scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
     id: 2,
@@ -98,7 +101,10 @@ const mockTasks = [
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
-    endTime: null
+    endTime: null,
+    type: null,
+    reference: null,
+    scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
     id: 3,
@@ -145,7 +151,10 @@ const mockTasks = [
         deadline: new Date('October 15, 2014 08:00:00'),
         creationTime: new Date('October 13, 2014 11:13:00'),
         startTime: null,
-        endTime: null
+        endTime: null,
+        type: null,
+        reference: null,
+        scheduledTime: new Date('October 13, 2014 11:15:00')
       },
       {
         id: 2,
@@ -172,7 +181,10 @@ const mockTasks = [
         deadline: new Date('October 15, 2014 08:00:00'),
         creationTime: new Date('October 13, 2014 11:13:00'),
         startTime: null,
-        endTime: null
+        endTime: null,
+        type: null,
+        reference: null,
+        scheduledTime: new Date('October 13, 2014 11:15:00')
       },
       {
         id: 3,
@@ -199,7 +211,10 @@ const mockTasks = [
         deadline: new Date('October 15, 2014 08:00:00'),
         creationTime: new Date('October 13, 2014 11:13:00'),
         startTime: null,
-        endTime: null
+        endTime: null,
+        type: null,
+        reference: null,
+        scheduledTime: new Date('October 13, 2014 11:15:00')
       }
     ],
     details: 'Nakleić informację: Uwaga! Szkło',
@@ -207,7 +222,10 @@ const mockTasks = [
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
-    endTime: null
+    endTime: null,
+    type: null,
+    reference: null,
+    scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
     id: 4,
@@ -234,9 +252,25 @@ const mockTasks = [
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
-    endTime: null
+    endTime: null,
+    type: null,
+    reference: null,
+    scheduledTime: new Date('October 13, 2014 11:15:00')
   }
 ];
+
+const mockTaskRequest = {
+  name: 'Wysłać przesyłkę nr 1951',
+  category: Category.TODO,
+  assigneeId: null,
+  precedingTaskIds: [],
+  details: 'Wykonać w pierwszej kolejności',
+  estimatedTimeInMinutes: 8,
+  deadline: new Date('October 19, 2014 07:00:00'),
+  type: null,
+  reference: null,
+  scheduledTime: new Date('October 13, 2014 11:15:00')
+};
 
 describe('TaskService', () => {
   let taskService: TaskService;
@@ -340,6 +374,18 @@ describe('TaskService', () => {
           req.flush(mockTasks.slice(0, 3));
           httpMock.verify();
         });
+      });
+    });
+  });
+
+  describe('given addTask method', () => {
+    describe('when called', () => {
+      it('should hit "/tasks/add" with POST', () => {
+        taskService.addTask(mockTaskRequest).subscribe(() => {
+        });
+        const req = httpMock.expectOne('http://localhost:8080/tasks');
+        expect(req.request.method).toBe('POST');
+        httpMock.verify();
       });
     });
   });

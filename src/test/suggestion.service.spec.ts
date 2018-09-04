@@ -127,6 +127,13 @@ const mockSuggestions = [
   }
 ];
 
+const mockSuggestionRequest = {
+  name: 'Zmniejszyć liczbę pracowników przy wysyłaniu paczek kurierskich',
+  description: 'Zaproponowane przez przełożonego',
+  authorId: null,
+  recipientIds: [2, 3]
+};
+
 describe('SuggestionService', () => {
   let suggestionService: SuggestionService;
   let httpMock: HttpTestingController;
@@ -230,6 +237,18 @@ describe('SuggestionService', () => {
           req.flush(mockSuggestions);
           httpMock.verify();
         });
+      });
+    });
+  });
+
+  describe('given addSuggestion method', () => {
+    describe('when called', () => {
+      it('should hit "/suggestions/add" with POST', () => {
+        suggestionService.addSuggestion(mockSuggestionRequest).subscribe(() => {
+        });
+        const req = httpMock.expectOne('http://localhost:8080/suggestions');
+        expect(req.request.method).toBe('POST');
+        httpMock.verify();
       });
     });
   });

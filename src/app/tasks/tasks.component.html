@@ -1,7 +1,8 @@
 <div *ngIf="areTasksLoaded">
   <div *ngFor="let t of tasks">
     <hr>{{t.id}} {{t.category}} {{t.name}} {{t.details}} {{t.assignee.firstName}} {{t.assignee.lastName}}
-    {{t.estimatedTimeInMinutes}} {{t.deadline}} {{t.creationTime}} {{t.startTime}} {{t.endTime}}
+    {{t.estimatedTimeInMinutes}} {{t.deadline}} {{t.creationTime}} {{t.startTime}} {{t.endTime}} {{t.type}}
+    {{t.reference}} {{t.scheduledTime}}
     <div *ngFor="let p of t.precedingTasks">
       {{p.id}} {{p.name}}
     </div>

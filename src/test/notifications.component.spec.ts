@@ -43,10 +43,15 @@ import {NotificationComponent} from '../app/notification/notification.component'
 import {NotificationsComponent} from '../app/notifications/notifications.component';
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
+import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 describe('NotificationsComponent', () => {
   let component: NotificationsComponent;
   let fixture: ComponentFixture<NotificationsComponent>;
+  let service: NotificationService;
+  let router: Router;
+  let location: Location;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -105,10 +110,19 @@ describe('NotificationsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationsComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(NotificationService);
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call taskService.fetchAllNotifications()', () => {
+    spyOn(service, 'fetchAllNotifications').and.callThrough();
+    component.ngOnInit();
+    expect(service.fetchAllNotifications).toHaveBeenCalled();
   });
 });

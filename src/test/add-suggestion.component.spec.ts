@@ -47,6 +47,7 @@ import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
 describe('AddSuggestionComponent', () => {
   let component: AddSuggestionComponent;
   let fixture: ComponentFixture<AddSuggestionComponent>;
+  let service: SuggestionService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -105,10 +106,22 @@ describe('AddSuggestionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddSuggestionComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(SuggestionService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('when form is submitted', () => {
+    beforeEach(() => {
+      spyOn(service, 'addSuggestion').and.callThrough();
+      component.submitForm();
+    });
+
+    it('should call suggestionService.addSuggestion()', () => {
+      expect(service.addSuggestion).toHaveBeenCalled();
+    });
   });
 });

@@ -9,7 +9,10 @@
   {{task.deadline}} <br>
   {{task.creationTime}} <br>
   {{task.startTime}} <br>
-  {{task.endTime}}
+  {{task.endTime}} <br>
+  {{task.type}} <br>
+  {{task.reference}} <br>
+  {{task.scheduledTime}}
   <div *ngIf="task.precedingTasks">
     <div *ngFor="let p of task.precedingTasks">
       {{p.id}} {{p.name}}

@@ -132,6 +132,9 @@ export interface Task {
   creationTime: Date;
   startTime?: Date;
   endTime?: Date;
+  type?: Type;
+  reference?: number;
+  scheduledTime: Date;
 }
 
 export interface TaskRequest {
@@ -142,6 +145,9 @@ export interface TaskRequest {
   details: string;
   estimatedTimeInMinutes: number;
   deadline: Date;
+  type?: Type;
+  reference?: number;
+  scheduledTime: Date;
 }
 
 export interface EstimatedCosts {

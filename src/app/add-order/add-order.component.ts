@@ -61,7 +61,7 @@ export class AddOrderComponent implements OnInit {
       postalCode: this.postalCode
     };
     let order: Order;
-    this.orderService.addNewOrder(this.orderRequest).subscribe(res => {
+    this.orderService.addOneOrder(this.orderRequest).subscribe(res => {
       order = res;
     }, err => {
       console.log(err);
