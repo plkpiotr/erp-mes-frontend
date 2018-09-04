@@ -36,14 +36,14 @@
   <div class="form-group">
     <label>Type:
       <select name="category" [(ngModel)]="type" required>
-        <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+        <option *ngFor="let t of types" [value]="t">{{t}}</option>
       </select>
     </label>
   </div>
   <!-- If I have complaints and returns it will be select -->
   <div class="form-group">
     <label>Reference:
-      <input type="number" class="form-control" name="estimatedTimeInMinutes" [(ngModel)]="estimatedTimeInMinutes" required>
+      <input type="number" class="form-control" name="reference" [(ngModel)]="reference" required>
     </label>
   </div>
   <div class="form-group">
