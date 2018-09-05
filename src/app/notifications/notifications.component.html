@@ -1,0 +1,16 @@
+<div *ngIf="areNotificationsLoaded">
+  <div *ngFor="let n of notifications">
+    <hr>{{n.id}} {{n.state}} {{n.instruction}} {{n.description}}
+    <div *ngIf="n.notifier">
+      {{n.notifier.firstName}} {{n.notifier.lastName}}
+    </div>
+    <div *ngIf="n.transferee">
+      {{n.transferee.firstName}} {{n.transferee.lastName}}
+    </div>
+    <div *ngFor="let c of n.consignees">
+      {{c.id}} {{c.firstName}} {{c.lastName}}
+    </div>
+    <button (click)="seeNotification(n.id)">Zobacz</button>
+  </div>
+  <button (click)="addNotification()">Dodaj powiadomienie</button>
+</div>

@@ -37,6 +37,18 @@ import {SpecialPlansComponent} from "../app/special-plans/special-plans.componen
 import {PlanningComponent} from "../app/planning/planning.component";
 import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
 import {PlanningService} from "../app/planning.service";
+import {NotificationService} from '../app/notification.service';
+import {SuggestionService} from '../app/suggestion.service';
+import {OrderService} from '../app/order.service';
+import {AddOrderComponent} from '../app/add-order/add-order.component';
+import {AddNotificationComponent} from '../app/add-notification/add-notification.component';
+import {AddSuggestionComponent} from '../app/add-suggestion/add-suggestion.component';
+import {OrderComponent} from '../app/order/order.component';
+import {OrdersComponent} from '../app/orders/orders.component';
+import {NotificationComponent} from '../app/notification/notification.component';
+import {NotificationsComponent} from '../app/notifications/notifications.component';
+import {SuggestionComponent} from '../app/suggestion/suggestion.component';
+import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
 
 describe('DeliveriesComponent', () => {
   let component: DeliveriesComponent;
@@ -58,6 +70,9 @@ describe('DeliveriesComponent', () => {
         AddTaskComponent,
         AddDeliveryComponent,
         AddItemComponent,
+        AddOrderComponent,
+        AddNotificationComponent,
+        AddSuggestionComponent,
         EmployeeComponent,
         EmployeesComponent,
         TeamComponent,
@@ -75,7 +90,13 @@ describe('DeliveriesComponent', () => {
         LoginComponent,
         UpdateDailyPlanComponent,
         PlanningComponent,
-        SpecialPlansComponent
+        SpecialPlansComponent,
+        OrderComponent,
+        OrdersComponent,
+        NotificationComponent,
+        NotificationsComponent,
+        SuggestionComponent,
+        SuggestionsComponent
       ],
       providers: [
         EmployeeService,
@@ -85,6 +106,9 @@ describe('DeliveriesComponent', () => {
         ReportService,
         ItemService,
         DeliveryService,
+        OrderService,
+        NotificationService,
+        SuggestionService,
         PlanningService
       ]
     })

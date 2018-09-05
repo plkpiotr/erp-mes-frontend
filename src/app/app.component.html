@@ -1,14 +1,18 @@
 <div *ngIf="isUserLoggedIn()">
-  <a routerLink="/employees" routerLinkActive="active">Employees</a><br>
-  <a routerLink="/teams" routerLinkActive="active">Teams</a><br>
-  <a routerLink="/tasks" routerLinkActive="active">/tasks</a><br>
-  <a routerLink="/tasks/add" routerLinkActive="active">/tasks/add</a><br>
-  <a routerLink="/reports" routerLinkActive="active">Reports</a><br>
-  <a routerLink="/current-report" routerLinkActive="active">Current Report</a><br>
-  <a routerLink="/items" routerLinkActive="active">Items</a><br>
-  <a routerLink="/deliveries" routerLinkActive="active">Deliveries</a><br>
+  <p>ERP:</p><br>
+  <a routerLink="/employees" routerLinkActive="active">Pracownicy</a><br>
+  <a routerLink="/teams" routerLinkActive="active">Zespoły</a><br>
+  <a routerLink="/reports" routerLinkActive="active">Raporty</a><br>
+  <a routerLink="/current-report" routerLinkActive="active">Obecny raport</a><br>
   <a routerLink="/planning" routerLinkActive="active">Planowanie</a><br>
+  <a routerLink="/items" routerLinkActive="active">Przedmioty</a><br>
+  <a routerLink="/deliveries" routerLinkActive="active">Przesyłki</a><br>
+  <a routerLink="/orders" routerLinkActive="active">Zamówienia</a><br>
   <a routerLink="/special-plans" routerLinkActive="active">Plany specjalne</a><br>
+  <p>MES:</p><br>
+  <a routerLink="/tasks" routerLinkActive="active">Zadania</a><br>
+  <a routerLink="/notifications" routerLinkActive="active">Powiadomienia</a><br>
+  <a routerLink="/suggestions" routerLinkActive="active">Usprawnienia</a>
 </div>
 <div>
   <router-outlet></router-outlet>

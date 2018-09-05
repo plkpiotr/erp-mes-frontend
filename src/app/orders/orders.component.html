@@ -1,0 +1,11 @@
+<div *ngIf="areOrdersLoaded">
+  <div *ngFor="let o of orders">
+    <hr>{{o.id}} {{o.status}} {{o.firstName}} {{o.lastName}} {{o.email}} {{o.phoneNumber}} {{o.street}}
+    {{o.houseNumber}} {{o.city}} {{o.postalCode}} {{o.scheduledFor}} {{o.value}}
+    <div *ngFor="let d of o.deliveryItems">
+      {{d.item.name}} {{d.quantity}}
+    </div>
+    <button (click)="seeOrder(o.id)">Zobacz</button>
+  </div>
+  <button (click)="addOrder()">Dodaj zamówienie</button>
+</div>

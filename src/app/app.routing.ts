@@ -11,18 +11,27 @@ import {AddTaskComponent} from './add-task/add-task.component';
 import {ReportsComponent} from './reports/reports.component';
 import {ReportComponent} from './report/report.component';
 import {CurrentReportComponent} from './current-report/current-report.component';
-import {DeliveriesComponent} from "./deliveries/deliveries.component";
-import {DeliveryComponent} from "./delivery/delivery.component";
-import {AddDeliveryComponent} from "./add-delivery/add-delivery.component";
-import {ItemsComponent} from "./items/items.component";
-import {ItemComponent} from "./item/item.component";
-import {AddItemComponent} from "./add-item/add-item.component";
-import {LoginComponent} from "./login/login.component";
-import {ValidateComponent} from "./validate/validate.component";
-import {PlanningService} from "./planning.service";
-import {SpecialPlansComponent} from "./special-plans/special-plans.component";
-import {PlanningComponent} from "./planning/planning.component";
-import {UpdateDailyPlanComponent} from "./update-daily-plan/update-daily-plan.component";
+import {DeliveriesComponent} from './deliveries/deliveries.component';
+import {DeliveryComponent} from './delivery/delivery.component';
+import {AddDeliveryComponent} from './add-delivery/add-delivery.component';
+import {ItemsComponent} from './items/items.component';
+import {ItemComponent} from './item/item.component';
+import {AddItemComponent} from './add-item/add-item.component';
+import {LoginComponent} from './login/login.component';
+import {ValidateComponent} from './validate/validate.component';
+import {PlanningService} from './planning.service';
+import {SpecialPlansComponent} from './special-plans/special-plans.component';
+import {PlanningComponent} from './planning/planning.component';
+import {UpdateDailyPlanComponent} from './update-daily-plan/update-daily-plan.component';
+import {AddOrderComponent} from './add-order/add-order.component';
+import {AddNotificationComponent} from './add-notification/add-notification.component';
+import {AddSuggestionComponent} from './add-suggestion/add-suggestion.component';
+import {OrderComponent} from './order/order.component';
+import {OrdersComponent} from './orders/orders.component';
+import {NotificationComponent} from './notification/notification.component';
+import {NotificationsComponent} from './notifications/notifications.component';
+import {SuggestionComponent} from './suggestion/suggestion.component';
+import {SuggestionsComponent} from './suggestions/suggestions.component';
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -47,7 +56,16 @@ export const appRoutes: Routes = [
   {path: 'planning', component: PlanningComponent},
   {path: 'planning/update', component: UpdateDailyPlanComponent},
   {path: 'special-plans', component: SpecialPlansComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'notifications', component: NotificationsComponent},
+  {path: 'notifications/add', component: AddNotificationComponent},
+  {path: 'notifications/:id', component: NotificationComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'orders/add', component: AddOrderComponent},
+  {path: 'orders/:id', component: OrderComponent},
+  {path: 'suggestions', component: SuggestionsComponent},
+  {path: 'suggestions/add', component: AddSuggestionComponent},
+  {path: 'suggestions/:id', component: SuggestionComponent},
   ];
 
 export const routing = RouterModule.forRoot(appRoutes);

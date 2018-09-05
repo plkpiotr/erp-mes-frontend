@@ -27,7 +27,7 @@ export class EmployeeComponent implements OnInit {
   isUserLoggedIn = false;
 
   constructor(private employeeService: EmployeeService,
-              private tasksService: TaskService,
+              private taskService: TaskService,
               private holidayService: HolidayService,
               private loginService: LoginService,
               private route: ActivatedRoute,
@@ -118,7 +118,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   fetchTasksByAssignee() {
-    this.tasksService.fetchTasksByAssignee(this.route.snapshot.params['id']).subscribe(
+    this.taskService.fetchTasksByAssignee(this.route.snapshot.params['id']).subscribe(
       res => {
         this.tasks = res;
       }, err => {

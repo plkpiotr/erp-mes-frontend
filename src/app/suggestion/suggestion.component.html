@@ -1,0 +1,14 @@
+<div *ngIf="isSuggestionLoaded">
+  {{suggestion.id}} <br>
+  {{suggestion.phase}} <br>
+  {{suggestion.name}} <br>
+  {{suggestion.description}} <br>
+  {{suggestion.author.firstName}} <br>
+  {{suggestion.author.lastName}} <br>
+  {{suggestion.creationTime}} <br>
+  <div *ngIf="suggestion.recipients">
+    <div *ngFor="let r of suggestion.recipients">
+      {{r.id}} {{r.firstName}} {{r.lastName}}
+    </div>
+  </div>
+</div>

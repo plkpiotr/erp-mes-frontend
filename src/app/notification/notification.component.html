@@ -1,0 +1,18 @@
+<div *ngIf="isNotificationLoaded">
+  {{notification.id}} <br>
+  {{notification.state}} <br>
+  {{notification.instruction}} <br>
+  {{notification.description}} <br>
+  {{notification.notifier.firstName}} <br>
+  {{notification.notifier.lastName}} <br>
+  {{notification.transferee.firstName}} <br>
+  {{notification.transferee.lastName}} <br>
+  {{notification.creationTime}} <br>
+  {{notification.type}} <br>
+  {{notification.reference}} <br>
+  <div *ngIf="notification.consignees">
+    <div *ngFor="let c of notification.consignees">
+      {{c.id}} {{c.firstName}} {{c.lastName}}
+    </div>
+  </div>
+</div>
