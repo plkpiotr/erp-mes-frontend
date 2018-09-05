@@ -29,6 +29,7 @@ export class AddDeliveryComponent implements OnInit {
 
   ngOnInit() {
     this.remainingItems = new Array();
+
     this.deliveryService.getRecommendations().subscribe(res => {
       this.recommendedDeliveryItems = res;
     }, err => {

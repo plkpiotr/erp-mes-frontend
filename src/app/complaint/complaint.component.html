@@ -1,0 +1,42 @@
+<div *ngIf="isComplaintLoaded">
+  {{complaint.id}}<br>
+  {{complaint.status}}<br>
+  {{complaint.firstName}}<br>
+  {{complaint.lastName}}<br>
+  {{complaint.email}}<br>
+  {{complaint.phoneNumber}}<br>
+  {{complaint.street}}<br>
+  {{complaint.houseNumber}}<br>
+  {{complaint.city}}<br>
+  {{complaint.postalCode}}<br>
+  {{complaint.scheduledFor}}<br>
+  {{complaint.value}}<br>
+  {{complaint.requestedResolution}}<br>
+  {{complaint.resolution}}<br>
+  {{complaint.fault}}<br>
+  <div *ngFor="let deliveryItem of complaint.deliveryItems">
+    {{deliveryItem.item.name}} {{deliveryItem.quantity}}<br>
+  </div>
+  <div>
+    <label>Aktualizuj status:
+      <select name="status" [(ngModel)]="status">
+        <option *ngFor="let s of statuses" [value]="s">{{s}}</option>
+      </select>
+    </label>
+    <button (click)="updateComplaintStatus()" [disabled]="status == complaint.status ||
+    complaint.status == 'MONEY_RETURNED' || complaint.status.toString().includes('ITEM_SENT')">
+      Zatwierdź
+    </button>
+  </div>
+  <div>
+    <label>Aktualizuj rozwiązanie:
+      <select name="resolution" [(ngModel)]="resolution">
+        <option *ngFor="let r of resolutions" [value]="r">{{r}}</option>
+      </select>
+    </label>
+    <button (click)="updateComplaintResolution()" [disabled]="resolution == complaint.resolution &&
+    complaint.resolution != 'IN_PROGRESS'">
+      Zatwierdź rozwiązanie
+    </button>
+  </div>
+</div>

@@ -34,7 +34,6 @@ export class EmployeeService {
         privilege: 'user'
       }
     });
-
   }
 
   fetchOneEmployee(id: number): Observable<Employee> {

@@ -20,26 +20,26 @@ import {TaskComponent} from './task/task.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskService} from './task.service';
 import {ReportService} from './report.service';
-import {ReportsComponent} from './reports/reports.component';
-import {ReportComponent} from './report/report.component';
-import {CurrentReportComponent} from './current-report/current-report.component';
-import {ItemService} from './item.service';
-import {DeliveryService} from './delivery.service';
-import {ItemsComponent} from './items/items.component';
-import {ItemComponent} from './item/item.component';
-import {AddItemComponent} from './add-item/add-item.component';
-import {DeliveriesComponent} from './deliveries/deliveries.component';
-import {DeliveryComponent} from './delivery/delivery.component';
-import {AddDeliveryComponent} from './add-delivery/add-delivery.component';
-import {LoginComponent} from './login/login.component';
-import {LoginService} from './login.service';
-import {Token} from './token';
-import {Interceptor} from './interceptor';
-import {ValidateComponent} from './validate/validate.component';
-import {PlanningComponent} from './planning/planning.component';
-import {SpecialPlansComponent} from './special-plans/special-plans.component';
-import {PlanningService} from './planning.service';
-import {UpdateDailyPlanComponent} from './update-daily-plan/update-daily-plan.component';
+import { ReportsComponent } from './reports/reports.component';
+import { ReportComponent } from './report/report.component';
+import { CurrentReportComponent } from './current-report/current-report.component';
+import {ItemService} from "./item.service";
+import {DeliveryService} from "./delivery.service";
+import { ItemsComponent } from './items/items.component';
+import { ItemComponent } from './item/item.component';
+import { AddItemComponent } from './add-item/add-item.component';
+import { DeliveriesComponent } from './deliveries/deliveries.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+import { LoginComponent } from './login/login.component';
+import {LoginService} from "./login.service";
+import {Token} from "./token";
+import {Interceptor} from "./interceptor";
+import { ValidateComponent } from './validate/validate.component';
+import { PlanningComponent } from './planning/planning.component';
+import { SpecialPlansComponent } from './special-plans/special-plans.component';
+import {PlanningService} from "./planning.service";
+import { UpdateDailyPlanComponent } from './update-daily-plan/update-daily-plan.component';
 import {AddOrderComponent} from './add-order/add-order.component';
 import {AddSuggestionComponent} from './add-suggestion/add-suggestion.component';
 import {AddNotificationComponent} from './add-notification/add-notification.component';
@@ -52,6 +52,12 @@ import {SuggestionsComponent} from './suggestions/suggestions.component';
 import {OrderService} from './order.service';
 import {SuggestionService} from './suggestion.service';
 import {NotificationService} from './notification.service';
+import {ReturnService} from "./return.service";
+import {ComplaintService} from "./complaint.service";
+import { ReturnsComponent } from './returns/returns.component';
+import { ReturnComponent } from './return/return.component';
+import { ComplaintsComponent } from './complaints/complaints.component';
+import { ComplaintComponent } from './complaint/complaint.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +93,11 @@ import {NotificationService} from './notification.service';
     OrderComponent,
     OrdersComponent,
     SuggestionComponent,
-    SuggestionsComponent
+    SuggestionsComponent,
+    ReturnsComponent,
+    ReturnComponent,
+    ComplaintsComponent,
+    ComplaintComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +120,8 @@ import {NotificationService} from './notification.service';
     NotificationService,
     SuggestionService,
     Token,
+    ReturnService,
+    ComplaintService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

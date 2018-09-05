@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Order, OrderRequest} from './types';
+import {Order, ShopServiceRequest} from './types';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +24,7 @@ export class OrderService {
     return this.http.get<Order>('http://localhost:8080/orders/' + id, {headers: this.httpHeaders});
   }
 
-  addOneOrder(orderRequest: OrderRequest): Observable<Order> {
+  addOneOrder(orderRequest: ShopServiceRequest): Observable<Order> {
     return this.http.post<Order>('http://localhost:8080/orders', orderRequest, {headers: this.httpHeaders});
-  }
-
-  // TODO: It's up to @patsaf
-  getRecommendations(): Observable<OrderRequest> {
-    return this.http.get<OrderRequest>('http://localhost:8080/orders/recommended-delivery',
-      {headers: this.httpHeaders});
   }
 }

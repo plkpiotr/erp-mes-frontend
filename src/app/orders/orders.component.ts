@@ -13,7 +13,8 @@ export class OrdersComponent implements OnInit {
   orders: Array<Order>;
   areOrdersLoaded = false;
 
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router) {
+  }
 
   ngOnInit() {
     this.fetchOrders();
@@ -34,6 +35,10 @@ export class OrdersComponent implements OnInit {
   }
 
   addOrder() {
-    this.router.navigate(['orders/add']);
+    this.router.navigate(['shop-service/add'], {
+      queryParams: {
+        service: 'order'
+      }
+    });
   }
 }

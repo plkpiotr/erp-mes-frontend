@@ -1,0 +1,12 @@
+<div *ngIf="areComplaintsLoaded">
+  <div *ngFor="let c of complaints">
+    <hr>{{c.id}} {{c.status}} {{c.firstName}} {{c.lastName}} {{c.email}} {{c.phoneNumber}} {{c.street}}
+    {{c.houseNumber}} {{c.city}} {{c.postalCode}} {{c.scheduledFor}} {{c.value}} {{c.requestedResolution}}
+    {{c.resolution}} {{c.fault}}
+    <div *ngFor="let d of c.deliveryItems">
+      {{d.item.name}} {{d.quantity}}
+    </div>
+    <button (click)="seeComplaint(c.id)">Zobacz</button>
+  </div>
+  <button (click)="addComplaint()">Dodaj reklamację</button>
+</div>

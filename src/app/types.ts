@@ -66,6 +66,31 @@ export enum Type {
   RETURN = 'RETURN'
 }
 
+export enum ReturnStatus {
+  IN_PROGRESS = 'IN_PROGRESS',
+  ACCEPTED = 'ACCEPTED',
+  DECLINED = 'DECLINED',
+  MONEY_RETURNED = 'MONEY_RETURNED'
+}
+
+export enum ComplaintStatus {
+  IN_PROGRESS = 'IN_PROGRESS',
+  ACCEPTED = 'ACCEPTED',
+  DECLINED = 'DECLINED',
+  MONEY_RETURNED = 'MONEY_RETURNED',
+  NEW_ITEM_SENT = 'NEW_ITEM_SENT',
+  REPAIRING_ITEM = 'REPAIRING_ITEM',
+  REPAIRED_ITEM_SENT = 'REPAIRED_ITEM_SENT',
+  DECLINED_ITEM_SENT = 'DECLINED_ITEM_SENT'
+}
+
+export enum Resolution {
+  UNRESOLVED = 'UNRESOLVED',
+  MONEY_RETURN = 'MONEY_RETURN',
+  REPAIR = 'REPAIR',
+  EXCHAMGE_FOR_NEW = 'EXCHANGE_FOR_NEW'
+}
+
 export interface Contract {
   id: number;
   accountNumber: string;
@@ -258,19 +283,6 @@ export interface Order {
   value: number;
 }
 
-export interface OrderRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber?: string;
-  street: string;
-  houseNumber: string;
-  city: string;
-  postalCode: string;
-  deliveryItemRequests: DeliveryItemRequest[];
-  scheduledFor: Date;
-}
-
 export interface Notification {
   id: number;
   state: State;
@@ -342,6 +354,56 @@ export interface SpecialPlanRequest {
   ordersPerDay: number;
   returnsPerDay: number;
   complaintsResolvedPerDay: number;
+}
+
+export interface Return {
+  id: number;
+  status: ReturnStatus;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  street: string;
+  houseNumber: string;
+  city: string;
+  postalCode: string;
+  deliveryItems: DeliveryItem[];
+  scheduledFor: Date;
+  value: number;
+}
+
+export interface Complaint {
+  id: number;
+  status: ComplaintStatus;
+  requestedResolution: Resolution;
+  resolution: Resolution;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  street: string;
+  houseNumber: string;
+  city: string;
+  postalCode: string;
+  deliveryItems: DeliveryItem[];
+  scheduledFor: Date;
+  value: number;
+  fault: string;
+}
+
+export interface ShopServiceRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  street: string;
+  houseNumber: string;
+  city: string;
+  postalCode: string;
+  deliveryItemRequests: DeliveryItemRequest[];
+  scheduledFor: Date;
+  requestedResolution?: Resolution;
+  fault?: string;
 }
 
 
