@@ -95,7 +95,6 @@ export class PlanningComponent implements OnInit {
   inTwoDaysSpecialPlan() {
     this.day = new Date();
     this.day.setDate(this.day.getDate() + 2);
-    this.day = this.day;
     this.showAddSpecialPlan = true;
   }
 

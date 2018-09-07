@@ -39,7 +39,7 @@ export class DeliveryComponent implements OnInit {
   canConfirmDelivery(): boolean {
     const today = new Date();
     const deliveryDate = new Date(this.delivery.scheduledFor);
-    const isPastDate =  deliveryDate.valueOf() - today.valueOf() <= 0;
+    const isPastDate = deliveryDate.valueOf() - today.valueOf() <= 0;
     return isPastDate && !this.isConfirmed;
   }
 

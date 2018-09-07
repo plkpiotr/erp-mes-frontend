@@ -49,6 +49,12 @@ import {NotificationComponent} from '../app/notification/notification.component'
 import {NotificationsComponent} from '../app/notifications/notifications.component';
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
+import {ReturnService} from "../app/return.service";
+import {ComplaintService} from "../app/complaint.service";
+import {ReturnComponent} from "../app/return/return.component";
+import {ReturnsComponent} from "../app/returns/returns.component";
+import {ComplaintComponent} from "../app/complaint/complaint.component";
+import {ComplaintsComponent} from "../app/complaints/complaints.component";
 
 describe('ReportsComponent', () => {
   let component: ReportsComponent;
@@ -90,13 +96,17 @@ describe('ReportsComponent', () => {
         LoginComponent,
         UpdateDailyPlanComponent,
         PlanningComponent,
-        SpecialPlansComponent,
         OrderComponent,
         OrdersComponent,
         NotificationComponent,
         NotificationsComponent,
         SuggestionComponent,
-        SuggestionsComponent
+        SuggestionsComponent,
+        SpecialPlansComponent,
+        ComplaintsComponent,
+        ComplaintComponent,
+        ReturnsComponent,
+        ReturnComponent
       ],
       providers: [
         EmployeeService,
@@ -106,6 +116,8 @@ describe('ReportsComponent', () => {
         ReportService,
         ItemService,
         DeliveryService,
+        ComplaintService,
+        ReturnService,
         OrderService,
         NotificationService,
         SuggestionService,

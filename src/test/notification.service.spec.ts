@@ -44,6 +44,15 @@ import {NotificationComponent} from '../app/notification/notification.component'
 import {NotificationsComponent} from '../app/notifications/notifications.component';
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
+import {ReturnComponent} from "../app/return/return.component";
+import {ReturnsComponent} from "../app/returns/returns.component";
+import {ComplaintComponent} from "../app/complaint/complaint.component";
+import {ComplaintsComponent} from "../app/complaints/complaints.component";
+import {ReturnService} from "../app/return.service";
+import {ComplaintService} from "../app/complaint.service";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
 
 const mockNotifications = [
   {
@@ -211,7 +220,14 @@ describe('NotificationService', () => {
         NotificationComponent,
         NotificationsComponent,
         SuggestionComponent,
-        SuggestionsComponent
+        SuggestionsComponent,
+        ComplaintsComponent,
+        ComplaintComponent,
+        ReturnsComponent,
+        ReturnComponent,
+        PlanningComponent,
+        SpecialPlansComponent,
+        UpdateDailyPlanComponent
       ],
       providers: [
         EmployeeService,
@@ -223,7 +239,9 @@ describe('NotificationService', () => {
         DeliveryService,
         OrderService,
         NotificationService,
-        SuggestionService
+        SuggestionService,
+        ReturnService,
+        ComplaintService
       ]
     });
     notificationService = TestBed.get(NotificationService);

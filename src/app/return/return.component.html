@@ -1,0 +1,26 @@
+<div *ngIf="isReturnLoaded">
+  {{return.id}}<br>
+  {{return.status}}<br>
+  {{return.firstName}}<br>
+  {{return.lastName}}<br>
+  {{return.email}}<br>
+  {{return.phoneNumber}}<br>
+  {{return.street}}<br>
+  {{return.houseNumber}}<br>
+  {{return.city}}<br>
+  {{return.postalCode}}<br>
+  {{return.scheduledFor}}<br>
+  {{return.value}}<br>
+  <div *ngFor="let deliveryItem of return.deliveryItems">
+    {{deliveryItem.item.name}} {{deliveryItem.quantity}}<br>
+  </div>
+  <div>
+    <label>Aktualizuj status:
+      <select name="status" [(ngModel)]="status">
+        <option *ngFor="let s of statuses" [value]="s">{{s}}</option>
+      </select>
+    </label>
+    <button (click)="updateReturnStatus()" [disabled]="status == return.status ||
+    return.status == 'MONEY_RETURNED'">Zatwierdź</button>
+  </div>
+</div>

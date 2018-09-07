@@ -8,7 +8,7 @@ import {Item, ItemRequest} from "../types";
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.css']
 })
-export class AddItemComponent implements OnInit {
+export class AddItemComponent {
 
   name: string;
   stockPrice: number;
@@ -17,9 +17,6 @@ export class AddItemComponent implements OnInit {
 
   constructor(private itemService: ItemService,
               private router: Router) { }
-
-  ngOnInit() {
-  }
 
   submitForm() {
     this.itemRequest = {

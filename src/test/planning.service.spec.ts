@@ -35,6 +35,21 @@ import {appRoutes} from "../app/app.routing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {FormsModule} from "@angular/forms";
+import {ReturnService} from "../app/return.service";
+import {ComplaintService} from "../app/complaint.service";
+import {ReturnComponent} from "../app/return/return.component";
+import {ReturnsComponent} from "../app/returns/returns.component";
+import {ComplaintComponent} from "../app/complaint/complaint.component";
+import {ComplaintsComponent} from "../app/complaints/complaints.component";
+import {AddSuggestionComponent} from "../app/add-suggestion/add-suggestion.component";
+import {AddNotificationComponent} from "../app/add-notification/add-notification.component";
+import {AddOrderComponent} from "../app/add-order/add-order.component";
+import {NotificationsComponent} from "../app/notifications/notifications.component";
+import {NotificationComponent} from "../app/notification/notification.component";
+import {OrdersComponent} from "../app/orders/orders.component";
+import {OrderComponent} from "../app/order/order.component";
+import {SuggestionComponent} from "../app/suggestion/suggestion.component";
+import {SuggestionsComponent} from "../app/suggestions/suggestions.component";
 
 const mockDailyPlan = {
   'id': 1,
@@ -115,7 +130,20 @@ describe('PlanningService', () => {
         LoginComponent,
         UpdateDailyPlanComponent,
         PlanningComponent,
-        SpecialPlansComponent
+        SpecialPlansComponent,
+        ComplaintsComponent,
+        ComplaintComponent,
+        ReturnsComponent,
+        ReturnComponent,
+        OrderComponent,
+        OrdersComponent,
+        NotificationComponent,
+        NotificationsComponent,
+        SuggestionComponent,
+        SuggestionsComponent,
+        AddOrderComponent,
+        AddNotificationComponent,
+        AddSuggestionComponent
       ],
       providers: [
         EmployeeService,
@@ -125,16 +153,18 @@ describe('PlanningService', () => {
         ReportService,
         ItemService,
         DeliveryService,
-        PlanningService
+        PlanningService,
+        ComplaintService,
+        ReturnService
       ]
     });
     service = TestBed.get(PlanningService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
-  it('should be created', inject([PlanningService], (service: PlanningService) => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
-  }));
+  });
 
   describe('given fetchDailyPlan method', () => {
     describe('when called', () => {

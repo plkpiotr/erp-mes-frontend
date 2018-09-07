@@ -1,0 +1,11 @@
+<div *ngIf="areReturnsLoaded">
+  <div *ngFor="let r of returns">
+    <hr>{{r.id}} {{r.status}} {{r.firstName}} {{r.lastName}} {{r.email}} {{r.phoneNumber}} {{r.street}}
+    {{r.houseNumber}} {{r.city}} {{r.postalCode}} {{r.scheduledFor}} {{r.value}}
+    <div *ngFor="let d of r.deliveryItems">
+      {{d.item.name}} {{d.quantity}}
+    </div>
+    <button (click)="seeReturn(r.id)">Zobacz</button>
+  </div>
+  <button (click)="addReturn()">Dodaj zwrot</button>
+</div>

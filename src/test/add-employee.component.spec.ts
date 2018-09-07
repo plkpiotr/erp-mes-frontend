@@ -17,24 +17,24 @@ import {TaskComponent} from '../app/task/task.component';
 import {TasksComponent} from '../app/tasks/tasks.component';
 import {TaskService} from '../app/task.service';
 import {AddTaskComponent} from '../app/add-task/add-task.component';
-import {ReportService} from '../app/report.service';
-import {CurrentReportComponent} from '../app/current-report/current-report.component';
-import {ReportComponent} from '../app/report/report.component';
-import {ReportsComponent} from '../app/reports/reports.component';
-import {ItemsComponent} from '../app/items/items.component';
-import {ItemComponent} from '../app/item/item.component';
-import {DeliveryComponent} from '../app/delivery/delivery.component';
-import {DeliveriesComponent} from '../app/deliveries/deliveries.component';
-import {ItemService} from '../app/item.service';
-import {DeliveryService} from '../app/delivery.service';
-import {AddDeliveryComponent} from '../app/add-delivery/add-delivery.component';
-import {AddItemComponent} from '../app/add-item/add-item.component';
-import {LoginComponent} from '../app/login/login.component';
-import {ValidateComponent} from '../app/validate/validate.component';
-import {SpecialPlansComponent} from '../app/special-plans/special-plans.component';
-import {PlanningComponent} from '../app/planning/planning.component';
-import {UpdateDailyPlanComponent} from '../app/update-daily-plan/update-daily-plan.component';
-import {PlanningService} from '../app/planning.service';
+import {ReportService} from "../app/report.service";
+import {CurrentReportComponent} from "../app/current-report/current-report.component";
+import {ReportComponent} from "../app/report/report.component";
+import {ReportsComponent} from "../app/reports/reports.component";
+import {ItemsComponent} from "../app/items/items.component";
+import {ItemComponent} from "../app/item/item.component";
+import {DeliveryComponent} from "../app/delivery/delivery.component";
+import {DeliveriesComponent} from "../app/deliveries/deliveries.component";
+import {ItemService} from "../app/item.service";
+import {DeliveryService} from "../app/delivery.service";
+import {AddDeliveryComponent} from "../app/add-delivery/add-delivery.component";
+import {AddItemComponent} from "../app/add-item/add-item.component";
+import {LoginComponent} from "../app/login/login.component";
+import {ValidateComponent} from "../app/validate/validate.component";
+import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {PlanningComponent} from "../app/planning/planning.component";
+import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
+import {PlanningService} from "../app/planning.service";
 import {NotificationService} from '../app/notification.service';
 import {SuggestionService} from '../app/suggestion.service';
 import {OrderService} from '../app/order.service';
@@ -47,6 +47,12 @@ import {NotificationComponent} from '../app/notification/notification.component'
 import {NotificationsComponent} from '../app/notifications/notifications.component';
 import {SuggestionComponent} from '../app/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/suggestions/suggestions.component';
+import {ReturnsComponent} from "../app/returns/returns.component";
+import {ComplaintComponent} from "../app/complaint/complaint.component";
+import {ComplaintsComponent} from "../app/complaints/complaints.component";
+import {ReturnComponent} from "../app/return/return.component";
+import {ComplaintService} from "../app/complaint.service";
+import {ReturnService} from "../app/return.service";
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
@@ -87,6 +93,11 @@ describe('AddEmployeeComponent', () => {
         UpdateDailyPlanComponent,
         PlanningComponent,
         SpecialPlansComponent,
+        ComplaintsComponent,
+        ComplaintComponent,
+        ReturnsComponent,
+        ReturnComponent,
+        SpecialPlansComponent,
         LoginComponent,
         OrderComponent,
         OrdersComponent,
@@ -104,6 +115,8 @@ describe('AddEmployeeComponent', () => {
         ItemService,
         DeliveryService,
         PlanningService,
+        ComplaintService,
+        ReturnService,
         OrderService,
         NotificationService,
         SuggestionService
