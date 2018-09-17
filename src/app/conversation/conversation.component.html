@@ -1,0 +1,33 @@
+<div>
+  <div *ngFor="let email of visibleEmails">
+    <a [routerLink]="['/emails', email.id]">{{email.id}}</a>
+    <br>{{email.email}} {{email.subject}} {{email.emailType}} {{email.timestamp}}
+    <div *ngFor="let c of email.content">
+      {{c}}
+    </div>
+    <br>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
+  </div>
+  <button (click)="shouldShowResponseForm = !shouldShowResponseForm">Odpowiedz</button>
+  <div *ngIf="shouldShowResponseForm">
+    <form #form='ngForm' (ngSubmit)='send()'>
+      <div class="form-group">
+        <label>Temat: </label>
+        <input type="text" class="form-control"
+               name="subject" [(ngModel)]="subject"
+               required/>
+      </div>
+      <div class="form-group">
+        <label>Treść: </label>
+        <input type="text" class="form-control"
+               name="fullContent" [(ngModel)]="fullContent"
+               required/>
+      </div>
+      <button type='submit' [disabled]="form.invalid">Wyślij</button>
+    </form>
+  </div>
+</div>

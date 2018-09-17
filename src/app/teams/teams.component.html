@@ -1,5 +1,5 @@
 <div *ngIf="isLoaded">
-  <div *ngFor="let team of teams">
+  <div *ngFor="let team of visibleTeams">
     <br>{{team.id}} {{team.role}}
     <div *ngIf="team.manager">
       {{team.manager.id}} {{team.manager.lastName}}
@@ -12,5 +12,10 @@
     <br>
     <button (click)="seeTeam(team.id)">Zobacz zespół</button>
     <br>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
 </div>

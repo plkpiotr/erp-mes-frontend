@@ -11,7 +11,12 @@ import {Delivery} from "../types";
 export class DeliveriesComponent implements OnInit {
 
   areDeliveriesLoaded = false;
-  deliveries: Delivery[];
+  deliveries: Array<Delivery>;
+  visibleDeliveries: Array<Delivery>;
+
+  deliveriesPerPage = 15;
+  selectedPage = 1;
+  pageNumbers: number[];
 
   constructor(private deliveryService: DeliveryService,
               private router: Router) { }
@@ -27,6 +32,8 @@ export class DeliveriesComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areDeliveriesLoaded = true;
+      this.setVisibleDeliveries();
+      this.setPageNumbers();
     });
   }
 
@@ -36,6 +43,27 @@ export class DeliveriesComponent implements OnInit {
 
   addDelivery() {
     this.router.navigate(['deliveries/add']);
+  }
+
+  setVisibleDeliveries() {
+    const pageIndex = (this.selectedPage - 1) * this.deliveriesPerPage;
+    this.visibleDeliveries = this.deliveries.slice(
+      pageIndex,
+      pageIndex + this.deliveriesPerPage
+    );
+  }
+
+  setPageNumbers() {
+    this.pageNumbers = Array(
+      Math.ceil(this.deliveries.length / this.deliveriesPerPage)
+    )
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+    this.setVisibleDeliveries();
   }
 
 }

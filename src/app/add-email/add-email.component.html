@@ -1,0 +1,21 @@
+<form #form='ngForm' (ngSubmit)='send()'>
+  <div class="form-group">
+    <label>Odbiorca: </label>
+    <input type="text" class="form-control"
+           name="email" [(ngModel)]="email"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Temat: </label>
+    <input type="text" class="form-control"
+           name="subject" [(ngModel)]="subject"
+           required/>
+  </div>
+  <div class="form-group">
+    <label>Treść: </label>
+    <input type="text" class="form-control"
+           name="fullContent" [(ngModel)]="fullContent"
+           required/>
+  </div>
+  <button type='submit' [disabled]="form.invalid">Wyślij</button>
+</form>

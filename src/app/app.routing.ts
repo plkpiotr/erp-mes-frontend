@@ -35,6 +35,10 @@ import {ReturnsComponent} from "./returns/returns.component";
 import {ReturnComponent} from "./return/return.component";
 import {ComplaintsComponent} from "./complaints/complaints.component";
 import {ComplaintComponent} from "./complaint/complaint.component";
+import {InboxComponent} from "./inbox/inbox.component";
+import {OutboxComponent} from "./outbox/outbox.component";
+import {ConversationComponent} from "./conversation/conversation.component";
+import {AddEmailComponent} from "./add-email/add-email.component";
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -73,6 +77,10 @@ export const appRoutes: Routes = [
   {path: 'returns/:id', component: ReturnComponent},
   {path: 'complaints', component: ComplaintsComponent},
   {path: 'complaints/:id', component: ComplaintComponent},
+  {path: 'emails/inbox', component: InboxComponent},
+  {path: 'emails/outbox', component: OutboxComponent},
+  {path: 'emails/add', component: AddEmailComponent},
+  {path: 'emails/:id', component: ConversationComponent},
   {path: 'login', component: LoginComponent}
   ];
 

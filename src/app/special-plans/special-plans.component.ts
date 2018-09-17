@@ -9,8 +9,13 @@ import {SpecialPlan} from "../types";
 })
 export class SpecialPlansComponent implements OnInit {
 
-  specialPlans: SpecialPlan[];
+  specialPlans: Array<SpecialPlan>;
+  visibleSpecialPlans: Array<SpecialPlan>;
   arePlansLoaded = false;
+
+  plansPerPage = 15;
+  selectedPage = 1;
+  pageNumbers: number[];
 
   constructor(private planningService: PlanningService) {
   }
@@ -22,7 +27,29 @@ export class SpecialPlansComponent implements OnInit {
       console.log(err);
     }, () => {
       this.arePlansLoaded = true;
+      this.setVisiblePlans();
+      this.setPageNumbers();
     });
   }
 
+  setVisiblePlans() {
+    const pageIndex = (this.selectedPage - 1) * this.plansPerPage;
+    this.visibleSpecialPlans = this.specialPlans.slice(
+      pageIndex,
+      pageIndex + this.plansPerPage
+    );
+  }
+
+  setPageNumbers() {
+    this.pageNumbers = Array(
+      Math.ceil(this.specialPlans.length / this.plansPerPage)
+    )
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+    this.setVisiblePlans();
+  }
 }

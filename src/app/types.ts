@@ -91,6 +91,11 @@ export enum Resolution {
   EXCHAMGE_FOR_NEW = 'EXCHANGE_FOR_NEW'
 }
 
+export enum EmailType {
+  SENT = 'SENT',
+  RECEIVED = 'RECEIVED'
+}
+
 export interface Contract {
   id: number;
   accountNumber: string;
@@ -404,6 +409,21 @@ export interface ShopServiceRequest {
   scheduledFor: Date;
   requestedResolution?: Resolution;
   fault?: string;
+}
+
+export interface EmailEntity {
+  id: number;
+  email: string;
+  subject: string;
+  content: string[];
+  emailType: EmailType;
+  timestamp: Date;
+}
+
+export interface EmailEntityRequest {
+  email?: string;
+  subject: string;
+  content: string[];
 }
 
 

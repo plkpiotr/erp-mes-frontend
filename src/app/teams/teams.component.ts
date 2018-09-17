@@ -11,7 +11,12 @@ import {Team} from '../types';
 export class TeamsComponent implements OnInit {
 
   teams: Array<Team>;
+  visibleTeams: Array<Team>;
   isLoaded = false;
+
+  teamsPerPage = 15;
+  selectedPage = 1;
+  pageNumbers: number[];
 
   constructor(private router: Router,
               private teamService: TeamService) { }
@@ -23,10 +28,33 @@ export class TeamsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.isLoaded = true;
+      this.setVisibleTeams();
+      this.setPageNumbers();
     });
   }
 
   seeTeam(id: number) {
     this.router.navigate(['/teams', id]);
+  }
+
+  setVisibleTeams() {
+    const pageIndex = (this.selectedPage - 1) * this.teamsPerPage;
+    this.visibleTeams = this.teams.slice(
+      pageIndex,
+      pageIndex + this.teamsPerPage
+    );
+  }
+
+  setPageNumbers() {
+    this.pageNumbers = Array(
+      Math.ceil(this.teams.length / this.teamsPerPage)
+    )
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+    this.setVisibleTeams();
   }
 }

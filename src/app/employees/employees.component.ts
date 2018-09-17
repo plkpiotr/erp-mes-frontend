@@ -11,15 +11,26 @@ import {Employee} from '../types';
 export class EmployeesComponent implements OnInit {
 
   employees: Array<Employee>;
+  visibleEmployees: Array<Employee>;
 
-  constructor(private employeeService: EmployeeService, private router: Router) { }
+  employeesPerPage = 15;
+  selectedPage = 1;
+  pageNumbers: number[];
+
+  constructor(private employeeService: EmployeeService, private router: Router) {
+  }
 
   ngOnInit() {
     this.fetchEmployees();
   }
 
   fetchEmployees() {
-    this.employeeService.fetchAllEmployees().subscribe(res => this.employees = res);
+    this.employeeService.fetchAllEmployees().subscribe(res => this.employees = res,
+      err => console.log(err),
+      () => {
+        this.setVisibleEmployees();
+        this.setPageNumbers();
+      });
   }
 
   fetchEmployee(id: number) {
@@ -28,6 +39,27 @@ export class EmployeesComponent implements OnInit {
 
   addEmployee() {
     this.router.navigate(['/employees/add']);
+  }
+
+  setVisibleEmployees() {
+    const pageIndex = (this.selectedPage - 1) * this.employeesPerPage;
+    this.visibleEmployees = this.employees.slice(
+      pageIndex,
+      pageIndex + this.employeesPerPage
+    );
+  }
+
+  setPageNumbers() {
+    this.pageNumbers = Array(
+      Math.ceil(this.employees.length / this.employeesPerPage)
+    )
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+    this.setVisibleEmployees();
   }
 
 }

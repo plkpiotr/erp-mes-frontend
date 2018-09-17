@@ -1,6 +1,11 @@
 <div *ngIf="areReportsLoaded">
-  <div *ngFor="let report of reports">
+  <div *ngFor="let report of visibleReports">
     {{report.id}} {{report.startDate}}
     <button (click)="seeReport(report.id)">Zobacz</button>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
 </div>

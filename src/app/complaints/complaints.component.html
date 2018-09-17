@@ -1,5 +1,5 @@
 <div *ngIf="areComplaintsLoaded">
-  <div *ngFor="let c of complaints">
+  <div *ngFor="let c of visibleComplaints">
     <hr>{{c.id}} {{c.status}} {{c.firstName}} {{c.lastName}} {{c.email}} {{c.phoneNumber}} {{c.street}}
     {{c.houseNumber}} {{c.city}} {{c.postalCode}} {{c.scheduledFor}} {{c.value}} {{c.requestedResolution}}
     {{c.resolution}} {{c.fault}}
@@ -7,6 +7,11 @@
       {{d.item.name}} {{d.quantity}}
     </div>
     <button (click)="seeComplaint(c.id)">Zobacz</button>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
   <button (click)="addComplaint()">Dodaj reklamację</button>
 </div>
