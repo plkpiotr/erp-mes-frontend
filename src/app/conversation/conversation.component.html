@@ -1,7 +1,6 @@
 <div>
   <div *ngFor="let email of visibleEmails">
-    <a [routerLink]="['/emails', email.id]">{{email.id}}</a>
-    <br>{{email.email}} {{email.subject}} {{email.emailType}} {{email.timestamp}}
+    <br> {{email.id}} {{email.email}} {{email.subject}} {{email.emailType}} {{email.timestamp}}
     <div *ngFor="let c of email.content">
       {{c}}
     </div>

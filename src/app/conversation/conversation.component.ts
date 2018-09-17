@@ -17,7 +17,7 @@ export class ConversationComponent implements OnInit {
 
   subject: string;
   fullContent: string;
-  content: string[];
+  content = new Array<string>();
   emailEntityRequest: EmailEntityRequest;
 
   emailsPerPage = 15;
@@ -43,26 +43,20 @@ export class ConversationComponent implements OnInit {
         });
   }
 
-  seeConversation(id: number) {
-    this.router.navigate(['/emails', id]);
-  }
-
   send() {
     this.divideContent();
     this.emailEntityRequest = {
       subject: this.subject,
       content: this.content
     };
-    let emailEntity: EmailEntity;
     this.emailService.reply(this.emailEntityRequest, this.route.snapshot.params['id'])
       .subscribe(res => {
-          emailEntity = res;
         },
         err => {
           console.log(err);
         },
         () => {
-          this.router.navigate(['/emails', emailEntity.id]);
+          this.router.navigate(['/emails/inbox']);
         });
   }
 

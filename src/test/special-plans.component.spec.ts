@@ -50,6 +50,11 @@ import {NotificationsComponent} from "../app/notifications/notifications.compone
 import {NotificationComponent} from "../app/notification/notification.component";
 import {OrdersComponent} from "../app/orders/orders.component";
 import {OrderComponent} from "../app/order/order.component";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {EmailService} from "../app/email.service";
 
 describe('SpecialPlansComponent', () => {
   let component: SpecialPlansComponent;
@@ -99,7 +104,11 @@ describe('SpecialPlansComponent', () => {
         SuggestionsComponent,
         AddOrderComponent,
         AddNotificationComponent,
-        AddSuggestionComponent
+        AddSuggestionComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -111,7 +120,8 @@ describe('SpecialPlansComponent', () => {
         DeliveryService,
         PlanningService,
         ComplaintService,
-        ReturnService
+        ReturnService,
+        EmailService
       ]
     })
       .compileComponents();
