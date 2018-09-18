@@ -54,6 +54,11 @@ import {OrderService} from "../app/order.service";
 import {NotificationService} from "../app/notification.service";
 import {SuggestionService} from "../app/suggestion.service";
 import {ReturnStatus} from "../app/types";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {EmailService} from "../app/email.service";
 
 const mockReturns = [
   {
@@ -150,7 +155,11 @@ describe('ReturnService', () => {
         SuggestionsComponent,
         AddOrderComponent,
         AddNotificationComponent,
-        AddSuggestionComponent
+        AddSuggestionComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -165,7 +174,8 @@ describe('ReturnService', () => {
         ReturnService,
         OrderService,
         NotificationService,
-        SuggestionService
+        SuggestionService,
+        EmailService
       ]
     });
     service = TestBed.get(ReturnService);

@@ -54,6 +54,11 @@ import {ReturnComponent} from "../app/return/return.component";
 import {ReturnsComponent} from "../app/returns/returns.component";
 import {ComplaintComponent} from "../app/complaint/complaint.component";
 import {ComplaintsComponent} from "../app/complaints/complaints.component";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {EmailService} from "../app/email.service";
 
 const mockDelivery = {
   id: 1,
@@ -138,7 +143,11 @@ describe('DeliveryComponent', () => {
         ComplaintsComponent,
         ComplaintComponent,
         ReturnsComponent,
-        ReturnComponent
+        ReturnComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -154,7 +163,8 @@ describe('DeliveryComponent', () => {
         NotificationService,
         SuggestionService,
         ComplaintService,
-        ReturnService
+        ReturnService,
+        EmailService
       ]
     })
     .compileComponents();

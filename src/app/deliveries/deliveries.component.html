@@ -1,11 +1,16 @@
 <div *ngIf="areDeliveriesLoaded">
-  <div *ngFor="let delivery of deliveries">
+  <div *ngFor="let delivery of visibleDeliveries">
     <div *ngFor="let deliveryItem of delivery.deliveryItems">
       {{deliveryItem.item.name}} {{deliveryItem.quantity}}
     </div>
     {{delivery.scheduledFor}}
     {{delivery.value}}
     <button (click)="seeDelivery(delivery.id)">Zobacz</button>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
   <button (click)="addDelivery()">Dodaj dostawę</button>
 </div>

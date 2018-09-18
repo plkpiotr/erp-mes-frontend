@@ -1,8 +1,13 @@
 <div *ngIf="arePlansLoaded">
-  <div *ngFor="let plan of specialPlans">
+  <div *ngFor="let plan of visibleSpecialPlans">
     <br>{{plan.id}} {{plan.description}} {{plan.day}} {{plan.employeesPerDay}}
     {{plan.ordersPerDay}} {{plan.returnsPerDay}} {{plan.complaintsResolvedPerDay}}
     <button (click)="fetchItem(item.id)">Zobacz</button>
     <br>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
 </div>

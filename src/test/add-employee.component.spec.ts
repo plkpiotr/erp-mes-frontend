@@ -53,6 +53,11 @@ import {ComplaintsComponent} from "../app/complaints/complaints.component";
 import {ReturnComponent} from "../app/return/return.component";
 import {ComplaintService} from "../app/complaint.service";
 import {ReturnService} from "../app/return.service";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {EmailService} from "../app/email.service";
 
 describe('AddEmployeeComponent', () => {
   let component: AddEmployeeComponent;
@@ -104,7 +109,11 @@ describe('AddEmployeeComponent', () => {
         NotificationComponent,
         NotificationsComponent,
         SuggestionComponent,
-        SuggestionsComponent
+        SuggestionsComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -119,7 +128,8 @@ describe('AddEmployeeComponent', () => {
         ReturnService,
         OrderService,
         NotificationService,
-        SuggestionService
+        SuggestionService,
+        EmailService
       ]
     })
       .compileComponents();

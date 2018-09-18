@@ -1,8 +1,13 @@
 <div>
-  <div *ngFor="let employee of employees">
+  <div *ngFor="let employee of visibleEmployees">
     <br>{{employee.id}} {{employee.firstName}} {{employee.lastName}} {{employee.email}} {{employee.role}} {{employee.passwordValid}}
     <button (click)="fetchEmployee(employee.id)">Zobacz</button>
     <br>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
   <button (click)="addEmployee()">Dodaj pracownika</button>
 </div>

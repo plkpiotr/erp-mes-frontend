@@ -54,6 +54,11 @@ import {ReturnComponent} from "../app/return/return.component";
 import {ReturnsComponent} from "../app/returns/returns.component";
 import {ComplaintComponent} from "../app/complaint/complaint.component";
 import {ComplaintsComponent} from "../app/complaints/complaints.component";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {EmailService} from "../app/email.service";
 
 describe('TeamComponent', () => {
   let component: TeamComponent;
@@ -104,7 +109,11 @@ describe('TeamComponent', () => {
         ComplaintsComponent,
         ComplaintComponent,
         ReturnsComponent,
-        ReturnComponent
+        ReturnComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -119,7 +128,8 @@ describe('TeamComponent', () => {
         ReturnService,
         OrderService,
         NotificationService,
-        SuggestionService
+        SuggestionService,
+        EmailService
       ]
     })
     .compileComponents();

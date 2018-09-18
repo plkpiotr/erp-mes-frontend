@@ -50,6 +50,11 @@ import {OrdersComponent} from "../app/orders/orders.component";
 import {OrderComponent} from "../app/order/order.component";
 import {SuggestionComponent} from "../app/suggestion/suggestion.component";
 import {SuggestionsComponent} from "../app/suggestions/suggestions.component";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {EmailService} from "../app/email.service";
 
 const mockDailyPlan = {
   'id': 1,
@@ -143,7 +148,11 @@ describe('PlanningService', () => {
         SuggestionsComponent,
         AddOrderComponent,
         AddNotificationComponent,
-        AddSuggestionComponent
+        AddSuggestionComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -155,7 +164,8 @@ describe('PlanningService', () => {
         DeliveryService,
         PlanningService,
         ComplaintService,
-        ReturnService
+        ReturnService,
+        EmailService
       ]
     });
     service = TestBed.get(PlanningService);

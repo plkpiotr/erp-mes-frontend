@@ -11,10 +11,15 @@ import {Item} from "../types";
 export class ItemsComponent implements OnInit {
 
   areItemsLoaded = false;
-  items: Item[];
+  items: Array<Item>;
+  visibleItems: Array<Item>;
   showAddSpecialOffer = false;
   percentOff: string;
   query = '';
+
+  itemsPerPage = 15;
+  selectedPage = 1;
+  pageNumbers: number[];
 
   constructor(private router: Router,
               private itemService: ItemService) {
@@ -31,6 +36,8 @@ export class ItemsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areItemsLoaded = true;
+      this.setVisibleItems();
+      this.setPageNumbers();
     });
   }
 
@@ -61,6 +68,27 @@ export class ItemsComponent implements OnInit {
     }, () => {
       this.areItemsLoaded = true;
     });
+  }
+
+  setVisibleItems() {
+    const pageIndex = (this.selectedPage - 1) * this.itemsPerPage;
+    this.visibleItems = this.items.slice(
+      pageIndex,
+      pageIndex + this.itemsPerPage
+    );
+  }
+
+  setPageNumbers() {
+    this.pageNumbers = Array(
+      Math.ceil(this.items.length / this.itemsPerPage)
+    )
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+    this.setVisibleItems();
   }
 
 }

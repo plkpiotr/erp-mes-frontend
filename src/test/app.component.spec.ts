@@ -41,6 +41,10 @@ import {ComplaintsComponent} from "../app/complaints/complaints.component";
 import {ComplaintComponent} from "../app/complaint/complaint.component";
 import {ReturnsComponent} from "../app/returns/returns.component";
 import {ReturnComponent} from "../app/return/return.component";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -87,7 +91,11 @@ describe('AppComponent', () => {
         NotificationComponent,
         NotificationsComponent,
         SuggestionComponent,
-        SuggestionsComponent
+        SuggestionsComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         Token

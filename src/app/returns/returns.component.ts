@@ -11,7 +11,12 @@ import {Router} from "@angular/router";
 export class ReturnsComponent implements OnInit {
 
   returns: Array<Return>;
+  visibleReturns: Array<Return>;
   areReturnsLoaded = false;
+
+  returnsPerPage = 15;
+  selectedPage = 1;
+  pageNumbers: number[];
 
   constructor(private returnService: ReturnService, private router: Router) {
   }
@@ -27,6 +32,8 @@ export class ReturnsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areReturnsLoaded = true;
+      this.setVisibleReturns();
+      this.setPageNumbers();
     });
   }
 
@@ -40,5 +47,26 @@ export class ReturnsComponent implements OnInit {
         service: 'return'
       }
     });
+  }
+
+  setVisibleReturns() {
+    const pageIndex = (this.selectedPage - 1) * this.returnsPerPage;
+    this.visibleReturns = this.returns.slice(
+      pageIndex,
+      pageIndex + this.returnsPerPage
+    );
+  }
+
+  setPageNumbers() {
+    this.pageNumbers = Array(
+      Math.ceil(this.returns.length / this.returnsPerPage)
+    )
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+    this.setVisibleReturns();
   }
 }

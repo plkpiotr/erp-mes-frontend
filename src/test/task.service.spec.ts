@@ -53,6 +53,11 @@ import {ReturnService} from "../app/return.service";
 import {PlanningComponent} from "../app/planning/planning.component";
 import {UpdateDailyPlanComponent} from "../app/update-daily-plan/update-daily-plan.component";
 import {SpecialPlansComponent} from "../app/special-plans/special-plans.component";
+import {EmailService} from "../app/email.service";
+import {ConversationComponent} from "../app/conversation/conversation.component";
+import {AddEmailComponent} from "../app/add-email/add-email.component";
+import {OutboxComponent} from "../app/outbox/outbox.component";
+import {InboxComponent} from "../app/inbox/inbox.component";
 
 const mockTasks = [
   {
@@ -328,7 +333,11 @@ describe('TaskService', () => {
         ReturnComponent,
         PlanningComponent,
         UpdateDailyPlanComponent,
-        SpecialPlansComponent
+        SpecialPlansComponent,
+        InboxComponent,
+        OutboxComponent,
+        AddEmailComponent,
+        ConversationComponent
       ],
       providers: [
         EmployeeService,
@@ -342,7 +351,8 @@ describe('TaskService', () => {
         NotificationService,
         SuggestionService,
         ComplaintService,
-        ReturnService
+        ReturnService,
+        EmailService
       ]
     });
     taskService = TestBed.get(TaskService);

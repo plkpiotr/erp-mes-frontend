@@ -1,0 +1,16 @@
+<div>
+  <div *ngFor="let email of visibleEmails">
+    <a [routerLink]="['/emails', email.id]">{{email.id}}</a>
+    <br>{{email.email}} {{email.subject}} {{email.emailType}} {{email.timestamp}}
+    <div *ngFor="let c of email.content">
+      {{c}}
+    </div>
+    <br>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
+  </div>
+  <button (click)="sendEmail()">Napisz email</button>
+</div>

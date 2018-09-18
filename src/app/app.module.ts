@@ -58,6 +58,11 @@ import { ReturnsComponent } from './returns/returns.component';
 import { ReturnComponent } from './return/return.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { ComplaintComponent } from './complaint/complaint.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { OutboxComponent } from './outbox/outbox.component';
+import { ConversationComponent } from './conversation/conversation.component';
+import { AddEmailComponent } from './add-email/add-email.component';
+import {EmailService} from "./email.service";
 
 @NgModule({
   declarations: [
@@ -98,6 +103,10 @@ import { ComplaintComponent } from './complaint/complaint.component';
     ReturnComponent,
     ComplaintsComponent,
     ComplaintComponent,
+    InboxComponent,
+    OutboxComponent,
+    ConversationComponent,
+    AddEmailComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,6 +131,7 @@ import { ComplaintComponent } from './complaint/complaint.component';
     Token,
     ReturnService,
     ComplaintService,
+    EmailService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

@@ -1,8 +1,13 @@
 <div *ngIf="areItemsLoaded">
-  <div *ngFor="let item of items">
+  <div *ngFor="let item of visibleItems">
     <br>{{item.id}} {{item.name}} {{item.quantity}} {{item.stockPrice}} {{item.originalPrice}} {{item.currentPrice}}
     <button (click)="fetchItem(item.id)">Zobacz</button>
     <br>
+  </div>
+  <div>
+    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
+      {{page}}
+    </button>
   </div>
   <button (click)="addItem()">Dodaj przedmiot</button><br><br>
   <button (click)="showAddSpecialOffer = !showAddSpecialOffer">Wprowadź ofertę specjalną</button>
