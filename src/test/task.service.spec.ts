@@ -44,20 +44,20 @@ import {NotificationComponent} from '../app/communication/notifications/notifica
 import {NotificationsComponent} from '../app/communication/notifications/notifications/notifications.component';
 import {SuggestionComponent} from '../app/communication/suggestions/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/communication/suggestions/suggestions/suggestions.component';
-import {ReturnComponent} from "../app/shop/returns/return/return.component";
-import {ReturnsComponent} from "../app/shop/returns/returns/returns.component";
-import {ComplaintComponent} from "../app/shop/complaints/complaint/complaint.component";
-import {ComplaintsComponent} from "../app/shop/complaints/complaints/complaints.component";
-import {ComplaintService} from "../app/services/complaint.service";
-import {ReturnService} from "../app/services/return.service";
-import {PlanningComponent} from "../app/production/planning/planning/planning.component";
-import {UpdateDailyPlanComponent} from "../app/production/planning/update-daily-plan/update-daily-plan.component";
-import {SpecialPlansComponent} from "../app/production/planning/special-plans/special-plans.component";
-import {EmailService} from "../app/services/email.service";
-import {ConversationComponent} from "../app/communication/emails/conversation/conversation.component";
-import {AddEmailComponent} from "../app/communication/emails/add-email/add-email.component";
-import {OutboxComponent} from "../app/communication/emails/outbox/outbox.component";
-import {InboxComponent} from "../app/communication/emails/inbox/inbox.component";
+import {ReturnComponent} from '../app/shop/returns/return/return.component';
+import {ReturnsComponent} from '../app/shop/returns/returns/returns.component';
+import {ComplaintComponent} from '../app/shop/complaints/complaint/complaint.component';
+import {ComplaintsComponent} from '../app/shop/complaints/complaints/complaints.component';
+import {ComplaintService} from '../app/services/complaint.service';
+import {ReturnService} from '../app/services/return.service';
+import {PlanningComponent} from '../app/production/planning/planning/planning.component';
+import {UpdateDailyPlanComponent} from '../app/production/planning/update-daily-plan/update-daily-plan.component';
+import {SpecialPlansComponent} from '../app/production/planning/special-plans/special-plans.component';
+import {EmailService} from '../app/services/email.service';
+import {ConversationComponent} from '../app/communication/emails/conversation/conversation.component';
+import {AddEmailComponent} from '../app/communication/emails/add-email/add-email.component';
+import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
+import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 
 const mockTasks = [
   {

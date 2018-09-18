@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/index';
+import {Observable} from 'rxjs';
 import {CurrentReport, EstimatedCostsRequest, ExpenseRequest, MonthlyReport} from '../types';
 
 @Injectable({

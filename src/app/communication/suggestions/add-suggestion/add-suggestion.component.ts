@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Employee, Phase, Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {EmployeeService} from '../../../services/employee.service';

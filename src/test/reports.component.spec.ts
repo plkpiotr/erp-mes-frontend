@@ -49,17 +49,17 @@ import {NotificationComponent} from '../app/communication/notifications/notifica
 import {NotificationsComponent} from '../app/communication/notifications/notifications/notifications.component';
 import {SuggestionComponent} from '../app/communication/suggestions/suggestion/suggestion.component';
 import {SuggestionsComponent} from '../app/communication/suggestions/suggestions/suggestions.component';
-import {ReturnService} from "../app/services/return.service";
-import {ComplaintService} from "../app/services/complaint.service";
-import {ReturnComponent} from "../app/shop/returns/return/return.component";
-import {ReturnsComponent} from "../app/shop/returns/returns/returns.component";
-import {ComplaintComponent} from "../app/shop/complaints/complaint/complaint.component";
-import {ComplaintsComponent} from "../app/shop/complaints/complaints/complaints.component";
-import {ConversationComponent} from "../app/communication/emails/conversation/conversation.component";
-import {AddEmailComponent} from "../app/communication/emails/add-email/add-email.component";
-import {OutboxComponent} from "../app/communication/emails/outbox/outbox.component";
-import {InboxComponent} from "../app/communication/emails/inbox/inbox.component";
-import {EmailService} from "../app/services/email.service";
+import {ReturnService} from '../app/services/return.service';
+import {ComplaintService} from '../app/services/complaint.service';
+import {ReturnComponent} from '../app/shop/returns/return/return.component';
+import {ReturnsComponent} from '../app/shop/returns/returns/returns.component';
+import {ComplaintComponent} from '../app/shop/complaints/complaint/complaint.component';
+import {ComplaintsComponent} from '../app/shop/complaints/complaints/complaints.component';
+import {ConversationComponent} from '../app/communication/emails/conversation/conversation.component';
+import {AddEmailComponent} from '../app/communication/emails/add-email/add-email.component';
+import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
+import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
+import {EmailService} from '../app/services/email.service';
 
 describe('ReportsComponent', () => {
   let component: ReportsComponent;

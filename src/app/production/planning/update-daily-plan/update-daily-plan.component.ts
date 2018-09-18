@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {DailyPlanRequest} from "../../../types";
-import {PlanningService} from "../../../services/planning.service";
-import {Router} from "@angular/router";
+import {DailyPlanRequest} from '../../../types';
+import {PlanningService} from '../../../services/planning.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-update-daily-plan',

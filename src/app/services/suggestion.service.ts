@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Suggestion, SuggestionRequest} from '../types';
-import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 
 @Injectable()
 export class SuggestionService {
 
-  private httpHeaders: HttpHeaders;
+  private readonly httpHeaders: HttpHeaders;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     this.httpHeaders = new HttpHeaders()
       .set('Access-Control-Allow-Origin', 'https://localhost:4200');
   }

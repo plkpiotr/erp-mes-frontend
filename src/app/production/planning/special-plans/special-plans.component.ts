@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PlanningService} from "../../../services/planning.service";
-import {SpecialPlan} from "../../../types";
+import {PlanningService} from '../../../services/planning.service';
+import {SpecialPlan} from '../../../types';
 
 @Component({
   selector: 'app-special-plans',

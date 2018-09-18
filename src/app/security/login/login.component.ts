@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {Token} from '../../token';
-import {Employee} from '../../types';
-import {EmployeeService} from '../../services/employee.service';
 
 @Component({
   selector: 'app-login',

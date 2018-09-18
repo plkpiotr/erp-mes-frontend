@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {ActivatedRoute} from '@angular/router';

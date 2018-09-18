@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReportService} from '../../../services/report.service';
 import {ActivatedRoute} from '@angular/router';
 import {MonthlyReport} from '../../../types';

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PlanningService} from '../../../services/planning.service';
 import {DailyPlan, SpecialPlanRequest} from '../../../types';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-planning',

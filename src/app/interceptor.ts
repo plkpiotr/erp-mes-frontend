@@ -8,12 +8,12 @@ import {
   HttpResponse,
   HttpSentEvent,
   HttpUserEvent
-} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {Token} from "./token";
-import {Router} from "@angular/router";
-import {Observable} from "rxjs/index";
-import {tap} from "rxjs/internal/operators";
+} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Token} from './token';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/internal/operators';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {

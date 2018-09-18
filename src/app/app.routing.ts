@@ -11,17 +11,17 @@ import {AddTaskComponent} from './production/tasks/add-task/add-task.component';
 import {ReportsComponent} from './production/finance/reports/reports.component';
 import {ReportComponent} from './production/finance/report/report.component';
 import {CurrentReportComponent} from './production/finance/current-report/current-report.component';
-import {DeliveriesComponent} from "./shop/deliveries/deliveries/deliveries.component";
-import {DeliveryComponent} from "./shop/deliveries/delivery/delivery.component";
-import {AddDeliveryComponent} from "./shop/deliveries/add-delivery/add-delivery.component";
-import {ItemsComponent} from "./shop/items/items/items.component";
-import {ItemComponent} from "./shop/items/item/item.component";
-import {AddItemComponent} from "./shop/items/add-item/add-item.component";
-import {LoginComponent} from "./security/login/login.component";
-import {ValidateComponent} from "./security/validate/validate.component";
-import {SpecialPlansComponent} from "./production/planning/special-plans/special-plans.component";
-import {PlanningComponent} from "./production/planning/planning/planning.component";
-import {UpdateDailyPlanComponent} from "./production/planning/update-daily-plan/update-daily-plan.component";
+import {DeliveriesComponent} from './shop/deliveries/deliveries/deliveries.component';
+import {DeliveryComponent} from './shop/deliveries/delivery/delivery.component';
+import {AddDeliveryComponent} from './shop/deliveries/add-delivery/add-delivery.component';
+import {ItemsComponent} from './shop/items/items/items.component';
+import {ItemComponent} from './shop/items/item/item.component';
+import {AddItemComponent} from './shop/items/add-item/add-item.component';
+import {LoginComponent} from './security/login/login.component';
+import {ValidateComponent} from './security/validate/validate.component';
+import {SpecialPlansComponent} from './production/planning/special-plans/special-plans.component';
+import {PlanningComponent} from './production/planning/planning/planning.component';
+import {UpdateDailyPlanComponent} from './production/planning/update-daily-plan/update-daily-plan.component';
 import {AddOrderComponent} from './shop/orders/add-order/add-order.component';
 import {AddNotificationComponent} from './communication/notifications/add-notification/add-notification.component';
 import {AddSuggestionComponent} from './communication/suggestions/add-suggestion/add-suggestion.component';
@@ -31,14 +31,14 @@ import {NotificationComponent} from './communication/notifications/notification/
 import {NotificationsComponent} from './communication/notifications/notifications/notifications.component';
 import {SuggestionComponent} from './communication/suggestions/suggestion/suggestion.component';
 import {SuggestionsComponent} from './communication/suggestions/suggestions/suggestions.component';
-import {ReturnsComponent} from "./shop/returns/returns/returns.component";
-import {ReturnComponent} from "./shop/returns/return/return.component";
-import {ComplaintsComponent} from "./shop/complaints/complaints/complaints.component";
-import {ComplaintComponent} from "./shop/complaints/complaint/complaint.component";
-import {InboxComponent} from "./communication/emails/inbox/inbox.component";
-import {OutboxComponent} from "./communication/emails/outbox/outbox.component";
-import {ConversationComponent} from "./communication/emails/conversation/conversation.component";
-import {AddEmailComponent} from "./communication/emails/add-email/add-email.component";
+import {ReturnsComponent} from './shop/returns/returns/returns.component';
+import {ReturnComponent} from './shop/returns/return/return.component';
+import {ComplaintsComponent} from './shop/complaints/complaints/complaints.component';
+import {ComplaintComponent} from './shop/complaints/complaint/complaint.component';
+import {InboxComponent} from './communication/emails/inbox/inbox.component';
+import {OutboxComponent} from './communication/emails/outbox/outbox.component';
+import {ConversationComponent} from './communication/emails/conversation/conversation.component';
+import {AddEmailComponent} from './communication/emails/add-email/add-email.component';
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -82,6 +82,7 @@ export const appRoutes: Routes = [
   {path: 'emails/add', component: AddEmailComponent},
   {path: 'emails/:id', component: ConversationComponent},
   {path: 'login', component: LoginComponent}
+  // {path: '**', redirectTo: 'login'}
   ];
 
 export const routing = RouterModule.forRoot(appRoutes);

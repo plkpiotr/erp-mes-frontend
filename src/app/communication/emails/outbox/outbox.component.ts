@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EmailEntity} from '../../../types';
 import {EmailService} from '../../../services/email.service';
 import {Router} from '@angular/router';
