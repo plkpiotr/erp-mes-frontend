@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Token} from "./token";
-import {Router} from "@angular/router";
+import {Token} from './token';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
