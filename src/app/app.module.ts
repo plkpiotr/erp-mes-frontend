@@ -63,6 +63,8 @@ import {OutboxComponent} from './communication/emails/outbox/outbox.component';
 import {ConversationComponent} from './communication/emails/conversation/conversation.component';
 import {AddEmailComponent} from './communication/emails/add-email/add-email.component';
 import {EmailService} from './services/email.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from './material';
 
 @NgModule({
   declarations: [
@@ -113,7 +115,9 @@ import {EmailService} from './services/email.service';
     HttpClientModule,
     RouterModule,
     routing,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     EmployeeService,
