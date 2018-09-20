@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  panelOpenState = false;
 
   constructor(private token: Token, private router: Router) {
     if (!this.isUserLoggedIn()) {

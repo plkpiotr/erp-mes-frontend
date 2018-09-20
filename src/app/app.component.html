@@ -1,21 +1,108 @@
-<div *ngIf="isUserLoggedIn()">
-  <p>ERP:</p><br>
-  <a routerLink="/employees" routerLinkActive="active">Pracownicy</a><br>
-  <a routerLink="/teams" routerLinkActive="active">Zespoły</a><br>
-  <a routerLink="/reports" routerLinkActive="active">Raporty</a><br>
-  <a routerLink="/current-report" routerLinkActive="active">Obecny raport</a><br>
-  <a routerLink="/planning" routerLinkActive="active">Planowanie</a><br>
-  <a routerLink="/items" routerLinkActive="active">Przedmioty</a><br>
-  <a routerLink="/deliveries" routerLinkActive="active">Przesyłki</a><br>
-  <a routerLink="/orders" routerLinkActive="active">Zamówienia</a><br>
-  <a routerLink="/special-plans" routerLinkActive="active">Plany specjalne</a><br>
-  <p>MES:</p><br>
-  <a routerLink="/tasks" routerLinkActive="active">Zadania</a><br>
-  <a routerLink="/notifications" routerLinkActive="active">Powiadomienia</a><br>
-  <a routerLink="/suggestions" routerLinkActive="active">Usprawnienia</a><br>
-  <a routerLink="/returns" routerLinkActive="active">Zwroty</a><br>
-  <a routerLink="/complaints" routerLinkActive="active">Reklamacje</a><br>
-</div>
-<div>
-  <router-outlet></router-outlet>
-</div>
+<mat-drawer-container class="example-container">
+  <mat-drawer *ngIf="isUserLoggedIn()" mode="side" opened>
+
+    <mat-accordion primary>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Personal
+          </mat-panel-title>
+          <mat-panel-description>
+            Type your
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+        <mat-nav-list dense>
+          <mat-list-item>
+            <mat-icon matListIcon>folder</mat-icon>
+            <h3 matLine> fff </h3>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon matListIcon>folder</mat-icon>
+            <h3 matLine> fff </h3>
+          </mat-list-item>
+        </mat-nav-list>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list dense>
+          <mat-list-item>
+            <mat-icon matListIcon>folder</mat-icon>
+            <h3 matLine> fff </h3>
+          </mat-list-item>
+        </mat-list>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list dense>
+          <mat-list-item>
+            <mat-icon matListIcon>folder</mat-icon>
+            <h3 matLine> fff </h3>
+          </mat-list-item>
+        </mat-list>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list dense>
+          <mat-list-item>
+            <mat-icon matListIcon>folder</mat-icon>
+            <h3 matLine> fff </h3>
+          </mat-list-item>
+        </mat-list>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <p>ERP:</p><br>
+    <a routerLink="/employees" routerLinkActive="active">Pracownicy</a><br>
+    <a routerLink="/teams" routerLinkActive="active">Zespoły</a><br>
+    <a routerLink="/reports" routerLinkActive="active">Raporty</a><br>
+    <a routerLink="/current-report" routerLinkActive="active">Obecny raport</a><br>
+    <a routerLink="/planning" routerLinkActive="active">Planowanie</a><br>
+    <a routerLink="/items" routerLinkActive="active">Przedmioty</a><br>
+    <a routerLink="/deliveries" routerLinkActive="active">Przesyłki</a><br>
+    <a routerLink="/orders" routerLinkActive="active">Zamówienia</a><br>
+    <a routerLink="/special-plans" routerLinkActive="active">Plany specjalne</a><br>
+    <p>MES:</p><br>
+    <a routerLink="/tasks" routerLinkActive="active">Zadania</a><br>
+    <a routerLink="/notifications" routerLinkActive="active">Powiadomienia</a><br>
+    <a routerLink="/suggestions" routerLinkActive="active">Usprawnienia</a><br>
+    <a routerLink="/returns" routerLinkActive="active">Zwroty</a><br>
+    <a routerLink="/complaints" routerLinkActive="active">Reklamacje</a><br>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
