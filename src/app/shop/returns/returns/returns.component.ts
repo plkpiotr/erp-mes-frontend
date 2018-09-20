@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-returns',
   templateUrl: './returns.component.html',
-  styleUrls: ['./returns.component.css']
+  styleUrls: ['./returns.component.scss']
 })
 export class ReturnsComponent implements OnInit {
 

@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.css']
+  styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
 

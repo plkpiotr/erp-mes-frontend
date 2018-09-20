@@ -9,7 +9,7 @@ import {_appIdRandomProviderFactory} from '@angular/core/src/application_tokens'
 @Component({
   selector: 'app-delivery',
   templateUrl: './delivery.component.html',
-  styleUrls: ['./delivery.component.css']
+  styleUrls: ['./delivery.component.scss']
 })
 export class DeliveryComponent implements OnInit {
 

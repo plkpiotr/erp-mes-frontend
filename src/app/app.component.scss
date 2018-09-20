@@ -1,0 +1,23 @@
+@import "../variables";
+
+mat-drawer {
+  background-color: $warn;
+  width: 300px;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-expansion-panel {
+  margin: 0;
+  background-color: $accent;
+}
+
+.mat-nav-list[dense] {
+  padding-top: 0;
+}
+
+mat-expansion-panel-header {
+  padding: 0 20px;
+}

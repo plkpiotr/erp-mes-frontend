@@ -108,7 +108,7 @@ import {MaterialModule} from './material';
     InboxComponent,
     OutboxComponent,
     ConversationComponent,
-    AddEmailComponent,
+    AddEmailComponent
   ],
   imports: [
     BrowserModule,

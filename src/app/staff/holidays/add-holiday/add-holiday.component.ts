@@ -6,7 +6,7 @@ import {HolidayType} from '../../../types';
 @Component({
   selector: 'app-add-holiday',
   templateUrl: './add-holiday.component.html',
-  styleUrls: ['./add-holiday.component.css']
+  styleUrls: ['./add-holiday.component.scss']
 })
 export class AddHolidayComponent implements OnInit {
 

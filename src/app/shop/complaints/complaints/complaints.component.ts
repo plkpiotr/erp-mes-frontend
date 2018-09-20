@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-complaints',
   templateUrl: './complaints.component.html',
-  styleUrls: ['./complaints.component.css']
+  styleUrls: ['./complaints.component.scss']
 })
 export class ComplaintsComponent implements OnInit {
 

@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit {
 

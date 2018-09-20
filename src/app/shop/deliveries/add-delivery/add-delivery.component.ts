@@ -7,7 +7,7 @@ import {ItemService} from '../../../services/item.service';
 @Component({
   selector: 'app-add-delivery',
   templateUrl: './add-delivery.component.html',
-  styleUrls: ['./add-delivery.component.css']
+  styleUrls: ['./add-delivery.component.scss']
 })
 export class AddDeliveryComponent implements OnInit {
 
@@ -42,10 +42,10 @@ export class AddDeliveryComponent implements OnInit {
       }, () => {
         this.areItemsLoaded = true;
         this.items.forEach(item => {
-          if(this.recommendedDeliveryItems.filter(rec => rec.itemId === item.id).length === 0) {
+          if (this.recommendedDeliveryItems.filter(rec => rec.itemId === item.id).length === 0) {
             this.remainingItems.push(item);
           }
-        })
+        });
       });
     });
     this.deliveryItemRequests = new Array();

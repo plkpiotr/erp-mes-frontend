@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-add-notification',
   templateUrl: './add-notification.component.html',
-  styleUrls: ['./add-notification.component.css']
+  styleUrls: ['./add-notification.component.scss']
 })
 export class AddNotificationComponent implements OnInit {
 
