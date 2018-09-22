@@ -1,106 +1,165 @@
 <mat-drawer-container class="example-container">
   <mat-drawer *ngIf="isUserLoggedIn()" mode="side" opened>
-
-    <mat-accordion primary>
+    <mat-card>Menu</mat-card>
+    <mat-accordion>
       <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Personal
-          </mat-panel-title>
-          <mat-panel-description>
-            Type your
-          </mat-panel-description>
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                    [expandedHeight]="expandedHeight">
+          <mat-panel-title>Communication</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
         <mat-nav-list dense>
-          <mat-list-item>
-            <mat-icon matListIcon>folder</mat-icon>
-            <h3 matLine> fff </h3>
+          <mat-list-item routerLink="/emails/inbox"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>drafts</mat-icon>
+            <h3 matLine>Inbox</h3>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item>
-            <mat-icon matListIcon>folder</mat-icon>
-            <h3 matLine> fff </h3>
+          <mat-list-item routerLink="/emails/outbox"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>email</mat-icon>
+            <h4 matLine>Outbox</h4>
           </mat-list-item>
+          <mat-divider></mat-divider>
+          <!--<mat-list-item>-->
+            <!--<mat-icon matListIcon>forum</mat-icon>-->
+            <!--<h4 matLine>Chat</h4>-->
+          <!--</mat-list-item>-->
+          <!--<mat-divider></mat-divider>-->
+          <mat-list-item routerLink="/notifications"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>notifications</mat-icon>
+            <h4 matLine>Notifications</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/suggestions"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>plus_one</mat-icon>
+            <h4 matLine>Suggestions</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
         </mat-nav-list>
-        <mat-divider></mat-divider>
       </mat-expansion-panel>
-
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-          <mat-panel-description>
-            Currently I {{panelOpenState ? 'open' : 'closed'}}
-          </mat-panel-description>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                    [expandedHeight]="expandedHeight">
+          <mat-panel-title>Production</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-list dense>
-          <mat-list-item>
-            <mat-icon matListIcon>folder</mat-icon>
-            <h3 matLine> fff </h3>
-          </mat-list-item>
-        </mat-list>
         <mat-divider></mat-divider>
+        <mat-nav-list dense>
+          <mat-list-item routerLink="/current-report"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>today</mat-icon>
+            <h3 matLine>Current report</h3>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/reports"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>calendar_today</mat-icon>
+            <h4 matLine>Reports</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/planning"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>assignment</mat-icon>
+            <h4 matLine>Planning</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/special-plans"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>assignment_late</mat-icon>
+            <h4 matLine>Special plans</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/tasks"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>view_carousel</mat-icon>
+            <h4 matLine>Tasks</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-nav-list>
       </mat-expansion-panel>
-
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-          <mat-panel-description>
-            Currently I {{panelOpenState ? 'open' : 'closed'}}
-          </mat-panel-description>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                    [expandedHeight]="expandedHeight">
+          <mat-panel-title>Shop</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-list dense>
-          <mat-list-item>
-            <mat-icon matListIcon>folder</mat-icon>
-            <h3 matLine> fff </h3>
-          </mat-list-item>
-        </mat-list>
         <mat-divider></mat-divider>
+        <mat-nav-list dense>
+          <mat-list-item routerLink="/complaints"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>sentiment_dissatisfied</mat-icon>
+            <h3 matLine>Complaints</h3>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/deliveries"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>card_giftcard</mat-icon>
+            <h4 matLine>Deliveries</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/items"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>shopping_cart</mat-icon>
+            <h4 matLine>Items</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/orders"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>redo</mat-icon>
+            <h4 matLine>Orders</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/returns"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>undo</mat-icon>
+            <h4 matLine>Returns</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-nav-list>
       </mat-expansion-panel>
-
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-          <mat-panel-description>
-            Currently I {{panelOpenState ? 'open' : 'closed'}}
-          </mat-panel-description>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                    [expandedHeight]="expandedHeight">
+          <mat-panel-title>Staff</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-list dense>
-          <mat-list-item>
-            <mat-icon matListIcon>folder</mat-icon>
-            <h3 matLine> fff </h3>
-          </mat-list-item>
-        </mat-list>
         <mat-divider></mat-divider>
+        <mat-nav-list dense>
+          <mat-list-item routerLink="/employees"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>person</mat-icon>
+            <h3 matLine>Employees</h3>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/teams"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>people</mat-icon>
+            <h4 matLine>Teams</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-nav-list>
       </mat-expansion-panel>
-
+      <mat-expansion-panel>
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                    [expandedHeight]="expandedHeight">
+          <mat-panel-title>Settings</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+        <mat-nav-list dense>
+          <mat-list-item routerLink="/login"
+                         routerLinkActive="active">
+            <mat-icon matListIcon>cloud_queue</mat-icon>
+            <h3 matLine>Sign in</h3>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <!--<mat-list-item>-->
+            <!--<mat-icon matListIcon>cloud_off</mat-icon>-->
+            <!--<h4 matLine>Sign out</h4>-->
+          <!--</mat-list-item>-->
+          <!--<mat-divider></mat-divider>-->
+        </mat-nav-list>
+      </mat-expansion-panel>
     </mat-accordion>
-
-    <p>ERP:</p><br>
-    <a routerLink="/employees" routerLinkActive="active">Pracownicy</a><br>
-    <a routerLink="/teams" routerLinkActive="active">Zespoły</a><br>
-    <a routerLink="/reports" routerLinkActive="active">Raporty</a><br>
-    <a routerLink="/current-report" routerLinkActive="active">Obecny raport</a><br>
-    <a routerLink="/planning" routerLinkActive="active">Planowanie</a><br>
-    <a routerLink="/items" routerLinkActive="active">Przedmioty</a><br>
-    <a routerLink="/deliveries" routerLinkActive="active">Przesyłki</a><br>
-    <a routerLink="/orders" routerLinkActive="active">Zamówienia</a><br>
-    <a routerLink="/special-plans" routerLinkActive="active">Plany specjalne</a><br>
-    <p>MES:</p><br>
-    <a routerLink="/tasks" routerLinkActive="active">Zadania</a><br>
-    <a routerLink="/notifications" routerLinkActive="active">Powiadomienia</a><br>
-    <a routerLink="/suggestions" routerLinkActive="active">Usprawnienia</a><br>
-    <a routerLink="/returns" routerLinkActive="active">Zwroty</a><br>
-    <a routerLink="/complaints" routerLinkActive="active">Reklamacje</a><br>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>

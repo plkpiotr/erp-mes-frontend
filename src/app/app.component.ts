@@ -9,6 +9,8 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   panelOpenState = false;
+  collapsedHeight = '48px';
+  expandedHeight = '48px';
 
   constructor(private token: Token, private router: Router) {
     if (!this.isUserLoggedIn()) {
