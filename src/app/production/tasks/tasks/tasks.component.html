@@ -1,3 +1,4 @@
+<mat-card>Tasks</mat-card>
 <div *ngIf="areTasksLoaded">
   <div *ngFor="let t of tasks">
     <hr>{{t.id}} {{t.category}} {{t.name}} {{t.details}} {{t.assignee.firstName}} {{t.assignee.lastName}}

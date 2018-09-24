@@ -7,7 +7,7 @@ import {EmployeeService} from '../../../services/employee.service';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
-  styleUrls: ['./add-task.component.css']
+  styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent implements OnInit {
 

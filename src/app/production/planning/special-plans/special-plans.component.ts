@@ -5,7 +5,7 @@ import {SpecialPlan} from '../../../types';
 @Component({
   selector: 'app-special-plans',
   templateUrl: './special-plans.component.html',
-  styleUrls: ['./special-plans.component.css']
+  styleUrls: ['./special-plans.component.scss']
 })
 export class SpecialPlansComponent implements OnInit {
 

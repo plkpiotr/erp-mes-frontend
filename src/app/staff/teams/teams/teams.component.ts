@@ -6,7 +6,7 @@ import {Team} from '../../../types';
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.css']
+  styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit {
 

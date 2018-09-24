@@ -4,12 +4,12 @@ import {Employee, Holiday, Task} from '../../../types';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HolidayService} from '../../../services/holiday.service';
 import {TaskService} from '../../../services/task.service';
-import {LoginService} from "../../../services/login.service";
+import {LoginService} from '../../../services/login.service';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
 

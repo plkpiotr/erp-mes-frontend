@@ -5,7 +5,7 @@ import {CurrentReport, EstimatedCostsRequest, ExpenseRequest, ExpenseType} from 
 @Component({
   selector: 'app-current-report',
   templateUrl: './current-report.component.html',
-  styleUrls: ['./current-report.component.css']
+  styleUrls: ['./current-report.component.scss']
 })
 export class CurrentReportComponent implements OnInit {
 

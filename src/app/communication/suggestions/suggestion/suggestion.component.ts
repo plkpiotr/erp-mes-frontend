@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-suggestion',
   templateUrl: './suggestion.component.html',
-  styleUrls: ['./suggestion.component.css']
+  styleUrls: ['./suggestion.component.scss']
 })
 export class SuggestionComponent implements OnInit {
 

@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-add-email',
   templateUrl: './add-email.component.html',
-  styleUrls: ['./add-email.component.css']
+  styleUrls: ['./add-email.component.scss']
 })
 export class AddEmailComponent implements OnInit {
 

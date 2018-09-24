@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-update-daily-plan',
   templateUrl: './update-daily-plan.component.html',
-  styleUrls: ['./update-daily-plan.component.css']
+  styleUrls: ['./update-daily-plan.component.scss']
 })
 export class UpdateDailyPlanComponent {
 

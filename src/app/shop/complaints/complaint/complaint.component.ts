@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-complaint',
   templateUrl: './complaint.component.html',
-  styleUrls: ['./complaint.component.css']
+  styleUrls: ['./complaint.component.scss']
 })
 export class ComplaintComponent implements OnInit {
 
@@ -53,7 +53,7 @@ export class ComplaintComponent implements OnInit {
       .subscribe(res => {
         this.complaint = res;
       }, err => {
-        console.log(err)
+        console.log(err);
       }, () => {
         if (this.complaint.status === ComplaintStatus.MONEY_RETURNED) {
           const expenseRequest: ExpenseRequest = {
@@ -78,7 +78,7 @@ export class ComplaintComponent implements OnInit {
       this.route.snapshot.params['id']).subscribe(res => {
       this.complaint = res;
     }, err => {
-      console.log(err)
+      console.log(err);
     }, () => {
       if (this.complaint.resolution === Resolution.UNRESOLVED) {
         this.statuses = this.unresolvedStatuses;

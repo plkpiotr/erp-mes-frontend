@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-return',
   templateUrl: './return.component.html',
-  styleUrls: ['./return.component.css']
+  styleUrls: ['./return.component.scss']
 })
 export class ReturnComponent implements OnInit {
 
@@ -43,7 +43,7 @@ export class ReturnComponent implements OnInit {
       .subscribe(res => {
         this.return = res;
       }, err => {
-        console.log(err)
+        console.log(err);
       }, () => {
         if (this.return.status === ReturnStatus.MONEY_RETURNED) {
           this.return.deliveryItems.forEach(deliveryItem => {
