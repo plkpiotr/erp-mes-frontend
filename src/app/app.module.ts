@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routing} from './app.routing';
 import {EmployeesComponent} from './staff/employees/employees/employees.component';
 import {AddEmployeeComponent} from './staff/employees/add-employee/add-employee.component';
@@ -117,6 +117,7 @@ import {MaterialModule} from './material';
     routing,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MaterialModule
   ],
   providers: [

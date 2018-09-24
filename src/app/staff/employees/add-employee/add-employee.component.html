@@ -1,46 +1,49 @@
-<form #form='ngForm' (ngSubmit)='submitForm()'>
-  <div class="form-group">
-    <label>Imię: </label>
-    <input type="text" class="form-control"
-           name="firstName" [(ngModel)]="firstName"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Nazwisko: </label>
-    <input type="text" class="form-control"
-           name="lastName" [(ngModel)]="lastName"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Email: </label>
-    <input type="email" class="form-control"
-           name="email" [(ngModel)]="email"
-           required email/>
-  </div>
-  <div class="form-group">
-    <label>Rola: </label>
-    <select name="role" [(ngModel)]="role" required>
-      <option *ngFor="let r of roles" [value]="r">{{r}}</option>
-    </select>
-  </div>
-  <br>
-  <div class="form-group">
-    <label>Numer konta: </label>
-    <input type="number" class="form-control"
-           name="accountNumber" [(ngModel)]="accountNumber"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Ilość dni wolnych w roku: </label>
-    <input type="number" class="form-control"
-           name="daysOffPerYear" [(ngModel)]="daysOffPerYear"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Wynagrodzenie: </label>
-    <input type="number" class="form-control"
-           name="salary" [(ngModel)]="salary"
-           required/>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Dodaj pracownika</button>
-</form>
+<div class="content" [formGroup]="form">
+
+  <mat-form-field appearance="legacy">
+    <mat-label>First name</mat-label>
+    <input matInput placeholder="firstName" name="firstName" formControlName="firstName" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Last name</mat-label>
+    <input matInput placeholder="lastName" name="lastName" formControlName="lastName" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="email" formControlName="email" name="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <mat-select placeholder="role" name="role" formControlName="role" required>
+      <mat-option *ngFor="let r of roles" [value]="r">
+        {{r}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Account number</mat-label>
+    <input matInput placeholder="accountNumber" formControlName="accountNumber"
+           name="accountNumber" required>
+    <mat-hint>26 digits</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Days off per year</mat-label>
+    <input matInput placeholder="daysOffPerYear" formControlName="daysOffPerYear" name="daysOffPerYear"
+           required>
+    <mat-hint>0 - 26</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Salary</mat-label>
+    <input matInput placeholder="salary" formControlName="salary" name="salary" required>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">
+    Dodaj pracownika</button>
+</div>

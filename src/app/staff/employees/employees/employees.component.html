@@ -1,13 +1,27 @@
-<div>
-  <div *ngFor="let employee of visibleEmployees">
-    <br>{{employee.id}} {{employee.firstName}} {{employee.lastName}} {{employee.email}} {{employee.role}} {{employee.passwordValid}}
-    <button (click)="fetchEmployee(employee.id)">Zobacz</button>
-    <br>
+<div class="content">
+  <mat-progress-spinner *ngIf="!areLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="areLoaded">
+    <table mat-table [dataSource]="employees">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['id', 'name', 'role']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['id', 'name', 'role']" (click)="fetchEmployee(row.id)"></mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addEmployee()">Add employee</button>
   </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="addEmployee()">Dodaj pracownika</button>
 </div>
