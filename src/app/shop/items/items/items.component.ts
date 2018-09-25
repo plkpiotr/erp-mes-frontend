@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {Item} from '../../../types';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-items',
@@ -12,14 +13,17 @@ export class ItemsComponent implements OnInit {
 
   areItemsLoaded = false;
   items: Array<Item>;
-  visibleItems: Array<Item>;
   showAddSpecialOffer = false;
   percentOff: string;
   query = '';
+  dataSource: MatTableDataSource<Item> = new MatTableDataSource([]);
+  paginator: any;
 
-  itemsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private router: Router,
               private itemService: ItemService) {
@@ -36,8 +40,7 @@ export class ItemsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areItemsLoaded = true;
-      this.setVisibleItems();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Item>(this.items);
     });
   }
 
@@ -69,26 +72,4 @@ export class ItemsComponent implements OnInit {
       this.areItemsLoaded = true;
     });
   }
-
-  setVisibleItems() {
-    const pageIndex = (this.selectedPage - 1) * this.itemsPerPage;
-    this.visibleItems = this.items.slice(
-      pageIndex,
-      pageIndex + this.itemsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.items.length / this.itemsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleItems();
-  }
-
 }

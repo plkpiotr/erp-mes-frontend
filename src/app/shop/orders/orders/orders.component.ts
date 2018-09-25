@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Order} from '../../../types';
 import {OrderService} from '../../../services/order.service';
 import {Router} from '@angular/router';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-orders',
@@ -11,12 +12,15 @@ import {Router} from '@angular/router';
 export class OrdersComponent implements OnInit {
 
   orders: Array<Order>;
-  visibleOrders: Array<Order>;
   areOrdersLoaded = false;
+  dataSource: MatTableDataSource<Order> = new MatTableDataSource([]);
+  paginator: any;
 
-  ordersPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private orderService: OrderService, private router: Router) {
   }
@@ -32,8 +36,7 @@ export class OrdersComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areOrdersLoaded = true;
-      this.setVisibleOrders();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Order>(this.orders);
     });
   }
 
@@ -47,26 +50,5 @@ export class OrdersComponent implements OnInit {
         service: 'order'
       }
     });
-  }
-
-  setVisibleOrders() {
-    const pageIndex = (this.selectedPage - 1) * this.ordersPerPage;
-    this.visibleOrders = this.orders.slice(
-      pageIndex,
-      pageIndex + this.ordersPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.orders.length / this.ordersPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleOrders();
   }
 }

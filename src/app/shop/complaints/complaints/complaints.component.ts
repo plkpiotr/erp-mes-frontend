@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Complaint} from '../../../types';
 import {ComplaintService} from '../../../services/complaint.service';
 import {Router} from '@angular/router';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-complaints',
@@ -11,12 +12,15 @@ import {Router} from '@angular/router';
 export class ComplaintsComponent implements OnInit {
 
   complaints: Array<Complaint>;
-  visibleComplaints: Array<Complaint>;
   areComplaintsLoaded = false;
+  dataSource: MatTableDataSource<Complaint> = new MatTableDataSource([]);
+  paginator: any;
 
-  complaintsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private complaintService: ComplaintService, private router: Router) {
   }
@@ -32,8 +36,7 @@ export class ComplaintsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areComplaintsLoaded = true;
-      this.setVisibleComplaints();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Complaint>(this.complaints);
     });
   }
 
@@ -47,27 +50,6 @@ export class ComplaintsComponent implements OnInit {
         service: 'complaint'
       }
     });
-  }
-
-  setVisibleComplaints() {
-    const pageIndex = (this.selectedPage - 1) * this.complaintsPerPage;
-    this.visibleComplaints = this.complaints.slice(
-      pageIndex,
-      pageIndex + this.complaintsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.complaints.length / this.complaintsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleComplaints();
   }
 
 }

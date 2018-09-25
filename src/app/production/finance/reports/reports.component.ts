@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReportService} from '../../../services/report.service';
 import {Router} from '@angular/router';
 import {MonthlyReport} from '../../../types';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-reports',
@@ -11,12 +12,15 @@ import {MonthlyReport} from '../../../types';
 export class ReportsComponent implements OnInit {
 
   reports: Array<MonthlyReport>;
-  visibleReports: Array<MonthlyReport>;
   areReportsLoaded = false;
+  dataSource: MatTableDataSource<MonthlyReport> = new MatTableDataSource([]);
+  paginator: any;
 
-  reportsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private reportService: ReportService,
               private router: Router) { }
@@ -32,34 +36,12 @@ export class ReportsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areReportsLoaded = true;
-      this.setVisibleReports();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<MonthlyReport>(this.reports);
     });
   }
 
   seeReport(id: number) {
     this.router.navigate(['/reports', id]);
-  }
-
-  setVisibleReports() {
-    const pageIndex = (this.selectedPage - 1) * this.reportsPerPage;
-    this.visibleReports = this.reports.slice(
-      pageIndex,
-      pageIndex + this.reportsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.reports.length / this.reportsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleReports();
   }
 
 }

@@ -1,21 +1,22 @@
-<div *ngIf="isLoaded">
-  <div *ngFor="let team of visibleTeams">
-    <br>{{team.id}} {{team.role}}
-    <div *ngIf="team.manager">
-      {{team.manager.id}} {{team.manager.lastName}}
-    </div>
-    <div *ngIf="team.employees">
-      <div *ngFor="let employee of team.employees">
-        <br>{{employee.id}} {{employee.lastName}}
-      </div>
-    </div>
-    <br>
-    <button (click)="seeTeam(team.id)">Zobacz zespół</button>
-    <br>
-  </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
+<mat-card>Teams</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!isLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="isLoaded">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['id', 'role']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['id', 'role']" (click)="seeTeam(row.id)"></mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>

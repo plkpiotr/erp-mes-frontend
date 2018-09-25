@@ -1,8 +1,9 @@
+<mat-card>Employees</mat-card>
 <div class="content">
   <mat-progress-spinner *ngIf="!areLoaded" mode="indeterminate">
   </mat-progress-spinner>
   <div *ngIf="areLoaded">
-    <table mat-table [dataSource]="employees">
+    <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>

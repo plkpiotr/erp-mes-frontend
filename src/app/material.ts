@@ -1,9 +1,12 @@
 import {
   MatButtonModule, MatCardModule,
-  MatCheckboxModule, MatDatepickerModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
+  MatCheckboxModule, MatDatepickerModule,
+  MatExpansionModule, MatFormFieldModule,
+  MatDividerModule, MatGridListModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule,
-  MatSidenavModule, MatStepperModule, MatTableModule, MatTabsModule,
+  MatListModule, MatNativeDateModule, MatSelectModule,
+  MatSidenavModule, MatTableModule,
+  MatListModule, MatPaginatorModule, MatProgressSpinnerModule, MatTabsModule,
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 
@@ -22,9 +25,10 @@ import {NgModule} from '@angular/core';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatSelectModule,
     MatTabsModule,
     MatDividerModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatGridListModule,
   ],
@@ -42,10 +46,11 @@ import {NgModule} from '@angular/core';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+    MatSelectModule,
     MatTabsModule,
     MatDividerModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     MatGridListModule,
   ],
 })

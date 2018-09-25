@@ -1,15 +1,52 @@
+<mat-card>Items</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!areItemsLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="areItemsLoaded">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.quantity}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="stockPrice">
+        <mat-header-cell *matHeaderCellDef> Stock price</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.stockPrice}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="originalPrice">
+        <mat-header-cell *matHeaderCellDef> Original price</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.originalPrice}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currentPrice">
+        <mat-header-cell *matHeaderCellDef> Current price</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.currentPrice}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['id', 'name', 'quantity', 'stockPrice', 'originalPrice', 'currentPrice']"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['id', 'name', 'quantity', 'stockPrice', 'originalPrice', 'currentPrice']"
+        (click)="fetchItem(row.id)"></mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addItem()">Add item</button>
+  </div>
+</div>
+
+
 <div *ngIf="areItemsLoaded">
-  <div *ngFor="let item of visibleItems">
-    <br>{{item.id}} {{item.name}} {{item.quantity}} {{item.stockPrice}} {{item.originalPrice}} {{item.currentPrice}}
-    <button (click)="fetchItem(item.id)">Zobacz</button>
-    <br>
-  </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="addItem()">Dodaj przedmiot</button><br><br>
   <button (click)="showAddSpecialOffer = !showAddSpecialOffer">Wprowadź ofertę specjalną</button>
   <div *ngIf="showAddSpecialOffer">
     <form #form='ngForm' (ngSubmit)='addSpecialOffer()'>

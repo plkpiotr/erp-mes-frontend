@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TeamService} from '../../../services/team.service';
 import {Team} from '../../../types';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-teams',
@@ -11,12 +12,15 @@ import {Team} from '../../../types';
 export class TeamsComponent implements OnInit {
 
   teams: Array<Team>;
-  visibleTeams: Array<Team>;
   isLoaded = false;
+  dataSource: MatTableDataSource<Team> = new MatTableDataSource([]);
+  paginator: any;
 
-  teamsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private router: Router,
               private teamService: TeamService) { }
@@ -28,33 +32,11 @@ export class TeamsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.isLoaded = true;
-      this.setVisibleTeams();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Team>(this.teams);
     });
   }
 
   seeTeam(id: number) {
     this.router.navigate(['/teams', id]);
-  }
-
-  setVisibleTeams() {
-    const pageIndex = (this.selectedPage - 1) * this.teamsPerPage;
-    this.visibleTeams = this.teams.slice(
-      pageIndex,
-      pageIndex + this.teamsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.teams.length / this.teamsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleTeams();
   }
 }

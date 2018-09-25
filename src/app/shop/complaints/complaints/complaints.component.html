@@ -1,17 +1,46 @@
-<div *ngIf="areComplaintsLoaded">
-  <div *ngFor="let c of visibleComplaints">
-    <hr>{{c.id}} {{c.status}} {{c.firstName}} {{c.lastName}} {{c.email}} {{c.phoneNumber}} {{c.street}}
-    {{c.houseNumber}} {{c.city}} {{c.postalCode}} {{c.scheduledFor}} {{c.value}} {{c.requestedResolution}}
-    {{c.resolution}} {{c.fault}}
-    <div *ngFor="let d of c.deliveryItems">
-      {{d.item.name}} {{d.quantity}}
-    </div>
-    <button (click)="seeComplaint(c.id)">Zobacz</button>
+<mat-card>Complaints</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!areComplaintsLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="areComplaintsLoaded">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Customer name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currentStatus">
+        <mat-header-cell *matHeaderCellDef> Current status</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="requestedResolution">
+        <mat-header-cell *matHeaderCellDef> Requested resolution</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.requestedResolution}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="resolution">
+        <mat-header-cell *matHeaderCellDef> Resolution</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.resolution}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="deadline">
+        <mat-header-cell *matHeaderCellDef> Deadline</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.scheduledFor}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['id', 'name', 'currentStatus', 'requestedResolution', 'resolution', 'deadline']"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['id', 'name', 'currentStatus', 'requestedResolution', 'resolution', 'deadline']"
+        (click)="seeComplaint(row.id)"></mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addComplaint()">Add complaint</button>
   </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="addComplaint()">Dodaj reklamację</button>
 </div>
