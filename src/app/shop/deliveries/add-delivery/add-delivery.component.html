@@ -1,42 +1,73 @@
-<div *ngIf="areItemsLoaded">
-  Rekomendowane przedmioty:
-  <div *ngFor="let rec of recommendedDeliveryItems">
-    {{rec.itemId}}
-    <label>Ilość: </label>
-    <input type="number" class="form-control"
-           name="rec.quantity" [(ngModel)]="rec.quantity"
-           required/>
-    <button (click)="addRecommendedItem(rec.itemId, rec.quantity)">Dodaj</button>
-    <br>
+<mat-card>Add delivery</mat-card>
+<mat-progress-spinner *ngIf="!areItemsLoaded" mode="indeterminate">
+</mat-progress-spinner>
+<div class="content" *ngIf="areItemsLoaded">
+  Recommended items:
+  <mat-nav-list class="content">
+    <mat-list-item *ngFor="let rec of recommendedDeliveryItems">
+      {{itemsById[rec.itemId].name}}
+      <mat-form-field class="small-input">
+        <input matInput placeholder="Quantity" [(ngModel)]="rec.quantity">
+      </mat-form-field>
+      <button mat-icon-button (click)="addRecommendedItem(rec.itemId, rec.quantity)">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-nav-list>
+  Remaining items:
+  <div class="content" [formGroup]="itemsForm">
+    <mat-form-field>
+      <mat-label>Item</mat-label>
+      <mat-select placeholder="itemId" name="itemId" formControlName="itemId" required>
+        <mat-option *ngFor="let i of remainingItems" [value]="i.id">
+          {{i.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Quantity</mat-label>
+      <input matInput placeholder="quantity" name="quantity" formControlName="quantity" required>
+      <mat-error *ngIf="quantity.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="addDeliveryItem()" [disabled]="itemsForm.invalid">Add</button>
   </div>
-  <br><br>
-  Pozostałe przedmioty:
-  <form #form='ngForm' (ngSubmit)='addDeliveryItem()'>
-    <div class="form-group">
-      <label>Przedmiot: </label>
-      <select name="itemid" [(ngModel)]="itemId" required>
-        <option *ngFor="let i of remainingItems" [value]="i.id">{{i.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Ilość: </label>
-      <input type="number" class="form-control"
-             name="quantity" [(ngModel)]="quantity"
-             required/>
-    </div>
-    <button type='submit' [disabled]="itemId == null || quantity == null">Dodaj</button>
-  </form>
-<br>
-  <div *ngFor="let itemRequest of deliveryItemRequests">
-    {{itemRequest.itemId}} {{itemRequest.quantity}}
+  <div *ngIf="deliveryItemRequests.length > 0">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.itemId}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{itemsById[row.itemId].name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.quantity}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['id', 'name', 'quantity']"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['id', 'name', 'quantity']"></mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
-  <form #form='ngForm' (ngSubmit)='addDelivery()'>
-    <div class="form-group">
-      <label>Data: </label>
-      <input type="date" class="form-control"
-             name="scheduledFor" [(ngModel)]="scheduledFor"
-             required/>
-    </div>
-    <button type='submit' [disabled]="scheduledFor == null || deliveryItemRequests.length == 0">Zatwierdź</button>
-  </form>
+
+  <div class="content" [formGroup]="form">
+    <mat-form-field appearance="legacy">
+      <input matInput [min]="today" [matDatepicker]="picker" placeholder="Scheduled for" name="scheduledFor"
+             formControlName="scheduledFor" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button (click)="addDelivery()" [disabled]="form.invalid || deliveryItemRequests.length == 0">
+    Add delivery
+  </button>
 </div>

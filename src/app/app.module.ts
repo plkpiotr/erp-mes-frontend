@@ -65,8 +65,7 @@ import {AddEmailComponent} from './communication/emails/add-email/add-email.comp
 import {EmailService} from './services/email.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material';
-import {MatNativeDateModule} from "@angular/material";
-import {DatePipe} from "@angular/common";
+import { SpecialOfferDialogComponent } from './shop/items/special-offer-dialog/special-offer-dialog.component';
 import {MatSortModule, MatTableModule} from '@angular/material';
 import {KanbanComponent} from './production/tasks/kanban/kanban.component';
 import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
@@ -122,6 +121,11 @@ import { EnumerationPipe } from './pipes/enumeration.pipe';
     TasksDonePipe,
     TasksTodoPipe,
     EnumerationPipe
+    AddEmailComponent,
+    SpecialOfferDialogComponent
+  ],
+  entryComponents: [
+    SpecialOfferDialogComponent
   ],
   imports: [
     BrowserModule,

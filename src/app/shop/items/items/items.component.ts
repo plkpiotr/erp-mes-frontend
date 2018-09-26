@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {Item} from '../../../types';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {SpecialOfferDialogComponent} from "../special-offer-dialog/special-offer-dialog.component";
 
 @Component({
   selector: 'app-items',
@@ -26,7 +27,8 @@ export class ItemsComponent implements OnInit {
   }
 
   constructor(private router: Router,
-              private itemService: ItemService) {
+              private itemService: ItemService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -53,12 +55,23 @@ export class ItemsComponent implements OnInit {
   }
 
   addSpecialOffer() {
-    this.areItemsLoaded = false;
-    this.itemService.setSpecialOffer(this.percentOff, this.query).subscribe(res => {
-    }, err => {
-      console.log(err);
-    }, () => {
-      this.fetchItems();
+    const dialogRef = this.dialog.open(SpecialOfferDialogComponent, {
+      width: '350px',
+      data: {percentOff: this.percentOff, query: this.query}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        this.percentOff = result.percentOff;
+        this.query = result.query == null ? '' : result.query;
+        this.areItemsLoaded = false;
+        this.itemService.setSpecialOffer(this.percentOff, this.query).subscribe(res => {
+        }, err => {
+          console.log(err);
+        }, () => {
+          this.fetchItems();
+        });
+      }
     });
   }
 
@@ -70,6 +83,7 @@ export class ItemsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areItemsLoaded = true;
+      this.dataSource = new MatTableDataSource<Item>(this.items);
     });
   }
 }

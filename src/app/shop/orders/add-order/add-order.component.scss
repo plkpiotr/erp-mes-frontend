@@ -1,0 +1,29 @@
+@import "../../../../global";
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  align-items: flex-start;
+}
+
+mat-form-field {
+  width: 250px;
+}
+
+button {
+  align-self: center;
+}
+
+table {
+  width: 100%;
+}
+
+mat-progress-spinner {
+ margin: auto;
+}
+
+.small-input {
+  width: 100px;
+  margin-left: 15px;
+}

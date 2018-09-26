@@ -1,6 +1,6 @@
 import {
   MatButtonModule, MatCardModule,
-  MatCheckboxModule, MatDatepickerModule,
+  MatCheckboxModule, MatDatepickerModule, MatDialogModule,
   MatExpansionModule, MatFormFieldModule,
   MatDividerModule, MatGridListModule,
   MatIconModule, MatInputModule,
@@ -26,10 +26,12 @@ import {NgModule} from '@angular/core';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule,
+    MatDialogModule
     MatSelectModule,
     MatTabsModule,
     MatDividerModule,
-    MatNativeDateModule,
     MatGridListModule,
   ],
   exports: [
@@ -47,7 +49,9 @@ import {NgModule} from '@angular/core';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatListModule,
+    MatDialogModule,
     MatSelectModule,
     MatTabsModule,
     MatDividerModule,

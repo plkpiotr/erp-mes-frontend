@@ -1,5 +1,7 @@
 <mat-card>Items</mat-card>
 <div class="content">
+  <button mat-raised-button (click)="addSpecialOffer()">Add special offer</button>
+  <button mat-raised-button (click)="cancelSpecialOffer()">Cancel special offer</button>
   <mat-progress-spinner *ngIf="!areItemsLoaded" mode="indeterminate">
   </mat-progress-spinner>
   <div *ngIf="areItemsLoaded">
@@ -43,27 +45,4 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     <button mat-raised-button (click)="addItem()">Add item</button>
   </div>
-</div>
-
-
-<div *ngIf="areItemsLoaded">
-  <button (click)="showAddSpecialOffer = !showAddSpecialOffer">Wprowadź ofertę specjalną</button>
-  <div *ngIf="showAddSpecialOffer">
-    <form #form='ngForm' (ngSubmit)='addSpecialOffer()'>
-      <div class="form-group">
-        <label>Ilość % obniżki: </label>
-        <input type="number" class="form-control"
-               name="percentOff" [(ngModel)]="percentOff"
-               required/>
-      </div>
-      <div class="form-group">
-        <label>Produkty (opcjonalnie): </label>
-        <input type="text" class="form-control"
-               name="query" [(ngModel)]="query"/>
-      </div>
-      <button type='submit' [disabled]="form.invalid">Zatwierdź</button>
-    </form>
-  </div>
-  <br>
-  <button (click)="cancelSpecialOffer()">Anuluj ofertę specjalną</button>
 </div>
