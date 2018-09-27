@@ -65,6 +65,7 @@ import {AddEmailComponent} from './communication/emails/add-email/add-email.comp
 import {EmailService} from './services/email.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material';
+import {MatSortModule, MatTableModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,10 @@ import {MaterialModule} from './material';
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    BrowserModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     EmployeeService,

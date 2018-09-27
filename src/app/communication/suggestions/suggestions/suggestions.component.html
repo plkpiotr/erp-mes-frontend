@@ -1,14 +1,43 @@
 <mat-card>Suggestions</mat-card>
-<div *ngIf="areSuggestionsLoaded">
-  <div *ngFor="let s of suggestions">
-    <hr> {{s.id}} {{s.phase}} {{s.name}} {{s.description}} {{s.creationTime}}
-    <div *ngIf="s.author">
-      {{s.author.firstName}} {{s.author.firstName}}
-    </div>
-    <div *ngFor="let r of s.recipients">
-      {{r.id}} {{r.firstName}} {{r.lastName}}
-    </div>
-  <button (click)="seeSuggestion(s.id)">Zobacz</button>
+<div class="content">
+  <div *ngIf="areSuggestionsLoaded">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Index</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phase">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Phase</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.phase}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
+      </ng-container>
+
+      <!--{{row.author.firstName}}-->
+      <!--{{row.author.lastName}}-->
+
+      <ng-container matColumnDef="creationTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Creation time</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.creationTime | date:'medium'}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns">
+
+      </mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        (click)="seeSuggestion(row.id)">
+      </mat-row>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
-  <button (click)="addSuggestion()">Dodaj sugestię</button>
 </div>
+<button (click)="addSuggestion()">Add suggestion</button>

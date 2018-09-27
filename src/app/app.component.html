@@ -2,35 +2,40 @@
   <mat-drawer *ngIf="isUserLoggedIn()" mode="side" [opened]="true">
     <mat-card>Menu</mat-card>
     <mat-accordion>
+
       <mat-expansion-panel>
-        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
-                                    [expandedHeight]="expandedHeight">
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight" [expandedHeight]="expandedHeight">
           <mat-panel-title>Communication</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
         <mat-nav-list dense>
+
           <a mat-list-item routerLink="/emails/inbox"
              routerLinkActive="active">
             <mat-icon matListIcon>drafts</mat-icon>
             <h3 matLine>Inbox</h3>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/emails/outbox"
              routerLinkActive="active">
             <mat-icon matListIcon>email</mat-icon>
             <h4 matLine>Outbox</h4>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item>
           <mat-icon matListIcon>forum</mat-icon>
           <h4 matLine>Chat (off)</h4>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/notifications"
              routerLinkActive="active">
             <mat-icon matListIcon>notifications</mat-icon>
             <h4 matLine>Notifications</h4>
           </a>
+
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/suggestions"
              routerLinkActive="active">
@@ -38,14 +43,16 @@
             <h4 matLine>Suggestions</h4>
           </a>
           <mat-divider></mat-divider>
+
         </mat-nav-list>
       </mat-expansion-panel>
+
       <mat-expansion-panel>
-        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
-                                    [expandedHeight]="expandedHeight">
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight" [expandedHeight]="expandedHeight">
           <mat-panel-title>Production</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
+
         <mat-nav-list dense>
           <a mat-list-item routerLink="/current-report"
              routerLinkActive="active">
@@ -53,24 +60,28 @@
             <h3 matLine>Current report</h3>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/reports"
              routerLinkActive="active">
             <mat-icon matListIcon>calendar_today</mat-icon>
             <h4 matLine>Reports</h4>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/planning"
              routerLinkActive="active">
             <mat-icon matListIcon>assignment</mat-icon>
             <h4 matLine>Planning</h4>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/special-plans"
              routerLinkActive="active">
             <mat-icon matListIcon>assignment_late</mat-icon>
             <h4 matLine>Special plans</h4>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/tasks"
              routerLinkActive="active">
             <mat-icon matListIcon>view_carousel</mat-icon>
@@ -79,36 +90,41 @@
           <mat-divider></mat-divider>
         </mat-nav-list>
       </mat-expansion-panel>
+
       <mat-expansion-panel>
-        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
-                                    [expandedHeight]="expandedHeight">
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight" [expandedHeight]="expandedHeight">
           <mat-panel-title>Shop</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
         <mat-nav-list dense>
+
           <a mat-list-item routerLink="/complaints"
              routerLinkActive="active">
             <mat-icon matListIcon>sentiment_dissatisfied</mat-icon>
             <h3 matLine>Complaints</h3>
           </a>
           <mat-divider></mat-divider>
+
           <a mat-list-item routerLink="/deliveries"
              routerLinkActive="active">
             <mat-icon matListIcon>card_giftcard</mat-icon>
             <h4 matLine>Deliveries</h4>
           </a>
+
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/items"
              routerLinkActive="active">
             <mat-icon matListIcon>shopping_cart</mat-icon>
             <h4 matLine>Items</h4>
           </a>
+
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/orders"
              routerLinkActive="active">
             <mat-icon matListIcon>redo</mat-icon>
             <h4 matLine>Orders</h4>
           </a>
+
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/returns"
              routerLinkActive="active">
@@ -116,49 +132,56 @@
             <h4 matLine>Returns</h4>
           </a>
           <mat-divider></mat-divider>
+
         </mat-nav-list>
       </mat-expansion-panel>
+
       <mat-expansion-panel>
-        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
-                                    [expandedHeight]="expandedHeight">
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight" [expandedHeight]="expandedHeight">
           <mat-panel-title>Staff</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
         <mat-nav-list dense>
+
           <a mat-list-item routerLink="/employees"
              routerLinkActive="active">
             <mat-icon matListIcon>person</mat-icon>
             <h3 matLine>Employees</h3>
           </a>
           <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/teams"
-             routerLinkActive="active">
+
+          <a mat-list-item routerLink="/teams" routerLinkActive="active">
             <mat-icon matListIcon>people</mat-icon>
             <h4 matLine>Teams</h4>
           </a>
           <mat-divider></mat-divider>
+
         </mat-nav-list>
       </mat-expansion-panel>
+
       <mat-expansion-panel>
-        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
-                                    [expandedHeight]="expandedHeight">
+        <mat-expansion-panel-header [collapsedHeight]="collapsedHeight" [expandedHeight]="expandedHeight">
           <mat-panel-title>Settings</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
         <mat-nav-list dense>
+
           <a mat-list-item routerLink="/login"
              routerLinkActive="active">
             <mat-icon matListIcon>cloud_queue</mat-icon>
             <h3 matLine>Sign in</h3>
           </a>
+
           <mat-divider></mat-divider>
           <a mat-list-item>
           <mat-icon matListIcon>cloud_off</mat-icon>
           <h4 matLine>Sign out (off)</h4>
           </a>
           <mat-divider></mat-divider>
+
         </mat-nav-list>
       </mat-expansion-panel>
+
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
