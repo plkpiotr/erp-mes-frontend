@@ -1,15 +1,22 @@
-@import "../variables";
+@import "../theme";
+
+mat-drawer {
+  background-color: $light;
+}
 
 mat-drawer-container {
   height: 100%;
+  background-color: white;
 }
 
 mat-expansion-panel {
   margin: 0;
+  background-color: $normal;
 }
 
 .mat-nav-list[dense] {
   padding-top: 0;
+  background-color: $light;
 }
 
 mat-expansion-panel-header {
@@ -22,5 +29,6 @@ mat-icon {
 
 mat-card {
   border-radius: 0;
-  padding: 15px;
+  padding: 15px 15px 15px 20px;
+  background-color: $dark;
 }

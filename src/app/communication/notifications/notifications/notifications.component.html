@@ -1,17 +1,55 @@
 <mat-card>Notifications</mat-card>
-<div *ngIf="areNotificationsLoaded">
-  <div *ngFor="let n of notifications">
-    <hr>{{n.id}} {{n.state}} {{n.instruction}} {{n.description}}
-    <div *ngIf="n.notifier">
-      {{n.notifier.firstName}} {{n.notifier.lastName}}
-    </div>
-    <div *ngIf="n.transferee">
-      {{n.transferee.firstName}} {{n.transferee.lastName}}
-    </div>
-    <div *ngFor="let c of n.consignees">
-      {{c.id}} {{c.firstName}} {{c.lastName}}
-    </div>
-    <button (click)="seeNotification(n.id)">Zobacz</button>
+<div class="content">
+  <mat-spinner *ngIf="!areNotificationsLoaded">
+  </mat-spinner>
+  <div *ngIf="areNotificationsLoaded">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search all notifications">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="creationTime" matSortDirection="desc">
+
+      <ng-container matColumnDef="creationTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Creation time</th>
+        <td mat-cell *matCellDef="let row">{{row.creationTime | date:'short'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+        <td mat-cell *matCellDef="let row">{{row.state}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let row">{{row.type}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="instruction">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Instruction</th>
+        <td mat-cell *matCellDef="let row">{{row.instruction}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="notifier">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Notifier</th>
+        <td mat-cell *matCellDef="let row">{{row.notifier.firstName}} {{row.notifier.lastName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="transferee">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Transferee</th>
+        <td mat-cell *matCellDef="let row">
+          {{row.transferee ? row.transferee.firstName : null}}
+          {{row.transferee ? row.transferee.lastName : null}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="seeNotification(row.id)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addNotification()">Add notification</button>
   </div>
-  <button (click)="addNotification()">Dodaj powiadomienie</button>
 </div>

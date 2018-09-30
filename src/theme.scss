@@ -1,0 +1,108 @@
+$dark: #7CA6C7;
+$normal: #ACCBE2;
+$light: #DCEBF6;
+
+// Header:
+
+mat-card {
+  border-radius: 0;
+  padding: 15px 14px 15px 15px;
+  background-color: $normal;
+}
+
+// Container for forms:
+
+.container {
+  background-color: crimson;
+}
+
+// Container for no-forms:
+
+.content {
+  padding: 2vh 4vw;
+}
+
+// Spinner:
+
+mat-spinner {
+  margin: 2vh auto;
+  &::ng-deep circle {
+    stroke: $normal;
+  }
+}
+
+// Table:
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: $normal;
+}
+
+tr {
+  background-color: $light;
+  transition: .3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: $normal;
+    transition: .3s ease-in-out;
+  }
+}
+
+::ng-deep .mat-sort-header-container {
+  color: black;
+}
+
+// Filter above the table:
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+// Button:
+
+button {
+  box-shadow: none;
+  float: right;
+  margin-bottom: 20px;
+  background-color: $normal;
+  &:hover {
+    background-color: $dark;
+  }
+}
+
+// Plain text:
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+// Kanban board:
+
+::ng-deep .mat-ink-bar {
+  background-color: var(--primary-color, $dark) !important;
+}
+
+.tile {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  margin: 1vh 0.5vw;
+  padding: 1vh 0.5vw;
+  min-height: 70px;
+  min-width: 190px;
+  max-height: 70px;
+  max-width: 190px;
+  background-color: $light;
+  transition: .3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: $normal;
+    transition: .3s ease-in-out;
+  }
+}

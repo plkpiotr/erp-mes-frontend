@@ -154,7 +154,7 @@ export interface Task {
   id: number;
   name: string;
   category: Category;
-  assignee?: Employee;
+  assigneeDTO?: Employee;
   precedingTasks: Task[];
   details: string;
   estimatedTimeInMinutes: number;
@@ -315,8 +315,8 @@ export interface Suggestion {
   phase: Phase;
   name: string;
   description: string;
-  author?: Employee;
-  recipients: Employee[];
+  authorDTO?: Employee;
+  recipientDTOs: Employee[];
   creationTime: Date;
 }
 

@@ -1,13 +1,60 @@
 <mat-card>Tasks</mat-card>
-<div *ngIf="areTasksLoaded">
-  <div *ngFor="let t of tasks">
-    <hr>{{t.id}} {{t.category}} {{t.name}} {{t.details}} {{t.assignee.firstName}} {{t.assignee.lastName}}
-    {{t.estimatedTimeInMinutes}} {{t.deadline}} {{t.creationTime}} {{t.startTime}} {{t.endTime}} {{t.type}}
-    {{t.reference}} {{t.scheduledTime}}
-    <div *ngFor="let p of t.precedingTasks">
-      {{p.id}} {{p.name}}
-    </div>
-    <button (click)="seeTask(t.id)">Zobacz</button>
+<div class="content">
+  <mat-spinner *ngIf="!areTasksLoaded">
+  </mat-spinner>
+  <div *ngIf="areTasksLoaded">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search all tasks">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="deadline" matSortDirection="desc">
+
+      <ng-container matColumnDef="creationTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Creation time</th>
+        <td mat-cell *matCellDef="let row">{{row.creationTime | date:'short'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="deadline">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Deadline</th>
+        <td mat-cell *matCellDef="let row">{{row.deadline | date: 'short'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+        <td mat-cell *matCellDef="let row">{{row.category}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let row">{{row.type ? row.type : null}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="reference">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ref.</th>
+        <td mat-cell *matCellDef="let row">{{row.reference ? row.reference : null}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="assignee">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Assignee</th>
+        <td mat-cell *matCellDef="let row">
+          {{row.assigneeDTO ? row.assigneeDTO.firstName : null}}
+          {{row.assigneeDTO ? row.assigneeDTO.lastName : null}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="seeTask(row.id)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addTask()">Add task</button>
   </div>
-  <button (click)="addTask()">Dodaj zadanie</button>
 </div>

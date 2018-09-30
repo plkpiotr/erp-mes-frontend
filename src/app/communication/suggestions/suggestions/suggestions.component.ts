@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {Router} from '@angular/router';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
 
 @Component({
   selector: 'app-suggestions',
@@ -11,9 +11,9 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 })
 export class SuggestionsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'phase', 'description', 'creationTime'];
   suggestions: Array<Suggestion>;
   areSuggestionsLoaded = false;
+  displayedColumns: string[] = ['creationTime', 'phase', 'id', 'name', 'author'];
   dataSource: MatTableDataSource<Suggestion> = new MatTableDataSource<Suggestion>();
   paginator: any;
   sort: any;

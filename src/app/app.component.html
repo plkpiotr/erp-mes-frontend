@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container">
   <mat-drawer *ngIf="isUserLoggedIn()" mode="side" [opened]="true">
-    <mat-card>Menu</mat-card>
+    <mat-card>ERP-MES</mat-card>
     <mat-accordion>
 
       <mat-expansion-panel>
@@ -84,8 +84,15 @@
 
           <a mat-list-item routerLink="/tasks"
              routerLinkActive="active">
-            <mat-icon matListIcon>view_carousel</mat-icon>
+            <mat-icon matListIcon>check</mat-icon>
             <h4 matLine>Tasks</h4>
+          </a>
+          <mat-divider></mat-divider>
+
+          <a mat-list-item routerLink="/kanban"
+             routerLinkActive="active">
+            <mat-icon matListIcon>view_carousel</mat-icon>
+            <h4 matLine>Kanban board</h4>
           </a>
           <mat-divider></mat-divider>
         </mat-nav-list>
