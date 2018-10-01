@@ -3,7 +3,7 @@
 </mat-progress-spinner>
 <div class="content" *ngIf="areItemsLoaded">
   Recommended items:
-  <mat-nav-list class="content">
+  <mat-list class="content">
     <mat-list-item *ngFor="let rec of recommendedDeliveryItems">
       {{itemsById[rec.itemId].name}}
       <mat-form-field class="small-input">
@@ -13,7 +13,7 @@
         <mat-icon>add_circle_outline</mat-icon>
       </button>
     </mat-list-item>
-  </mat-nav-list>
+  </mat-list>
   Remaining items:
   <div class="content" [formGroup]="itemsForm">
     <mat-form-field>

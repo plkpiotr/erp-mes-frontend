@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Type your email:</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Subject" formControlName="subject" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Content" formControlName="content" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="submit()" [disabled]="form.invalid">Send</button>
+</mat-dialog-actions>

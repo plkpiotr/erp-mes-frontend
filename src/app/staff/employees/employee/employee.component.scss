@@ -1,3 +1,46 @@
-.requests {
-  color: red;
+@import "../../../../global";
+
+.content {
+  margin: 15px;
+}
+
+mat-card, mat-expansion-panel {
+  margin-bottom: 15px;
+}
+
+mat-icon {
+  margin-left: 25px;
+}
+
+mat-progress-spinner {
+  margin: auto;
+}
+
+.out-of-office {
+  color: limegreen;
+  font-style: italic;
+}
+
+.pending-vacation {
+  color: darkorange;
+  font-style: italic;
+}
+
+table {
+  width: 100%;
+}
+
+.contract {
+  display: inline-flex;
+  vertical-align: middle;
+  padding-bottom: 10px;
+}
+
+.button-group {
+
+  button {
+    margin-top: 15px;
+    float: right;
+    margin-left: 5px;
+  }
 }

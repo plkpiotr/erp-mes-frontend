@@ -1,4 +1,22 @@
-<div *ngIf="isItemLoaded">
-    <br>{{item.id}} {{item.name}} {{item.quantity}} {{item.stockPrice}} {{item.originalPrice}} {{item.currentPrice}}
-    <br>
+<mat-card *ngIf="isItemLoaded">{{item.name}}</mat-card>
+<mat-progress-spinner *ngIf="!isItemLoaded" mode="indeterminate"></mat-progress-spinner>
+<div class="content" *ngIf="isItemLoaded">
+  <mat-card>Quantity: {{item.quantity}}</mat-card>
+  <mat-card>
+    <mat-list>
+      <mat-list-item>
+        Current price: {{item.currentPrice}} PLN
+        <button mat-icon-button="" (click)="changePrice()"><mat-icon>create</mat-icon></button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Base price: {{item.originalPrice}} PLN
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Stock price: {{item.stockPrice}} PLN
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card>
 </div>

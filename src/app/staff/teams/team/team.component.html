@@ -1,11 +1,36 @@
-<div *ngIf="isLoaded">
-  <br>{{team.role}}
-  <div *ngIf="team.manager">
-    {{team.manager.id}} {{team.manager.lastName}}
-  </div>
-  <div *ngIf="team.employees">
-    <div *ngFor="let employee of team.employees">
-      <br>{{employee.id}} {{employee.lastName}}
+<mat-card *ngIf="isLoaded">Team {{team.role}}</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!isLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="isLoaded">
+    <div *ngIf="team.manager">
+      <mat-card>
+        The manager of this team is <br>
+        <mat-list>
+          <mat-list-item>
+            <a routerLink="/employees/{{team.manager.id}}"
+               routerLinkActive="active">{{team.manager.firstName}} {{team.manager.lastName}} </a> <br>
+            <button mat-icon-button (click)="sendEmail(team.manager.email)"><mat-icon>email</mat-icon>
+               {{team.manager.email}}</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+    <div *ngIf="team.employees">
+      <mat-card>
+        And the employees are:
+        <mat-list>
+          <mat-list-item *ngFor="let employee of team.employees">
+            <a routerLink="/employees/{{employee.id}}"
+               routerLinkActive="active">{{employee.firstName}} {{employee.lastName}} </a>
+            <button mat-icon-button (click)="sendEmail(employee.email)">
+              <mat-icon>email</mat-icon>
+               {{employee.email}}
+            </button>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
     </div>
   </div>
 </div>

@@ -66,6 +66,9 @@ import {EmailService} from './services/email.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material';
 import { SpecialOfferDialogComponent } from './shop/items/special-offer-dialog/special-offer-dialog.component';
+import { ReplyDialogComponent } from './communication/emails/reply-dialog/reply-dialog.component';
+import { ManageHolidaysDialogComponent } from './staff/holidays/manage-holidays-dialog/manage-holidays-dialog.component';
+import { NewPriceDialogComponent } from './shop/items/new-price-dialog/new-price-dialog.component';
 import {MatSortModule, MatTableModule} from '@angular/material';
 import {KanbanComponent} from './production/tasks/kanban/kanban.component';
 import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
@@ -120,12 +123,18 @@ import { EnumerationPipe } from './pipes/enumeration.pipe';
     TasksDoingPipe,
     TasksDonePipe,
     TasksTodoPipe,
-    EnumerationPipe
+    EnumerationPipe,
     AddEmailComponent,
-    SpecialOfferDialogComponent
+    SpecialOfferDialogComponent,
+    ReplyDialogComponent,
+    ManageHolidaysDialogComponent,
+    NewPriceDialogComponent
   ],
   entryComponents: [
-    SpecialOfferDialogComponent
+    SpecialOfferDialogComponent,
+    ReplyDialogComponent,
+    ManageHolidaysDialogComponent,
+    NewPriceDialogComponent
   ],
   imports: [
     BrowserModule,

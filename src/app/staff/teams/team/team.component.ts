@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {TeamService} from '../../../services/team.service';
 import {ActivatedRoute} from '@angular/router';
 import {Team} from '../../../types';
+import {MatDialog} from "@angular/material";
+import { ReplyDialogComponent } from '../../../communication/emails/reply-dialog/reply-dialog.component';
 
 @Component({
   selector: 'app-team',
@@ -14,7 +16,8 @@ export class TeamComponent implements OnInit {
   isLoaded = false;
 
   constructor(private teamService: TeamService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.teamService.fetchOneTeam(this.route.snapshot.params[('id')])
@@ -27,5 +30,12 @@ export class TeamComponent implements OnInit {
         () => {
         this.isLoaded = true;
         });
+  }
+
+  sendEmail(email: string) {
+    this.dialog.open(ReplyDialogComponent, {
+      width: '350px',
+      data: {email: email}
+    });
   }
 }

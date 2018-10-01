@@ -6,7 +6,7 @@ import {
   MatIconModule, MatInputModule,
   MatListModule, MatNativeDateModule, MatSelectModule,
   MatSidenavModule, MatTableModule,
-  MatListModule, MatPaginatorModule, MatProgressSpinnerModule, MatTabsModule,
+  MatPaginatorModule, MatProgressSpinnerModule, MatTabsModule,
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 
@@ -28,11 +28,12 @@ import {NgModule} from '@angular/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatListModule,
-    MatDialogModule
     MatSelectModule,
     MatTabsModule,
     MatDividerModule,
     MatGridListModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -56,6 +57,7 @@ import {NgModule} from '@angular/core';
     MatTabsModule,
     MatDividerModule,
     MatGridListModule,
+    MatExpansionModule
   ],
 })
 export class MaterialModule { }
