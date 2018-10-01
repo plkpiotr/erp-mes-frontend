@@ -58,6 +58,7 @@ import {AddEmailComponent} from '../app/communication/emails/add-email/add-email
 import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {EmailService} from '../app/services/email.service';
+import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
 
 describe('ReportComponent', () => {
   let component: ReportComponent;
@@ -111,7 +112,8 @@ describe('ReportComponent', () => {
         InboxComponent,
         OutboxComponent,
         AddEmailComponent,
-        ConversationComponent
+        ConversationComponent,
+        KanbanComponent
       ],
       providers: [
         EmployeeService,

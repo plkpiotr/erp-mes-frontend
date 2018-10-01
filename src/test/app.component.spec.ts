@@ -45,6 +45,7 @@ import {ConversationComponent} from '../app/communication/emails/conversation/co
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
 import {AddEmailComponent} from '../app/communication/emails/add-email/add-email.component';
+import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -95,7 +96,8 @@ describe('AppComponent', () => {
         InboxComponent,
         OutboxComponent,
         AddEmailComponent,
-        ConversationComponent
+        ConversationComponent,
+        KanbanComponent
       ],
       providers: [
         Token

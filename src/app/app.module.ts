@@ -66,10 +66,10 @@ import {EmailService} from './services/email.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material';
 import {MatSortModule, MatTableModule} from '@angular/material';
-import { KanbanComponent } from './production/tasks/kanban/kanban.component';
-import { TasksDoingPipe } from './pipes/tasks-doing.pipe';
-import { TasksDonePipe } from './pipes/tasks-done.pipe';
-import { TasksTodoPipe } from './pipes/tasks-todo.pipe';
+import {KanbanComponent} from './production/tasks/kanban/kanban.component';
+import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
+import {TasksDonePipe} from './pipes/tasks-done.pipe';
+import {TasksTodoPipe} from './pipes/tasks-todo.pipe';
 
 @NgModule({
   declarations: [

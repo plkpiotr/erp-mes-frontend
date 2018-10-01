@@ -1,6 +1,8 @@
-$dark: #7CA6C7;
-$normal: #ACCBE2;
-$light: #DCEBF6;
+// Variables:
+
+$dark: #90CAF9;
+$normal: #BBDEFB;
+$light: #E3F2FD;
 
 // Header:
 
@@ -12,8 +14,20 @@ mat-card {
 
 // Container for forms:
 
+@media (max-width: 900px) {
+  .container {
+    padding: 2vh 8vw !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    padding: 2vh 16vw;
+  }
+}
+
 .container {
-  background-color: crimson;
+  padding: 2vh 20vw;
 }
 
 // Container for no-forms:
@@ -55,7 +69,7 @@ tr {
   color: black;
 }
 
-// Filter above the table:
+// Filters:
 
 .mat-form-field {
   font-size: 14px;
@@ -74,18 +88,12 @@ button {
   }
 }
 
-// Plain text:
+// Kanban board:
 
 p {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 14px;
-}
-
-// Kanban board:
-
-::ng-deep .mat-ink-bar {
-  background-color: var(--primary-color, $dark) !important;
 }
 
 .tile {
