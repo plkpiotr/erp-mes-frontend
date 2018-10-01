@@ -1,21 +1,27 @@
 <mat-card>Add new suggestion</mat-card>
-<form #form="ngForm" (ngSubmit)="submitForm()">
-  <div class="form-group">
-    <label>Nazwa:
-      <input type="text" class="form-control" name="name" [(ngModel)]="name" required>
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Opis:
-      <input type="text" class="form-control" name="description" [(ngModel)]="description">
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Beneficjenci:
-      <select name="recipientIds" [(ngModel)]="recipientIds" multiple>
-        <option *ngFor="let r of recipients" [value]="r.id">{{r.id}} {{r.firstName}} {{r.lastName}}</option>
-      </select>
-    </label>
-  </div>
-  <button type="submit" [disabled]="form.invalid">Dodaj sugestię</button>
-</form>
+<div class="container" [formGroup]="form">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" name="name" formControlName="name" required>
+    <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="Description" name="description" formControlName="description" required>
+    <mat-error *ngIf="name.invalid">{{getErrorDescription()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Recipients</mat-label>
+    <mat-select placeholder="Recipients" formControlName="recipientIds" name="recipientIds" multiple required>
+      <mat-option *ngFor="let r of recipients" [value]="r.id">
+        {{r.firstName}}
+        {{r.lastName}}
+        ({{r.role | titlecase}})</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add suggestion</button>
+</div>

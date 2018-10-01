@@ -225,6 +225,24 @@ describe('EmployeeService', () => {
     });
   });
 
+  describe('given fetchColleagues method', () => {
+    describe('when called', () => {
+
+      it('should hit "/employees/colleagues" with GET and return employees', () => {
+        service.fetchAllEmployees().subscribe(employees => {
+          expect(employees.length).toBe(3);
+          expect(employees).toEqual(mockEmployees);
+
+          const req = httpMock.expectOne('http://localhost:8080/employees/colleagues');
+          expect(req.request.method).toBe('GET');
+          req.flush(mockEmployees);
+
+          httpMock.verify();
+        });
+      });
+    });
+  });
+
   describe('given fetchAllManagers method', () => {
     describe('when called', () => {
 

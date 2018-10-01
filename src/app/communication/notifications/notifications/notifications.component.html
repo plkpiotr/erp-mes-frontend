@@ -15,12 +15,12 @@
 
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
-        <td mat-cell *matCellDef="let row">{{row.state}}</td>
+        <td mat-cell *matCellDef="let row">{{row.state | titlecase}}</td>
       </ng-container>
 
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-        <td mat-cell *matCellDef="let row">{{row.type}}</td>
+        <td mat-cell *matCellDef="let row">{{row.type ? (row.type | titlecase) : 'N/A'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="id">

@@ -18,6 +18,10 @@ export class EmployeeService {
     return this.http.get<Array<Employee>>('http://localhost:8080/employees', {headers: this.httpHeaders});
   }
 
+  fetchColleagues(): Observable<Array<Employee>> {
+    return this.http.get<Array<Employee>>('http://localhost:8080/employees/colleagues', {headers: this.httpHeaders});
+  }
+
   fetchAllManagers(): Observable<Array<Employee>> {
     return this.http.get<Array<Employee>>('http://localhost:8080/employees', {
       headers: this.httpHeaders,

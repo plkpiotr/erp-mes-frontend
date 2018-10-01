@@ -12,7 +12,9 @@ import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material
 export class SuggestionsComponent implements OnInit {
 
   suggestions: Array<Suggestion>;
+  mySuggestions: Array<Suggestion>;
   areSuggestionsLoaded = false;
+  areMySuggestionsLoaded = false;
   displayedColumns: string[] = ['creationTime', 'phase', 'id', 'name', 'author'];
   dataSource: MatTableDataSource<Suggestion> = new MatTableDataSource<Suggestion>();
   paginator: any;

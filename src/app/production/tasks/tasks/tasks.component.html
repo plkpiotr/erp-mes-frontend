@@ -20,17 +20,17 @@
 
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-        <td mat-cell *matCellDef="let row">{{row.category}}</td>
+        <td mat-cell *matCellDef="let row">{{row.category | titlecase}}</td>
       </ng-container>
 
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-        <td mat-cell *matCellDef="let row">{{row.type ? row.type : null}}</td>
+        <td mat-cell *matCellDef="let row">{{row.type ? (row.type | titlecase) : 'N/A'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="reference">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ref.</th>
-        <td mat-cell *matCellDef="let row">{{row.reference ? row.reference : null}}</td>
+        <td mat-cell *matCellDef="let row">{{row.reference ? row.reference : 'N/A'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">

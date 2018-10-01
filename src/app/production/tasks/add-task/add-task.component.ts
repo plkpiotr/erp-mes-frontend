@@ -40,7 +40,7 @@ export class AddTaskComponent implements OnInit {
       assigneeId: this.assigneeId,
       precedingTaskIds: this.precedingTaskIds,
       details: this.details,
-      estimatedTimeInMinutes: this.estimatedTimeInMinutes,
+      estimatedTime: this.estimatedTimeInMinutes,
       deadline: this.deadline,
       type: this.type,
       reference: this.reference,

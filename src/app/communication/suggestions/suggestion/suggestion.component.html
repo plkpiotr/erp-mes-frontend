@@ -1,15 +1,19 @@
 <mat-card>Suggestion</mat-card>
-<div *ngIf="isSuggestionLoaded">
-  {{suggestion.id}} <br>
-  {{suggestion.phase}} <br>
-  {{suggestion.name}} <br>
-  {{suggestion.description}} <br>
-  {{suggestion.author.firstName}} <br>
-  {{suggestion.author.lastName}} <br>
-  {{suggestion.creationTime}} <br>
-  <div *ngIf="suggestion.recipients">
-    <div *ngFor="let r of suggestion.recipients">
-      {{r.id}} {{r.firstName}} {{r.lastName}}
+<div class="content">
+  <mat-spinner *ngIf="!isSuggestionLoaded">
+  </mat-spinner>
+  <div *ngIf="isSuggestionLoaded">
+    <h2>{{suggestion.name}} ({{suggestion.id}})</h2>
+    <h2>{{suggestion.phase}}</h2>
+    <h3></h3>
+    <h4>{{suggestion.description}}</h4>
+    <h5>{{suggestion.authorDTO.firstName}}</h5>
+    <h6>{{suggestion.authorDTO.lastName}}</h6>
+    <h6>{{suggestion.creationTime}}</h6>
+    <div *ngIf="suggestion.recipientDTOs">
+      <div *ngFor="let r of suggestion.recipientDTOs">
+        {{r.id}} {{r.firstName}} {{r.lastName}}
+      </div>
     </div>
   </div>
 </div>

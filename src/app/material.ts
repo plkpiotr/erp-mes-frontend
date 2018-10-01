@@ -1,7 +1,7 @@
 import {
   MatAutocompleteModule,
   MatButtonModule, MatCardModule,
-  MatCheckboxModule, MatDatepickerModule, MatDividerModule, MatExpansionModule, MatFormFieldModule,
+  MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDividerModule, MatExpansionModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule,
   MatSidenavModule, MatSliderModule, MatStepperModule, MatTableModule, MatTabsModule,
@@ -27,7 +27,8 @@ import {NgModule} from '@angular/core';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSliderModule
+    MatSliderModule,
+    MatChipsModule
   ],
   exports: [
     MatButtonModule,
@@ -47,7 +48,8 @@ import {NgModule} from '@angular/core';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSliderModule
+    MatSliderModule,
+    MatChipsModule
   ],
 })
 export class MaterialModule { }

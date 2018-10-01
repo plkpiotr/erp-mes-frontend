@@ -315,7 +315,7 @@ export interface Suggestion {
   phase: Phase;
   name: string;
   description: string;
-  author?: Employee;
+  authorDTO: Employee;
   recipientDTOs: Employee[];
   creationTime: Date;
 }
@@ -323,7 +323,6 @@ export interface Suggestion {
 export interface SuggestionRequest {
   name: String;
   description: String;
-  authorId?: number;
   recipientIds: number[];
 }
 
