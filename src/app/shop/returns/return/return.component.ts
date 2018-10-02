@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ExpenseRequest, ExpenseType, Return, ReturnStatus} from '../../../types';
+import {Return, ReturnStatus} from '../../../types';
 import {ReturnService} from '../../../services/return.service';
-import {ItemService} from '../../../services/item.service';
-import {ReportService} from '../../../services/report.service';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from "@angular/material";
+import {StatusDialogComponent} from "../status-dialog/status-dialog.component";
 
 @Component({
   selector: 'app-return',
@@ -14,16 +14,14 @@ export class ReturnComponent implements OnInit {
 
   isReturnLoaded = false;
   return: Return;
-  statuses;
   status: ReturnStatus;
 
-  constructor(private returnService: ReturnService, private itemService: ItemService,
-              private reportService: ReportService, private route: ActivatedRoute) {
+  constructor(private returnService: ReturnService, private route: ActivatedRoute,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.fetchReturn();
-    this.statuses = Object.keys(ReturnStatus);
   }
 
   fetchReturn() {
@@ -38,26 +36,23 @@ export class ReturnComponent implements OnInit {
   }
 
   updateReturnStatus() {
-    this.isReturnLoaded = false;
-    this.returnService.updateReturnStatus(this.status.toLocaleString(), this.route.snapshot.params['id'])
-      .subscribe(res => {
-        this.return = res;
-      }, err => {
-        console.log(err);
-      }, () => {
-        if (this.return.status === ReturnStatus.MONEY_RETURNED) {
-          this.return.deliveryItems.forEach(deliveryItem => {
-            this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
-            });
-          });
-          const expenseRequest: ExpenseRequest = {
-            expenseType: ExpenseType.UNEXPECTED,
-            amount: this.return.value
-          };
-          this.reportService.addExpense(expenseRequest).subscribe(res => {
-          });
-        }
-        this.isReturnLoaded = true;
-      });
+    let status = [];
+    if (this.return.status === ReturnStatus.IN_PROGRESS) {
+      status = ['ACCEPTED', 'DECLINED'];
+    } else if (this.return.status === ReturnStatus.ACCEPTED) {
+      status = ['MONEY_RETURNED'];
+    }
+    const dialogRef = this.dialog.open(StatusDialogComponent, {
+      width: '350px',
+      data: {
+        status: status,
+        r: this.return
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isReturnLoaded = false;
+      this.fetchReturn();
+    });
   }
 }

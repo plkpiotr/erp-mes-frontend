@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {ExpenseType, Order} from '../../../types';
+import {Component, OnInit} from '@angular/core';
+import {Order, Status} from '../../../types';
 import {OrderService} from '../../../services/order.service';
-import {ItemService} from '../../../services/item.service';
-import {ReportService} from '../../../services/report.service';
 import {ActivatedRoute} from '@angular/router';
+import {OrderStatusDialogComponent} from "../order-status-dialog/order-status-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-order',
@@ -15,8 +15,10 @@ export class OrderComponent implements OnInit {
   isOrderLoaded = false;
   order: Order;
 
-  constructor(private orderService: OrderService, private itemService: ItemService, private reportService: ReportService,
-              private route: ActivatedRoute) { }
+  constructor(private orderService: OrderService,
+              private route: ActivatedRoute,
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.fetchOrder();
@@ -32,13 +34,24 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  confirmOrder() {
-    this.order.deliveryItems.forEach(deliveryItem => {
-      this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
+  updateOrderStatus() {
+    let status = [];
+    if (this.order.status === Status.WAITING_FOR_PAYMENT) {
+      status = ['IN_PROGRESS', 'DECLINED'];
+    } else if (this.order.status === Status.IN_PROGRESS) {
+      status = ['SENT', 'DECLINED'];
+    }
+    const dialogRef = this.dialog.open(OrderStatusDialogComponent, {
+      width: '350px',
+      data: {
+        status: status,
+        order: this.order
+      }
     });
-    const expenseRequest = {
-      amount: this.order.value
-    };
-    this.reportService.addIncome(expenseRequest.amount).subscribe(res => {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isOrderLoaded = false;
+      this.fetchOrder();
+    });
   }
 }

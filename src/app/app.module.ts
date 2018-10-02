@@ -75,6 +75,10 @@ import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
 import {TasksDonePipe} from './pipes/tasks-done.pipe';
 import {TasksTodoPipe} from './pipes/tasks-todo.pipe';
 import { EnumerationPipe } from './pipes/enumeration.pipe';
+import { StatusDialogComponent } from './shop/returns/status-dialog/status-dialog.component';
+import { OrderStatusDialogComponent } from './shop/orders/order-status-dialog/order-status-dialog.component';
+import { ComplaintStatusDialogComponent } from './shop/complaints/complaint-status-dialog/complaint-status-dialog.component';
+import { ComplaintResolutionDialogComponent } from './shop/complaints/complaint-resolution-dialog/complaint-resolution-dialog.component';
 
 @NgModule({
   declarations: [
@@ -128,13 +132,21 @@ import { EnumerationPipe } from './pipes/enumeration.pipe';
     SpecialOfferDialogComponent,
     ReplyDialogComponent,
     ManageHolidaysDialogComponent,
-    NewPriceDialogComponent
+    NewPriceDialogComponent,
+    StatusDialogComponent,
+    OrderStatusDialogComponent,
+    ComplaintStatusDialogComponent,
+    ComplaintResolutionDialogComponent,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,
     ReplyDialogComponent,
     ManageHolidaysDialogComponent,
-    NewPriceDialogComponent
+    NewPriceDialogComponent,
+    StatusDialogComponent,
+    OrderStatusDialogComponent,
+    ComplaintStatusDialogComponent,
+    ComplaintResolutionDialogComponent
   ],
   imports: [
     BrowserModule,

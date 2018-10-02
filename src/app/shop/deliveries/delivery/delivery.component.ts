@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Delivery, ExpenseType} from '../../../types';
 import {DeliveryService} from '../../../services/delivery.service';
 import {ActivatedRoute} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
-import {_appIdRandomProviderFactory} from '@angular/core/src/application_tokens';
 
 @Component({
   selector: 'app-delivery',
@@ -15,12 +14,12 @@ export class DeliveryComponent implements OnInit {
 
   isDeliveryLoaded = false;
   delivery: Delivery;
-  isConfirmed = false;
 
   constructor(private deliveryService: DeliveryService,
               private route: ActivatedRoute,
               private itemService: ItemService,
-              private reportService: ReportService) { }
+              private reportService: ReportService) {
+  }
 
   ngOnInit() {
     this.fetchDelivery();
@@ -40,18 +39,26 @@ export class DeliveryComponent implements OnInit {
     const today = new Date();
     const deliveryDate = new Date(this.delivery.scheduledFor);
     const isPastDate = deliveryDate.valueOf() - today.valueOf() <= 0;
-    return isPastDate && !this.isConfirmed;
+    return isPastDate && !this.delivery.confirmed;
   }
 
   confirmDelivery() {
     this.delivery.deliveryItems.forEach(deliveryItem => {
-      this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
+      this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
+      });
     });
     const expenseRequest = {
       expenseType: ExpenseType.STOCK,
       amount: this.delivery.value
     };
-    this.reportService.addExpense(expenseRequest).subscribe(res => {});
-    this.isConfirmed = true;
+    this.reportService.addExpense(expenseRequest).subscribe(res => {
+    });
+    this.deliveryService.confirmDelivery(this.delivery.id).subscribe(res => {
+      },
+      err => console.log(err),
+      () => {
+        this.isDeliveryLoaded = false;
+        this.fetchDelivery();
+      });
   }
 }

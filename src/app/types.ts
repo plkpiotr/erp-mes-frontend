@@ -88,7 +88,7 @@ export enum Resolution {
   UNRESOLVED = 'UNRESOLVED',
   MONEY_RETURN = 'MONEY_RETURN',
   REPAIR = 'REPAIR',
-  EXCHAMGE_FOR_NEW = 'EXCHANGE_FOR_NEW'
+  EXCHANGE_FOR_NEW = 'EXCHANGE_FOR_NEW'
 }
 
 export enum EmailType {
@@ -265,6 +265,7 @@ export interface Delivery {
   deliveryItems: DeliveryItem[];
   scheduledFor: Date;
   value: number;
+  confirmed: boolean;
 }
 
 export interface DeliveryRequest {

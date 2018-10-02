@@ -1,10 +1,30 @@
-<div *ngIf="isDeliveryLoaded">
-  <div *ngFor="let deliveryItem of delivery.deliveryItems">
-    {{deliveryItem.item.name}} {{deliveryItem.quantity}}
-  </div>
-  {{delivery.scheduledFor}}
-  {{delivery.value}}
-  <div *ngIf="canConfirmDelivery()">
-    <button (click)="confirmDelivery()">Potwierdź</button>
-  </div>
+<mat-card *ngIf="isDeliveryLoaded">Delivery #{{delivery.id}}</mat-card>
+<mat-progress-spinner *ngIf="!isDeliveryLoaded" mode="indeterminate"></mat-progress-spinner>
+<div class="content" *ngIf="isDeliveryLoaded">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+    <mat-panel-title>Items</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item  *ngFor="let deliveryItem of delivery.deliveryItems">
+        {{deliveryItem.item.name}}, quantity: {{deliveryItem.quantity}}
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+  <mat-card>
+    <div class="delivery-info">
+      <mat-icon>calendar_today</mat-icon>
+      <span class="info">{{delivery.scheduledFor}}</span>
+      <mat-icon>attach_money</mat-icon>
+      <span class="info">{{delivery.value}}</span>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="delivery.confirmed">
+    <div class="confirmed">Delivery successfully went through.</div>
+  </mat-card>
+  <button mat-raised-button *ngIf="canConfirmDelivery()" (click)="confirmDelivery()">Confirm</button>
 </div>
