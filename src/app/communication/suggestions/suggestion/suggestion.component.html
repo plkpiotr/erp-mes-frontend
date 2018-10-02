@@ -3,16 +3,63 @@
   <mat-spinner *ngIf="!isSuggestionLoaded">
   </mat-spinner>
   <div *ngIf="isSuggestionLoaded">
-    <h2>{{suggestion.name}} ({{suggestion.id}})</h2>
-    <h2>{{suggestion.phase}}</h2>
-    <h3></h3>
+    <h3>{{suggestion.name}}</h3>
+    <mat-divider></mat-divider>
     <h4>{{suggestion.description}}</h4>
-    <h5>{{suggestion.authorDTO.firstName}}</h5>
-    <h6>{{suggestion.authorDTO.lastName}}</h6>
-    <h6>{{suggestion.creationTime}}</h6>
-    <div *ngIf="suggestion.recipientDTOs">
-      <div *ngFor="let r of suggestion.recipientDTOs">
-        {{r.id}} {{r.firstName}} {{r.lastName}}
+    <mat-divider></mat-divider>
+    <div class="line">
+      <form class="grid" (ngSubmit)="submitForm()">
+        <p>ID: <strong>{{suggestion.id}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Phase: <strong>{{suggestion.phase | titlecase}}</strong></p>
+        <mat-divider></mat-divider>
+        <button mat-raised-button *ngIf="!(suggestion.phase === isImplemented)" (click)="submitForm()">
+          Next phase
+        </button>
+      </form>
+      <div class="grid">
+        <p>Reported at:
+          <strong>
+            {{suggestion.creationTime | date: 'short'}}
+          </strong>
+        </p>
+        <p>Reported by:
+          <strong>
+            {{suggestion.authorDTO.firstName}} {{suggestion.authorDTO.lastName}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+        <p>Launch at:
+          <strong>
+            {{suggestion.startTime ? (suggestion.startTime | date: 'short') : 'N/A'}}
+          </strong>
+        </p>
+        <p>Launch by:
+          <strong>
+            {{suggestion.startEmployee ? (suggestion.startEmployee.firstName + ' ' + suggestion.startEmployee.lastName) : 'N/A'}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+        <p>Ended at:
+          <strong>
+            {{suggestion.endTime ? (suggestion.endTime | date: 'short') : 'N/A'}}
+          </strong>
+        </p>
+        <p>Ended by:
+          <strong>
+            {{suggestion.endEmployee ? (suggestion.endEmployee.firstName + ' ' + suggestion.endEmployee.lastName) : 'N/A'}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="grid">
+        <p>Recipients:</p>
+        <div *ngIf="suggestion.recipientDTOs">
+          <div class="hyperlink" *ngFor="let r of suggestion.recipientDTOs" (click)="seeEmployee(r.id)">
+            {{r.firstName}} {{r.lastName}} ({{r.role | titlecase}})
+          </div>
+        </div>
+        <mat-divider></mat-divider>
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ export class AddSuggestionComponent implements OnInit {
       Validators.required
     ]);
     this.description = new FormControl('', [
-      Validators.maxLength(200),
+      Validators.maxLength(250),
       Validators.required
     ]);
     this.recipientIds = new FormControl('', [
@@ -70,6 +70,6 @@ export class AddSuggestionComponent implements OnInit {
   }
 
   getErrorDescription() {
-    return this.description.hasError('maxLength') ? '' : 'Maximum 200 characters';
+    return this.description.hasError('maxLength') ? '' : 'Maximum 250 characters';
   }
 }

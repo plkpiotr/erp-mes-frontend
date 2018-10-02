@@ -1,5 +1,6 @@
 // Variables:
 
+$link: #439AE2;
 $dark: #90CAF9;
 $normal: #BBDEFB;
 $light: #E3F2FD;
@@ -81,7 +82,7 @@ tr {
 button {
   box-shadow: none;
   float: right;
-  margin-bottom: 20px;
+  margin: 10px auto;
   background-color: $normal;
   &:hover {
     background-color: $dark;
@@ -114,3 +115,30 @@ p {
     transition: .3s ease-in-out;
   }
 }
+
+// Responsiveness instead of Angular-Flex or Bootstrap:
+
+.line {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid {
+  flex: 1;
+  min-width: 250px;
+  margin : 3vh 3vw 1.5vh 0;
+}
+
+.hyperlink {
+  transition: .3s ease-in-out;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  &:hover {
+    color: $link;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+  }
+}
+

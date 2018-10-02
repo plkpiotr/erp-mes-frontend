@@ -56,7 +56,6 @@ export enum Phase {
   REPORTED = 'REPORTED',
   IN_IMPLEMENTATION = 'IN_IMPLEMENTATION',
   IMPLEMENTED = 'IMPLEMENTED',
-  ABANDONED = 'ABANDONED'
 }
 
 export enum Type {
@@ -318,6 +317,10 @@ export interface Suggestion {
   authorDTO: Employee;
   recipientDTOs: Employee[];
   creationTime: Date;
+  startTime: Date;
+  endTime: Date;
+  startEmployee: Employee;
+  endEmployee: Employee;
 }
 
 export interface SuggestionRequest {

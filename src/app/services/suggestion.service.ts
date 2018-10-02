@@ -24,4 +24,8 @@ export class SuggestionService {
   addSuggestion(suggestionRequest: SuggestionRequest): Observable<Suggestion> {
     return this.http.post<Suggestion>('http://localhost:8080/suggestions', suggestionRequest, {headers: this.httpHeaders});
   }
+
+  setNextPhase(id: number): Observable<Suggestion> {
+    return this.http.put<Suggestion>('http://localhost:8080/suggestions/' + id, {headers: this.httpHeaders});
+  }
 }
