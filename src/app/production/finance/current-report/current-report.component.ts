@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ReportService} from '../../../services/report.service';
-import {CurrentReport, EstimatedCostsRequest, ExpenseRequest, ExpenseType} from '../../../types';
+import {CurrentReport} from '../../../types';
+import {MatDialog} from "@angular/material";
+import {AddIncomeDialogComponent} from "../add-income-dialog/add-income-dialog.component";
+import {AddExpenseDialogComponent} from "../add-expense-dialog/add-expense-dialog.component";
+import {RecalculateDialogComponent} from "../recalculate-dialog/recalculate-dialog.component";
 
 @Component({
   selector: 'app-current-report',
@@ -10,16 +14,8 @@ import {CurrentReport, EstimatedCostsRequest, ExpenseRequest, ExpenseType} from 
 export class CurrentReportComponent implements OnInit {
 
   currentReport: CurrentReport;
-  income: number;
-  expenseType: ExpenseType;
-  expenseAmount: number;
   isReportLoaded = false;
   areRecommendationsLoaded = false;
-  showAddIncome = false;
-  showAddExpense = false;
-  showReestimate = false;
-  expenseRequest: ExpenseRequest;
-  types;
 
   estimatedIncome: number;
   estimatedShipping: number;
@@ -29,14 +25,12 @@ export class CurrentReportComponent implements OnInit {
   stockCosts: number;
   socialFund: number;
   unexpected: number;
-  estimatedCostsRequest: EstimatedCostsRequest;
 
-  constructor(private reportService: ReportService) {
+  constructor(private reportService: ReportService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.fetchReport();
-    this.types = Object.keys(ExpenseType);
     this.fetchRecommendations();
   }
 
@@ -69,52 +63,46 @@ export class CurrentReportComponent implements OnInit {
   }
 
   addIncome() {
-    this.isReportLoaded = false;
-    this.reportService.addIncome(this.income).subscribe(res => {
-      this.currentReport = res;
-    }, err => {
-      console.log(err);
-    }, () => {
-      this.isReportLoaded = true;
+    const dialogRef = this.dialog.open(AddIncomeDialogComponent, {
+      width: '350px'
     });
-    this.showAddIncome = false;
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isReportLoaded = false;
+      this.fetchReport();
+    });
   }
 
   addExpense() {
-    this.isReportLoaded = false;
-    this.expenseRequest = {
-      expenseType: this.expenseType,
-      amount: this.expenseAmount
-    };
-    this.reportService.addExpense(this.expenseRequest).subscribe(res => {
-      this.currentReport = res;
-    }, err => {
-      console.log(err);
-    }, () => {
-      this.isReportLoaded = true;
+    const dialogRef = this.dialog.open(AddExpenseDialogComponent, {
+      width: '350px'
     });
-    this.showAddExpense = false;
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isReportLoaded = false;
+      this.fetchReport();
+      this.fetchRecommendations();
+    });
   }
 
   reestimate() {
-    this.isReportLoaded = false;
-    this.estimatedCostsRequest = {
-      estimatedIncome: this.estimatedIncome,
-      estimatedShippingCosts: this.estimatedShipping,
-      estimatedBills: this.estimatedBills,
-      rent: this.rent,
-      salaries: this.salaries,
-      stockCosts: this.stockCosts,
-      socialFund: this.socialFund,
-      unexpected: this.unexpected
-    };
-    this.reportService.recalculateCosts(this.estimatedCostsRequest).subscribe(res => {
-      this.currentReport = res;
-    }, err => {
-      console.log(err);
-    }, () => {
-      this.isReportLoaded = true;
-      this.fetchRecommendations();
+    const dialogRef = this.dialog.open(RecalculateDialogComponent, {
+      width: '350px',
+      data: {
+        estimatedIncome: this.estimatedIncome,
+        estimatedShipping: this.estimatedShipping,
+        estimatedBills: this.estimatedBills,
+        rent: this.rent,
+        salaries: this.salaries,
+        stockCosts: this.stockCosts,
+        socialFund: this.socialFund,
+        unexpected: this.unexpected
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isReportLoaded = false;
+      this.fetchReport();
     });
   }
 }

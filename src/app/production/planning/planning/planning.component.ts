@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {PlanningService} from '../../../services/planning.service';
 import {DailyPlan, SpecialPlanRequest} from '../../../types';
 import {Router} from '@angular/router';
+import {MatDialog} from "@angular/material";
+import {SpecialPlanDialogComponent} from "../special-plan-dialog/special-plan-dialog.component";
+import {SpecialPlanNoDateDialogComponent} from "../special-plan-no-date-dialog/special-plan-no-date-dialog.component";
 
 @Component({
   selector: 'app-planning',
@@ -14,20 +17,12 @@ export class PlanningComponent implements OnInit {
   ordersToday: number;
   ordersTomorrow: number;
   ordersInTwoDays: number;
-  description: string;
-  day: Date;
-  employeesPerDay: number;
-  ordersPerDay: number;
-  returnsPerDay: number;
-  complaintsResolvedPerDay: number;
-  specialPlanRequest: SpecialPlanRequest;
   isDailyPlanLoaded = false;
   isTodayLoaded = false;
   isTomorrowLoaded = false;
   isInTwoDaysLoaded = false;
-  showAddSpecialPlan = false;
 
-  constructor(private planningService: PlanningService, private router: Router) {
+  constructor(private planningService: PlanningService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -87,47 +82,51 @@ export class PlanningComponent implements OnInit {
   }
 
   tomorrowSpecialPlan() {
-    this.day = new Date();
-    this.day.setDate(this.day.getDate() + 1);
-    this.showAddSpecialPlan = true;
+    let day = new Date();
+    day.setDate(day.getDate() + 1);
+
+    const dialogRef = this.dialog.open(SpecialPlanNoDateDialogComponent, {
+      width: '350px',
+      data: {
+        date: day
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isDailyPlanLoaded = false;
+      this.fetchDailyPlan();
+      this.fetchOrders();
+    });
   }
 
   inTwoDaysSpecialPlan() {
-    this.day = new Date();
-    this.day.setDate(this.day.getDate() + 2);
-    this.showAddSpecialPlan = true;
+    let day = new Date();
+    day.setDate(day.getDate() + 2);
+
+    const dialogRef = this.dialog.open(SpecialPlanNoDateDialogComponent, {
+      width: '350px',
+      data: {
+        date: day
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isDailyPlanLoaded = false;
+      this.fetchDailyPlan();
+      this.fetchOrders();
+    });
   }
 
-  submitForm() {
-    this.specialPlanRequest = {
-      description: this.description,
-      day: this.day.toString().includes('T') ?
-        this.day.toISOString().substring(0, this.day.toISOString().indexOf('T')) : this.day.toString(),
-      employeesPerDay: this.employeesPerDay,
-      ordersPerDay: this.ordersPerDay,
-      returnsPerDay: this.returnsPerDay,
-      complaintsResolvedPerDay: this.complaintsResolvedPerDay
-    };
+  addSpecialPlan() {
+    const dialogRef = this.dialog.open(SpecialPlanDialogComponent, {
+      width: '350px'
+    });
 
-    this.planningService.addSpecialPlan(this.specialPlanRequest).subscribe(() => {
-      },
-      err => {
-        console.log(err);
-      }, () => {
-        this.showAddSpecialPlan = false;
-        this.description = null;
-        this.day = null;
-        this.employeesPerDay = null;
-        this.returnsPerDay = null;
-        this.ordersPerDay = null;
-        this.complaintsResolvedPerDay = null;
-        this.isInTwoDaysLoaded = false;
-        this.isTomorrowLoaded = false;
-        this.isTodayLoaded = false;
-        this.isDailyPlanLoaded = false;
-        this.fetchDailyPlan();
-        this.fetchOrders();
-      });
+    dialogRef.afterClosed().subscribe(result => {
+      this.isDailyPlanLoaded = false;
+      this.fetchDailyPlan();
+      this.fetchOrders();
+    });
   }
 
 }

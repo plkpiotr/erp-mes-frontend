@@ -1,27 +1,25 @@
-<form #form='ngForm' (ngSubmit)='submitForm()'>
-  <div class="form-group">
-    <label>Ilość pracowników </label>
-    <input type="number" class="form-control"
-           name="employeesPerDay" [(ngModel)]="employeesPerDay"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Ilość zamówień: </label>
-    <input type="number" class="form-control"
-           name="ordersPerDay" [(ngModel)]="ordersPerDay"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Ilość zwrotów: </label>
-    <input type="number" class="form-control"
-           name="returnsPerDay" [(ngModel)]="returnsPerDay"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Ilość obsłużonych zwrotów: </label>
-    <input type="number" class="form-control"
-           name="complaintsResolvedPerDay" [(ngModel)]="complaintsResolvedPerDay"
-           required/>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Aktualizuj plan</button>
-</form>
+<mat-card>Update Daily Plan</mat-card>
+<div class="content" [formGroup]="form">
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Employees per day</mat-label>
+    <input matInput placeholder="employeesPerDay" formControlName="employeesPerDay" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Orders per day</mat-label>
+    <input matInput placeholder="ordersPerDay" formControlName="ordersPerDay" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Returns per day</mat-label>
+    <input matInput placeholder="returnsPerDay" formControlName="returnsPerDay" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Complaints resolved per day</mat-label>
+    <input matInput placeholder="complaintsResolvedPerDay" formControlName="complaintsResolvedPerDay" required>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Update</button>
+</div>

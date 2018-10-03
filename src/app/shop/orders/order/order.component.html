@@ -5,8 +5,8 @@
     <mat-list>
       <mat-list-item>
         Status: {{order.status}}
-        <!--button mat-icon-button *ngIf="order.status != 'SENT' && order.status != 'DECLINED'"
-                (click)="updateOrderStatus()"><mat-icon>create</mat-icon></button-->
+        <button mat-icon-button *ngIf="order.status != 'SENT' && order.status != 'DECLINED'"
+                (click)="updateOrderStatus()"><mat-icon>create</mat-icon></button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>

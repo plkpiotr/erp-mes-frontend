@@ -79,6 +79,12 @@ import { StatusDialogComponent } from './shop/returns/status-dialog/status-dialo
 import { OrderStatusDialogComponent } from './shop/orders/order-status-dialog/order-status-dialog.component';
 import { ComplaintStatusDialogComponent } from './shop/complaints/complaint-status-dialog/complaint-status-dialog.component';
 import { ComplaintResolutionDialogComponent } from './shop/complaints/complaint-resolution-dialog/complaint-resolution-dialog.component';
+import { NoCommaNumberPipe } from './pipes/no-comma-number.pipe';
+import { AddIncomeDialogComponent } from './production/finance/add-income-dialog/add-income-dialog.component';
+import { AddExpenseDialogComponent } from './production/finance/add-expense-dialog/add-expense-dialog.component';
+import { RecalculateDialogComponent } from './production/finance/recalculate-dialog/recalculate-dialog.component';
+import { SpecialPlanNoDateDialogComponent } from './production/planning/special-plan-no-date-dialog/special-plan-no-date-dialog.component';
+import { SpecialPlanDialogComponent } from './production/planning/special-plan-dialog/special-plan-dialog.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +143,12 @@ import { ComplaintResolutionDialogComponent } from './shop/complaints/complaint-
     OrderStatusDialogComponent,
     ComplaintStatusDialogComponent,
     ComplaintResolutionDialogComponent,
+    NoCommaNumberPipe,
+    AddIncomeDialogComponent,
+    AddExpenseDialogComponent,
+    RecalculateDialogComponent,
+    SpecialPlanNoDateDialogComponent,
+    SpecialPlanDialogComponent,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,
@@ -146,7 +158,12 @@ import { ComplaintResolutionDialogComponent } from './shop/complaints/complaint-
     StatusDialogComponent,
     OrderStatusDialogComponent,
     ComplaintStatusDialogComponent,
-    ComplaintResolutionDialogComponent
+    ComplaintResolutionDialogComponent,
+    AddIncomeDialogComponent,
+    AddExpenseDialogComponent,
+    RecalculateDialogComponent,
+    SpecialPlanDialogComponent,
+    SpecialPlanNoDateDialogComponent
   ],
   imports: [
     BrowserModule,

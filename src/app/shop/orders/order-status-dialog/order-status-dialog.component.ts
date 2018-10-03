@@ -32,23 +32,22 @@ export class OrderStatusDialogComponent {
 
   submit(s: string) {
     this.showSpinner = true;
-    //TODO: uncomment
-    // this.orderService.updateOrderStatus(s, this.data.order.id)
-    //   .subscribe(res => {
-    //   }, err => {
-    //     console.log(err);
-    //   }, () => {
-    //     if (s === 'SENT') {
-    //       this.data.order.deliveryItems.forEach(deliveryItem => {
-    //         this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
-    //       });
-    //       const expenseRequest = {
-    //         amount: this.data.order.value
-    //       };
-    //       this.reportService.addIncome(expenseRequest.amount).subscribe(res => {});
-    //     }
-    //     this.cancel();
-    //   });
+    this.orderService.updateOrderStatus(s, this.data.order.id)
+      .subscribe(res => {
+      }, err => {
+        console.log(err);
+      }, () => {
+        if (s === 'SENT') {
+          this.data.order.deliveryItems.forEach(deliveryItem => {
+            this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
+          });
+          const expenseRequest = {
+            amount: this.data.order.value
+          };
+          this.reportService.addIncome(expenseRequest.amount).subscribe(res => {});
+        }
+        this.cancel();
+      });
   }
 
 }

@@ -1,79 +1,57 @@
-<div *ngIf="isDailyPlanLoaded">
-  **********************************************<br>
-  Plan dzienny<br>
-  {{dailyPlan.id}} {{dailyPlan.employeesPerDay}} {{dailyPlan.ordersPerDay}} {{dailyPlan.returnsPerDay}}
-  {{dailyPlan.complaintsResolvedPerDay}}
-  <button (click)="updateDailyPlan()">Update</button>
-  <br>
-</div>
-<div *ngIf="isDailyPlanLoaded && isTodayLoaded">
-  **********************************************<br>
-  Dzisiaj - ilość zamówień do skompletowania: {{ordersToday}}
-</div>
-<div *ngIf="isDailyPlanLoaded && isTomorrowLoaded">
-  **********************************************<br>
-  Jutro - ilość zamówień do skompletowania: {{ordersTomorrow}}
-  <div *ngIf="ordersTomorrow > dailyPlan.ordersPerDay">
-    <button (click)="tomorrowSpecialPlan()">Wprowadź specjalny plan</button>
-  </div>
-  <br>
-</div>
-<div *ngIf="isDailyPlanLoaded && isInTwoDaysLoaded">
-  **********************************************<br>
-  Pojutrze - ilość zamówień do skompletowania: {{ordersInTwoDays}}
-  <div *ngIf="ordersInTwoDays > dailyPlan.ordersPerDay">
-    <button (click)="inTwoDaysSpecialPlan()">Wprowadź plan specjalny</button>
-  </div>
-  <br>
-</div>
-<div *ngIf="isDailyPlanLoaded && isInTwoDaysLoaded">
-  **********************************************<br>
-  <button (click)="showAddSpecialPlan = !showAddSpecialPlan">Dodaj plan specjalny</button>
-  <br>
-</div>
-<div *ngIf="showAddSpecialPlan">
-  **********************************************<br>
-  <form #form='ngForm' (ngSubmit)='submitForm()'>
-    <div class="form-group">
-      <label>Opis </label>
-      <input type="text" class="form-control"
-             name="description" [(ngModel)]="description"
-             required/>
+<mat-card>Work Planning</mat-card>
+<mat-progress-spinner *ngIf="!isDailyPlanLoaded" mode="indeterminate"></mat-progress-spinner>
+<div class="content" *ngIf="isDailyPlanLoaded">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>
+        <div class="daily=plan-info">
+          <span class="info">Daily plan</span>
+          <button mat-icon-button (click)="updateDailyPlan()">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        Employees per day: {{dailyPlan.employeesPerDay}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Orders per day: {{dailyPlan.ordersPerDay}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Returns per day: {{dailyPlan.returnsPerDay}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Complaints resolved per day: {{dailyPlan.complaintsResolvedPerDay}}
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+  <mat-card *ngIf="isDailyPlanLoaded && isTodayLoaded">
+    <div class="daily-plan-info">
+      <span class="info">Today - orders to be completed: {{ordersToday}}</span>
     </div>
-    <div *ngIf="day == null" class="form-group">
-      <label>Data </label>
-      <input type="date" class="form-control"
-             name="day" [(ngModel)]="day"
-             required/>
+  </mat-card>
+  <mat-card *ngIf="isDailyPlanLoaded && isTomorrowLoaded">
+    <div class="daily-plan-info">
+      <span class="info">Tomorrow - orders to be completed: {{ordersTomorrow}}</span>
+      <button mat-icon-button *ngIf="ordersTomorrow > dailyPlan.ordersPerDay" (click)="tomorrowSpecialPlan()">
+        <mat-icon>create</mat-icon>
+      </button>
     </div>
-    <div *ngIf="day != null">
-    {{day}}
+  </mat-card>
+  <mat-card *ngIf="isDailyPlanLoaded && isInTwoDaysLoaded">
+    <div class="daily-plan-info">
+      <span class="info">In two days - orders to be completed: {{ordersInTwoDays}}</span>
+      <button mat-icon-button *ngIf="ordersInTwoDays > dailyPlan.ordersPerDay" (click)="inTwoDaysSpecialPlan()">
+        <mat-icon>create</mat-icon>
+      </button>
     </div>
-    <div class="form-group">
-      <label>Ilość pracowników </label>
-      <input type="number" class="form-control"
-             name="employeesPerDay" [(ngModel)]="employeesPerDay"
-             required/>
-    </div>
-    <div class="form-group">
-      <label>Ilość zamówień: </label>
-      <input type="number" class="form-control"
-             name="ordersPerDay" [(ngModel)]="ordersPerDay"
-             required/>
-    </div>
-    <div class="form-group">
-      <label>Ilość zwrotów: </label>
-      <input type="number" class="form-control"
-             name="returnsPerDay" [(ngModel)]="returnsPerDay"
-             required/>
-    </div>
-    <div class="form-group">
-      <label>Ilość obsłużonych zwrotów: </label>
-      <input type="number" class="form-control"
-             name="complaintsResolvedPerDay" [(ngModel)]="complaintsResolvedPerDay"
-             required/>
-    </div>
-    <button type='submit' [disabled]="form.invalid">Aktualizuj plan</button>
-  </form>
-  **********************************************
+  </mat-card>
+    <button mat-raised-button class="floating-button" (click)="addSpecialPlan()">Add special plan</button>
 </div>

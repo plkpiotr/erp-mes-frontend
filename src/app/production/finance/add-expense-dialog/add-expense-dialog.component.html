@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Enter expense details:</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-select placeholder="Category" [(ngModel)]="expenseType" required>
+      <mat-option *ngFor="let t of types" [value]="t">
+        {{t}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Amount" [(ngModel)]="amount" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="submit()" [disabled]="!isFormValid()">Add</button>
+</mat-dialog-actions>

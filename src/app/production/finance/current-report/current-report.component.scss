@@ -1,0 +1,36 @@
+@import "../../../../global";
+
+mat-card, mat-expansion-panel {
+  margin-bottom: 15px;
+}
+
+.content {
+  margin: 15px;
+}
+
+mat-progress-spinner {
+  margin: auto;
+}
+
+mat-icon {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.date-info {
+  display: inline-flex;
+  vertical-align: middle;
+  padding-bottom: 10px;
+}
+
+.info {
+  margin-top: 5px;
+}
+
+.button-group {
+  button {
+    margin-top: 15px;
+    float: right;
+    margin-left: 5px;
+  }
+}
