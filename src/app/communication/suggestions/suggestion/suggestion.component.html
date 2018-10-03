@@ -1,13 +1,12 @@
 <mat-card>Suggestion</mat-card>
 <div class="content">
-  <mat-spinner *ngIf="!isSuggestionLoaded">
-  </mat-spinner>
+  <mat-spinner *ngIf="!isSuggestionLoaded"></mat-spinner>
   <div *ngIf="isSuggestionLoaded">
     <h3>{{suggestion.name}}</h3>
     <mat-divider></mat-divider>
     <h4>{{suggestion.description}}</h4>
     <mat-divider></mat-divider>
-    <div class="line">
+    <div class="row">
       <form class="grid" (ngSubmit)="submitForm()">
         <p>ID: <strong>{{suggestion.id}}</strong></p>
         <mat-divider></mat-divider>

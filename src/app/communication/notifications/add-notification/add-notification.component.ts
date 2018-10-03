@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee, Notification, Type} from '../../../types';
+import {Complaint, Delivery, Employee, Notification, Order, Return, Type} from '../../../types';
 import {NotificationService} from '../../../services/notification.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {OrderService} from '../../../services/order.service';
+import {DeliveryService} from '../../../services/delivery.service';
+import {ComplaintService} from '../../../services/complaint.service';
+import {ReturnService} from '../../../services/return.service';
 
 @Component({
   selector: 'app-add-notification',
@@ -12,32 +17,93 @@ import {Router} from '@angular/router';
 export class AddNotificationComponent implements OnInit {
 
   notificationRequest;
-  instruction: string;
-  description?: string;
-  notifierId?: number;
-  consigneeIds: number[];
-  type?: Type;
-  reference?: number;
+  form: FormGroup;
+  areElementsLoaded = false;
+  allElements = [];
+  index;
 
-  // notifier: Employee; // TODO: Get logged in user
+  instruction: FormControl;
+  description?: FormControl;
+  consigneeIds: FormControl;
+  type?: FormControl;
+  referenceId?: FormControl;
+
   consignees: Array<Employee>;
+  deliveries: Array<Delivery>;
+  orders: Array<Order>;
+  complaints: Array<Complaint>;
+  returns: Array<Return>;
   types;
 
-  constructor(private notificationService: NotificationService, private employeeService: EmployeeService, private router: Router) {}
+  constructor(private notificationService: NotificationService, private employeeService: EmployeeService, private router: Router,
+              private deliveryService: DeliveryService, private orderService: OrderService, private complaintService: ComplaintService,
+              private returnService: ReturnService) {}
 
   ngOnInit() {
-    this.employeeService.fetchAllEmployees().subscribe(res => this.consignees = res);
+    this.employeeService.fetchColleagues().subscribe(res => {
+      this.consignees = res;
+    }, err => {
+      console.log(err);
+    });
+    this.deliveryService.fetchAllDeliveries().subscribe(res => {
+      this.deliveries = res;
+      this.allElements.push(this.deliveries);
+    }, err => {
+      console.log(err);
+    });
+    this.orderService.fetchAllOrders().subscribe(res => {
+      this.orders = res;
+      this.allElements.push(this.orders);
+    }, err => {
+      console.log(err);
+    });
+    this.complaintService.fetchAllComplaints().subscribe(res => {
+      this.complaints = res;
+      this.allElements.push(this.complaints);
+    }, err => {
+      console.log(err);
+    });
+    this.returnService.fetchAllReturns().subscribe(res => {
+      this.returns = res;
+      this.allElements.push(this.returns);
+    }, err => {
+      console.log(err);
+    }, () => {
+      this.areElementsLoaded = true;
+    });
     this.types = Object.keys(Type);
+    this.setupFormControls();
+    this.form = new FormGroup({
+      'instruction': this.instruction,
+      'description': this.description,
+      'consigneeIds': this.consigneeIds,
+      'type': this.type,
+      'referenceId': this.type
+    });
+  }
+
+  setupFormControls() {
+    this.instruction = new FormControl('', [
+      Validators.maxLength(25),
+      Validators.required
+    ]);
+    this.description = new FormControl('', [
+      Validators.maxLength(250),
+    ]);
+    this.consigneeIds = new FormControl('', [
+      Validators.required
+    ]);
+    this.type = new FormControl('', []);
+    this.referenceId = new FormControl((''), []);
   }
 
   submitForm() {
     this.notificationRequest = {
-      instruction: this.instruction,
-      description: this.description,
-      notifierId: null, // TODO: Get logged in user
-      consigneeIds: this.consigneeIds,
-      type: this.type,
-      reference: this.reference
+      instruction: this.form.get('instruction').value,
+      description: this.form.get('description').value,
+      consigneeIds: this.form.get('consigneeIds').value,
+      type: this.form.get('type').value,
+      referenceId: this.form.get('referenceId').value
     };
     let notification: Notification;
     this.notificationService.addNotification(this.notificationRequest)
@@ -50,5 +116,19 @@ export class AddNotificationComponent implements OnInit {
         () => {
           this.router.navigate(['/notifications', notification.id]);
         });
+  }
+
+  getErrorInstruction() {
+    return this.instruction.hasError('maxLength') ? '' : 'Maximum 25 characters';
+  }
+
+  getErrorDescription() {
+    return this.description.hasError('maxLength') ? '' : 'Maximum 250 characters';
+  }
+
+  mapType(type: Type) {
+    if (type === Type.COMPLAINT) {
+      return 0;
+    }
   }
 }

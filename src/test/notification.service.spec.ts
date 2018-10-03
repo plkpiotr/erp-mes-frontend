@@ -116,7 +116,7 @@ const mockNotifications = [
       }
     ],
     type: null,
-    reference: null
+    referenceId: null
   },
   {
     id: 1,
@@ -173,7 +173,7 @@ const mockNotifications = [
       }
     ],
     type: null,
-    reference: null
+    referenceId: null
   }
 ];
 

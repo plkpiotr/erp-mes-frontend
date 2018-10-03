@@ -48,8 +48,8 @@ export enum Status {
 
 export enum State {
   REPORTED = 'REPORTED',
-  ACCEPTED = 'ACCEPTED',
-  SOLVED = 'SOLVED'
+  IN_PROGRESS = 'IN_PROGRESS',
+  RESOLVED = 'RESOLVED'
 }
 
 export enum Phase {
@@ -298,6 +298,9 @@ export interface Notification {
   creationTime: Date;
   type?: Type;
   reference?: number;
+  startTime: Date;
+  endTime: Date;
+  endEmployee: Employee;
 }
 
 export interface NotificationRequest {
@@ -306,7 +309,7 @@ export interface NotificationRequest {
   notifierId?: number;
   consigneeIds: number[];
   type?: Type;
-  reference?: number;
+  referenceId?: number;
 }
 
 export interface Suggestion {

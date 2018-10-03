@@ -87,7 +87,7 @@ const mockTasks = [
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
@@ -117,7 +117,7 @@ const mockTasks = [
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
@@ -167,7 +167,7 @@ const mockTasks = [
         startTime: null,
         endTime: null,
         type: null,
-        reference: null,
+        referenceId: null,
         scheduledTime: new Date('October 13, 2014 11:15:00')
       },
       {
@@ -197,7 +197,7 @@ const mockTasks = [
         startTime: null,
         endTime: null,
         type: null,
-        reference: null,
+        referenceId: null,
         scheduledTime: new Date('October 13, 2014 11:15:00')
       },
       {
@@ -227,7 +227,7 @@ const mockTasks = [
         startTime: null,
         endTime: null,
         type: null,
-        reference: null,
+        referenceId: null,
         scheduledTime: new Date('October 13, 2014 11:15:00')
       }
     ],
@@ -238,7 +238,7 @@ const mockTasks = [
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
@@ -268,7 +268,7 @@ const mockTasks = [
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   }
 ];

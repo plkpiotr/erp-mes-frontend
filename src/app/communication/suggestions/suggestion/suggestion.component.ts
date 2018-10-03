@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Phase, Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-suggestion',

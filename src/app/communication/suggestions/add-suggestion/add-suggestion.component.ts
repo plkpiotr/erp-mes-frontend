@@ -4,6 +4,7 @@ import {SuggestionService} from '../../../services/suggestion.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-add-suggestion',
@@ -20,11 +21,18 @@ export class AddSuggestionComponent implements OnInit {
   recipientIds: FormControl;
 
   recipients: Array<Employee>;
+  areRecipientsLoaded = false;
 
   constructor(private suggestionService: SuggestionService, private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() {
-    this.employeeService.fetchColleagues().subscribe(res => this.recipients = res);
+    this.employeeService.fetchColleagues().subscribe(res => {
+      this.recipients = res;
+    }, err => {
+      console.log(err);
+    }, () => {
+      this.areRecipientsLoaded = true;
+    });
     this.setupFormControls();
     this.form = new FormGroup({
       'name': this.name,

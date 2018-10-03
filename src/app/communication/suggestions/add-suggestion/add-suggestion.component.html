@@ -1,27 +1,29 @@
 <mat-card>Add new suggestion</mat-card>
-<div class="container" [formGroup]="form">
+<div class="container">
+  <mat-spinner *ngIf="!areRecipientsLoaded"></mat-spinner>
+  <div *ngIf="areRecipientsLoaded" [formGroup]="form">
 
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" name="name" formControlName="name" required>
-    <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" name="name" formControlName="name" required>
+      <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <input matInput placeholder="Description" name="description" formControlName="description" required>
-    <mat-error *ngIf="name.invalid">{{getErrorDescription()}}</mat-error>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Description" name="description" formControlName="description" required>
+      <mat-error *ngIf="description.invalid">{{getErrorDescription()}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Recipients</mat-label>
-    <mat-select placeholder="Recipients" formControlName="recipientIds" name="recipientIds" multiple required>
-      <mat-option *ngFor="let r of recipients" [value]="r.id">
-        {{r.firstName}}
-        {{r.lastName}}
-        ({{r.role | titlecase}})</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Recipients</mat-label>
+      <mat-select placeholder="Recipients" formControlName="recipientIds" name="recipientIds" multiple required>
+        <mat-option *ngFor="let r of recipients" [value]="r.id">
+          {{r.firstName}} {{r.lastName}} ({{r.role | titlecase}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add suggestion</button>
+    <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add suggestion</button>
+  </div>
 </div>

@@ -29,4 +29,8 @@ export class NotificationService {
   addNotification(notificationRequest: NotificationRequest): Observable<Notification> {
     return this.http.post<Notification>('http://localhost:8080/notifications', notificationRequest, {headers: this.httpHeaders});
   }
+
+  setNextState(id: number): Observable<Notification> {
+    return this.http.put<Notification>('http://localhost:8080/notifications/' + id, {headers: this.httpHeaders});
+  }
 }
