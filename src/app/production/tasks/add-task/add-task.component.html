@@ -1,66 +1,72 @@
-<mat-card>Add new task</mat-card>
+<mat-card>Add notification</mat-card>
+<div class="container">
+  <mat-spinner *ngIf="!(areAssigneesLoaded || areTasksLoaded)"></mat-spinner>
+  <div *ngIf="(areAssigneesLoaded || areTasksLoaded)" [formGroup]="form">
 
-<div class="container" [formGroup]="form">
-
-  <mat-form-field class="theme-form">
-    <mat-label>Name</mat-label>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
       <input matInput placeholder="Name" name="name" formControlName="name" required>
-  </mat-form-field>
+      <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field class="theme-form">
-    <mat-label>Details</mat-label>
-    <input matInput placeholder="Details" name="details" formControlName="details">
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Preceding tasks</mat-label>
+      <mat-select placeholder="Preceding tasks" formControlName="precedingTaskIds" name="precedingTaskIds" multiple>
+        <mat-option *ngFor="let p of precedingTasks" [value]="p.id">
+          {{p.id}} {{p.name}} ({{p.category | enumeration}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Preceding tasks</mat-label>
-    <mat-select placeholder="Preceding tasks" formControlName="precedingTaskIds" multiple>
-      <mat-option *ngFor="let p of precedingTasks" [value]="p.id">{{p.id}} {{p.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assignee</mat-label>
+      <mat-select placeholder="Assignee" formControlName="assigneeId" name="assigneeId">
+        <mat-option *ngFor="let a of assignees" [value]="a.id">
+          {{a.firstName}} {{a.lastName}} ({{a.role | enumeration}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Assignee</mat-label>
-    <mat-select placeholder="Assignee" formControlName="assigneeId">
-      <mat-option *ngFor="let a of assignees" [value]="a.id">{{a.firstName}} {{a.lastName}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estimated time</mat-label>
+      <input matInput placeholder="Estimated time (in minutes)" name="estimatedTime" formControlName="estimatedTime"
+             type="number" required>
+      <mat-hint>0 - 120 minutes</mat-hint>
+      <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Estimated time (in minutes)" type="number" [formControl]="estimatedTime" required>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Deadline</mat-label>
+      <input matInput type="datetime-local" value="{{now}}" name="deadline" formControlName="deadline"
+             required>
+      <mat-hint>0 - 120 minutes</mat-hint>
+      <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
+    </mat-form-field>
 
-  <button type="submit" [disabled]="form.invalid" mat-raised-button>Add task</button>
+    <mat-form-field>
+      <mat-label>Scheduled time</mat-label>
+      <input matInput type="datetime-local" value="{{now}}" name="deadline" formControlName="deadline"
+             required>
+      <mat-hint>0 - 120 minutes</mat-hint>
+      <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
+    </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Details</mat-label>
+      <input matInput placeholder="Details" name="details" formControlName="details">
+      <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select placeholder="Type" formControlName="type" name="type">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let t of types" [value]="t">
+          {{t | titlecase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add suggestion</button>
+  </div>
 </div>
-
-<form #form="ngForm" (ngSubmit)="submitForm()">
-  <div class="form-group">
-    <label>Przewidywany czas wykonania:
-      <input type="number" class="form-control" name="estimatedTimeInMinutes" [(ngModel)]="estimatedTimeInMinutes" required>
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Ostateczny termin:
-      <input type="datetime-local" class="form-control" name="deadline" [(ngModel)]="deadline" required>
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Type:
-      <select name="category" [(ngModel)]="type" required>
-        <option *ngFor="let t of types" [value]="t">{{t}}</option>
-      </select>
-    </label>
-  </div>
-  <!-- If I have complaints and returns it will be select -->
-  <div class="form-group">
-    <label>Reference:
-      <input type="number" class="form-control" name="reference" [(ngModel)]="reference" required>
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Planowa data rozpoczęcia:
-      <input type="datetime-local" class="form-control" name="scheduledTime" [(ngModel)]="scheduledTime" required>
-    </label>
-  </div>
-</form>

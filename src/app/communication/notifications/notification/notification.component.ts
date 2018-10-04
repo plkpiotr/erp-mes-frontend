@@ -12,13 +12,12 @@ export class NotificationComponent implements OnInit {
 
   notification: Notification;
   isNotificationLoaded = false;
-  isResolved;
+  isResolved = State.RESOLVED;
 
   constructor(private notificationService: NotificationService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.fetchNotification();
-    this.isResolved = State.RESOLVED;
   }
 
   fetchNotification() {

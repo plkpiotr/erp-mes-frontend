@@ -20,7 +20,7 @@
 
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-        <td mat-cell *matCellDef="let row">{{row.category | titlecase}}</td>
+        <td mat-cell *matCellDef="let row">{{row.category | enumeration}}</td>
       </ng-container>
 
       <ng-container matColumnDef="type">

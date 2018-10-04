@@ -10,11 +10,9 @@
       <form class="grid" (ngSubmit)="submitForm()">
         <p>ID: <strong>{{notification.id}}</strong></p>
         <mat-divider></mat-divider>
-        <p>State: <strong>{{notification.state | titlecase}}</strong></p>
+        <p>State: <strong>{{notification.state | enumeration}}</strong></p>
         <mat-divider></mat-divider>
-        <p>Type: <strong>{{notification.type | titlecase}}</strong></p>
-        <mat-divider></mat-divider>
-        <p>Reference: <strong>{{notification.reference}}</strong></p>
+        <p>Type: <strong>{{notification.type ? (notification.type | titlecase) : 'N/A'}}</strong></p>
         <mat-divider></mat-divider>
         <button mat-raised-button *ngIf="!(notification.state === isResolved)" (click)="submitForm()">
           Next state
@@ -59,7 +57,7 @@
         <p>Consignees:</p>
         <div *ngIf="notification.consignees">
           <div class="hyperlink" *ngFor="let n of notification.consignees" (click)="seeEmployee(n.id)">
-            {{n.firstName}} {{n.lastName}} ({{n.role | titlecase}})
+            {{n.firstName}} {{n.lastName}} ({{n.role | enumeration}})
           </div>
         </div>
         <mat-divider></mat-divider>

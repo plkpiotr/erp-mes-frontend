@@ -12,13 +12,12 @@ export class SuggestionComponent implements OnInit {
 
   suggestion: Suggestion;
   isSuggestionLoaded = false;
-  isImplemented;
+  isImplemented = Phase.IMPLEMENTED;
 
   constructor(private suggestionService: SuggestionService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.fetchOneSuggestion();
-    this.isImplemented = Phase.IMPLEMENTED;
   }
 
   fetchOneSuggestion() {

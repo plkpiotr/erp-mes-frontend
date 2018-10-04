@@ -129,6 +129,8 @@ p {
   margin : 3vh 3vw 1.5vh 0;
 }
 
+// Plain text:
+
 .hyperlink {
   transition: .3s ease-in-out;
   margin-top: 0;
@@ -142,3 +144,9 @@ p {
   }
 }
 
+.paragraph {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+}

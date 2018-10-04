@@ -10,7 +10,7 @@ export class TasksTodoPipe implements PipeTransform {
     if (!myTasks) {
       return myTasks;
     }
-    return myTasks.filter(task => task.category === Category.TODO);
+    return myTasks.filter(task => task.category === Category.TO_DO);
   }
 
 }

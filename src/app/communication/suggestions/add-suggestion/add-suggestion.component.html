@@ -19,7 +19,7 @@
       <mat-label>Recipients</mat-label>
       <mat-select placeholder="Recipients" formControlName="recipientIds" name="recipientIds" multiple required>
         <mat-option *ngFor="let r of recipients" [value]="r.id">
-          {{r.firstName}} {{r.lastName}} ({{r.role | titlecase}})
+          {{r.firstName}} {{r.lastName}} ({{r.role | enumeration}})
         </mat-option>
       </mat-select>
     </mat-form-field>

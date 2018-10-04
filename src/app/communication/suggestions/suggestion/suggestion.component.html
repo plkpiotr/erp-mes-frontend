@@ -10,7 +10,7 @@
       <form class="grid" (ngSubmit)="submitForm()">
         <p>ID: <strong>{{suggestion.id}}</strong></p>
         <mat-divider></mat-divider>
-        <p>Phase: <strong>{{suggestion.phase | titlecase}}</strong></p>
+        <p>Phase: <strong>{{suggestion.phase | enumeration}}</strong></p>
         <mat-divider></mat-divider>
         <button mat-raised-button *ngIf="!(suggestion.phase === isImplemented)" (click)="submitForm()">
           Next phase
@@ -55,7 +55,7 @@
         <p>Recipients:</p>
         <div *ngIf="suggestion.recipientDTOs">
           <div class="hyperlink" *ngFor="let r of suggestion.recipientDTOs" (click)="seeEmployee(r.id)">
-            {{r.firstName}} {{r.lastName}} ({{r.role | titlecase}})
+            {{r.firstName}} {{r.lastName}} ({{r.role | enumeration}})
           </div>
         </div>
         <mat-divider></mat-divider>

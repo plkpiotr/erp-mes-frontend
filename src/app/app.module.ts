@@ -70,6 +70,7 @@ import {KanbanComponent} from './production/tasks/kanban/kanban.component';
 import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
 import {TasksDonePipe} from './pipes/tasks-done.pipe';
 import {TasksTodoPipe} from './pipes/tasks-todo.pipe';
+import { EnumerationPipe } from './pipes/enumeration.pipe';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import {TasksTodoPipe} from './pipes/tasks-todo.pipe';
     KanbanComponent,
     TasksDoingPipe,
     TasksDonePipe,
-    TasksTodoPipe
+    TasksTodoPipe,
+    EnumerationPipe
   ],
   imports: [
     BrowserModule,

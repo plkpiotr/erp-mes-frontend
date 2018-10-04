@@ -63,7 +63,7 @@ const mockTasks = [
   {
     id: 1,
     name: 'Zapakować przesyłkę nr 1444',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 1,
       firstName: 'Jakub',
@@ -93,7 +93,7 @@ const mockTasks = [
   {
     id: 2,
     name: 'Wysłać przesyłkę nr 1490',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 1,
       firstName: 'Jakub',
@@ -123,7 +123,7 @@ const mockTasks = [
   {
     id: 3,
     name: 'Wysłać przesyłkę nr 1429',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 1,
       firstName: 'Jakub',
@@ -143,7 +143,7 @@ const mockTasks = [
       {
         id: 1,
         name: 'Zapakować przesyłkę nr 1444',
-        category: Category.TODO,
+        category: Category.TO_DO,
         assignee: {
           id: 1,
           firstName: 'Jakub',
@@ -173,7 +173,7 @@ const mockTasks = [
       {
         id: 2,
         name: 'Wysłać przesyłkę nr 1410',
-        category: Category.TODO,
+        category: Category.TO_DO,
         assignee: {
           id: 1,
           firstName: 'Jakub',
@@ -203,7 +203,7 @@ const mockTasks = [
       {
         id: 3,
         name: 'Wysłać przesyłkę nr 1490',
-        category: Category.TODO,
+        category: Category.TO_DO,
         assignee: {
           id: 1,
           firstName: 'Jakub',
@@ -244,7 +244,7 @@ const mockTasks = [
   {
     id: 4,
     name: 'Wysłać przesyłkę nr 1410',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 2,
       firstName: 'Michał',
@@ -275,7 +275,7 @@ const mockTasks = [
 
 const mockTaskRequest = {
   name: 'Wysłać przesyłkę nr 1951',
-  category: Category.TODO,
+  category: Category.TO_DO,
   assigneeId: null,
   precedingTaskIds: [],
   details: 'Wykonać w pierwszej kolejności',

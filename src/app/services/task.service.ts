@@ -9,7 +9,7 @@ export class TaskService {
 
   private readonly httpHeaders: HttpHeaders;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     this.httpHeaders = new HttpHeaders()
       .set('Access-Control-Allow-Origin', 'https://localhost:4200');
   }
@@ -30,15 +30,7 @@ export class TaskService {
     return this.http.post<Task>('http://localhost:8080/tasks', taskRequest, {headers: this.httpHeaders});
   }
 
-  deleteTask(id: number) {
-    this.http.delete('http://localhost:8080/tasks/' + id, {headers: this.httpHeaders})
-      .subscribe(() => {
-        },
-        err => {
-          console.log(err);
-        },
-        () => {
-          this.router.navigate(['/tasks']);
-        });
+  setNextCategory(id: number): Observable<Task> {
+    return this.http.put<Task>('http://localhost:8080/tasks/' + id, {headers: this.httpHeaders});
   }
 }

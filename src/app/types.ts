@@ -23,7 +23,7 @@ export enum ApprovalState {
 }
 
 export enum Category {
-  TODO = 'TODO',
+  TO_DO = 'TO_DO',
   DOING = 'DOING',
   DONE = 'DONE'
 }
@@ -153,30 +153,30 @@ export interface Task {
   id: number;
   name: string;
   category: Category;
+  precedingTaskIds: number[];
+  authorDTO: Employee;
   assigneeDTO?: Employee;
-  precedingTasks: Task[];
-  details: string;
+  creationTime: Date;
   estimatedTime: number;
   deadline: Date;
-  creationTime: Date;
+  scheduledTime?: Date;
   startTime?: Date;
   endTime?: Date;
+  details?: string;
   type?: Type;
-  reference?: number;
-  scheduledTime: Date;
+  startEmployee?: Employee;
+  endEmployee?: Employee;
 }
 
 export interface TaskRequest {
   name: string;
-  category: Category;
-  assigneeId?: number;
   precedingTaskIds: number[];
-  details: string;
-  estimatedTimeInMinutes: number;
+  assigneeId?: number;
+  estimatedTime: number;
   deadline: Date;
+  scheduledTime?: Date;
+  details?: string;
   type?: Type;
-  reference?: number;
-  scheduledTime: Date;
 }
 
 export interface EstimatedCosts {
@@ -298,9 +298,9 @@ export interface Notification {
   creationTime: Date;
   type?: Type;
   reference?: number;
-  startTime: Date;
-  endTime: Date;
-  endEmployee: Employee;
+  startTime?: Date;
+  endTime?: Date;
+  endEmployee?: Employee;
 }
 
 export interface NotificationRequest {
@@ -320,10 +320,10 @@ export interface Suggestion {
   authorDTO: Employee;
   recipientDTOs: Employee[];
   creationTime: Date;
-  startTime: Date;
-  endTime: Date;
-  startEmployee: Employee;
-  endEmployee: Employee;
+  startTime?: Date;
+  endTime?: Date;
+  startEmployee?: Employee;
+  endEmployee?: Employee;
 }
 
 export interface SuggestionRequest {
