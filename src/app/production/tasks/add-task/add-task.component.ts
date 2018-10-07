@@ -120,8 +120,4 @@ export class AddTaskComponent implements OnInit {
   getErrorDetails() {
     return this.details.hasError('maxLength') ? '' : '0-250 characters';
   }
-
-  getErrorEstimatedTime() {
-    return this.estimatedTime.hasError('min') ? '' : 'Positive number';
-  }
 }
