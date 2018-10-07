@@ -17,7 +17,11 @@ export class TaskComponent implements OnInit {
   constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.fetchTask();
+    this.route.params.subscribe(
+      params => {
+        this.fetchTask();
+      }
+    );
   }
 
   fetchTask() {

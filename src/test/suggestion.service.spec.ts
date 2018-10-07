@@ -240,10 +240,10 @@
 //     });
 //   });
 //
-//   describe('given fetchOneSuggestion method', () => {
+//   describe('given fetchSuggestion method', () => {
 //     describe('when called', () => {
 //       it('should hit "suggestions/1" with GET and return suggestion', () => {
-//         suggestionService.fetchOneSuggestion(1).subscribe(suggestion => {
+//         suggestionService.fetchSuggestion(1).subscribe(suggestion => {
 //           expect(suggestion).toEqual(mockSuggestions[0]);
 //         });
 //         const req = httpMock.expectOne('http://localhost:8080/suggestions/1');

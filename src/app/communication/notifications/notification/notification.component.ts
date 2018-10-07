@@ -17,7 +17,11 @@ export class NotificationComponent implements OnInit {
   constructor(private notificationService: NotificationService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.fetchNotification();
+    this.route.params.subscribe(
+      params => {
+        this.fetchNotification();
+      }
+    );
   }
 
   fetchNotification() {
@@ -38,7 +42,7 @@ export class NotificationComponent implements OnInit {
       }, err => {
         console.log(err);
       }, () => {
-        this.router.navigate(['/notifications']);
+        this.router.navigate(['/notifications', this.route.snapshot.params[('id')]]);
       });
   }
 

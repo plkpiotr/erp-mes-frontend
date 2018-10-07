@@ -1,4 +1,4 @@
-<mat-card>Add notification</mat-card>
+<mat-card>Add task</mat-card>
 <div class="container">
   <mat-spinner *ngIf="!(areAssigneesLoaded || areTasksLoaded)"></mat-spinner>
   <div *ngIf="(areAssigneesLoaded || areTasksLoaded)" [formGroup]="form">
@@ -31,7 +31,6 @@
       <mat-label>Estimated time</mat-label>
       <input matInput placeholder="Estimated time (in minutes)" name="estimatedTime" formControlName="estimatedTime"
              type="number" required>
-      <mat-hint>0 - 120 minutes</mat-hint>
       <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
     </mat-form-field>
 
@@ -39,15 +38,11 @@
       <mat-label>Deadline</mat-label>
       <input matInput type="datetime-local" value="{{now}}" name="deadline" formControlName="deadline"
              required>
-      <mat-hint>0 - 120 minutes</mat-hint>
-      <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Scheduled time</mat-label>
-      <input matInput type="datetime-local" value="{{now}}" name="deadline" formControlName="deadline"
-             required>
-      <mat-hint>0 - 120 minutes</mat-hint>
+      <input matInput type="datetime-local" value="{{now}}" name="deadline" formControlName="deadline">
       <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
     </mat-form-field>
 
@@ -59,14 +54,13 @@
 
     <mat-form-field>
       <mat-label>Type</mat-label>
-      <mat-select placeholder="Type" formControlName="type" name="type">
-        <mat-option>None</mat-option>
+      <mat-select placeholder="Type" formControlName="type" name="type" required>
         <mat-option *ngFor="let t of types" [value]="t">
           {{t | titlecase}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add suggestion</button>
+    <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add task</button>
   </div>
 </div>

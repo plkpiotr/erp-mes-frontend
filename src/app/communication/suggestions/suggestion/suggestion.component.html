@@ -24,7 +24,7 @@
         </p>
         <p>Reported by:
           <strong>
-            {{suggestion.authorDTO.firstName}} {{suggestion.authorDTO.lastName}}
+            {{suggestion.author.firstName}} {{suggestion.author.lastName}}
           </strong>
         </p>
         <mat-divider></mat-divider>
@@ -53,8 +53,8 @@
       </div>
       <div class="grid">
         <p>Recipients:</p>
-        <div *ngIf="suggestion.recipientDTOs">
-          <div class="hyperlink" *ngFor="let r of suggestion.recipientDTOs" (click)="seeEmployee(r.id)">
+        <div *ngIf="suggestion.recipients">
+          <div class="hyperlink" *ngFor="let r of suggestion.recipients" (click)="seeEmployee(r.id)">
             {{r.firstName}} {{r.lastName}} ({{r.role | enumeration}})
           </div>
         </div>

@@ -17,7 +17,8 @@ export class KanbanComponent implements OnInit {
   constructor(private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
-    this.taskService.fetchTasksByAssignee().subscribe(res => {
+    this.taskService.fetchTasksByAssignee()
+      .subscribe(res => {
       this.myTasks = res;
     }, err => {
       console.log(err);

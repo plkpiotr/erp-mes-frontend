@@ -17,9 +17,9 @@ export class AddNotificationComponent implements OnInit {
   areEmployeesLoaded = false;
 
   instruction: FormControl;
-  description?: FormControl;
+  description: FormControl;
   consigneeIds: FormControl;
-  type?: FormControl;
+  type: FormControl;
 
   consignees: Array<Employee>;
   deliveries: Array<Delivery>;
@@ -59,7 +59,9 @@ export class AddNotificationComponent implements OnInit {
     this.consigneeIds = new FormControl('', [
       Validators.required
     ]);
-    this.type = new FormControl('', []);
+    this.type = new FormControl('', [
+      Validators.required
+    ]);
   }
 
   submitForm() {

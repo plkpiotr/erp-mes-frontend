@@ -24,8 +24,8 @@ export class AddTaskComponent implements OnInit {
   estimatedTime: FormControl;
   deadline: FormControl;
   scheduledTime: FormControl;
-  details?: FormControl;
-  type?: FormControl;
+  details: FormControl;
+  type: FormControl;
 
   assignees: Array<Employee>;
   precedingTasks: Array<Task>;
@@ -78,12 +78,15 @@ export class AddTaskComponent implements OnInit {
     ]);
     this.scheduledTime = new FormControl('', []);
     this.details = new FormControl('', [
-      Validators.maxLength(25),
+      Validators.maxLength(250),
     ]);
-    this.type = new FormControl('', []);
+    this.type = new FormControl('', [
+      Validators.required
+    ]);
   }
 
   submitForm() {
+    console.log(this.form.get('precedingTaskIds'));
     this.taskRequest = {
       name: this.form.get('name').value,
       precedingTaskIds: this.form.get('precedingTaskIds').value,
@@ -94,27 +97,31 @@ export class AddTaskComponent implements OnInit {
       details: this.form.get('details').value,
       type: this.form.get('type').value
     };
+    if (this.form.get('precedingTaskIds').value.constructor !== Array) {
+      this.taskRequest.precedingTaskIds = [];
+    }
+    console.log(this.form.get('precedingTaskIds'));
     let task: Task;
     this.taskService.addTask(this.taskRequest)
       .subscribe(res => {
-        task = res;
-      }, err => {
-        console.log(err);
+          task = res;
+        }, err => {
+          console.log(err);
         },
         () => {
-        this.router.navigate(['/tasks', task.id]);
+          this.router.navigate(['/tasks', task.id]);
         });
   }
 
   getErrorName() {
-    return this.name.hasError('maxLength') ? '' : 'Maximum 25 characters';
+    return this.name.hasError('maxLength') ? '' : '0-25 characters';
   }
 
   getErrorDetails() {
-    return this.details.hasError('maxLength') ? '' : 'Maximum 250 characters';
+    return this.details.hasError('maxLength') ? '' : '0-250 characters';
   }
 
   getErrorEstimatedTime() {
-    return this.estimatedTime.hasError('min') ? 'dd' : 'Więcej niż zero';
+    return this.estimatedTime.hasError('min') ? '' : 'Positive number';
   }
 }

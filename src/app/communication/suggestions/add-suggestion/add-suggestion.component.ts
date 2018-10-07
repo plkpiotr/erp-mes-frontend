@@ -4,7 +4,6 @@ import {SuggestionService} from '../../../services/suggestion.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-add-suggestion',
@@ -74,10 +73,10 @@ export class AddSuggestionComponent implements OnInit {
   }
 
   getErrorName() {
-    return this.name.hasError('maxLength') ? '' : 'Maximum 25 characters';
+    return this.name.hasError('maxLength') ? '' : '0-25 characters';
   }
 
   getErrorDescription() {
-    return this.description.hasError('maxLength') ? '' : 'Maximum 250 characters';
+    return this.description.hasError('maxLength') ? '' : '0-250 characters';
   }
 }

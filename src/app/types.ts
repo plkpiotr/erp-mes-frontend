@@ -62,7 +62,8 @@ export enum Type {
   DELIVERY = 'DELIVERY',
   ORDER = 'ORDER',
   COMPLAINT = 'COMPLAINT',
-  RETURN = 'RETURN'
+  RETURN = 'RETURN',
+  OTHER = 'OTHER'
 }
 
 export enum ReturnStatus {
@@ -154,8 +155,8 @@ export interface Task {
   name: string;
   category: Category;
   precedingTaskIds: number[];
-  authorDTO: Employee;
-  assigneeDTO?: Employee;
+  author: Employee;
+  assignee?: Employee;
   creationTime: Date;
   estimatedTime: number;
   deadline: Date;
@@ -163,7 +164,7 @@ export interface Task {
   startTime?: Date;
   endTime?: Date;
   details?: string;
-  type?: Type;
+  type: Type;
   startEmployee?: Employee;
   endEmployee?: Employee;
 }
@@ -296,8 +297,7 @@ export interface Notification {
   transferee?: Employee;
   consignees: Employee[];
   creationTime: Date;
-  type?: Type;
-  reference?: number;
+  type: Type;
   startTime?: Date;
   endTime?: Date;
   endEmployee?: Employee;
@@ -309,7 +309,6 @@ export interface NotificationRequest {
   notifierId?: number;
   consigneeIds: number[];
   type?: Type;
-  referenceId?: number;
 }
 
 export interface Suggestion {
@@ -317,8 +316,8 @@ export interface Suggestion {
   phase: Phase;
   name: string;
   description: string;
-  authorDTO: Employee;
-  recipientDTOs: Employee[];
+  author: Employee;
+  recipients: Employee[];
   creationTime: Date;
   startTime?: Date;
   endTime?: Date;

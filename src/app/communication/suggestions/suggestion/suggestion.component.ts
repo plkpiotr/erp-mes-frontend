@@ -17,10 +17,14 @@ export class SuggestionComponent implements OnInit {
   constructor(private suggestionService: SuggestionService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.fetchOneSuggestion();
+    this.route.params.subscribe(
+      params => {
+        this.fetchSuggestion();
+      }
+    );
   }
 
-  fetchOneSuggestion() {
+  fetchSuggestion() {
     this.suggestionService.fetchOneSuggestion(this.route.snapshot.params[('id')])
       .subscribe(res => {
         this.suggestion = res;
@@ -38,7 +42,7 @@ export class SuggestionComponent implements OnInit {
       }, err => {
         console.log(err);
       }, () => {
-        this.router.navigate(['/suggestions']);
+        this.router.navigate(['/suggestions', this.route.snapshot.params[('id')]]);
       });
   }
 

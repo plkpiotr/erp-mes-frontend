@@ -15,7 +15,7 @@
 
       <ng-container matColumnDef="phase">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Phase</th>
-        <td mat-cell *matCellDef="let row">{{row.phase | titlecase}}</td>
+        <td mat-cell *matCellDef="let row">{{row.phase | enumeration}}</td>
       </ng-container>
 
       <ng-container matColumnDef="id">
@@ -31,8 +31,8 @@
       <ng-container matColumnDef="author">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Author</th>
         <td mat-cell *matCellDef="let row">
-          {{row.authorDTO.firstName}}
-          {{row.authorDTO.lastName}}
+          {{row.author.firstName}}
+          {{row.author.lastName}}
         </td>
       </ng-container>
 

@@ -13,7 +13,7 @@ export class TasksComponent implements OnInit {
 
   tasks: Array<Task>;
   areTasksLoaded = false;
-  displayedColumns: string[] = ['creationTime', 'deadline', 'category', 'type', 'reference', 'name', 'assignee', 'id'];
+  displayedColumns: string[] = ['creationTime', 'deadline', 'category', 'name', 'type', 'assignee', 'id'];
   dataSource: MatTableDataSource<Task> = new MatTableDataSource<Task>();
   paginator: any;
   sort: any;

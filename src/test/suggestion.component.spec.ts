@@ -147,7 +147,7 @@ describe('SuggestionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call suggestionService.fetchOneSuggestion()', () => {
+  it('should call suggestionService.fetchSuggestion()', () => {
     spyOn(service, 'fetchOneSuggestion').and.callThrough();
     component.ngOnInit();
     expect(service.fetchOneSuggestion).toHaveBeenCalledWith(route.snapshot.params['id']);

@@ -12,7 +12,7 @@
         <mat-divider></mat-divider>
         <p>State: <strong>{{notification.state | enumeration}}</strong></p>
         <mat-divider></mat-divider>
-        <p>Type: <strong>{{notification.type ? (notification.type | titlecase) : 'N/A'}}</strong></p>
+        <p>Type: <strong>{{notification.type | enumeration}}</strong></p>
         <mat-divider></mat-divider>
         <button mat-raised-button *ngIf="!(notification.state === isResolved)" (click)="submitForm()">
           Next state
