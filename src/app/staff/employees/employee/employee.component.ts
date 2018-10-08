@@ -102,7 +102,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   fetchTasksByAssignee() {
-    this.taskService.fetchTasksByAssignee(this.route.snapshot.params['id']).subscribe(
+    this.taskService.fetchTasksByAssignee().subscribe(
       res => {
         this.tasks = res;
       }, err => {
