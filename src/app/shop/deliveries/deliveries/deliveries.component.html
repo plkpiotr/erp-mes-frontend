@@ -5,25 +5,25 @@
   <div *ngIf="areDeliveriesLoaded">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Index</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}}</td>
       </ng-container>
 
       <ng-container matColumnDef="scheduledFor">
-        <mat-header-cell *matHeaderCellDef> Scheduled for</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.scheduledFor}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Scheduled for</th>
+        <td mat-cell *matCellDef="let row"> {{row.scheduledFor}}</td>
       </ng-container>
 
       <ng-container matColumnDef="value">
-        <mat-header-cell *matHeaderCellDef> Value</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.value}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Value</th>
+        <td mat-cell *matCellDef="let row"> {{row.value}}</td>
       </ng-container>
 
-      <mat-header-row
-        *matHeaderRowDef="['id', 'scheduledFor', 'value']"></mat-header-row>
-      <mat-row
+      <tr mat-header-row
+        *matHeaderRowDef="['id', 'scheduledFor', 'value']"></tr>
+      <tr mat-row
         *matRowDef="let row; columns: ['id', 'scheduledFor', 'value']"
-        (click)="seeDelivery(row.id)"></mat-row>
+        (click)="seeDelivery(row.id)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     <button mat-raised-button (click)="addDelivery()">Add delivery</button>

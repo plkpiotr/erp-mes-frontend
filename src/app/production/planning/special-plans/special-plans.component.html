@@ -5,44 +5,44 @@
   <div *ngIf="arePlansLoaded">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Index</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}}</td>
       </ng-container>
 
       <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.description}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Description</th>
+        <td mat-cell *matCellDef="let row"> {{row.description}}</td>
       </ng-container>
 
       <ng-container matColumnDef="day">
-        <mat-header-cell *matHeaderCellDef> Day</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.day}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Day</th>
+        <td mat-cell *matCellDef="let row"> {{row.day}}</td>
       </ng-container>
 
       <ng-container matColumnDef="employeesPerDay">
-        <mat-header-cell *matHeaderCellDef> Number of employees</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.employeesPerDay}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Number of employees</th>
+        <td mat-cell *matCellDef="let row"> {{row.employeesPerDay}}</td>
       </ng-container>
 
       <ng-container matColumnDef="ordersPerDay">
-        <mat-header-cell *matHeaderCellDef> Orders</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.ordersPerDay}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Orders</th>
+        <td mat-cell *matCellDef="let row"> {{row.ordersPerDay}}</td>
       </ng-container>
 
       <ng-container matColumnDef="returnsPerDay">
-        <mat-header-cell *matHeaderCellDef> Returns</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.returnsPerDay}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Returns</th>
+        <td mat-cell *matCellDef="let row"> {{row.returnsPerDay}}</td>
       </ng-container>
 
       <ng-container matColumnDef="complaintsResolvedPerDay">
-        <mat-header-cell *matHeaderCellDef> Complaints</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.complaintsResolvedPerDay}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Complaints</th>
+        <td mat-cell *matCellDef="let row"> {{row.complaintsResolvedPerDay}}</td>
       </ng-container>
 
-      <mat-header-row
-        *matHeaderRowDef="['id', 'description', 'day', 'employeesPerDay', 'ordersPerDay', 'returnsPerDay', 'complaintsResolvedPerDay']"></mat-header-row>
-      <mat-row
-        *matRowDef="let row; columns: ['id', 'description', 'day', 'employeesPerDay', 'ordersPerDay', 'returnsPerDay', 'complaintsResolvedPerDay']"></mat-row>
+      <tr mat-header-row
+        *matHeaderRowDef="['id', 'description', 'day', 'employeesPerDay', 'ordersPerDay', 'returnsPerDay', 'complaintsResolvedPerDay']"></tr>
+      <tr mat-row
+        *matRowDef="let row; columns: ['id', 'description', 'day', 'employeesPerDay', 'ordersPerDay', 'returnsPerDay', 'complaintsResolvedPerDay']"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>

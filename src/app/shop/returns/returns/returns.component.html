@@ -5,35 +5,35 @@
   <div *ngIf="areReturnsLoaded">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Index</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Customer name</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Customer name</th>
+        <td mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Status</th>
+        <td mat-cell *matCellDef="let row"> {{row.status}}</td>
       </ng-container>
 
       <ng-container matColumnDef="value">
-        <mat-header-cell *matHeaderCellDef> Value</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.value}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Value</th>
+        <td mat-cell *matCellDef="let row"> {{row.value}}</td>
       </ng-container>
 
       <ng-container matColumnDef="deadline">
-        <mat-header-cell *matHeaderCellDef> Deadline</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.scheduledFor}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Deadline</th>
+        <td mat-cell *matCellDef="let row"> {{row.scheduledFor}}</td>
       </ng-container>
 
-      <mat-header-row
-        *matHeaderRowDef="['id', 'name', 'status', 'value', 'deadline']"></mat-header-row>
-      <mat-row
+      <tr mat-header-row
+        *matHeaderRowDef="['id', 'name', 'status', 'value', 'deadline']"></tr>
+      <tr mat-row
         *matRowDef="let row; columns: ['id', 'name', 'status', 'value', 'deadline']"
-        (click)="seeReturn(row.id)"></mat-row>
+        (click)="seeReturn(row.id)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     <button mat-raised-button (click)="addReturn()">Add return</button>

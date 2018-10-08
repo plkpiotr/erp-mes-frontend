@@ -1,17 +1,5 @@
 @import "../../../../theme";
 
-mat-card, mat-expansion-panel {
-  margin-bottom: 15px;
-}
-
-.content {
-  margin: 15px;
-}
-
-mat-progress-spinner {
-  margin: auto;
-}
-
 mat-icon {
   margin-left: 10px;
   margin-right: 5px;
@@ -20,13 +8,8 @@ mat-icon {
 .daily-plan-info {
   display: inline-flex;
   vertical-align: middle;
-  padding-bottom: 10px;
 }
 
 .info {
-  margin-top: 5px;
-}
-
-.floating-button {
-  float: right;
+  margin-top: 20px;
 }

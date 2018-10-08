@@ -1,17 +1,5 @@
 @import "../../../../theme";
 
-mat-card, mat-expansion-panel {
-  margin-bottom: 15px;
-}
-
-.content {
-  margin: 15px;
-}
-
-mat-progress-spinner {
-  margin: auto;
-}
-
 mat-icon {
   margin-left: 25px;
   margin-right: 5px;
@@ -25,10 +13,6 @@ mat-icon {
 
 .info {
   margin-top: 5px;
-}
-
-button {
-  float: right;
 }
 
 .confirmed {

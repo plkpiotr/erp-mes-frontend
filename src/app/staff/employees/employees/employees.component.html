@@ -5,22 +5,22 @@
   <div *ngIf="areLoaded">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Index </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="role">
-        <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let row"> {{row.role}} </td>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['id', 'name', 'role']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['id', 'name', 'role']" (click)="fetchEmployee(row.id)"></mat-row>
+      <tr mat-header-row *matHeaderRowDef="['id', 'name', 'role']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'role']" (click)="fetchEmployee(row.id)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     <button mat-raised-button (click)="addEmployee()">Add employee</button>

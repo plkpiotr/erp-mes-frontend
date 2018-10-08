@@ -1,18 +1,1 @@
 @import "../../../../theme";
-
-.content {
-  display: flex;
-  flex-direction: column;
-  margin: 15px;
-  align-items: flex-start;
-}
-
-mat-form-field {
-  width: 250px;
-  margin: 5px auto;
-}
-
-button {
-  margin-top: 15px;
-  align-self: center;
-}

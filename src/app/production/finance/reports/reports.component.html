@@ -5,32 +5,32 @@
   <div *ngIf="areReportsLoaded">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Index </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
 
       <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef> Start date </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.startDate}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Start date </th>
+        <td mat-cell *matCellDef="let row"> {{row.startDate}}</td>
       </ng-container>
 
       <ng-container matColumnDef="expenses">
-        <mat-header-cell *matHeaderCellDef> Expenses </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.overallExpenses}} </mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Expenses </th>
+        <td mat-cell *matCellDef="let row"> {{row.overallExpenses}} </td>
       </ng-container>
 
       <ng-container matColumnDef="income">
-        <mat-header-cell *matHeaderCellDef> Income </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.overallIncome}} </mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Income </th>
+        <td mat-cell *matCellDef="let row"> {{row.overallIncome}} </td>
       </ng-container>
 
       <ng-container matColumnDef="balance">
-        <mat-header-cell *matHeaderCellDef> Balance </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.balance}} </mat-cell>
+        <th mat-header-cell *matHeaderCellDef> Balance </th>
+        <td mat-cell *matCellDef="let row"> {{row.balance}} </td>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['id', 'date', 'expenses', 'income', 'balance']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['id', 'date', 'expenses', 'income', 'balance']" (click)="seeReport(row.id)"></mat-row>
+      <tr mat-header-row *matHeaderRowDef="['id', 'date', 'expenses', 'income', 'balance']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'date', 'expenses', 'income', 'balance']" (click)="seeReport(row.id)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
