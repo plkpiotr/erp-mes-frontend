@@ -1,0 +1,167 @@
+// Variables:
+
+$link: #439AE2;
+$dark: #90CAF9;
+$normal: #BBDEFB;
+$light: #E3F2FD;
+
+// Header:
+
+mat-card {
+  border-radius: 0;
+  padding: 15px 14px 15px 15px;
+  background-color: $normal;
+}
+
+// Container for forms:
+
+@media (max-width: 900px) {
+  .container {
+    padding: 2vh 8vw !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    padding: 2vh 16vw;
+  }
+}
+
+.container {
+  padding: 2vh 20vw;
+}
+
+// Container for no-forms:
+
+.content {
+  padding: 2vh 4vw;
+}
+
+// Spinner:
+
+mat-spinner {
+  margin: 2vh auto;
+  &::ng-deep circle {
+    stroke: $normal;
+  }
+}
+
+// Table:
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: $normal;
+}
+
+tr {
+  background-color: $light;
+  transition: .3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: $normal;
+    transition: .3s ease-in-out;
+  }
+}
+
+::ng-deep .mat-sort-header-container {
+  color: black;
+}
+
+// Filters:
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+// Button:
+
+button {
+  box-shadow: none;
+  float: right;
+  margin: 10px auto;
+  background-color: $normal;
+  &:hover {
+    background-color: $dark;
+  }
+}
+
+// Kanban board:
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.tile {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  margin: 1vh 0.5vw;
+  padding: 1vh 0.5vw;
+  min-height: 70px;
+  min-width: 190px;
+  max-height: 70px;
+  max-width: 190px;
+  background-color: $light;
+  transition: .3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: $normal;
+    transition: .3s ease-in-out;
+  }
+}
+
+// Responsiveness instead of Angular-Flex or Bootstrap:
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid {
+  flex: 1;
+  min-width: 250px;
+  margin : 3vh 3vw 1.5vh 0;
+}
+
+// Plain text:
+
+.hyperlink {
+  transition: .3s ease-in-out;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  &:hover {
+    color: $link;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+  }
+}
+
+.paragraph {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+// Inputs:
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input::-webkit-clear-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

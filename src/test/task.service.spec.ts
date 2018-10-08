@@ -63,7 +63,7 @@ const mockTasks = [
   {
     id: 1,
     name: 'Zapakować przesyłkę nr 1444',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 1,
       firstName: 'Jakub',
@@ -81,19 +81,19 @@ const mockTasks = [
     },
     precedingTasks: [],
     details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 15,
+    estimatedTime: 15,
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
     id: 2,
     name: 'Wysłać przesyłkę nr 1490',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 1,
       firstName: 'Jakub',
@@ -111,19 +111,19 @@ const mockTasks = [
     },
     precedingTasks: [],
     details: 'Zmienić sposób dostarczenia na list ekonomiczny',
-    estimatedTimeInMinutes: 19,
+    estimatedTime: 19,
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
     id: 3,
     name: 'Wysłać przesyłkę nr 1429',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 1,
       firstName: 'Jakub',
@@ -143,7 +143,7 @@ const mockTasks = [
       {
         id: 1,
         name: 'Zapakować przesyłkę nr 1444',
-        category: Category.TODO,
+        category: Category.TO_DO,
         assignee: {
           id: 1,
           firstName: 'Jakub',
@@ -161,19 +161,19 @@ const mockTasks = [
         },
         precedingTasks: [],
         details: 'Zmienić sposób dostarczenia na list priorytetowy',
-        estimatedTimeInMinutes: 15,
+        estimatedTime: 15,
         deadline: new Date('October 15, 2014 08:00:00'),
         creationTime: new Date('October 13, 2014 11:13:00'),
         startTime: null,
         endTime: null,
         type: null,
-        reference: null,
+        referenceId: null,
         scheduledTime: new Date('October 13, 2014 11:15:00')
       },
       {
         id: 2,
         name: 'Wysłać przesyłkę nr 1410',
-        category: Category.TODO,
+        category: Category.TO_DO,
         assignee: {
           id: 1,
           firstName: 'Jakub',
@@ -191,19 +191,19 @@ const mockTasks = [
         },
         precedingTasks: [],
         details: 'Zmienić sposób dostarczenia na list priorytetowy',
-        estimatedTimeInMinutes: 17,
+        estimatedTime: 17,
         deadline: new Date('October 15, 2014 08:00:00'),
         creationTime: new Date('October 13, 2014 11:13:00'),
         startTime: null,
         endTime: null,
         type: null,
-        reference: null,
+        referenceId: null,
         scheduledTime: new Date('October 13, 2014 11:15:00')
       },
       {
         id: 3,
         name: 'Wysłać przesyłkę nr 1490',
-        category: Category.TODO,
+        category: Category.TO_DO,
         assignee: {
           id: 1,
           firstName: 'Jakub',
@@ -221,30 +221,30 @@ const mockTasks = [
         },
         precedingTasks: [],
         details: 'Zmienić sposób dostarczenia na list ekonomiczny',
-        estimatedTimeInMinutes: 19,
+        estimatedTime: 19,
         deadline: new Date('October 15, 2014 08:00:00'),
         creationTime: new Date('October 13, 2014 11:13:00'),
         startTime: null,
         endTime: null,
         type: null,
-        reference: null,
+        referenceId: null,
         scheduledTime: new Date('October 13, 2014 11:15:00')
       }
     ],
     details: 'Nakleić informację: Uwaga! Szkło',
-    estimatedTimeInMinutes: 13,
+    estimatedTime: 13,
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   },
   {
     id: 4,
     name: 'Wysłać przesyłkę nr 1410',
-    category: Category.TODO,
+    category: Category.TO_DO,
     assignee: {
       id: 2,
       firstName: 'Michał',
@@ -262,20 +262,20 @@ const mockTasks = [
     },
     precedingTasks: [],
     details: 'Zmienić sposób dostarczenia na list priorytetowy',
-    estimatedTimeInMinutes: 17,
+    estimatedTime: 17,
     deadline: new Date('October 15, 2014 08:00:00'),
     creationTime: new Date('October 13, 2014 11:13:00'),
     startTime: null,
     endTime: null,
     type: null,
-    reference: null,
+    referenceId: null,
     scheduledTime: new Date('October 13, 2014 11:15:00')
   }
 ];
 
 const mockTaskRequest = {
   name: 'Wysłać przesyłkę nr 1951',
-  category: Category.TODO,
+  category: Category.TO_DO,
   assigneeId: null,
   precedingTaskIds: [],
   details: 'Wykonać w pierwszej kolejności',
@@ -392,19 +392,19 @@ describe('TaskService', () => {
     });
   });
 
-  describe('given fetchTasksByAssignee method', () => {
-    describe('when called', () => {
-      it('should hit "/employees/1/tasks" with GET and return tasks by assignee', () => {
-        taskService.fetchTasksByAssignee(1).subscribe(tasks => {
-          expect(tasks.length).toBe(3);
-          const req = httpMock.expectOne('http://localhost:8080/employees/1/tasks');
-          expect(req.request.method).toBe('GET');
-          req.flush(mockTasks.slice(0, 3));
-          httpMock.verify();
-        });
-      });
-    });
-  });
+  // describe('given fetchTasksByAssignee method', () => {
+  //   describe('when called', () => {
+  //     it('should hit "/employees/1/tasks" with GET and return tasks by assignee', () => {
+  //       taskService.fetchTasksByAssignee(1).subscribe(tasks => {
+  //         expect(tasks.length).toBe(3);
+  //         const req = httpMock.expectOne('http://localhost:8080/employees/1/tasks');
+  //         expect(req.request.method).toBe('GET');
+  //         req.flush(mockTasks.slice(0, 3));
+  //         httpMock.verify();
+  //       });
+  //     });
+  //   });
+  // });
 
   describe('given addTask method', () => {
     describe('when called', () => {

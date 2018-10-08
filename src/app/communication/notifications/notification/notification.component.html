@@ -1,19 +1,67 @@
 <mat-card>Notification</mat-card>
-<div *ngIf="isNotificationLoaded">
-  {{notification.id}} <br>
-  {{notification.state}} <br>
-  {{notification.instruction}} <br>
-  {{notification.description}} <br>
-  {{notification.notifier.firstName}} <br>
-  {{notification.notifier.lastName}} <br>
-  {{notification.transferee.firstName}} <br>
-  {{notification.transferee.lastName}} <br>
-  {{notification.creationTime}} <br>
-  {{notification.type}} <br>
-  {{notification.reference}} <br>
-  <div *ngIf="notification.consignees">
-    <div *ngFor="let c of notification.consignees">
-      {{c.id}} {{c.firstName}} {{c.lastName}}
+<div class="content">
+  <mat-spinner *ngIf="!isNotificationLoaded"></mat-spinner>
+  <div *ngIf="isNotificationLoaded">
+    <h3>{{notification.instruction}}</h3>
+    <mat-divider></mat-divider>
+    <h4 *ngIf="notification.description">{{notification.description}}</h4>
+    <mat-divider *ngIf="notification.description"></mat-divider>
+    <div class="row">
+      <form class="grid" (ngSubmit)="submitForm()">
+        <p>ID: <strong>{{notification.id}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>State: <strong>{{notification.state | enumeration}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Type: <strong>{{notification.type | enumeration}}</strong></p>
+        <mat-divider></mat-divider>
+        <button mat-raised-button *ngIf="!(notification.state === isResolved)" (click)="submitForm()">
+          Next state
+        </button>
+      </form>
+      <div class="grid">
+        <p>Reported at:
+          <strong>
+            {{notification.creationTime | date: 'short'}}
+          </strong>
+        </p>
+        <p>Reported by:
+          <strong>
+            {{notification.notifier.firstName}} {{notification.notifier.lastName}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+        <p>Taken over at:
+          <strong>
+            {{notification.startTime ? (notification.startTime | date: 'short') : 'N/A'}}
+          </strong>
+        </p>
+        <p>Taken over by:
+          <strong>
+            {{notification.transferee ? (notification.transferee.firstName + ' ' + notification.transferee.lastName) : 'N/A'}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+        <p>Deemed to be completed at:
+          <strong>
+            {{notification.endTime ? (notification.endTime | date: 'short') : 'N/A'}}
+          </strong>
+        </p>
+        <p>Deemed to be completed by:
+          <strong>
+            {{notification.endEmployee ? (notification.endEmployee.firstName + ' ' + notification.endEmployee.lastName) : 'N/A'}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="grid">
+        <p>Consignees:</p>
+        <div *ngIf="notification.consignees">
+          <div class="hyperlink" *ngFor="let n of notification.consignees" (click)="seeEmployee(n.id)">
+            {{n.firstName}} {{n.lastName}} ({{n.role | enumeration}})
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
     </div>
   </div>
 </div>

@@ -1,1 +1,18 @@
-@import "../../../../global";
+@import "../../../../theme";
+
+.mat-divider {
+  margin: 10px 0;
+}
+
+mat-expansion-panel {
+  margin: 0;
+  background-color: $normal;
+}
+
+mat-expansion-panel-header {
+  padding: 0 20px;
+}
+
+.expansion-panel-paragraph {
+  padding: 5px 20px;
+}

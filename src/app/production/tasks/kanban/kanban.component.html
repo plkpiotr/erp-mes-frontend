@@ -1,0 +1,47 @@
+<mat-card>Kanban board</mat-card>
+<mat-spinner *ngIf="!areMyTasksLoaded">
+</mat-spinner>
+<div class="content">
+  <mat-tab-group dynamicHeight *ngIf="areMyTasksLoaded">
+
+    <mat-tab label="To do">
+      <div class="tile" *ngFor="let myTask of (myTasks | tasksTodo)" (click)="seeTask(myTask.id)">
+        <p>ID: <strong>{{myTask.id}}</strong> Type: <strong>{{myTask.type ? myTask.type : 'N/A'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p><strong>{{myTask.name}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Created: <strong>{{myTask.creationTime | date:'short'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Deadline: <strong>{{myTask.deadline | date:'short'}}</strong></p>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Doing">
+      <div class="tile" *ngFor="let myTask of (myTasks | tasksDoing)" (click)="seeTask(myTask.id)">
+        <p>ID: <strong>{{myTask.id}}</strong> Type: <strong>{{myTask.type ? myTask.type : 'N/A'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p><strong>{{myTask.name}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Started: <strong>{{myTask.startTime | date:'short'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Deadline: <strong>{{myTask.deadline | date:'short'}}</strong></p>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Done">
+      <div class="tile" *ngFor="let myTask of (myTasks | tasksDoing)" (click)="seeTask(myTask.id)">
+        <p>ID: <strong>{{myTask.id}}</strong> Type: <strong>{{myTask.type ? myTask.type : 'N/A'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p><strong>{{myTask.name}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Ended: <strong>{{myTask.endTime | date:'short'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Deadline: <strong>{{myTask.deadline | date:'short'}}</strong></p>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

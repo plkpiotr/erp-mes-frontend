@@ -59,6 +59,7 @@ import {OutboxComponent} from '../app/communication/emails/outbox/outbox.compone
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {EmailService} from '../app/services/email.service';
 import {EmailType} from '../app/types';
+import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
 
 const mockEmails = [
   {
@@ -164,7 +165,8 @@ describe('EmailService', () => {
         InboxComponent,
         OutboxComponent,
         AddEmailComponent,
-        ConversationComponent
+        ConversationComponent,
+        KanbanComponent
       ],
       providers: [
         EmployeeService,

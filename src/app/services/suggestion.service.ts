@@ -21,11 +21,11 @@ export class SuggestionService {
     return this.http.get<Suggestion>('http://localhost:8080/suggestions/' + id, {headers: this.httpHeaders});
   }
 
-  fetchSuggestionsByRecipient(id: number): Observable<Array<Suggestion>> {
-    return this.http.get<Array<Suggestion>>('http://localhost:8080/employees/' + id + '/tasks', {headers: this.httpHeaders});
-  }
-
   addSuggestion(suggestionRequest: SuggestionRequest): Observable<Suggestion> {
     return this.http.post<Suggestion>('http://localhost:8080/suggestions', suggestionRequest, {headers: this.httpHeaders});
+  }
+
+  setNextPhase(id: number): Observable<Suggestion> {
+    return this.http.put<Suggestion>('http://localhost:8080/suggestions/' + id, {headers: this.httpHeaders});
   }
 }

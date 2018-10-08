@@ -14,7 +14,7 @@ export class ComplaintComponent implements OnInit {
 
   isComplaintLoaded = false;
   complaint: Complaint;
-  unresolvedStatuses = ['IN_PROGRESS', 'ACCEPTED', 'DECLINED', 'DECLINED_ITEM_SENT'];
+  unresolvedStatuses = ['IN_PROGRESS', 'IN_PROGRESS', 'DECLINED', 'DECLINED_ITEM_SENT'];
   resolvedStatuses = ['MONEY_RETURNED', 'NEW_ITEM_SENT', 'REPAIRING_ITEM', 'REPAIRED_ITEM_SENT'];
   statuses;
   resolutions;

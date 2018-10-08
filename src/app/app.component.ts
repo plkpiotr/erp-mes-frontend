@@ -21,5 +21,4 @@ export class AppComponent {
   isUserLoggedIn(): boolean {
     return this.token.getToken() != null;
   }
-
 }

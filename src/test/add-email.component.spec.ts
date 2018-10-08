@@ -55,6 +55,7 @@ import {appRoutes} from '../app/app.routing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormsModule} from '@angular/forms';
+import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
 
 describe('AddEmailComponent', () => {
   let component: AddEmailComponent;
@@ -108,7 +109,8 @@ describe('AddEmailComponent', () => {
         InboxComponent,
         OutboxComponent,
         AddEmailComponent,
-        ConversationComponent
+        ConversationComponent,
+        KanbanComponent
       ],
       providers: [
         EmployeeService,

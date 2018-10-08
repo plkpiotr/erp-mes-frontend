@@ -23,7 +23,7 @@ export enum ApprovalState {
 }
 
 export enum Category {
-  TODO = 'TODO',
+  TO_DO = 'TO_DO',
   DOING = 'DOING',
   DONE = 'DONE'
 }
@@ -48,22 +48,22 @@ export enum Status {
 
 export enum State {
   REPORTED = 'REPORTED',
-  ACCEPTED = 'ACCEPTED',
-  SOLVED = 'SOLVED'
+  IN_PROGRESS = 'IN_PROGRESS',
+  RESOLVED = 'RESOLVED'
 }
 
 export enum Phase {
   REPORTED = 'REPORTED',
   IN_IMPLEMENTATION = 'IN_IMPLEMENTATION',
   IMPLEMENTED = 'IMPLEMENTED',
-  ABANDONED = 'ABANDONED'
 }
 
 export enum Type {
   DELIVERY = 'DELIVERY',
   ORDER = 'ORDER',
   COMPLAINT = 'COMPLAINT',
-  RETURN = 'RETURN'
+  RETURN = 'RETURN',
+  OTHER = 'OTHER'
 }
 
 export enum ReturnStatus {
@@ -154,30 +154,30 @@ export interface Task {
   id: number;
   name: string;
   category: Category;
+  precedingTaskIds: number[];
+  author: Employee;
   assignee?: Employee;
-  precedingTasks: Task[];
-  details: string;
-  estimatedTimeInMinutes: number;
-  deadline: Date;
   creationTime: Date;
+  estimatedTime: number;
+  deadline: Date;
+  scheduledTime?: Date;
   startTime?: Date;
   endTime?: Date;
-  type?: Type;
-  reference?: number;
-  scheduledTime: Date;
+  details?: string;
+  type: Type;
+  startEmployee?: Employee;
+  endEmployee?: Employee;
 }
 
 export interface TaskRequest {
   name: string;
-  category: Category;
-  assigneeId?: number;
   precedingTaskIds: number[];
-  details: string;
-  estimatedTimeInMinutes: number;
+  assigneeId?: number;
+  estimatedTime: number;
   deadline: Date;
+  scheduledTime?: Date;
+  details?: string;
   type?: Type;
-  reference?: number;
-  scheduledTime: Date;
 }
 
 export interface EstimatedCosts {
@@ -297,8 +297,10 @@ export interface Notification {
   transferee?: Employee;
   consignees: Employee[];
   creationTime: Date;
-  type?: Type;
-  reference?: number;
+  type: Type;
+  startTime?: Date;
+  endTime?: Date;
+  endEmployee?: Employee;
 }
 
 export interface NotificationRequest {
@@ -307,7 +309,6 @@ export interface NotificationRequest {
   notifierId?: number;
   consigneeIds: number[];
   type?: Type;
-  reference?: number;
 }
 
 export interface Suggestion {
@@ -315,15 +316,18 @@ export interface Suggestion {
   phase: Phase;
   name: string;
   description: string;
-  author?: Employee;
+  author: Employee;
   recipients: Employee[];
   creationTime: Date;
+  startTime?: Date;
+  endTime?: Date;
+  startEmployee?: Employee;
+  endEmployee?: Employee;
 }
 
 export interface SuggestionRequest {
   name: String;
   description: String;
-  authorId?: number;
   recipientIds: number[];
 }
 

@@ -1,22 +1,75 @@
 <mat-card>Task</mat-card>
-<div *ngIf="isTaskLoaded">
-  {{task.id}} <br>
-  {{task.category}} <br>
-  {{task.name}} <br>
-  {{task.details}} <br>
-  {{task.assignee.firstName}} <br>
-  {{task.assignee.lastName}} <br>
-  {{task.estimatedTimeInMinutes}} <br>
-  {{task.deadline}} <br>
-  {{task.creationTime}} <br>
-  {{task.startTime}} <br>
-  {{task.endTime}} <br>
-  {{task.type}} <br>
-  {{task.reference}} <br>
-  {{task.scheduledTime}}
-  <div *ngIf="task.precedingTasks">
-    <div *ngFor="let p of task.precedingTasks">
-      {{p.id}} {{p.name}}
+<div class="content">
+  <mat-spinner *ngIf="!isTaskLoaded"></mat-spinner>
+  <div *ngIf="isTaskLoaded">
+    <h3>{{task.name}}</h3>
+    <mat-divider></mat-divider>
+    <h4 *ngIf="task.details">{{task.details}}</h4>
+    <mat-divider *ngIf="task.details"></mat-divider>
+    <div class="row">
+      <form class="grid" (ngSubmit)="submitForm()">
+        <p>ID: <strong>{{task.id}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Category: <strong>{{task.category | enumeration}}</strong></p>
+        <p>Type: <strong>{{task.type | enumeration}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Assignee: <strong>
+          {{task.assignee ? (task.assignee.firstName + ' ' + task.assignee.lastName) : 'N/A'}}
+        </strong></p>
+        <mat-divider></mat-divider>
+        <p>Scheduled time: <strong>{{task.scheduledTime ? (task.scheduledTime | date: 'short') : 'N/A'}}</strong></p>
+        <p>Deadline: <strong>{{task.deadline | date: 'short'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Estimated time: <strong>{{task.estimatedTime}}</strong></p>
+        <mat-divider></mat-divider>
+        <button mat-raised-button *ngIf="!(task.category === isDone)" (click)="submitForm()">
+          Next category
+        </button>
+      </form>
+      <div class="grid">
+        <p>Created at:
+          <strong>
+            {{task.creationTime | date: 'short'}}
+          </strong>
+        </p>
+        <p>Created by:
+          <strong>
+            {{task.author.firstName}} {{task.author.lastName}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+        <p>Deemed to be started at:
+          <strong>
+            {{task.startTime ? (task.startTime | date: 'short') : 'N/A'}}
+          </strong>
+        </p>
+        <p>Deemed to be started by:
+          <strong>
+            {{task.startEmployee ? (task.startEmployee.firstName + ' ' + task.startEmployee.lastName) : 'N/A'}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+        <p>Deemed to be completed at:
+          <strong>
+            {{task.endTime ? (task.endTime | date: 'short') : 'N/A'}}
+          </strong>
+        </p>
+        <p>Deemed to be completed by:
+          <strong>
+            {{task.endEmployee ? (task.endEmployee.firstName + ' ' + task.endEmployee.lastName) : 'N/A'}}
+          </strong>
+        </p>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="grid">
+        <p>Preceding task IDs:</p>
+        <div *ngIf="task.precedingTaskIds">
+          <div class="hyperlink" *ngFor="let p of task.precedingTaskIds" (click)="seeTask(p)">
+            No. {{p}}
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
     </div>
   </div>
 </div>

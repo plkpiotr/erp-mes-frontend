@@ -59,6 +59,7 @@ import {AddEmailComponent} from '../app/communication/emails/add-email/add-email
 import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {EmailService} from '../app/services/email.service';
+import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
 
 const mockContract = {
     id: 1,
@@ -178,7 +179,8 @@ describe('EmployeeService', () => {
         InboxComponent,
         OutboxComponent,
         AddEmailComponent,
-        ConversationComponent
+        ConversationComponent,
+        KanbanComponent
       ],
       providers: [
         EmployeeService,
@@ -214,6 +216,24 @@ describe('EmployeeService', () => {
           expect(employees).toEqual(mockEmployees);
 
           const req = httpMock.expectOne('http://localhost:8080/employees');
+          expect(req.request.method).toBe('GET');
+          req.flush(mockEmployees);
+
+          httpMock.verify();
+        });
+      });
+    });
+  });
+
+  describe('given fetchColleagues method', () => {
+    describe('when called', () => {
+
+      it('should hit "/employees/colleagues" with GET and return employees', () => {
+        service.fetchAllEmployees().subscribe(employees => {
+          expect(employees.length).toBe(3);
+          expect(employees).toEqual(mockEmployees);
+
+          const req = httpMock.expectOne('http://localhost:8080/employees/colleagues');
           expect(req.request.method).toBe('GET');
           req.flush(mockEmployees);
 

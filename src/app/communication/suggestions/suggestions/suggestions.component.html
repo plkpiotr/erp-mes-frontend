@@ -1,14 +1,45 @@
 <mat-card>Suggestions</mat-card>
-<div *ngIf="areSuggestionsLoaded">
-  <div *ngFor="let s of suggestions">
-    <hr> {{s.id}} {{s.phase}} {{s.name}} {{s.description}} {{s.creationTime}}
-    <div *ngIf="s.author">
-      {{s.author.firstName}} {{s.author.firstName}}
-    </div>
-    <div *ngFor="let r of s.recipients">
-      {{r.id}} {{r.firstName}} {{r.lastName}}
-    </div>
-  <button (click)="seeSuggestion(s.id)">Zobacz</button>
+<div class="content">
+  <mat-spinner *ngIf="!areSuggestionsLoaded">
+  </mat-spinner>
+  <div *ngIf="areSuggestionsLoaded">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search all suggestions">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="creationTime" matSortDirection="desc">
+
+      <ng-container matColumnDef="creationTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Creation time</th>
+        <td mat-cell *matCellDef="let row">{{row.creationTime | date:'short'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phase">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phase</th>
+        <td mat-cell *matCellDef="let row">{{row.phase | enumeration}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Author</th>
+        <td mat-cell *matCellDef="let row">
+          {{row.author.firstName}}
+          {{row.author.lastName}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="seeSuggestion(row.id)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addSuggestion()">Add suggestion</button>
   </div>
-  <button (click)="addSuggestion()">Dodaj sugestię</button>
 </div>

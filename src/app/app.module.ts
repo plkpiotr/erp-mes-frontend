@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routing} from './app.routing';
 import {EmployeesComponent} from './staff/employees/employees/employees.component';
 import {AddEmployeeComponent} from './staff/employees/add-employee/add-employee.component';
@@ -65,6 +65,12 @@ import {AddEmailComponent} from './communication/emails/add-email/add-email.comp
 import {EmailService} from './services/email.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material';
+import {MatSortModule, MatTableModule} from '@angular/material';
+import {KanbanComponent} from './production/tasks/kanban/kanban.component';
+import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
+import {TasksDonePipe} from './pipes/tasks-done.pipe';
+import {TasksTodoPipe} from './pipes/tasks-todo.pipe';
+import { EnumerationPipe } from './pipes/enumeration.pipe';
 
 @NgModule({
   declarations: [
@@ -108,7 +114,12 @@ import {MaterialModule} from './material';
     InboxComponent,
     OutboxComponent,
     ConversationComponent,
-    AddEmailComponent
+    AddEmailComponent,
+    KanbanComponent,
+    TasksDoingPipe,
+    TasksDonePipe,
+    TasksTodoPipe,
+    EnumerationPipe
   ],
   imports: [
     BrowserModule,
@@ -117,7 +128,11 @@ import {MaterialModule} from './material';
     routing,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    ReactiveFormsModule,
+    MaterialModule,
+    BrowserModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     EmployeeService,

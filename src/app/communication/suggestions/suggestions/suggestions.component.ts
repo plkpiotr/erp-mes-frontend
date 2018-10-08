@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {Router} from '@angular/router';
+import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
 
 @Component({
   selector: 'app-suggestions',
@@ -11,7 +12,24 @@ import {Router} from '@angular/router';
 export class SuggestionsComponent implements OnInit {
 
   suggestions: Array<Suggestion>;
+  mySuggestions: Array<Suggestion>;
   areSuggestionsLoaded = false;
+  displayedColumns: string[] = ['creationTime', 'phase', 'id', 'name', 'author'];
+  dataSource: MatTableDataSource<Suggestion> = new MatTableDataSource<Suggestion>();
+  paginator: any;
+  sort: any;
+
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  @ViewChild(MatSort)
+  set sorting(sort: MatSort) {
+    this.sort = sort;
+    this.dataSource.sort = this.sort;
+  }
 
   constructor(private suggestionService: SuggestionService, private router: Router) { }
 
@@ -22,6 +40,7 @@ export class SuggestionsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areSuggestionsLoaded = true;
+      this.dataSource = new MatTableDataSource<Suggestion>(this.suggestions);
     });
   }
 
@@ -31,5 +50,9 @@ export class SuggestionsComponent implements OnInit {
 
   addSuggestion() {
     this.router.navigate(['/suggestions/add']);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

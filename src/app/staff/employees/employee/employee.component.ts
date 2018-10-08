@@ -38,7 +38,6 @@ export class EmployeeComponent implements OnInit {
     this.loginService.fetchUser().subscribe(res => {
       if (res.id.toString() === this.route.snapshot.params['id']) {
         this.fetchEmployee();
-        this.fetchTasksByAssignee();
         this.isUserLoggedIn = true;
       } else {
         this.fetchProfile();
@@ -113,19 +112,6 @@ export class EmployeeComponent implements OnInit {
       },
       () => {
         this.areHolidaysLoaded = true;
-      }
-    );
-  }
-
-  fetchTasksByAssignee() {
-    this.taskService.fetchTasksByAssignee(this.route.snapshot.params['id']).subscribe(
-      res => {
-        this.tasks = res;
-      }, err => {
-        console.log(err);
-      },
-      () => {
-        this.areTasksLoaded = true;
       }
     );
   }

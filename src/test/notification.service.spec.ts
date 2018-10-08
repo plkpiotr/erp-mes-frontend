@@ -58,6 +58,7 @@ import {OutboxComponent} from '../app/communication/emails/outbox/outbox.compone
 import {AddEmailComponent} from '../app/communication/emails/add-email/add-email.component';
 import {ConversationComponent} from '../app/communication/emails/conversation/conversation.component';
 import {EmailService} from '../app/services/email.service';
+import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
 
 const mockNotifications = [
   {
@@ -115,7 +116,7 @@ const mockNotifications = [
       }
     ],
     type: null,
-    reference: null
+    referenceId: null
   },
   {
     id: 1,
@@ -172,7 +173,7 @@ const mockNotifications = [
       }
     ],
     type: null,
-    reference: null
+    referenceId: null
   }
 ];
 
@@ -236,7 +237,8 @@ describe('NotificationService', () => {
         InboxComponent,
         OutboxComponent,
         AddEmailComponent,
-        ConversationComponent
+        ConversationComponent,
+        KanbanComponent
       ],
       providers: [
         EmployeeService,

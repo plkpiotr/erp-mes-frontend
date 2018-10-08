@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee, Phase, Suggestion} from '../../../types';
+import {Employee, Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-suggestion',
@@ -12,30 +13,52 @@ import {Router} from '@angular/router';
 export class AddSuggestionComponent implements OnInit {
 
   suggestionRequest;
-  phase: Phase;
-  name: string;
-  description: string;
-  authorId?: number;
-  recipientIds: number[];
+  form: FormGroup;
 
-  // author: Employee; // TODO: Get logged in user (optional)
+  name: FormControl;
+  description: FormControl;
+  recipientIds: FormControl;
+
   recipients: Array<Employee>;
-  phases;
+  areRecipientsLoaded = false;
 
   constructor(private suggestionService: SuggestionService, private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() {
-    this.employeeService.fetchAllEmployees().subscribe(res => this.recipients = res);
-    this.phases = Object.keys(Phase);
+    this.employeeService.fetchColleagues().subscribe(res => {
+      this.recipients = res;
+    }, err => {
+      console.log(err);
+    }, () => {
+      this.areRecipientsLoaded = true;
+    });
+    this.setupFormControls();
+    this.form = new FormGroup({
+      'name': this.name,
+      'description': this.description,
+      'recipientIds': this.recipientIds
+    });
+  }
+
+  setupFormControls() {
+    this.name = new FormControl('', [
+      Validators.maxLength(25),
+      Validators.required
+    ]);
+    this.description = new FormControl('', [
+      Validators.maxLength(250),
+      Validators.required
+    ]);
+    this.recipientIds = new FormControl('', [
+      Validators.required
+    ]);
   }
 
   submitForm() {
     this.suggestionRequest = {
-      phase: this.phase,
-      name: this.name,
-      description: this.description,
-      authorId: null, // TODO: Get logged in user (optional)
-      recipientIds: this.recipientIds
+      name: this.form.get('name').value,
+      description: this.form.get('description').value,
+      recipientIds: this.form.get('recipientIds').value
     };
     let suggestion: Suggestion;
     this.suggestionService.addSuggestion(this.suggestionRequest)
@@ -45,7 +68,15 @@ export class AddSuggestionComponent implements OnInit {
           console.log(err);
         },
         () => {
-          this.router.navigate(['/suggestions', suggestion.id]);
+          this.router.navigate(['/suggestions/', suggestion.id]);
         });
+  }
+
+  getErrorName() {
+    return this.name.hasError('maxLength') ? '' : '0-25 characters';
+  }
+
+  getErrorDescription() {
+    return this.description.hasError('maxLength') ? '' : '0-250 characters';
   }
 }

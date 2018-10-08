@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Suggestion} from '../../../types';
+import {Phase, Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-suggestion',
@@ -12,11 +12,16 @@ export class SuggestionComponent implements OnInit {
 
   suggestion: Suggestion;
   isSuggestionLoaded = false;
+  isImplemented = Phase.IMPLEMENTED;
 
-  constructor(private suggestionService: SuggestionService, private route: ActivatedRoute) { }
+  constructor(private suggestionService: SuggestionService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.fetchSuggestion();
+    this.route.params.subscribe(
+      params => {
+        this.fetchSuggestion();
+      }
+    );
   }
 
   fetchSuggestion() {
@@ -28,5 +33,20 @@ export class SuggestionComponent implements OnInit {
       }, () => {
         this.isSuggestionLoaded = true;
       });
+  }
+
+  submitForm() {
+    this.suggestionService.setNextPhase(this.route.snapshot.params[('id')])
+      .subscribe(res => {
+        this.suggestion = res;
+      }, err => {
+        console.log(err);
+      }, () => {
+        this.router.navigate(['/suggestions', this.route.snapshot.params[('id')]]);
+      });
+  }
+
+  seeEmployee(id: number) {
+    this.router.navigate(['/employees', id]);
   }
 }

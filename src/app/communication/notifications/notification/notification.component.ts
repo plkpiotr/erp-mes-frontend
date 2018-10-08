@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Notification} from '../../../types';
+import {Notification, State} from '../../../types';
 import {NotificationService} from '../../../services/notification.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-notification',
@@ -12,11 +12,16 @@ export class NotificationComponent implements OnInit {
 
   notification: Notification;
   isNotificationLoaded = false;
+  isResolved = State.RESOLVED;
 
-  constructor(private notificationService: NotificationService, private route: ActivatedRoute) { }
+  constructor(private notificationService: NotificationService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.fetchNotification();
+    this.route.params.subscribe(
+      params => {
+        this.fetchNotification();
+      }
+    );
   }
 
   fetchNotification() {
@@ -28,5 +33,20 @@ export class NotificationComponent implements OnInit {
       }, () => {
         this.isNotificationLoaded = true;
       });
+  }
+
+  submitForm() {
+    this.notificationService.setNextState(this.route.snapshot.params[('id')])
+      .subscribe(res => {
+        this.notification = res;
+      }, err => {
+        console.log(err);
+      }, () => {
+        this.router.navigate(['/notifications', this.route.snapshot.params[('id')]]);
+      });
+  }
+
+  seeEmployee(id: number) {
+    this.router.navigate(['/employees', id]);
   }
 }
