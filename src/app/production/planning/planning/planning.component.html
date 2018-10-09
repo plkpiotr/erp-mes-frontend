@@ -35,7 +35,7 @@
   <mat-card *ngIf="isDailyPlanLoaded && isTodayLoaded">
     <mat-list>
       <mat-list-item class="daily-plan-info">
-        <span class="info"><b>Today</b></span>
+        <span><b>Today</b></span>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
@@ -54,17 +54,23 @@
   <mat-card *ngIf="isDailyPlanLoaded && isTomorrowLoaded">
     <mat-list>
       <mat-list-item class="daily-plan-info">
-        <span class="info"><b>Tomorrow</b></span>
-        <button mat-icon-button *ngIf="shouldShowPlanForTomorrow()" (click)="tomorrowSpecialPlan()">
-          <mat-icon>create</mat-icon>
-        </button>
+        <span><b>Tomorrow</b></span>
+        <div class="alert" *ngIf="isTomorrowPlanLoaded && shouldShowPlanForTomorrow()">
+          <span class="alert-label">You may need to introduce a special plan</span>
+          <button mat-icon-button (click)="tomorrowSpecialPlan()">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+        <div class="special" *ngIf="isTomorrowPlanLoaded && specialPlanTomorrow.id != 0">
+          <span class="alert-label">See special plan</span>
+          <button mat-icon-button (click)="showPlan(specialPlanTomorrow)">
+            <mat-icon>grade</mat-icon>
+          </button>
+        </div>
       </mat-list-item>
-    <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
       <mat-list-item>
         <span class="info">Orders to be completed: {{ordersTomorrow}}</span>
-        <button mat-icon-button *ngIf="shouldShowPlanForTomorrow()" (click)="tomorrowSpecialPlan()">
-          <mat-icon>create</mat-icon>
-        </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
@@ -79,17 +85,23 @@
   <mat-card *ngIf="isDailyPlanLoaded && isInTwoDaysLoaded">
     <mat-list>
       <mat-list-item>
-        <span class="info"><b>In two days</b></span>
-        <button mat-icon-button *ngIf="shouldShowPlanForTwoDays()" (click)="inTwoDaysSpecialPlan()">
-          <mat-icon>create</mat-icon>
-        </button>
+        <span><b>In two days</b></span>
+        <div class="alert" *ngIf="isInTwoDaysPlanLoaded && shouldShowPlanForTwoDays()">
+          <span class="alert-label">You may need to introduce a special plan</span>
+          <button mat-icon-button (click)="inTwoDaysSpecialPlan()">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+        <div class="special" *ngIf="isInTwoDaysPlanLoaded && specialPlanInTwoDays.id != 0">
+          <span class="alert-label">See special plan</span>
+          <button mat-icon-button (click)="showPlan(specialPlanInTwoDays)">
+            <mat-icon>grade</mat-icon>
+          </button>
+        </div>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <span class="info">Orders to be completed: {{ordersInTwoDays}}</span>
-        <button mat-icon-button *ngIf="shouldShowPlanForTwoDays()" (click)="inTwoDaysSpecialPlan()">
-          <mat-icon>create</mat-icon>
-        </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>

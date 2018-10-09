@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {PlanningService} from '../../../services/planning.service';
-import {DailyPlan, SpecialPlanRequest} from '../../../types';
+import {DailyPlan, SpecialPlan} from '../../../types';
 import {Router} from '@angular/router';
 import {MatDialog} from "@angular/material";
 import {SpecialPlanDialogComponent} from "../special-plan-dialog/special-plan-dialog.component";
 import {SpecialPlanNoDateDialogComponent} from "../special-plan-no-date-dialog/special-plan-no-date-dialog.component";
+import {ShowSpecialPlanDialogComponent} from "../show-special-plan-dialog/show-special-plan-dialog.component";
 
 @Component({
   selector: 'app-planning',
@@ -27,11 +28,26 @@ export class PlanningComponent implements OnInit {
   isTodayLoaded = false;
   isTomorrowLoaded = false;
   isInTwoDaysLoaded = false;
+  specialPlanTomorrow: SpecialPlan;
+  isTomorrowPlanLoaded: boolean;
+  specialPlanInTwoDays: SpecialPlan;
+  isInTwoDaysPlanLoaded: boolean;
 
   constructor(private planningService: PlanningService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    const today = new Date();
+    const tomorrow = new Date(today.setDate(today.getDate() + 1));
+    const inTwoDays = new Date(today.setDate(today.getDate() + 1));
+    this.planningService.fetchSpecialPlan(tomorrow.toISOString().substring(0, tomorrow.toISOString().indexOf('T')))
+      .subscribe(res => this.specialPlanTomorrow = res,
+        err => console.log(err),
+        () => this.isTomorrowPlanLoaded = true);
+    this.planningService.fetchSpecialPlan(inTwoDays.toISOString().substring(0, inTwoDays.toISOString().indexOf('T')))
+      .subscribe(res => this.specialPlanInTwoDays = res,
+        err => console.log(err),
+        () => this.isInTwoDaysPlanLoaded = true);
     this.fetchDailyPlan();
     this.fetchOrders();
   }
@@ -124,7 +140,8 @@ export class PlanningComponent implements OnInit {
         }
       }, err => {
         console.log(err);
-      }, () => {}
+      }, () => {
+      }
     );
   }
 
@@ -181,15 +198,26 @@ export class PlanningComponent implements OnInit {
   }
 
   shouldShowPlanForTomorrow() {
-    return this.ordersTomorrow > this.dailyPlan.ordersPerDay ||
+    return (this.ordersTomorrow > this.dailyPlan.ordersPerDay ||
       this.returnsTommorrow > this.dailyPlan.returnsPerDay ||
-      this.complaintsTomorrow > this.dailyPlan.complaintsResolvedPerDay;
-  }
+      this.complaintsTomorrow > this.dailyPlan.complaintsResolvedPerDay) &&
+      this.specialPlanTomorrow.id === 0;
+}
 
   shouldShowPlanForTwoDays() {
-    return this.ordersInTwoDays > this.dailyPlan.ordersPerDay ||
+    return (this.ordersInTwoDays > this.dailyPlan.ordersPerDay ||
       this.returnsInTwoDays > this.dailyPlan.returnsPerDay ||
-      this.complaintsInTwoDays > this.dailyPlan.complaintsResolvedPerDay;
+      this.complaintsInTwoDays > this.dailyPlan.complaintsResolvedPerDay) &&
+      this.specialPlanInTwoDays.id === 0;
+  }
+
+  showPlan(plan: SpecialPlan) {
+    this.dialog.open(ShowSpecialPlanDialogComponent, {
+      width: '350px',
+      data: {
+        specialPlan: plan
+      }
+    });
   }
 
 }

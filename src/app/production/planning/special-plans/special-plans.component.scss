@@ -1,1 +1,8 @@
 @import "../../../../theme";
+
+tr {
+  &:hover {
+    cursor: default;
+    background-color: $light;
+  }
+}
