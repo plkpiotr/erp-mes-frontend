@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmailEntity} from '../../../types';
 import {EmailService} from '../../../services/email.service';
 import {Router} from '@angular/router';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {Observable} from "rxjs/index";
 
 @Component({
   selector: 'app-outbox',
@@ -11,11 +13,16 @@ import {Router} from '@angular/router';
 export class OutboxComponent implements OnInit {
 
   emails: Array<EmailEntity>;
-  visibleEmails: Array<EmailEntity>;
+  areEmailsLoaded: boolean;
+  obs: Observable<any>;
+  dataSource: MatTableDataSource<EmailEntity> = new MatTableDataSource([]);
+  paginator: any;
 
-  emailsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private emailService: EmailService, private router: Router) {
   }
@@ -28,37 +35,13 @@ export class OutboxComponent implements OnInit {
     this.emailService.fetchSentEmails().subscribe(res => this.emails = res,
       err => console.log(err),
       () => {
-        this.setVisibleEmails();
-        this.setPageNumbers();
+        this.areEmailsLoaded = true;
+        this.dataSource = new MatTableDataSource(this.emails);
+        this.obs = this.dataSource.connect();
       });
-  }
-
-  seeConversation(id: number) {
-    this.router.navigate(['/emails', id]);
   }
 
   sendEmail() {
     this.router.navigate(['/emails/add']);
-  }
-
-  setVisibleEmails() {
-    const pageIndex = (this.selectedPage - 1) * this.emailsPerPage;
-    this.visibleEmails = this.emails.slice(
-      pageIndex,
-      pageIndex + this.emailsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.emails.length / this.emailsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleEmails();
   }
 }

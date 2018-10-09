@@ -52,4 +52,22 @@ export class PlanningService {
     });
   }
 
+  countScheduledReturns(when: string): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/scheduled-returns', {
+      headers: this.httpHeaders,
+      params: {
+        when: when
+      }
+    });
+  }
+
+  countScheduledComplaints(when: string): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/scheduled-complaints', {
+      headers: this.httpHeaders,
+      params: {
+        when: when
+      }
+    });
+  }
+
 }

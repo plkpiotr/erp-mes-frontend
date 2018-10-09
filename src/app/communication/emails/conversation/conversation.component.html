@@ -1,32 +1,29 @@
-<div>
-  <div *ngFor="let email of visibleEmails">
-    <br> {{email.id}} {{email.email}} {{email.subject}} {{email.emailType}} {{email.timestamp}}
-    <div *ngFor="let c of email.content">
-      {{c}}
-    </div>
-    <br>
-  </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="shouldShowResponseForm = !shouldShowResponseForm">Odpowiedz</button>
-  <div *ngIf="shouldShowResponseForm">
-    <form #form='ngForm' (ngSubmit)='send()'>
-      <div class="form-group">
-        <label>Temat: </label>
-        <input type="text" class="form-control"
-               name="subject" [(ngModel)]="subject"
-               required/>
-      </div>
-      <div class="form-group">
-        <label>Treść: </label>
-        <input type="text" class="form-control"
-               name="fullContent" [(ngModel)]="fullContent"
-               required/>
-      </div>
-      <button type='submit' [disabled]="form.invalid">Wyślij</button>
-    </form>
+<mat-card *ngIf="selectedEmail != null">Email #{{selectedEmail.id}} - {{selectedEmail.email}}</mat-card>
+<div class="content">
+  <button mat-raised-button (click)="send()">Reply</button>
+  <mat-progress-spinner *ngIf="selectedEmail == null" mode="indeterminate"></mat-progress-spinner>
+  <div *ngIf="selectedEmail != null">
+    <mat-card *ngFor="let email of obs | async">
+      <mat-list>
+        <mat-list-item>
+          Type: {{email.emailType}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Address: {{email.email}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Date and time: {{email.timestamp}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Subject: {{email.subject}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <div class="email" [innerHtml]="getContent(email.content)"></div>
+    </mat-card>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>

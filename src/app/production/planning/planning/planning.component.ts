@@ -17,6 +17,12 @@ export class PlanningComponent implements OnInit {
   ordersToday: number;
   ordersTomorrow: number;
   ordersInTwoDays: number;
+  returnsToday: number;
+  returnsTommorrow: number;
+  returnsInTwoDays: number;
+  complaintsToday: number;
+  complaintsTomorrow: number;
+  complaintsInTwoDays: number;
   isDailyPlanLoaded = false;
   isTodayLoaded = false;
   isTomorrowLoaded = false;
@@ -44,6 +50,12 @@ export class PlanningComponent implements OnInit {
     this.fetchOrdersForDay('today');
     this.fetchOrdersForDay('tomorrow');
     this.fetchOrdersForDay('in2days');
+    this.fetchReturnsForDay('today');
+    this.fetchReturnsForDay('tomorrow');
+    this.fetchReturnsForDay('in2days');
+    this.fetchComplaintsForDay('today');
+    this.fetchComplaintsForDay('tomorrow');
+    this.fetchComplaintsForDay('in2days');
   }
 
   fetchOrdersForDay(when: string) {
@@ -74,6 +86,45 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }
+    );
+  }
+
+  fetchReturnsForDay(when: string) {
+    this.planningService.countScheduledReturns(when).subscribe(res => {
+        switch (when) {
+          case 'today':
+            this.returnsToday = res;
+            break;
+          case 'tomorrow':
+            this.returnsTommorrow = res;
+            break;
+          case 'in2days':
+            this.returnsInTwoDays = res;
+            break;
+        }
+      }, err => {
+        console.log(err);
+      }, () => {
+      }
+    );
+  }
+
+  fetchComplaintsForDay(when: string) {
+    this.planningService.countScheduledComplaints(when).subscribe(res => {
+        switch (when) {
+          case 'today':
+            this.complaintsToday = res;
+            break;
+          case 'tomorrow':
+            this.complaintsTomorrow = res;
+            break;
+          case 'in2days':
+            this.complaintsInTwoDays = res;
+            break;
+        }
+      }, err => {
+        console.log(err);
+      }, () => {}
     );
   }
 
@@ -127,6 +178,18 @@ export class PlanningComponent implements OnInit {
       this.fetchDailyPlan();
       this.fetchOrders();
     });
+  }
+
+  shouldShowPlanForTomorrow() {
+    return this.ordersTomorrow > this.dailyPlan.ordersPerDay ||
+      this.returnsTommorrow > this.dailyPlan.returnsPerDay ||
+      this.complaintsTomorrow > this.dailyPlan.complaintsResolvedPerDay;
+  }
+
+  shouldShowPlanForTwoDays() {
+    return this.ordersInTwoDays > this.dailyPlan.ordersPerDay ||
+      this.returnsInTwoDays > this.dailyPlan.returnsPerDay ||
+      this.complaintsInTwoDays > this.dailyPlan.complaintsResolvedPerDay;
   }
 
 }
