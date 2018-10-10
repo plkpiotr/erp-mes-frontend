@@ -37,9 +37,6 @@ export class OrderStatusDialogComponent {
     this.orderService.updateOrderStatus(s, this.data.order.id)
       .subscribe(res => {
         if (s === 'SENT') {
-          this.data.order.deliveryItems.forEach(deliveryItem => {
-            this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
-          });
           const expenseRequest = {
             amount: this.data.order.value
           };

@@ -171,6 +171,9 @@ export class AddOrderComponent implements OnInit {
       let order: Order;
       this.orderService.addOneOrder(this.request).subscribe(res => {
         order = res;
+        order.deliveryItems.forEach(deliveryItem => {
+          this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
+        });
       }, err => {
         this.showError(err, false);
       }, () => {
