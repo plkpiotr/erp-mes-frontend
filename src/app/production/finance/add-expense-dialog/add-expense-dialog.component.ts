@@ -13,6 +13,8 @@ export class AddExpenseDialogComponent {
   expenseType: ExpenseType;
   types;
   amount: number;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<AddExpenseDialogComponent>,
               private reportService: ReportService) {
@@ -36,7 +38,8 @@ export class AddExpenseDialogComponent {
 
     this.reportService.addExpense(expenseRequest).subscribe(res => {
     }, err => {
-      console.log(err);
+      this.shouldShowError = true;
+      this.error = err.error;
     }, () => {
       this.cancel();
     });

@@ -19,6 +19,8 @@ export class SpecialPlanDialogComponent {
   complaintsResolvedPerDay: FormControl;
   date: FormControl;
   today: Date;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<SpecialPlanDialogComponent>,
               private planningService: PlanningService) {
@@ -78,7 +80,8 @@ export class SpecialPlanDialogComponent {
     this.planningService.addSpecialPlan(specialPlanRequest).subscribe(() => {
       },
       err => {
-        console.log(err);
+        this.shouldShowError = true;
+        this.error = err.error;
       }, () => {
         this.cancel();
       });

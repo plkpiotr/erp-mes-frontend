@@ -20,6 +20,9 @@ export interface DialogData {
 })
 export class RecalculateDialogComponent {
 
+  error: string;
+  shouldShowError: boolean;
+
   constructor(public dialogRef: MatDialogRef<RecalculateDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
               private reportService: ReportService) {
@@ -50,7 +53,8 @@ export class RecalculateDialogComponent {
     };
     this.reportService.recalculateCosts(estimatedCostsRequest).subscribe(res => {
     }, err => {
-      console.log(err);
+      this.shouldShowError = true;
+      this.error = err.error;
     }, () => {
       this.cancel();
     });

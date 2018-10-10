@@ -21,6 +21,8 @@ export class SpecialPlanNoDateDialogComponent {
   ordersPerDay: FormControl;
   returnsPerDay: FormControl;
   complaintsResolvedPerDay: FormControl;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<SpecialPlanNoDateDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -75,7 +77,8 @@ export class SpecialPlanNoDateDialogComponent {
     this.planningService.addSpecialPlan(specialPlanRequest).subscribe(() => {
       },
       err => {
-        console.log(err);
+        this.shouldShowError = true;
+        this.error = err.error;
       }, () => {
         this.cancel();
       });

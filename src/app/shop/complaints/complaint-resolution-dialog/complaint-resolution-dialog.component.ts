@@ -16,6 +16,8 @@ export interface DialogData {
 export class ComplaintResolutionDialogComponent {
 
   showSpinner: boolean;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<ComplaintResolutionDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -30,7 +32,9 @@ export class ComplaintResolutionDialogComponent {
     this.showSpinner = true;
     this.complaintService.updateComplaintResolution(s, this.data.complaint.id).subscribe(res => {
     }, err => {
-      console.log(err);
+      this.shouldShowError = true;
+      this.error = err.error;
+      this.showSpinner = false;
     }, () => {
       this.cancel();
     });

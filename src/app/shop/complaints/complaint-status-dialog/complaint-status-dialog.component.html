@@ -1,4 +1,5 @@
 <mat-progress-spinner *ngIf="showSpinner" mode="indeterminate"></mat-progress-spinner>
+<p class="error" *ngIf="shouldShowError">{{error}}</p>
 <div *ngIf="!showSpinner">
   <div class="content" *ngFor="let s of data.status">
     <button mat-raised-button (click)="submit(s)">{{s}}</button>

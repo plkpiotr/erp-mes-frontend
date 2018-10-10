@@ -1,4 +1,5 @@
 <h2 mat-dialog-title>Enter recalculated estimates:</h2>
+<p class="error" *ngIf="shouldShowError">{{error}}</p>
 <mat-dialog-content>
   <mat-form-field>
     <input matInput placeholder="Income" [(ngModel)]="data.estimatedIncome" required>

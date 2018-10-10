@@ -18,6 +18,8 @@ export interface DialogData {
 export class StatusDialogComponent {
 
   showSpinner: boolean;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<StatusDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -34,9 +36,6 @@ export class StatusDialogComponent {
     this.showSpinner = true;
     this.returnService.updateReturnStatus(s, this.data.r.id)
       .subscribe(res => {
-      }, err => {
-        console.log(err);
-      }, () => {
         if (s === 'MONEY_RETURNED') {
           this.data.r.deliveryItems.forEach(deliveryItem => {
             this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
@@ -49,6 +48,11 @@ export class StatusDialogComponent {
           this.reportService.addExpense(expenseRequest).subscribe(res => {
           });
         }
+      }, err => {
+        this.shouldShowError = true;
+        this.error = err.error;
+        this.showSpinner = false;
+      }, () => {
         this.cancel();
       });
   }
