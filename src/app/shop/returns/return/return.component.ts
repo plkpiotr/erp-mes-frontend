@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Return, ReturnStatus} from '../../../types';
 import {ReturnService} from '../../../services/return.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from "@angular/material";
 import {StatusDialogComponent} from "../status-dialog/status-dialog.component";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-return',
@@ -17,7 +18,7 @@ export class ReturnComponent implements OnInit {
   status: ReturnStatus;
 
   constructor(private returnService: ReturnService, private route: ActivatedRoute,
-              private dialog: MatDialog) {
+              private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -28,7 +29,7 @@ export class ReturnComponent implements OnInit {
     this.returnService.fetchOneReturn(this.route.snapshot.params['id']).subscribe(res => {
       this.return = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isReturnLoaded = true;
       this.status = this.return.status;
@@ -54,5 +55,16 @@ export class ReturnComponent implements OnInit {
       this.isReturnLoaded = false;
       this.fetchReturn();
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/returns']));
   }
 }

@@ -5,6 +5,8 @@ import {MatDialog} from "@angular/material";
 import {AddIncomeDialogComponent} from "../add-income-dialog/add-income-dialog.component";
 import {AddExpenseDialogComponent} from "../add-expense-dialog/add-expense-dialog.component";
 import {RecalculateDialogComponent} from "../recalculate-dialog/recalculate-dialog.component";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-current-report',
@@ -26,7 +28,7 @@ export class CurrentReportComponent implements OnInit {
   socialFund: number;
   unexpected: number;
 
-  constructor(private reportService: ReportService, private dialog: MatDialog) {
+  constructor(private reportService: ReportService, private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class CurrentReportComponent implements OnInit {
       this.socialFund = res.socialFund;
       this.unexpected = res.unexpected;
     }, err => {
-      console.log(err);
+      this.showError(err, false);
     }, () => {
       this.areRecommendationsLoaded = true;
     });
@@ -56,7 +58,7 @@ export class CurrentReportComponent implements OnInit {
     this.reportService.fetchCurrentReport().subscribe(res => {
       this.currentReport = res;
     }, err => {
-      console.log(err);
+      this.showError(err, true);
     }, () => {
       this.isReportLoaded = true;
     });
@@ -104,5 +106,18 @@ export class CurrentReportComponent implements OnInit {
       this.isReportLoaded = false;
       this.fetchReport();
     });
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/reports']));
+    }
   }
 }

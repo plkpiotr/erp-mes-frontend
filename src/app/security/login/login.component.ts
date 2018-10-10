@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {Token} from '../../token';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,8 @@ export class LoginComponent {
 
   constructor(private router: Router,
               private loginService: LoginService,
-              private token: Token) {
+              private token: Token,
+              private dialog: MatDialog) {
     this.setupFormControls();
     this.form = new FormGroup({
       "email": this.email,
@@ -39,7 +42,7 @@ export class LoginComponent {
     this.loginService.login(this.form.get('email').value, this.form.get('password').value).subscribe(res => {
       this.token.saveToken(res.token);
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.loginService.fetchUser().subscribe(res => {
         if (!res.passwordValid) {
@@ -48,8 +51,17 @@ export class LoginComponent {
           this.router.navigate(['employees']);
         }
       }, err => {
-        console.log(err);
+        this.showError(err);
       });
+    });
+  }
+
+  showError(err) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
     });
   }
 

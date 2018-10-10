@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../types';
 import {Router} from '@angular/router';
+import {ErrorDialogComponent} from "../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class LoginService {
 
   private httpHeaders: HttpHeaders;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
     this.httpHeaders = new HttpHeaders()
       .set('Access-Control-Allow-Origin', 'https://localhost:4200');
   }
@@ -31,9 +33,18 @@ export class LoginService {
     this.http.post('http://localhost:8080/employees/' + id + '/validate-password', password,
       {headers: this.httpHeaders}).subscribe(res => {},
       err => {
-        console.log(err);
+        this.showError(err);
       }, () => {
         this.router.navigate(['employees', id]);
       });
+  }
+
+  showError(err) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
   }
 }

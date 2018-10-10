@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Holiday, HolidayRequest} from '../types';
 import {Observable} from 'rxjs';
+import {ErrorDialogComponent} from "../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class HolidayService {
 
   private httpHeaders: HttpHeaders;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
     this.httpHeaders = new HttpHeaders()
       .set('Access-Control-Allow-Origin', 'https://localhost:4200');
   }
@@ -27,7 +29,7 @@ export class HolidayService {
       .subscribe(() => {
         },
         err => {
-          console.log(err);
+          this.showError(err);
         },
         () => {
           this.router.navigate(['/employees', employeeId]);
@@ -45,6 +47,15 @@ export class HolidayService {
       headers: this.httpHeaders,
       params: {
         approve: approve
+      }
+    });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
       }
     });
   }

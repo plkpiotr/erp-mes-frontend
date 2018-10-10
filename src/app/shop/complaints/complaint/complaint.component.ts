@@ -3,10 +3,11 @@ import {Complaint, ComplaintStatus, ExpenseRequest, ExpenseType, Resolution} fro
 import {ComplaintService} from '../../../services/complaint.service';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ComplaintStatusDialogComponent} from "../complaint-status-dialog/complaint-status-dialog.component";
 import {ComplaintResolutionDialogComponent} from "../complaint-resolution-dialog/complaint-resolution-dialog.component";
 import {MatDialog} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-complaint',
@@ -19,7 +20,7 @@ export class ComplaintComponent implements OnInit {
   complaint: Complaint;
 
   constructor(private complaintService: ComplaintService, private route: ActivatedRoute,
-              private dialog: MatDialog) {
+              private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class ComplaintComponent implements OnInit {
     this.complaintService.fetchOneComplaint(this.route.snapshot.params['id']).subscribe(res => {
       this.complaint = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isComplaintLoaded = true;
     });
@@ -90,6 +91,17 @@ export class ComplaintComponent implements OnInit {
   canUpdateStatus(): boolean {
     return (!this.complaint.status.toLocaleString().includes('SENT') && this.complaint.status !== ComplaintStatus.ACCEPTED) ||
       (this.complaint.status === ComplaintStatus.ACCEPTED && this.complaint.resolution !== 'UNRESOLVED');
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/complaints']));
   }
 
 }

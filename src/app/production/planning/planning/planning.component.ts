@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material";
 import {SpecialPlanDialogComponent} from "../special-plan-dialog/special-plan-dialog.component";
 import {SpecialPlanNoDateDialogComponent} from "../special-plan-no-date-dialog/special-plan-no-date-dialog.component";
 import {ShowSpecialPlanDialogComponent} from "../show-special-plan-dialog/show-special-plan-dialog.component";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-planning',
@@ -42,11 +43,11 @@ export class PlanningComponent implements OnInit {
     const inTwoDays = new Date(today.setDate(today.getDate() + 1));
     this.planningService.fetchSpecialPlan(tomorrow.toISOString().substring(0, tomorrow.toISOString().indexOf('T')))
       .subscribe(res => this.specialPlanTomorrow = res,
-        err => console.log(err),
+        err => this.showError(err),
         () => this.isTomorrowPlanLoaded = true);
     this.planningService.fetchSpecialPlan(inTwoDays.toISOString().substring(0, inTwoDays.toISOString().indexOf('T')))
       .subscribe(res => this.specialPlanInTwoDays = res,
-        err => console.log(err),
+        err => this.showError(err),
         () => this.isInTwoDaysPlanLoaded = true);
     this.fetchDailyPlan();
     this.fetchOrders();
@@ -56,7 +57,7 @@ export class PlanningComponent implements OnInit {
     this.planningService.fetchDailyPlan().subscribe(res => {
       this.dailyPlan = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isDailyPlanLoaded = true;
     });
@@ -88,7 +89,7 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }, err => {
-        console.log(err);
+       this.showError(err);
       }, () => {
         switch (when) {
           case 'today':
@@ -119,7 +120,7 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }, err => {
-        console.log(err);
+        this.showError(err);
       }, () => {
       }
     );
@@ -139,7 +140,7 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }, err => {
-        console.log(err);
+        this.showError(err);
       }, () => {
       }
     );
@@ -216,6 +217,15 @@ export class PlanningComponent implements OnInit {
       width: '350px',
       data: {
         specialPlan: plan
+      }
+    });
+  }
+
+  showError(err) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
       }
     });
   }

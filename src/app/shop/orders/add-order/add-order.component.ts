@@ -13,8 +13,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {ComplaintService} from '../../../services/complaint.service';
 import {ReturnService} from '../../../services/return.service';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
 import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-add-order',
@@ -59,7 +60,7 @@ export class AddOrderComponent implements OnInit {
 
   constructor(private orderService: OrderService, private router: Router, private itemService: ItemService,
               private complaintService: ComplaintService, private returnService: ReturnService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -171,7 +172,7 @@ export class AddOrderComponent implements OnInit {
       this.orderService.addOneOrder(this.request).subscribe(res => {
         order = res;
       }, err => {
-        console.log(err);
+        this.showError(err, false);
       }, () => {
         this.router.navigate(['/orders', order.id]);
       });
@@ -180,7 +181,7 @@ export class AddOrderComponent implements OnInit {
       this.returnService.addOneReturn(this.request).subscribe(res => {
         r = res;
       }, err => {
-        console.log(err);
+        this.showError(err, false);
       }, () => {
         this.router.navigate(['/returns', r.id]);
       });
@@ -189,7 +190,7 @@ export class AddOrderComponent implements OnInit {
       this.complaintService.addOneComplaint(this.request).subscribe(res => {
         complaint = res;
       }, err => {
-        console.log(err);
+        this.showError(err, false);
       }, () => {
         this.router.navigate(['/complaints', complaint.id]);
       });
@@ -200,7 +201,7 @@ export class AddOrderComponent implements OnInit {
     this.itemService.fetchAllItems().subscribe(res => {
       this.items = res;
     }, err => {
-      console.log(err);
+      this.showError(err, true);
     }, () => {
       this.areItemsLoaded = true;
       this.items.forEach(item => this.itemsById[item.id] = item);
@@ -226,6 +227,25 @@ export class AddOrderComponent implements OnInit {
 
   shouldShowComplaintForm(): boolean {
     return this.service === 'complaint';
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      if (this.service === 'order') {
+        dialogRef.afterClosed().subscribe(() => this.router.navigate(['/orders']));
+      } else if (this.service === 'return') {
+        dialogRef.afterClosed().subscribe(() => this.router.navigate(['/returns']));
+      } else if (this.service === 'complaint') {
+        dialogRef.afterClosed().subscribe(() => this.router.navigate(['/orders']));
+      }
+    }
   }
 
 }

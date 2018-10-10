@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PlanningService} from '../../../services/planning.service';
 import {SpecialPlan} from '../../../types';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-special-plans',
@@ -21,17 +23,27 @@ export class SpecialPlansComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private planningService: PlanningService) {
-  }
+  constructor(private planningService: PlanningService, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.planningService.fetchSpecialPlans().subscribe(res => {
       this.specialPlans = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.arePlansLoaded = true;
       this.dataSource = new MatTableDataSource<SpecialPlan>(this.specialPlans);
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

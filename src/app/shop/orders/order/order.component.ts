@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Order, Status} from '../../../types';
 import {OrderService} from '../../../services/order.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OrderStatusDialogComponent} from "../order-status-dialog/order-status-dialog.component";
 import {MatDialog} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-order',
@@ -17,7 +18,8 @@ export class OrderComponent implements OnInit {
 
   constructor(private orderService: OrderService,
               private route: ActivatedRoute,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class OrderComponent implements OnInit {
     this.orderService.fetchOneOrder(this.route.snapshot.params['id']).subscribe(res => {
       this.order = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isOrderLoaded = true;
     });
@@ -53,5 +55,16 @@ export class OrderComponent implements OnInit {
       this.isOrderLoaded = false;
       this.fetchOrder();
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/orders']));
   }
 }

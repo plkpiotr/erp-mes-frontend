@@ -2,8 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmailEntity} from '../../../types';
 import {EmailService} from '../../../services/email.service';
 import {Router} from '@angular/router';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
 import {Observable} from "rxjs/index";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-inbox',
@@ -24,7 +25,7 @@ export class InboxComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private emailService: EmailService, private router: Router) {
+  constructor(private emailService: EmailService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class InboxComponent implements OnInit {
 
   fetchEmails() {
     this.emailService.fetchReceivedEmails().subscribe(res => this.emails = res,
-      err => console.log(err),
+      err => this.showError(err),
       () => {
         this.areEmailsLoaded = true;
         this.dataSource = new MatTableDataSource(this.emails);
@@ -43,5 +44,16 @@ export class InboxComponent implements OnInit {
 
   sendEmail() {
     this.router.navigate(['/emails/add']);
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/emails/add']));
   }
 }

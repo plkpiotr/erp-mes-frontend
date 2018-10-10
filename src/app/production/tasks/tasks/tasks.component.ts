@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {TaskService} from '../../../services/task.service';
 import {Router} from '@angular/router';
 import {Task} from '../../../types';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-tasks',
@@ -30,13 +31,13 @@ export class TasksComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  constructor(private taskService: TaskService, private router: Router) { }
+  constructor(private taskService: TaskService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.taskService.fetchAllTasks().subscribe(res => {
       this.tasks = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.areTasksLoaded = true;
       this.dataSource = new MatTableDataSource<Task>(this.tasks);
@@ -53,5 +54,16 @@ export class TasksComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

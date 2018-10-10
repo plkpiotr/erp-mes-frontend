@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Item} from '../../../types';
 import {ItemService} from '../../../services/item.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NewPriceDialogComponent} from "../new-price-dialog/new-price-dialog.component";
 import {MatDialog} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-item',
@@ -17,7 +18,8 @@ export class ItemComponent implements OnInit {
 
   constructor(private itemService: ItemService,
               private route: ActivatedRoute,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class ItemComponent implements OnInit {
     this.itemService.fetchOneItem(this.route.snapshot.params['id']).subscribe(res => {
       this.item = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isItemLoaded = true;
     });
@@ -44,5 +46,16 @@ export class ItemComponent implements OnInit {
       this.isItemLoaded = false;
       this.fetchItem();
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/items']));
   }
 }

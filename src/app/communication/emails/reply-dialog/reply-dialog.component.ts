@@ -20,11 +20,12 @@ export class ReplyDialogComponent {
   private fullContent: FormControl;
   content = [];
   emailEntityRequest: EmailEntityRequest;
+  error: string;
+  shouldShowError: boolean;
 
-  constructor(
-    public dialogRef: MatDialogRef<ReplyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private emailService: EmailService) {
+  constructor(public dialogRef: MatDialogRef<ReplyDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private emailService: EmailService) {
     this.setupFormControls();
     this.form = new FormGroup({
       "subject": this.subject,
@@ -56,7 +57,8 @@ export class ReplyDialogComponent {
       .subscribe(res => {
         },
         err => {
-          console.log(err);
+          this.shouldShowError = true;
+          this.error = err.error;
         },
         () => {
           this.dialogRef.close(null);

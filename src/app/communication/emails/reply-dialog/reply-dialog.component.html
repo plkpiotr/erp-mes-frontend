@@ -1,4 +1,5 @@
 <h2 mat-dialog-title>Type your email:</h2>
+<p class="error" *ngIf="shouldShowError">{{error}}</p>
 <mat-dialog-content [formGroup]="form">
   <mat-form-field>
     <input matInput placeholder="Subject" formControlName="subject" required>

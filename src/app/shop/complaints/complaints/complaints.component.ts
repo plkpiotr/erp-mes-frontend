@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Complaint} from '../../../types';
 import {ComplaintService} from '../../../services/complaint.service';
 import {Router} from '@angular/router';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-complaints',
@@ -22,7 +23,7 @@ export class ComplaintsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private complaintService: ComplaintService, private router: Router) {
+  constructor(private complaintService: ComplaintService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class ComplaintsComponent implements OnInit {
     this.complaintService.fetchAllComplaints().subscribe(res => {
       this.complaints = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.areComplaintsLoaded = true;
       this.dataSource = new MatTableDataSource<Complaint>(this.complaints);
@@ -50,6 +51,16 @@ export class ComplaintsComponent implements OnInit {
         service: 'complaint'
       }
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 
 }

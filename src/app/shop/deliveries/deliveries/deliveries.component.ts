@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeliveryService} from '../../../services/delivery.service';
 import {Router} from '@angular/router';
 import {Delivery} from '../../../types';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-deliveries',
@@ -23,7 +24,8 @@ export class DeliveriesComponent implements OnInit {
   }
 
   constructor(private deliveryService: DeliveryService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.fetchDeliveries();
@@ -33,7 +35,7 @@ export class DeliveriesComponent implements OnInit {
     this.deliveryService.fetchAllDeliveries().subscribe(res => {
       this.deliveries = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.areDeliveriesLoaded = true;
       this.dataSource = new MatTableDataSource<Delivery>(this.deliveries);
@@ -46,5 +48,16 @@ export class DeliveriesComponent implements OnInit {
 
   addDelivery() {
     this.router.navigate(['deliveries/add']);
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

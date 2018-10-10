@@ -3,6 +3,8 @@ import {EmailEntity, EmailEntityRequest} from '../../../types';
 import {EmailService} from '../../../services/email.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-add-email',
@@ -18,7 +20,7 @@ export class AddEmailComponent {
   content: string[];
   emailEntityRequest: EmailEntityRequest;
 
-  constructor(private emailService: EmailService, private router: Router) {
+  constructor(private emailService: EmailService, private router: Router, private dialog: MatDialog) {
     this.setupFormControls();
     this.form = new FormGroup({
       "email": this.email,
@@ -53,7 +55,7 @@ export class AddEmailComponent {
           emailEntity = res;
         },
         err => {
-          console.log(err);
+          this.showError(err);
         },
         () => {
           this.router.navigate(['/emails', emailEntity.id]);
@@ -73,4 +75,12 @@ export class AddEmailComponent {
     this.content[i] = this.form.get('fullContent').value.substring(lastInd);
   }
 
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+  }
 }

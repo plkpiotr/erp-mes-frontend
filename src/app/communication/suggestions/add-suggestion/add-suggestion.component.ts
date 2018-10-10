@@ -4,6 +4,8 @@ import {SuggestionService} from '../../../services/suggestion.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-add-suggestion',
@@ -22,13 +24,14 @@ export class AddSuggestionComponent implements OnInit {
   recipients: Array<Employee>;
   areRecipientsLoaded = false;
 
-  constructor(private suggestionService: SuggestionService, private employeeService: EmployeeService, private router: Router) { }
+  constructor(private suggestionService: SuggestionService, private employeeService: EmployeeService,
+              private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.employeeService.fetchColleagues().subscribe(res => {
       this.recipients = res;
     }, err => {
-      console.log(err);
+      this.showError(err, true);
     }, () => {
       this.areRecipientsLoaded = true;
     });
@@ -65,7 +68,7 @@ export class AddSuggestionComponent implements OnInit {
       .subscribe(res => {
           suggestion = res;
         }, err => {
-          console.log(err);
+          this.showError(err, false);
         },
         () => {
           this.router.navigate(['/suggestions/', suggestion.id]);
@@ -78,5 +81,18 @@ export class AddSuggestionComponent implements OnInit {
 
   getErrorDescription() {
     return this.description.hasError('maxLength') ? '' : '0-250 characters';
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/suggestions']));
+    }
   }
 }

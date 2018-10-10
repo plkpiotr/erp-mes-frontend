@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TeamService} from '../../../services/team.service';
 import {Team} from '../../../types';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-teams',
@@ -23,13 +24,14 @@ export class TeamsComponent implements OnInit {
   }
 
   constructor(private router: Router,
-              private teamService: TeamService) { }
+              private teamService: TeamService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.teamService.fetchAllTeams().subscribe(res => {
       this.teams = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isLoaded = true;
       this.dataSource = new MatTableDataSource<Team>(this.teams);
@@ -38,5 +40,16 @@ export class TeamsComponent implements OnInit {
 
   seeTeam(id: number) {
     this.router.navigate(['/teams', id]);
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }
