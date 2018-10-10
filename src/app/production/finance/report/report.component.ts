@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ReportService} from '../../../services/report.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MonthlyReport} from '../../../types';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-report',
@@ -14,7 +16,9 @@ export class ReportComponent implements OnInit {
   isReportLoaded = false;
 
   constructor(private reportService: ReportService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.fetchReport(this.route.snapshot.params['id']);
@@ -24,10 +28,20 @@ export class ReportComponent implements OnInit {
     this.reportService.fetchOneReport(id).subscribe(res => {
       this.report = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.isReportLoaded = true;
     });
   }
 
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/reports']));
+  }
 }

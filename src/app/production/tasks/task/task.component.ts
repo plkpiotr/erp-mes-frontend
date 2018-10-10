@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Category, Task} from '../../../types';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-task',
@@ -14,7 +16,8 @@ export class TaskComponent implements OnInit {
   isTaskLoaded = false;
   isDone = Category.DONE;
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private taskService: TaskService, private route: ActivatedRoute,
+              private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -29,7 +32,7 @@ export class TaskComponent implements OnInit {
       .subscribe(res => {
         this.task = res;
       }, err => {
-        console.log(err);
+        this.showError(err, true);
       }, () => {
         this.isTaskLoaded = true;
       });
@@ -40,7 +43,7 @@ export class TaskComponent implements OnInit {
       .subscribe(res => {
         this.task = res;
       }, err => {
-        console.log(err);
+        this.showError(err, false);
       }, () => {
         this.router.navigate(['/tasks']);
       });
@@ -48,5 +51,18 @@ export class TaskComponent implements OnInit {
 
   seeTask(id: number) {
     this.router.navigate(['/tasks', id]);
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/tasks']));
+    }
   }
 }

@@ -3,6 +3,8 @@ import {Employee, Role} from '../../../types';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-add-employee',
@@ -23,7 +25,8 @@ export class AddEmployeeComponent implements OnInit {
   roles;
 
   constructor(private employeeService: EmployeeService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -90,7 +93,7 @@ export class AddEmployeeComponent implements OnInit {
           employee = res;
         },
         err => {
-          console.log(err);
+          this.showError(err);
         },
         () => {
           this.router.navigate(['/employees', employee.id]);
@@ -99,5 +102,14 @@ export class AddEmployeeComponent implements OnInit {
 
   getErrorMessage() {
     return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  showError(err) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
   }
 }

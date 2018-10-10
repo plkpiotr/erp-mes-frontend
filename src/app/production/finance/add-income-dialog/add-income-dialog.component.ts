@@ -10,6 +10,8 @@ import {ReportService} from "../../../services/report.service";
 export class AddIncomeDialogComponent {
 
   income = 0;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<AddIncomeDialogComponent>,
               private reportService: ReportService) {}
@@ -26,7 +28,8 @@ export class AddIncomeDialogComponent {
   submit() {
     this.reportService.addIncome(this.income).subscribe(res => {
     }, err => {
-      console.log(err);
+      this.shouldShowError = true;
+      this.error = err.error;
     }, () => {
       this.cancel();
     });

@@ -3,6 +3,8 @@ import {ItemService} from '../../../services/item.service';
 import {Router} from '@angular/router';
 import {Item, ItemRequest} from '../../../types';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-add-item',
@@ -18,7 +20,8 @@ export class AddItemComponent {
   itemRequest: ItemRequest;
 
   constructor(private itemService: ItemService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
     this.setupFormControls();
     this.form = new FormGroup({
       "name": this.name,
@@ -51,7 +54,7 @@ export class AddItemComponent {
     this.itemService.addNewItem(this.itemRequest).subscribe(res => {
       item = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.router.navigate(['/items', item.id]);
     });
@@ -63,5 +66,14 @@ export class AddItemComponent {
 
   getPriceErrorMessage() {
     return this.price.hasError('pattern') ? 'Enter a number' : '';
+  }
+
+  showError(err) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
   }
 }

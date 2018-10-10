@@ -4,7 +4,8 @@ import {Router} from '@angular/router';
 import {Delivery, DeliveryItem, DeliveryItemRequest, DeliveryRequest, Item} from '../../../types';
 import {ItemService} from '../../../services/item.service';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-add-delivery',
@@ -38,7 +39,8 @@ export class AddDeliveryComponent implements OnInit {
 
   constructor(private deliveryService: DeliveryService,
               private router: Router,
-              private itemService: ItemService) {
+              private itemService: ItemService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -49,12 +51,12 @@ export class AddDeliveryComponent implements OnInit {
     this.deliveryService.getRecommendations().subscribe(res => {
       this.recommendedDeliveryItems = res;
     }, err => {
-      console.log(err);
+      this.showError(err, false);
     }, () => {
       this.itemService.fetchAllItems().subscribe(res => {
         this.items = res;
       }, err => {
-        console.log(err);
+        this.showError(err, true);
       }, () => {
         this.areItemsLoaded = true;
         this.items.forEach(item => this.itemsById[item.id] = item);
@@ -122,7 +124,7 @@ export class AddDeliveryComponent implements OnInit {
     this.deliveryService.addNewDelivery(this.deliveryRequest).subscribe(res => {
       delivery = res;
     }, err => {
-      console.log(err);
+      this.showError(err, false);
     }, () => {
       this.router.navigate(['/deliveries', delivery.id]);
     });
@@ -130,6 +132,19 @@ export class AddDeliveryComponent implements OnInit {
 
   getErrorMessage() {
     return this.quantity.hasError('pattern') ? 'Enter a number' : '';
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/deliveries']));
+    }
   }
 
 }

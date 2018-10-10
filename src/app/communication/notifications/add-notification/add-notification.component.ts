@@ -4,6 +4,8 @@ import {NotificationService} from '../../../services/notification.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-add-notification',
@@ -28,13 +30,14 @@ export class AddNotificationComponent implements OnInit {
   returns: Array<Return>;
   types;
 
-  constructor(private notificationService: NotificationService, private employeeService: EmployeeService, private router: Router) {}
+  constructor(private notificationService: NotificationService, private employeeService: EmployeeService,
+              private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.employeeService.fetchColleagues().subscribe(res => {
       this.consignees = res;
     }, err => {
-      console.log(err);
+      this.showError(err, true);
     }, () => {
       this.areEmployeesLoaded = true;
     });
@@ -76,7 +79,7 @@ export class AddNotificationComponent implements OnInit {
       .subscribe(res => {
           notification = res;
         }, err => {
-          console.log(err);
+          this.showError(err, false);
         },
         () => {
           this.router.navigate(['/notifications', notification.id]);
@@ -89,5 +92,18 @@ export class AddNotificationComponent implements OnInit {
 
   getErrorDescription() {
     return this.description.hasError('maxLength') ? '' : 'Maximum 250 characters';
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/notifications']));
+    }
   }
 }

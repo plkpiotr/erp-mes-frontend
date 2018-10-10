@@ -18,6 +18,8 @@ export interface DialogData {
 export class ComplaintStatusDialogComponent {
 
   showSpinner: boolean;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<ComplaintStatusDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -35,9 +37,6 @@ export class ComplaintStatusDialogComponent {
     this.complaintService.updateComplaintStatus(s, this.data.complaint.id)
       .subscribe(res => {
         this.data.complaint = res;
-      }, err => {
-        console.log(err);
-      }, () => {
         if (this.data.complaint.status === ComplaintStatus.MONEY_RETURNED) {
           const expenseRequest: ExpenseRequest = {
             expenseType: ExpenseType.UNEXPECTED,
@@ -51,6 +50,11 @@ export class ComplaintStatusDialogComponent {
             });
           });
         }
+      }, err => {
+        this.shouldShowError = true;
+        this.error = err.error;
+        this.showSpinner = false;
+      }, () => {
         this.cancel();
       });
   }

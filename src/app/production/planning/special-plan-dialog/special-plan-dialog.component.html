@@ -1,4 +1,5 @@
 <h2 mat-dialog-title>Insert special plan details</h2>
+<p class="error" *ngIf="shouldShowError">{{error}}</p>
 <mat-dialog-content>
   <div class="content" [formGroup]="form">
 

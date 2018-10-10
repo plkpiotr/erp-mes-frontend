@@ -1,4 +1,5 @@
 <mat-dialog-content>
+  <p class="error" *ngIf="shouldShowError">{{error}}</p>
   <mat-form-field>
     <input matInput placeholder="New price" [(ngModel)]="price" required>
   </mat-form-field>

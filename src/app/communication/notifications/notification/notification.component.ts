@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Notification, State} from '../../../types';
 import {NotificationService} from '../../../services/notification.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-notification',
@@ -14,7 +16,8 @@ export class NotificationComponent implements OnInit {
   isNotificationLoaded = false;
   isResolved = State.RESOLVED;
 
-  constructor(private notificationService: NotificationService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private notificationService: NotificationService, private route: ActivatedRoute,
+              private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -29,7 +32,7 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         this.notification = res;
       }, err => {
-        console.log(err);
+        this.showError(err, true);
       }, () => {
         this.isNotificationLoaded = true;
       });
@@ -40,7 +43,7 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         this.notification = res;
       }, err => {
-        console.log(err);
+        this.showError(err, false);
       }, () => {
         this.router.navigate(['/notifications', this.route.snapshot.params[('id')]]);
       });
@@ -48,5 +51,18 @@ export class NotificationComponent implements OnInit {
 
   seeEmployee(id: number) {
     this.router.navigate(['/employees', id]);
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/notifications']));
+    }
   }
 }

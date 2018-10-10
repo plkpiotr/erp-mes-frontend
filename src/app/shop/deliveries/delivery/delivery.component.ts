@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Delivery, ExpenseType} from '../../../types';
 import {DeliveryService} from '../../../services/delivery.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-delivery',
@@ -18,7 +20,9 @@ export class DeliveryComponent implements OnInit {
   constructor(private deliveryService: DeliveryService,
               private route: ActivatedRoute,
               private itemService: ItemService,
-              private reportService: ReportService) {
+              private reportService: ReportService,
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -29,7 +33,7 @@ export class DeliveryComponent implements OnInit {
     this.deliveryService.fetchOneDelivery(this.route.snapshot.params['id']).subscribe(res => {
       this.delivery = res;
     }, err => {
-      console.log(err);
+      this.showError(err, true);
     }, () => {
       this.isDeliveryLoaded = true;
     });
@@ -55,10 +59,23 @@ export class DeliveryComponent implements OnInit {
     });
     this.deliveryService.confirmDelivery(this.delivery.id).subscribe(res => {
       },
-      err => console.log(err),
+      err => this.showError(err, false),
       () => {
         this.isDeliveryLoaded = false;
         this.fetchDelivery();
       });
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/deliveries']));
+    }
   }
 }

@@ -1,4 +1,5 @@
-<mat-progress-spinner *ngIf="!areRequestsLoaded" mode="indeterminate">
+<mat-progress-spinner *ngIf="!areRequestsLoaded && !shouldShowError" mode="indeterminate">
+  <p class="error" *ngIf="shouldShowError">{{error}}</p>
 </mat-progress-spinner>
 <div *ngIf="areRequestsLoaded">
   <button mat-icon-button class="decline" *ngIf="holidayRequests.length === 0" (click)="cancel()">There are no requests to manage.

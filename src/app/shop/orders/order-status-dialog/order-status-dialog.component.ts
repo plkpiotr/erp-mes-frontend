@@ -18,6 +18,8 @@ export interface DialogData {
 export class OrderStatusDialogComponent {
 
   showSpinner: boolean;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<OrderStatusDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -34,18 +36,17 @@ export class OrderStatusDialogComponent {
     this.showSpinner = true;
     this.orderService.updateOrderStatus(s, this.data.order.id)
       .subscribe(res => {
-      }, err => {
-        console.log(err);
-      }, () => {
         if (s === 'SENT') {
-          this.data.order.deliveryItems.forEach(deliveryItem => {
-            this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
-          });
           const expenseRequest = {
             amount: this.data.order.value
           };
           this.reportService.addIncome(expenseRequest.amount).subscribe(res => {});
         }
+      }, err => {
+        this.shouldShowError = true;
+        this.error = err.error;
+        this.showSpinner = false;
+      }, () => {
         this.cancel();
       });
   }

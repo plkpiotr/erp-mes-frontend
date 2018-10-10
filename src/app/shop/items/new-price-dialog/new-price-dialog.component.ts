@@ -14,6 +14,8 @@ export interface DialogData {
 export class NewPriceDialogComponent {
 
   price = null;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(public dialogRef: MatDialogRef<NewPriceDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -28,8 +30,12 @@ export class NewPriceDialogComponent {
     this.itemService.setNewPrice(this.data.id, this.price)
       .subscribe(() => {
         },
-        err => console.log(err),
-        () => this.cancel());
+        err => {
+          this.shouldShowError = true;
+          this.error = err.error;
+        },
+        () => this.cancel()
+      );
   }
 
   isPriceValid() {

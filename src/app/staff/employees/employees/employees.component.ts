@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {Employee} from '../../../types';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-employees',
@@ -22,7 +23,7 @@ export class EmployeesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private employeeService: EmployeeService, private router: Router) {
+  constructor(private employeeService: EmployeeService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class EmployeesComponent implements OnInit {
 
   fetchEmployees() {
     this.employeeService.fetchAllEmployees().subscribe(res => this.employees = res,
-      err => console.log(err),
+      err => this.showError(err),
       () => {
         this.areLoaded = true;
         this.dataSource = new MatTableDataSource<Employee>(this.employees);
@@ -44,5 +45,16 @@ export class EmployeesComponent implements OnInit {
 
   addEmployee() {
     this.router.navigate(['/employees/add']);
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/teams']));
   }
 }

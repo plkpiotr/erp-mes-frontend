@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {Router} from '@angular/router';
-import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-suggestions',
@@ -31,13 +32,13 @@ export class SuggestionsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  constructor(private suggestionService: SuggestionService, private router: Router) { }
+  constructor(private suggestionService: SuggestionService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.suggestionService.fetchAllSuggestions().subscribe(res => {
       this.suggestions = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.areSuggestionsLoaded = true;
       this.dataSource = new MatTableDataSource<Suggestion>(this.suggestions);
@@ -54,5 +55,16 @@ export class SuggestionsComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

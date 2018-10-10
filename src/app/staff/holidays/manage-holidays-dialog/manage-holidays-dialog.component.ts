@@ -16,6 +16,8 @@ export class ManageHolidaysDialogComponent {
 
   holidayRequests: Holiday[];
   areRequestsLoaded: boolean;
+  error: string;
+  shouldShowError: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<ManageHolidaysDialogComponent>,
@@ -29,7 +31,8 @@ export class ManageHolidaysDialogComponent {
       res => {
         this.holidayRequests = res;
       }, err => {
-        console.log(err);
+        this.shouldShowError = true;
+        this.error = err.error;
       }, () => {
         this.areRequestsLoaded = true;
       }
@@ -45,7 +48,8 @@ export class ManageHolidaysDialogComponent {
       .subscribe(
         () => {},
         err => {
-          console.log(err);
+          this.shouldShowError = true;
+          this.error = err.error;
         }, () => {
           this.areRequestsLoaded = false;
           this.fetchRequests();
@@ -58,7 +62,8 @@ export class ManageHolidaysDialogComponent {
       .subscribe(
         () => {},
         err => {
-          console.log(err);
+          this.shouldShowError = true;
+          this.error = err.error;
         }, () => {
           this.areRequestsLoaded = false;
           this.fetchRequests();

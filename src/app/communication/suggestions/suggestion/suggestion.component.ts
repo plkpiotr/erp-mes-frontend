@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Phase, Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-suggestion',
@@ -14,7 +16,8 @@ export class SuggestionComponent implements OnInit {
   isSuggestionLoaded = false;
   isImplemented = Phase.IMPLEMENTED;
 
-  constructor(private suggestionService: SuggestionService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private suggestionService: SuggestionService, private route: ActivatedRoute,
+              private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -29,7 +32,7 @@ export class SuggestionComponent implements OnInit {
       .subscribe(res => {
         this.suggestion = res;
       }, err => {
-        console.log(err);
+        this.showError(err, true);
       }, () => {
         this.isSuggestionLoaded = true;
       });
@@ -40,7 +43,7 @@ export class SuggestionComponent implements OnInit {
       .subscribe(res => {
         this.suggestion = res;
       }, err => {
-        console.log(err);
+        this.showError(err, false);
       }, () => {
         this.router.navigate(['/suggestions', this.route.snapshot.params[('id')]]);
       });
@@ -48,5 +51,18 @@ export class SuggestionComponent implements OnInit {
 
   seeEmployee(id: number) {
     this.router.navigate(['/employees', id]);
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/suggestions']));
+    }
   }
 }

@@ -8,6 +8,7 @@ import {LoginService} from '../../../services/login.service';
 import {ReplyDialogComponent} from "../../../communication/emails/reply-dialog/reply-dialog.component";
 import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
 import {ManageHolidaysDialogComponent} from "../../holidays/manage-holidays-dialog/manage-holidays-dialog.component";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-employee',
@@ -65,7 +66,7 @@ export class EmployeeComponent implements OnInit {
       res => {
         this.employee = res;
       }, err => {
-        console.log(err);
+        this.showError(err);
       },
       () => {
         this.isEmployeeLoaded = true;
@@ -78,7 +79,7 @@ export class EmployeeComponent implements OnInit {
       res => {
         this.employee = res;
       }, err => {
-        console.log(err);
+        this.showError(err);
       },
       () => {
         this.isEmployeeLoaded = true;
@@ -91,7 +92,7 @@ export class EmployeeComponent implements OnInit {
       res => {
         this.holidays = res;
       }, err => {
-        console.log(err);
+        this.showError(err);
       },
       () => {
         this.areHolidaysLoaded = true;
@@ -106,7 +107,7 @@ export class EmployeeComponent implements OnInit {
       res => {
         this.tasks = res;
       }, err => {
-        console.log(err);
+        this.showError(err);
       },
       () => {
         this.areTasksLoaded = true;
@@ -180,5 +181,16 @@ export class EmployeeComponent implements OnInit {
       width: '900px',
       data: {id: this.employee.id}
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

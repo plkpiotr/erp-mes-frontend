@@ -86,6 +86,7 @@ import { RecalculateDialogComponent } from './production/finance/recalculate-dia
 import { SpecialPlanNoDateDialogComponent } from './production/planning/special-plan-no-date-dialog/special-plan-no-date-dialog.component';
 import { SpecialPlanDialogComponent } from './production/planning/special-plan-dialog/special-plan-dialog.component';
 import { ShowSpecialPlanDialogComponent } from './production/planning/show-special-plan-dialog/show-special-plan-dialog.component';
+import { ErrorDialogComponent } from './custom/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +152,7 @@ import { ShowSpecialPlanDialogComponent } from './production/planning/show-speci
     SpecialPlanNoDateDialogComponent,
     SpecialPlanDialogComponent,
     ShowSpecialPlanDialogComponent,
+    ErrorDialogComponent,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,
@@ -166,7 +168,8 @@ import { ShowSpecialPlanDialogComponent } from './production/planning/show-speci
     RecalculateDialogComponent,
     SpecialPlanDialogComponent,
     SpecialPlanNoDateDialogComponent,
-    ShowSpecialPlanDialogComponent
+    ShowSpecialPlanDialogComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,

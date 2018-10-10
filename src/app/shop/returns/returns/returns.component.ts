@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Return} from '../../../types';
 import {ReturnService} from '../../../services/return.service';
 import {Router} from '@angular/router';
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-returns',
@@ -22,7 +23,7 @@ export class ReturnsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private returnService: ReturnService, private router: Router) {
+  constructor(private returnService: ReturnService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class ReturnsComponent implements OnInit {
     this.returnService.fetchAllReturns().subscribe(res => {
       this.returns = res;
     }, err => {
-      console.log(err);
+      this.showError(err);
     }, () => {
       this.areReturnsLoaded = true;
       this.dataSource = new MatTableDataSource<Return>(this.returns);
@@ -50,5 +51,16 @@ export class ReturnsComponent implements OnInit {
         service: 'return'
       }
     });
+  }
+
+  showError(err) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

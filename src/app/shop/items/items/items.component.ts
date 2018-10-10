@@ -4,6 +4,7 @@ import {ItemService} from '../../../services/item.service';
 import {Item} from '../../../types';
 import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
 import {SpecialOfferDialogComponent} from "../special-offer-dialog/special-offer-dialog.component";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-items',
@@ -39,7 +40,7 @@ export class ItemsComponent implements OnInit {
     this.itemService.fetchAllItems().subscribe(res => {
       this.items = res;
     }, err => {
-      console.log(err);
+      this.showError(err, true);
     }, () => {
       this.areItemsLoaded = true;
       this.dataSource = new MatTableDataSource<Item>(this.items);
@@ -67,7 +68,7 @@ export class ItemsComponent implements OnInit {
         this.areItemsLoaded = false;
         this.itemService.setSpecialOffer(this.percentOff, this.query).subscribe(res => {
         }, err => {
-          console.log(err);
+          this.showError(err, false);
         }, () => {
           this.fetchItems();
         });
@@ -80,10 +81,23 @@ export class ItemsComponent implements OnInit {
     this.itemService.cancelSpecialOffer().subscribe(res => {
       this.items = res;
     }, err => {
-      console.log(err);
+      this.showError(err, false);
     }, () => {
       this.areItemsLoaded = true;
       this.dataSource = new MatTableDataSource<Item>(this.items);
     });
+  }
+
+  showError(err, redirect: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
+
+    if (redirect) {
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
+    }
   }
 }

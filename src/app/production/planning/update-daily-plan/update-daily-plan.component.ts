@@ -3,6 +3,8 @@ import {DailyPlanRequest} from '../../../types';
 import {PlanningService} from '../../../services/planning.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-update-daily-plan',
@@ -18,7 +20,7 @@ export class UpdateDailyPlanComponent {
   returnsPerDay: FormControl;
   complaintsResolvedPerDay: FormControl;
 
-  constructor(private planningService: PlanningService, private router: Router) {
+  constructor(private planningService: PlanningService, private router: Router, private dialog: MatDialog) {
     this.setupFormControls();
     this.form = new FormGroup({
       "employeesPerDay": this.employeesPerDay,
@@ -57,9 +59,18 @@ export class UpdateDailyPlanComponent {
     this.planningService.updateDailyPlan(this.dailyPlanRequest).subscribe(() => {
       },
       err => {
-        console.log(err);
+        this.showError(err);
       }, () => {
         this.router.navigate(['/planning']);
       });
+  }
+
+  showError(err) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: '700px',
+      data: {
+        error: err.error
+      }
+    });
   }
 }
