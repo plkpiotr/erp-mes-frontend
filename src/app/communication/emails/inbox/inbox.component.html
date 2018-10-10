@@ -1,16 +1,23 @@
-<div>
-  <div *ngFor="let email of visibleEmails">
-    <a [routerLink]="['/emails', email.id]">{{email.id}}</a>
-    <br>{{email.email}} {{email.subject}} {{email.emailType}} {{email.timestamp}}
-    <div *ngFor="let c of email.content">
-      {{c}}
-    </div>
-    <br>
+<mat-card>Inbox</mat-card>
+<div class="content">
+  <button mat-raised-button (click)="sendEmail()">Write New Email</button>
+  <mat-progress-spinner *ngIf="!areEmailsLoaded" mode="indeterminate"></mat-progress-spinner>
+  <div *ngIf="areEmailsLoaded">
+    <mat-card *ngFor="let email of obs | async">
+      <mat-list>
+        <mat-list-item>
+          From: {{email.email}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Date and time: {{email.timestamp}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Subject: <a routerLink="/emails/{{email.id}}">{{email.subject}}</a>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="sendEmail()">Napisz email</button>
 </div>

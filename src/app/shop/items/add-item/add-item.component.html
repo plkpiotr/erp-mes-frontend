@@ -1,21 +1,22 @@
-<form #form='ngForm' (ngSubmit)='submitForm()'>
-  <div class="form-group">
-    <label>Nazwa: </label>
-    <input type="text" class="form-control"
-           name="name" [(ngModel)]="name"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Cena magazynowa: </label>
-    <input type="number" class="form-control"
-           name="stockPrice" [(ngModel)]="stockPrice"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Cena: </label>
-    <input type="number" class="form-control"
-           name="price" [(ngModel)]="price"
-           required/>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Dodaj przedmiot</button>
-</form>
+<mat-card>Add item</mat-card>
+<div class="content" [formGroup]="form">
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="name" name="name" formControlName="name" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Stock price</mat-label>
+    <input matInput placeholder="stockPrice" name="stockPrice" formControlName="stockPrice" required>
+    <mat-error *ngIf="stockPrice.invalid">{{getStockErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Price</mat-label>
+    <input matInput placeholder="price" name="price" formControlName="price" required>
+    <mat-error *ngIf="price.invalid">{{getPriceErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add item</button>
+</div>

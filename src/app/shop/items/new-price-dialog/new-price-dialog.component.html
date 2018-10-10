@@ -1,0 +1,9 @@
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="New price" [(ngModel)]="price" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="submit()" [disabled]="!isPriceValid()">Submit</button>
+</mat-dialog-actions>

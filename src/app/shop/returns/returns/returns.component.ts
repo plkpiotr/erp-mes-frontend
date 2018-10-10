@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Return} from '../../../types';
 import {ReturnService} from '../../../services/return.service';
 import {Router} from '@angular/router';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-returns',
@@ -11,12 +12,15 @@ import {Router} from '@angular/router';
 export class ReturnsComponent implements OnInit {
 
   returns: Array<Return>;
-  visibleReturns: Array<Return>;
   areReturnsLoaded = false;
+  dataSource: MatTableDataSource<Return> = new MatTableDataSource([]);
+  paginator: any;
 
-  returnsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private returnService: ReturnService, private router: Router) {
   }
@@ -32,8 +36,7 @@ export class ReturnsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areReturnsLoaded = true;
-      this.setVisibleReturns();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Return>(this.returns);
     });
   }
 
@@ -47,26 +50,5 @@ export class ReturnsComponent implements OnInit {
         service: 'return'
       }
     });
-  }
-
-  setVisibleReturns() {
-    const pageIndex = (this.selectedPage - 1) * this.returnsPerPage;
-    this.visibleReturns = this.returns.slice(
-      pageIndex,
-      pageIndex + this.returnsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.returns.length / this.returnsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleReturns();
   }
 }

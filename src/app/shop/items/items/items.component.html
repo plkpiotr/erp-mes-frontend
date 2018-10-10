@@ -1,32 +1,48 @@
-<div *ngIf="areItemsLoaded">
-  <div *ngFor="let item of visibleItems">
-    <br>{{item.id}} {{item.name}} {{item.quantity}} {{item.stockPrice}} {{item.originalPrice}} {{item.currentPrice}}
-    <button (click)="fetchItem(item.id)">Zobacz</button>
-    <br>
+<mat-card>Items</mat-card>
+<div class="content">
+  <button mat-raised-button (click)="addSpecialOffer()">Add special offer</button>
+  <button mat-raised-button (click)="cancelSpecialOffer()">Cancel special offer</button>
+  <mat-progress-spinner *ngIf="!areItemsLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="areItemsLoaded">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Index</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let row"> {{row.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity</th>
+        <td mat-cell *matCellDef="let row"> {{row.quantity}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="stockPrice">
+        <th mat-header-cell *matHeaderCellDef> Stock price</th>
+        <td mat-cell *matCellDef="let row"> {{row.stockPrice}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="originalPrice">
+        <th mat-header-cell *matHeaderCellDef> Original price</th>
+        <td mat-cell *matCellDef="let row"> {{row.originalPrice}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="currentPrice">
+        <th mat-header-cell *matHeaderCellDef> Current price</th>
+        <td mat-cell *matCellDef="let row"> {{row.currentPrice}}</td>
+      </ng-container>
+
+      <tr mat-header-row
+        *matHeaderRowDef="['id', 'name', 'quantity', 'stockPrice', 'originalPrice', 'currentPrice']"></tr>
+      <tr mat-row
+        *matRowDef="let row; columns: ['id', 'name', 'quantity', 'stockPrice', 'originalPrice', 'currentPrice']"
+        (click)="fetchItem(row.id)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addItem()">Add item</button>
   </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="addItem()">Dodaj przedmiot</button><br><br>
-  <button (click)="showAddSpecialOffer = !showAddSpecialOffer">Wprowadź ofertę specjalną</button>
-  <div *ngIf="showAddSpecialOffer">
-    <form #form='ngForm' (ngSubmit)='addSpecialOffer()'>
-      <div class="form-group">
-        <label>Ilość % obniżki: </label>
-        <input type="number" class="form-control"
-               name="percentOff" [(ngModel)]="percentOff"
-               required/>
-      </div>
-      <div class="form-group">
-        <label>Produkty (opcjonalnie): </label>
-        <input type="text" class="form-control"
-               name="query" [(ngModel)]="query"/>
-      </div>
-      <button type='submit' [disabled]="form.invalid">Zatwierdź</button>
-    </form>
-  </div>
-  <br>
-  <button (click)="cancelSpecialOffer()">Anuluj ofertę specjalną</button>
 </div>

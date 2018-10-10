@@ -1,3 +1,4 @@
+<mat-card>Add employee</mat-card>
 <div class="content" [formGroup]="form">
 
   <mat-form-field appearance="legacy">
@@ -44,6 +45,5 @@
     <input matInput placeholder="salary" formControlName="salary" name="salary" required>
   </mat-form-field>
 
-  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">
-    Dodaj pracownika</button>
+  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add employee</button>
 </div>

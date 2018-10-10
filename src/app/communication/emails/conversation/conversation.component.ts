@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, SecurityContext, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {EmailService} from '../../../services/email.service';
-import {EmailEntity, EmailEntityRequest} from '../../../types';
+import {EmailEntity} from '../../../types';
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {ReplyDialogComponent} from "../reply-dialog/reply-dialog.component";
+import {Observable} from "rxjs/index";
 
 @Component({
   selector: 'app-conversation',
@@ -11,24 +14,28 @@ import {EmailEntity, EmailEntityRequest} from '../../../types';
 export class ConversationComponent implements OnInit {
 
   emails: Array<EmailEntity>;
-  visibleEmails: Array<EmailEntity>;
   selectedEmail: EmailEntity;
-  shouldShowResponseForm = false;
+  obs: Observable<any>;
+  dataSource: MatTableDataSource<EmailEntity> = new MatTableDataSource([]);
+  paginator: any;
 
-  subject: string;
-  fullContent: string;
-  content = new Array<string>();
-  emailEntityRequest: EmailEntityRequest;
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
-  emailsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
-
-  constructor(private emailService: EmailService, private router: Router, private route: ActivatedRoute) {
+  constructor(private emailService: EmailService, private route: ActivatedRoute, private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.fetchEmails();
+  }
+
+  getContent(content: string[]) {
+    let result = '';
+    content.forEach(string => result += string);
+    return result;
   }
 
   fetchEmails() {
@@ -36,61 +43,19 @@ export class ConversationComponent implements OnInit {
       .subscribe(res => this.emails = res,
         err => console.log(err),
         () => {
-          this.setVisibleEmails();
-          this.setPageNumbers();
+          this.dataSource = new MatTableDataSource(this.emails);
+          this.obs = this.dataSource.connect();
           this.selectedEmail = this.emails
-            .filter(email => email.id === this.route.snapshot.params['id'])[0];
+            .filter(email => email.id.toString() === this.route.snapshot.params['id'])[0];
         });
   }
 
   send() {
-    this.divideContent();
-    this.emailEntityRequest = {
-      subject: this.subject,
-      content: this.content
-    };
-    this.emailService.reply(this.emailEntityRequest, this.route.snapshot.params['id'])
-      .subscribe(res => {
-        },
-        err => {
-          console.log(err);
-        },
-        () => {
-          this.router.navigate(['/emails/inbox']);
-        });
-  }
+    const dialogRef = this.dialog.open(ReplyDialogComponent, {
+      width: '350px',
+      data: {email: this.selectedEmail.email}
+    });
 
-  setVisibleEmails() {
-    const pageIndex = (this.selectedPage - 1) * this.emailsPerPage;
-    this.visibleEmails = this.emails.slice(
-      pageIndex,
-      pageIndex + this.emailsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.emails.length / this.emailsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleEmails();
-  }
-
-  divideContent() {
-    let i: number;
-    let lastInd = 0;
-    const threshold = 250;
-    for (i = 0; i < Math.floor(this.fullContent.length / threshold); i++) {
-      const firstInd = lastInd;
-      const tempString = this.fullContent.substring(0, (i + 1) * threshold);
-      lastInd = tempString.lastIndexOf(' ') + 1;
-      this.content[i] = this.fullContent.substring(firstInd, lastInd);
-    }
-    this.content[i] = this.fullContent.substring(lastInd);
+    dialogRef.afterClosed().subscribe(res => this.fetchEmails());
   }
 }

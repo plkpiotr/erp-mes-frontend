@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeliveryService} from '../../../services/delivery.service';
 import {Router} from '@angular/router';
 import {Delivery} from '../../../types';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-deliveries',
@@ -12,11 +13,14 @@ export class DeliveriesComponent implements OnInit {
 
   areDeliveriesLoaded = false;
   deliveries: Array<Delivery>;
-  visibleDeliveries: Array<Delivery>;
+  dataSource: MatTableDataSource<Delivery> = new MatTableDataSource([]);
+  paginator: any;
 
-  deliveriesPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private deliveryService: DeliveryService,
               private router: Router) { }
@@ -32,8 +36,7 @@ export class DeliveriesComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areDeliveriesLoaded = true;
-      this.setVisibleDeliveries();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Delivery>(this.deliveries);
     });
   }
 
@@ -44,26 +47,4 @@ export class DeliveriesComponent implements OnInit {
   addDelivery() {
     this.router.navigate(['deliveries/add']);
   }
-
-  setVisibleDeliveries() {
-    const pageIndex = (this.selectedPage - 1) * this.deliveriesPerPage;
-    this.visibleDeliveries = this.deliveries.slice(
-      pageIndex,
-      pageIndex + this.deliveriesPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.deliveries.length / this.deliveriesPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleDeliveries();
-  }
-
 }

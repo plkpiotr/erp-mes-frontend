@@ -1,9 +1,12 @@
 import {
   MatButtonModule, MatCardModule,
-  MatCheckboxModule, MatDatepickerModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
+  MatCheckboxModule, MatDatepickerModule, MatDialogModule,
+  MatExpansionModule, MatFormFieldModule,
+  MatDividerModule, MatGridListModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule,
-  MatSidenavModule, MatStepperModule, MatTableModule, MatTabsModule,
+  MatListModule, MatNativeDateModule, MatSelectModule,
+  MatSidenavModule, MatTableModule,
+  MatPaginatorModule, MatProgressSpinnerModule, MatTabsModule,
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 
@@ -22,11 +25,15 @@ import {NgModule} from '@angular/core';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTabsModule,
-    MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatListModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatDividerModule,
     MatGridListModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -42,11 +49,15 @@ import {NgModule} from '@angular/core';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTabsModule,
-    MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatListModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatDividerModule,
     MatGridListModule,
+    MatExpansionModule
   ],
 })
 export class MaterialModule { }

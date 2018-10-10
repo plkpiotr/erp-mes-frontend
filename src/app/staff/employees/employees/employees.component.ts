@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {Employee} from '../../../types';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-employees',
@@ -11,8 +12,15 @@ import {Employee} from '../../../types';
 export class EmployeesComponent implements OnInit {
 
   employees: Array<Employee>;
-  visibleEmployees: Array<Employee>;
   areLoaded: boolean;
+  dataSource: MatTableDataSource<Employee> = new MatTableDataSource([]);
+  paginator: any;
+
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private employeeService: EmployeeService, private router: Router) {
   }
@@ -26,6 +34,7 @@ export class EmployeesComponent implements OnInit {
       err => console.log(err),
       () => {
         this.areLoaded = true;
+        this.dataSource = new MatTableDataSource<Employee>(this.employees);
       });
   }
 

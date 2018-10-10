@@ -1,21 +1,20 @@
-<form #form='ngForm' (ngSubmit)='send()'>
-  <div class="form-group">
-    <label>Receiver: </label>
-    <input type="text" class="form-control"
-           name="email" [(ngModel)]="email"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Subject: </label>
-    <input type="text" class="form-control"
-           name="subject" [(ngModel)]="subject"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Content: </label>
-    <input type="text" class="form-control"
-           name="fullContent" [(ngModel)]="fullContent"
-           required/>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Send</button>
-</form>
+<mat-card>Write email</mat-card>
+<div class="content" [formGroup]="form">
+
+  <mat-form-field appearance="legacy">
+    <mat-label>To</mat-label>
+    <input matInput placeholder="email" formControlName="email" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Subject</mat-label>
+    <input matInput placeholder="subject" formControlName="subject" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Content</mat-label>
+    <input matInput placeholder="fullContent" formControlName="fullContent" required>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="send()" [disabled]="form.invalid">Send</button>
+</div>

@@ -1,54 +1,116 @@
-<div *ngIf="isLoaded()">
-  <br>{{employee.firstName}} {{employee.lastName}}
-  <br>{{employee.email}}
-  <br>{{employee.role}}
-  <div *ngFor="let holiday of holidays">
-    <br>{{holiday.startDate}}
-    <br>{{holiday.duration}}
-    <br>{{holiday.holidayType}}
-    <br>{{holiday.approvalState}}
-  </div>
-  <div *ngIf="isUserLoggedIn">
-    <br>{{employee.passwordValid}}
-    <div *ngFor="let t of tasks">
-      <br>{{t.category}} {{t.name}} {{t.details}} {{t.deadline}}
-    </div>
-    <br>
-    <br>{{employee.contract.accountNumber}}
-    <br>{{employee.contract.daysOffPerYear}}
-    <br>{{employee.contract.salary}}
-    <div *ngIf="isManager()"><br>
-      <button (click)="showRequests = !showRequests">Zarządzaj urlopami podwładnych</button>
-      <div *ngIf="showRequests" class="requests">
-        <div *ngIf="hasRequests(); else noRequests">
-          <div *ngFor="let holiday of holidayRequests">
-            <br>{{holiday.employee.firstName}} {{holiday.employee.lastName}}
-            <br>{{holiday.employee.role}}
-            <br>{{holiday.startDate}}
-            <br>{{holiday.duration}}
-            <br>{{holiday.holidayType}}
-            <br>{{holiday.approvalState}}
-            <div *ngIf="holiday.approvalState == 'PENDING'">
-              <button (click)="approve(holiday.id, holiday.employee.id)">Zaakceptuj</button>
-              <button (click)="decline(holiday.id, holiday.employee.id)">Odrzuć</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="hasSubordinates()">
-    <div *ngFor="let employee of subordinates">
-      <br>{{employee.firstName}} {{employee.lastName}}
-      <br>{{employee.email}}
-    </div>
-  </div>
-  <br>
-  <button *ngIf="isUserLoggedIn" (click)="addHolidayRequest()">Zgłoś urlop</button>
-  <br>
-  <button (click)="deleteEmployee()">Usuń pracownika</button>
-</div>
+<mat-card *ngIf="isLoaded()">{{employee.firstName}} {{employee.lastName}}</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!isLoaded()" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="isLoaded()">
+    <mat-card>
+      <mat-list>
+        <mat-list-item>
+          {{employee.role}}
+          <button mat-icon-button (click)="sendEmail()">
+            <mat-icon>email</mat-icon>
+            {{employee.email}}
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card *ngIf="endHolidayDate != null">
+      <div class="out-of-office">Out of office until {{endHolidayDate}}</div>
+    </mat-card>
+    <mat-card *ngIf="pendingHolidayStart != null && pendingHolidayEnd != null">
+      <div class="pending-vacation">Out of office between {{pendingHolidayStart}} and {{pendingHolidayEnd}}</div>
+    </mat-card>
+    <mat-expansion-panel *ngIf="holidays != null && holidays.length > 0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          All holidays
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-<ng-template #noRequests>
-  Nie ma żadnych zgłoszeń!
-</ng-template>
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef> Start Date</th>
+          <td mat-cell *matCellDef="let row"> {{row.startDate}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef> Duraton</th>
+          <td mat-cell *matCellDef="let row"> {{row.duration}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="holidayType">
+          <th mat-header-cell *matHeaderCellDef> Holiday Type</th>
+          <td mat-cell *matCellDef="let row"> {{row.holidayType}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="approvalState">
+          <th mat-header-cell *matHeaderCellDef> Approval State</th>
+          <td mat-cell *matCellDef="let row"> {{row.approvalState}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['startDate', 'duration', 'holidayType', 'approvalState']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['startDate', 'duration', 'holidayType', 'approvalState']"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </mat-expansion-panel>
+
+    <div *ngIf="isUserLoggedIn">
+      <mat-expansion-panel *ngIf="tasks != null && tasks.length > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            All tasks
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <table mat-table [dataSource]="taskDataSource">
+
+          <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef> Category</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.category}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef> Details</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.details}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="deadline">
+            <mat-header-cell *matHeaderCellDef> Deadline</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.deadline}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="['category', 'name', 'details', 'deadline']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['category', 'name', 'details', 'deadline']"></mat-row>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Contract information
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="contract">
+          <mat-icon>credit_card</mat-icon>
+          {{employee.contract.accountNumber}}
+          <mat-icon>flight_takeoff</mat-icon>
+          {{employee.contract.daysOffPerYear}}
+          <mat-icon>attach_money</mat-icon>
+          {{employee.contract.salary}}
+        </div>
+      </mat-expansion-panel>
+    </div>
+    <div class="button-group">
+      <button mat-raised-button *ngIf="isAdmin()" (click)="deleteEmployee()">Remove employee</button>
+      <button mat-raised-button *ngIf="isManager() && isUserLoggedIn" (click)="manageRequests()">Manage holiday requests
+      </button>
+      <button mat-raised-button *ngIf="isUserLoggedIn" (click)="addHolidayRequest()">Take time off</button>
+    </div>
+  </div>
+</div>

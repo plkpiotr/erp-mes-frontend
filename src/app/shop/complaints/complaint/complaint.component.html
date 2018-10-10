@@ -1,42 +1,75 @@
-<div *ngIf="isComplaintLoaded">
-  {{complaint.id}}<br>
-  {{complaint.status}}<br>
-  {{complaint.firstName}}<br>
-  {{complaint.lastName}}<br>
-  {{complaint.email}}<br>
-  {{complaint.phoneNumber}}<br>
-  {{complaint.street}}<br>
-  {{complaint.houseNumber}}<br>
-  {{complaint.city}}<br>
-  {{complaint.postalCode}}<br>
-  {{complaint.scheduledFor}}<br>
-  {{complaint.value}}<br>
-  {{complaint.requestedResolution}}<br>
-  {{complaint.resolution}}<br>
-  {{complaint.fault}}<br>
-  <div *ngFor="let deliveryItem of complaint.deliveryItems">
-    {{deliveryItem.item.name}} {{deliveryItem.quantity}}<br>
-  </div>
-  <div>
-    <label>Aktualizuj status:
-      <select name="status" [(ngModel)]="status">
-        <option *ngFor="let s of statuses" [value]="s">{{s}}</option>
-      </select>
-    </label>
-    <button (click)="updateComplaintStatus()" [disabled]="status == complaint.status ||
-    complaint.status == 'MONEY_RETURNED' || complaint.status.toString().includes('ITEM_SENT')">
-      Zatwierdź
-    </button>
-  </div>
-  <div>
-    <label>Aktualizuj rozwiązanie:
-      <select name="resolution" [(ngModel)]="resolution">
-        <option *ngFor="let r of resolutions" [value]="r">{{r}}</option>
-      </select>
-    </label>
-    <button (click)="updateComplaintResolution()" [disabled]="resolution == complaint.resolution &&
-    complaint.resolution != 'IN_PROGRESS'">
-      Zatwierdź rozwiązanie
-    </button>
-  </div>
+<mat-card *ngIf="isComplaintLoaded">Complaint #{{complaint.id}}</mat-card>
+<mat-progress-spinner *ngIf="!isComplaintLoaded" mode="indeterminate"></mat-progress-spinner>
+<div class="content" *ngIf="isComplaintLoaded">
+  <mat-card>
+    <mat-list>
+      <mat-list-item>
+        Status: {{complaint.status}}
+        <button mat-icon-button *ngIf="canUpdateStatus()"
+                (click)="updateComplaintStatus()"><mat-icon>create</mat-icon></button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Resolution: {{complaint.resolution}}
+        <button mat-icon-button *ngIf="complaint.resolution == 'UNRESOLVED' && complaint.status == 'ACCEPTED'"
+                (click)="updateComplaintResolution()"><mat-icon>create</mat-icon></button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Deadline: {{complaint.scheduledFor}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Value: {{complaint.value}} PLN
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>Details</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        Fault: {{complaint.fault}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Requested resolution: {{complaint.requestedResolution}}
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>Customer information</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="customer-info">
+      <mat-icon>face</mat-icon>
+      <span class="info">{{complaint.firstName}} {{complaint.lastName}}</span>
+      <mat-icon>email</mat-icon>
+      <span class="info">{{complaint.email}}</span>
+      <mat-icon>call</mat-icon>
+      <span class="info">{{complaint.phoneNumber}}</span>
+      <br>
+      <mat-icon>location_city</mat-icon>
+      <span class="info">{{complaint.street}} {{complaint.houseNumber}}, {{complaint.postalCode}} {{complaint.city}}</span>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>Items</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item *ngFor="let deliveryItem of complaint.deliveryItems">
+        {{deliveryItem.item.name}}, price: {{deliveryItem.item.currentPrice}} PLN, quantity: {{deliveryItem.quantity}}
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
 </div>
+

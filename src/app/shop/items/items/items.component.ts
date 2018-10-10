@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {Item} from '../../../types';
+import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
+import {SpecialOfferDialogComponent} from "../special-offer-dialog/special-offer-dialog.component";
 
 @Component({
   selector: 'app-items',
@@ -12,17 +14,21 @@ export class ItemsComponent implements OnInit {
 
   areItemsLoaded = false;
   items: Array<Item>;
-  visibleItems: Array<Item>;
   showAddSpecialOffer = false;
   percentOff: string;
   query = '';
+  dataSource: MatTableDataSource<Item> = new MatTableDataSource([]);
+  paginator: any;
 
-  itemsPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private router: Router,
-              private itemService: ItemService) {
+              private itemService: ItemService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -36,8 +42,7 @@ export class ItemsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areItemsLoaded = true;
-      this.setVisibleItems();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<Item>(this.items);
     });
   }
 
@@ -50,12 +55,23 @@ export class ItemsComponent implements OnInit {
   }
 
   addSpecialOffer() {
-    this.areItemsLoaded = false;
-    this.itemService.setSpecialOffer(this.percentOff, this.query).subscribe(res => {
-    }, err => {
-      console.log(err);
-    }, () => {
-      this.fetchItems();
+    const dialogRef = this.dialog.open(SpecialOfferDialogComponent, {
+      width: '350px',
+      data: {percentOff: this.percentOff, query: this.query}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        this.percentOff = result.percentOff;
+        this.query = result.query == null ? '' : result.query;
+        this.areItemsLoaded = false;
+        this.itemService.setSpecialOffer(this.percentOff, this.query).subscribe(res => {
+        }, err => {
+          console.log(err);
+        }, () => {
+          this.fetchItems();
+        });
+      }
     });
   }
 
@@ -67,28 +83,7 @@ export class ItemsComponent implements OnInit {
       console.log(err);
     }, () => {
       this.areItemsLoaded = true;
+      this.dataSource = new MatTableDataSource<Item>(this.items);
     });
   }
-
-  setVisibleItems() {
-    const pageIndex = (this.selectedPage - 1) * this.itemsPerPage;
-    this.visibleItems = this.items.slice(
-      pageIndex,
-      pageIndex + this.itemsPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.items.length / this.itemsPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisibleItems();
-  }
-
 }

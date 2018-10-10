@@ -1,3 +1,20 @@
-.requests {
-  color: red;
+@import "../../../../theme";
+
+mat-icon {
+  margin-left: 25px;
+}
+.out-of-office {
+  color: limegreen;
+  font-style: italic;
+}
+
+.pending-vacation {
+  color: darkorange;
+  font-style: italic;
+}
+
+.contract {
+  display: inline-flex;
+  vertical-align: middle;
+  padding-bottom: 10px;
 }

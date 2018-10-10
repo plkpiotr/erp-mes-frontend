@@ -65,12 +65,27 @@ import {AddEmailComponent} from './communication/emails/add-email/add-email.comp
 import {EmailService} from './services/email.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material';
+import { SpecialOfferDialogComponent } from './shop/items/special-offer-dialog/special-offer-dialog.component';
+import { ReplyDialogComponent } from './communication/emails/reply-dialog/reply-dialog.component';
+import { ManageHolidaysDialogComponent } from './staff/holidays/manage-holidays-dialog/manage-holidays-dialog.component';
+import { NewPriceDialogComponent } from './shop/items/new-price-dialog/new-price-dialog.component';
 import {MatSortModule, MatTableModule} from '@angular/material';
 import {KanbanComponent} from './production/tasks/kanban/kanban.component';
 import {TasksDoingPipe} from './pipes/tasks-doing.pipe';
 import {TasksDonePipe} from './pipes/tasks-done.pipe';
 import {TasksTodoPipe} from './pipes/tasks-todo.pipe';
 import { EnumerationPipe } from './pipes/enumeration.pipe';
+import { StatusDialogComponent } from './shop/returns/status-dialog/status-dialog.component';
+import { OrderStatusDialogComponent } from './shop/orders/order-status-dialog/order-status-dialog.component';
+import { ComplaintStatusDialogComponent } from './shop/complaints/complaint-status-dialog/complaint-status-dialog.component';
+import { ComplaintResolutionDialogComponent } from './shop/complaints/complaint-resolution-dialog/complaint-resolution-dialog.component';
+import { NoCommaNumberPipe } from './pipes/no-comma-number.pipe';
+import { AddIncomeDialogComponent } from './production/finance/add-income-dialog/add-income-dialog.component';
+import { AddExpenseDialogComponent } from './production/finance/add-expense-dialog/add-expense-dialog.component';
+import { RecalculateDialogComponent } from './production/finance/recalculate-dialog/recalculate-dialog.component';
+import { SpecialPlanNoDateDialogComponent } from './production/planning/special-plan-no-date-dialog/special-plan-no-date-dialog.component';
+import { SpecialPlanDialogComponent } from './production/planning/special-plan-dialog/special-plan-dialog.component';
+import { ShowSpecialPlanDialogComponent } from './production/planning/show-special-plan-dialog/show-special-plan-dialog.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +134,39 @@ import { EnumerationPipe } from './pipes/enumeration.pipe';
     TasksDoingPipe,
     TasksDonePipe,
     TasksTodoPipe,
-    EnumerationPipe
+    EnumerationPipe,
+    AddEmailComponent,
+    SpecialOfferDialogComponent,
+    ReplyDialogComponent,
+    ManageHolidaysDialogComponent,
+    NewPriceDialogComponent,
+    StatusDialogComponent,
+    OrderStatusDialogComponent,
+    ComplaintStatusDialogComponent,
+    ComplaintResolutionDialogComponent,
+    NoCommaNumberPipe,
+    AddIncomeDialogComponent,
+    AddExpenseDialogComponent,
+    RecalculateDialogComponent,
+    SpecialPlanNoDateDialogComponent,
+    SpecialPlanDialogComponent,
+    ShowSpecialPlanDialogComponent,
+  ],
+  entryComponents: [
+    SpecialOfferDialogComponent,
+    ReplyDialogComponent,
+    ManageHolidaysDialogComponent,
+    NewPriceDialogComponent,
+    StatusDialogComponent,
+    OrderStatusDialogComponent,
+    ComplaintStatusDialogComponent,
+    ComplaintResolutionDialogComponent,
+    AddIncomeDialogComponent,
+    AddExpenseDialogComponent,
+    RecalculateDialogComponent,
+    SpecialPlanDialogComponent,
+    SpecialPlanNoDateDialogComponent,
+    ShowSpecialPlanDialogComponent
   ],
   imports: [
     BrowserModule,

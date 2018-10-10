@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PlanningService} from '../../../services/planning.service';
 import {SpecialPlan} from '../../../types';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-special-plans',
@@ -10,12 +11,15 @@ import {SpecialPlan} from '../../../types';
 export class SpecialPlansComponent implements OnInit {
 
   specialPlans: Array<SpecialPlan>;
-  visibleSpecialPlans: Array<SpecialPlan>;
   arePlansLoaded = false;
+  dataSource: MatTableDataSource<SpecialPlan> = new MatTableDataSource([]);
+  paginator: any;
 
-  plansPerPage = 15;
-  selectedPage = 1;
-  pageNumbers: number[];
+  @ViewChild(MatPaginator)
+  set pagination(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(private planningService: PlanningService) {
   }
@@ -27,29 +31,7 @@ export class SpecialPlansComponent implements OnInit {
       console.log(err);
     }, () => {
       this.arePlansLoaded = true;
-      this.setVisiblePlans();
-      this.setPageNumbers();
+      this.dataSource = new MatTableDataSource<SpecialPlan>(this.specialPlans);
     });
-  }
-
-  setVisiblePlans() {
-    const pageIndex = (this.selectedPage - 1) * this.plansPerPage;
-    this.visibleSpecialPlans = this.specialPlans.slice(
-      pageIndex,
-      pageIndex + this.plansPerPage
-    );
-  }
-
-  setPageNumbers() {
-    this.pageNumbers = Array(
-      Math.ceil(this.specialPlans.length / this.plansPerPage)
-    )
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-    this.setVisiblePlans();
   }
 }

@@ -7,10 +7,11 @@ $light: #E3F2FD;
 
 // Header:
 
-mat-card {
+mat-card, mat-expansion-panel {
   border-radius: 0;
   padding: 15px 14px 15px 15px;
   background-color: $normal;
+  margin-bottom: 15px;
 }
 
 // Container for forms:
@@ -44,6 +45,10 @@ mat-spinner {
   &::ng-deep circle {
     stroke: $normal;
   }
+}
+
+mat-progress-spinner {
+  margin: auto;
 }
 
 // Table:

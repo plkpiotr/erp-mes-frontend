@@ -1,20 +1,106 @@
-<div *ngIf="isReportLoaded">
-  <div *ngFor="let expense of report.expenses">
-    {{expense.id}} {{expense.expenseType}} {{expense.amount}}
-  </div>
-  <div *ngFor="let inc of report.income">
-    {{inc}}
-  </div>
-  <br> {{report.startDate}}
-  <br> {{report.overallExpenses}}
-  <br> {{report.overallIncome}}
-  <br> {{report.balance}}
-  <br> {{report.estimatedCosts.estimatedIncome}}
-  <br> {{report.estimatedCosts.estimatedShippingCosts}}
-  <br> {{report.estimatedCosts.rent}}
-  <br> {{report.estimatedCosts.salaries}}
-  <br> {{report.estimatedCosts.socialFund}}
-  <br> {{report.estimatedCosts.stockCosts}}
-  <br> {{report.estimatedCosts.taxes}}
-  <br> {{report.estimatedCosts.unexpected}}
+<mat-card *ngIf="isReportLoaded">Report #{{report.id}}</mat-card>
+<mat-progress-spinner *ngIf="!isReportLoaded" mode="indeterminate"></mat-progress-spinner>
+<div class="content" *ngIf="isReportLoaded">
+
+  <mat-card>
+    <div class="date-info">
+      <mat-icon>calendar_today</mat-icon>
+      <span class="info">Report for {{report.startDate}}</span>
+    </div>
+  </mat-card>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>Expenses</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        <b>Overall: </b> <mat-icon>attach_money</mat-icon>
+        <span>{{report.overallExpenses | number : '1.2-2' | noCommaNumber}}</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item *ngFor="let expense of report.expenses">
+        {{expense.expenseType}}
+        <mat-icon>attach_money</mat-icon>
+        <span>{{expense.amount | number : '1.2-2' | noCommaNumber}} PLN</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>Income</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        <b>Overall: </b> <mat-icon>attach_money</mat-icon>
+        <span>{{report.overallIncome | number : '1.2-2' | noCommaNumber}}</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item *ngFor="let inc of report.income">
+        <mat-icon>attach_money</mat-icon>
+        <span>{{inc | number : '1.2-2' | noCommaNumber}} PLN</span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="collapsedHeight"
+                                [expandedHeight]="expandedHeight">
+      <mat-panel-title>Figures expected for this report</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item>
+        Income:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.estimatedIncome | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Shipping costs:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.estimatedShippingCosts | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Rent:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.rent | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Salaries:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.salaries | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Social fund:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.socialFund | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Stock costs:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.stockCosts | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Taxes:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.taxes | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        Unexpected expenses:
+        <mat-icon>attach_money</mat-icon>
+        <span>{{report.estimatedCosts.unexpected | number : '1.2-2' | noCommaNumber}} PLN</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-expansion-panel>
 </div>

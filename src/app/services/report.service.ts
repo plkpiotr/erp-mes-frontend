@@ -12,7 +12,8 @@ export class ReportService {
 
   constructor(private http: HttpClient) {
     this.httpHeaders = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'https://localhost:4200');
+      .set('Access-Control-Allow-Origin', 'https://localhost:4200')
+      .set('Content-Type', 'application/json');
   }
 
   fetchAllReports(): Observable<Array<MonthlyReport>> {

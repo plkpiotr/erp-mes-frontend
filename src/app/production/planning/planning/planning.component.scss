@@ -1,0 +1,38 @@
+@import "../../../../theme";
+
+mat-icon {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.daily-plan-info {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.info {
+  margin-top: 20px;
+}
+
+.alert {
+  display: inline-flex;
+  vertical-align: middle;
+  color: crimson;
+  font-style: italic;
+}
+
+.special {
+  display: inline-flex;
+  vertical-align: middle;
+  color: deeppink;
+  font-style: italic;
+}
+
+.alert-label {
+  padding-top: 22px;
+  padding-left: 25px;
+}
+
+.title {
+  padding-bottom: 0;
+}

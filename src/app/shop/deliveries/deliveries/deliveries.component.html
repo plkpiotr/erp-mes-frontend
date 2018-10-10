@@ -1,16 +1,31 @@
-<div *ngIf="areDeliveriesLoaded">
-  <div *ngFor="let delivery of visibleDeliveries">
-    <div *ngFor="let deliveryItem of delivery.deliveryItems">
-      {{deliveryItem.item.name}} {{deliveryItem.quantity}}
-    </div>
-    {{delivery.scheduledFor}}
-    {{delivery.value}}
-    <button (click)="seeDelivery(delivery.id)">Zobacz</button>
+<mat-card>Deliveries</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!areDeliveriesLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="areDeliveriesLoaded">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Index</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="scheduledFor">
+        <th mat-header-cell *matHeaderCellDef> Scheduled for</th>
+        <td mat-cell *matCellDef="let row"> {{row.scheduledFor}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Value</th>
+        <td mat-cell *matCellDef="let row"> {{row.value}}</td>
+      </ng-container>
+
+      <tr mat-header-row
+        *matHeaderRowDef="['id', 'scheduledFor', 'value']"></tr>
+      <tr mat-row
+        *matRowDef="let row; columns: ['id', 'scheduledFor', 'value']"
+        (click)="seeDelivery(row.id)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addDelivery()">Add delivery</button>
   </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="addDelivery()">Dodaj dostawę</button>
 </div>

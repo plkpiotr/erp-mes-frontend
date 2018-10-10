@@ -1,21 +1,26 @@
-<form #form='ngForm' (ngSubmit)='submitForm()'>
-  <div class="form-group">
-    <label>Data: </label>
-    <input type="date" class="form-control"
-           name="startDate" [(ngModel)]="startDate"
-           required/>
-  </div>
-  <div class="form-group">
-    <labeL>Czas trwania: </labeL>
-    <input type="number" class="form-control"
-           name="duration" [(ngModel)]="duration"
-           required min="0"/>
-  </div>
-  <div class="form-group">
-    <label>Typ: </label>
-    <select name="holidayType" [(ngModel)]="holidayType" required>
-      <option *ngFor="let t of types" [value]="t">{{t}}</option>
-    </select>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Submit</button>
-</form>
+<mat-card>Add holiday</mat-card>
+<div class="content" [formGroup]="form">
+
+  <mat-form-field appearance="legacy">
+      <input matInput [matDatepicker]="picker" placeholder="Start date" name="startDate" formControlName="startDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Duration</mat-label>
+    <input matInput placeholder="duration" name="duration" formControlName="duration" required>
+    <mat-error *ngIf="duration.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Holiday type</mat-label>
+    <mat-select placeholder="holidayType" name="holidayType" formControlName="holidayType" required>
+      <mat-option *ngFor="let t of types" [value]="t">
+        {{t}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add holiday</button>
+</div>

@@ -4,6 +4,9 @@ import {ComplaintService} from '../../../services/complaint.service';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
 import {ActivatedRoute} from '@angular/router';
+import {ComplaintStatusDialogComponent} from "../complaint-status-dialog/complaint-status-dialog.component";
+import {ComplaintResolutionDialogComponent} from "../complaint-resolution-dialog/complaint-resolution-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-complaint',
@@ -14,20 +17,13 @@ export class ComplaintComponent implements OnInit {
 
   isComplaintLoaded = false;
   complaint: Complaint;
-  unresolvedStatuses = ['IN_PROGRESS', 'IN_PROGRESS', 'DECLINED', 'DECLINED_ITEM_SENT'];
-  resolvedStatuses = ['MONEY_RETURNED', 'NEW_ITEM_SENT', 'REPAIRING_ITEM', 'REPAIRED_ITEM_SENT'];
-  statuses;
-  resolutions;
-  status: ComplaintStatus;
-  resolution: Resolution;
 
-  constructor(private complaintService: ComplaintService, private itemService: ItemService,
-              private reportService: ReportService, private route: ActivatedRoute) {
+  constructor(private complaintService: ComplaintService, private route: ActivatedRoute,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.fetchComplaint();
-    this.resolutions = Object.keys(Resolution);
   }
 
   fetchComplaint() {
@@ -37,56 +33,63 @@ export class ComplaintComponent implements OnInit {
       console.log(err);
     }, () => {
       this.isComplaintLoaded = true;
-      this.status = this.complaint.status;
-      this.resolution = this.complaint.resolution;
-      if (this.complaint.resolution === Resolution.UNRESOLVED) {
-        this.statuses = this.unresolvedStatuses;
-      } else {
-        this.statuses = this.resolvedStatuses;
-      }
     });
   }
 
   updateComplaintStatus() {
-    this.isComplaintLoaded = false;
-    this.complaintService.updateComplaintStatus(this.status.toLocaleString(), this.route.snapshot.params['id'])
-      .subscribe(res => {
-        this.complaint = res;
-      }, err => {
-        console.log(err);
-      }, () => {
-        if (this.complaint.status === ComplaintStatus.MONEY_RETURNED) {
-          const expenseRequest: ExpenseRequest = {
-            expenseType: ExpenseType.UNEXPECTED,
-            amount: this.complaint.value
-          };
-          this.reportService.addExpense(expenseRequest).subscribe(res => {
-          });
-        } else if (this.complaint.status === ComplaintStatus.NEW_ITEM_SENT) {
-          this.complaint.deliveryItems.forEach(deliveryItem => {
-            this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
-            });
-          });
-        }
-        this.isComplaintLoaded = true;
-      });
+    let status = [];
+    if (this.complaint.status === ComplaintStatus.IN_PROGRESS) {
+      status = ['ACCEPTED', 'DECLINED'];
+    } else if (this.complaint.status === 'DECLINED') {
+      status = ['DECLINED_ITEM_SENT'];
+    } else if (this.complaint.status === 'ACCEPTED') {
+      if (this.complaint.resolution === Resolution.EXCHANGE_FOR_NEW) {
+        status = ['NEW_ITEM_SENT'];
+      } else if (this.complaint.resolution === Resolution.MONEY_RETURN) {
+        status = ['MONEY_RETURNED'];
+      } else if (this.complaint.resolution === Resolution.REPAIR) {
+        status = ['REPAIRING_ITEM'];
+      }
+    } else if (this.complaint.status === ComplaintStatus.REPAIRING_ITEM) {
+      status = ['REPAIRED_ITEM_SENT'];
+    }
+
+    const dialogRef = this.dialog.open(ComplaintStatusDialogComponent, {
+      width: '350px',
+      data: {
+        status: status,
+        complaint: this.complaint
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isComplaintLoaded = false;
+      this.fetchComplaint();
+    });
   }
 
   updateComplaintResolution() {
-    this.isComplaintLoaded = false;
-    this.complaintService.updateComplaintResolution(this.resolution.toLocaleString(),
-      this.route.snapshot.params['id']).subscribe(res => {
-      this.complaint = res;
-    }, err => {
-      console.log(err);
-    }, () => {
-      if (this.complaint.resolution === Resolution.UNRESOLVED) {
-        this.statuses = this.unresolvedStatuses;
-      } else {
-        this.statuses = this.resolvedStatuses;
+    let resolution = [];
+    if (this.complaint.resolution === Resolution.UNRESOLVED) {
+      resolution = ['MONEY_RETURN', 'REPAIR', 'EXCHANGE_FOR_NEW'];
+    }
+    const dialogRef = this.dialog.open(ComplaintResolutionDialogComponent, {
+      width: '350px',
+      data: {
+        status: resolution,
+        complaint: this.complaint
       }
-      this.isComplaintLoaded = true;
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isComplaintLoaded = false;
+      this.fetchComplaint();
+    });
+  }
+
+  canUpdateStatus(): boolean {
+    return (!this.complaint.status.toLocaleString().includes('SENT') && this.complaint.status !== ComplaintStatus.ACCEPTED) ||
+      (this.complaint.status === ComplaintStatus.ACCEPTED && this.complaint.resolution !== 'UNRESOLVED');
   }
 
 }

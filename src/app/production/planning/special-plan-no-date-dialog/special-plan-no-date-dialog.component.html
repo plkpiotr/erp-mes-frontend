@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Special plan for: {{data.date}}</h2>
+<mat-dialog-content>
+  <div class="content" [formGroup]="form">
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="description" formControlName="description" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Employees per day</mat-label>
+      <input matInput placeholder="employeesPerDay" formControlName="employeesPerDay" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Orders per day</mat-label>
+      <input matInput placeholder="ordersPerDay" formControlName="ordersPerDay" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Returns per day</mat-label>
+      <input matInput placeholder="returnsPerDay" formControlName="returnsPerDay" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Complaints resolved per day</mat-label>
+      <input matInput placeholder="complaintsResolvedPerDay" formControlName="complaintsResolvedPerDay" required>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="submit()" [disabled]="form.invalid">Add</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

@@ -1,0 +1,23 @@
+<mat-progress-spinner *ngIf="!areRequestsLoaded" mode="indeterminate">
+</mat-progress-spinner>
+<div *ngIf="areRequestsLoaded">
+  <button mat-icon-button class="decline" *ngIf="holidayRequests.length === 0" (click)="cancel()">There are no requests to manage.
+    <mat-icon>clear</mat-icon>
+  </button>
+  <mat-list *ngIf="holidayRequests.length > 0">
+    <mat-list-item *ngFor="let req of holidayRequests">
+      <mat-icon>account_circle</mat-icon> {{req.employee.firstName}} {{req.employee.lastName}}
+      <mat-icon>business_center</mat-icon> {{req.holidayType}}
+      <mat-icon>calendar_today</mat-icon> {{req.startDate}}
+      <mat-icon>timeline</mat-icon> {{req.duration}} day(s)
+      <mat-icon>hourglass_empty</mat-icon> {{req.approvalState}}
+      <button class="accept" *ngIf="req.approvalState === 'PENDING'" mat-icon-button (click)="approve(req.id, req.employee.id)">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button class="decline" *ngIf="req.approvalState === 'PENDING'" mat-icon-button (click)="decline(req.id, req.employee.id)">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>

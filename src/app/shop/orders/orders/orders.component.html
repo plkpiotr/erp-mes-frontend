@@ -1,16 +1,41 @@
-<div *ngIf="areOrdersLoaded">
-  <div *ngFor="let o of visibleOrders">
-    <hr>{{o.id}} {{o.status}} {{o.firstName}} {{o.lastName}} {{o.email}} {{o.phoneNumber}} {{o.street}}
-    {{o.houseNumber}} {{o.city}} {{o.postalCode}} {{o.scheduledFor}} {{o.value}}
-    <div *ngFor="let d of o.deliveryItems">
-      {{d.item.name}} {{d.quantity}}
-    </div>
-    <button (click)="seeOrder(o.id)">Zobacz</button>
+<mat-card>Orders</mat-card>
+<div class="content">
+  <mat-progress-spinner *ngIf="!areOrdersLoaded" mode="indeterminate">
+  </mat-progress-spinner>
+  <div *ngIf="areOrdersLoaded">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Index</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Customer name</th>
+        <td mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status</th>
+        <td mat-cell *matCellDef="let row"> {{row.status}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Value</th>
+        <td mat-cell *matCellDef="let row"> {{row.value}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="deadline">
+        <th mat-header-cell *matHeaderCellDef> Deadline</th>
+        <td mat-cell *matCellDef="let row"> {{row.scheduledFor}}</td>
+      </ng-container>
+
+      <tr mat-header-row
+        *matHeaderRowDef="['id', 'name', 'status', 'value', 'deadline']"></tr>
+      <tr mat-row
+        *matRowDef="let row; columns: ['id', 'name', 'status', 'value', 'deadline']"
+        (click)="seeOrder(row.id)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-raised-button (click)="addOrder()">Add order</button>
   </div>
-  <div>
-    <button *ngFor="let page of pageNumbers" (click)="changePage(page)" [class.active]="page == selectedPage">
-      {{page}}
-    </button>
-  </div>
-  <button (click)="addOrder()">Dodaj zamówienie</button>
 </div>

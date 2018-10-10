@@ -28,6 +28,10 @@ export class DeliveryService {
     return this.http.post<Delivery>('http://localhost:8080/deliveries', request, {headers: this.httpHeaders});
   }
 
+  confirmDelivery(id: number): Observable<Delivery> {
+    return this.http.post<Delivery>('http://localhost:8080/deliveries/' + id, null, {headers: this.httpHeaders});
+  }
+
   getRecommendations(): Observable<Array<DeliveryItemRequest>> {
     return this.http.get<Array<DeliveryItemRequest>>('http://localhost:8080/deliveries/recommended-delivery',
       {headers: this.httpHeaders});

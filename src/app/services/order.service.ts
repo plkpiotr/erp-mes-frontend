@@ -27,4 +27,8 @@ export class OrderService {
   addOneOrder(orderRequest: ShopServiceRequest): Observable<Order> {
     return this.http.post<Order>('http://localhost:8080/orders', orderRequest, {headers: this.httpHeaders});
   }
+
+  updateOrderStatus(status: string, id: number): Observable<Order> {
+    return this.http.put<Order>('http://localhost:8080/orders/' + id, status, {headers: this.httpHeaders});
+  }
 }

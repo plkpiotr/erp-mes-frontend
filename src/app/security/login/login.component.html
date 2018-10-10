@@ -1,15 +1,15 @@
-<form #form='ngForm' (ngSubmit)='login()'>
-  <div class="form-group">
-    <label>Email: </label>
-    <input type="email" class="form-control"
-           name="email" [(ngModel)]="email"
-           required/>
-  </div>
-  <div class="form-group">
-    <label>Hasło: </label>
-    <input type="text" class="form-control"
-           name="password" [(ngModel)]="password"
-           required/>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Zaloguj</button>
-</form>
+<mat-card>Sign in</mat-card>
+<div class="content" [formGroup]="form">
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="email" formControlName="email" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="password" formControlName="password" required>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="login()" [disabled]="form.invalid">Sign in</button>
+</div>

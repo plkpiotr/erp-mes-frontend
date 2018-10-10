@@ -13,7 +13,8 @@ export class ItemService {
 
   constructor(private http: HttpClient, private router: Router) {
     this.httpHeaders = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'https://localhost:4200');
+      .set('Access-Control-Allow-Origin', 'https://localhost:4200')
+      .set('Content-Type', 'application/json');
   }
 
   fetchAllItems(): Observable<Array<Item>> {
@@ -26,6 +27,10 @@ export class ItemService {
 
   addNewItem(request: ItemRequest): Observable<Item> {
     return this.http.post<Item>('http://localhost:8080/items', request, {headers: this.httpHeaders});
+  }
+
+  setNewPrice(id: number, price: number): Observable<Item> {
+    return this.http.post<Item>('http://localhost:8080/items/' + id, price, {headers: this.httpHeaders});
   }
 
   supplyItem(id: number, quantity: number): Observable<Item> {
