@@ -1,9 +1,8 @@
-<form #form='ngForm' (ngSubmit)='submit()'>
-  <div class="form-group">
-    <label>Hasło: </label>
-    <input type="text" class="form-control"
-           name="password" [(ngModel)]="password"
-           required/>
-  </div>
-  <button type='submit' [disabled]="form.invalid">Zatwierdź</button>
-</form>
+<mat-card>Validate password</mat-card>
+<div class="content" [formGroup]="form">
+  <mat-form-field appearance="legacy">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="password" formControlName="password" required>
+  </mat-form-field>
+  <button mat-raised-button (click)="submit()" [disabled]="form.invalid">Validate</button>
+</div>
