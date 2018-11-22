@@ -11,6 +11,14 @@
             <mat-icon>email</mat-icon>
             {{employee.email}}
           </button>
+          <button mat-icon-button (click)="seeKanban()">
+            <mat-icon>view_carousel</mat-icon>
+            Kanban
+          </button>
+          <button mat-icon-button (click)="sendEmail()">
+            <mat-icon>equalizer</mat-icon>
+            Indicators
+          </button>
         </mat-list-item>
       </mat-list>
     </mat-card>
@@ -56,40 +64,6 @@
     </mat-expansion-panel>
 
     <div *ngIf="isUserLoggedIn">
-      <mat-expansion-panel *ngIf="tasks != null && tasks.length > 0">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            All tasks
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <table mat-table [dataSource]="taskDataSource">
-
-          <ng-container matColumnDef="category">
-            <mat-header-cell *matHeaderCellDef> Category</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.category}}</mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="details">
-            <mat-header-cell *matHeaderCellDef> Details</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.details}}</mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="deadline">
-            <mat-header-cell *matHeaderCellDef> Deadline</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.deadline}}</mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="['category', 'name', 'details', 'deadline']"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: ['category', 'name', 'details', 'deadline']"></mat-row>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-      </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>

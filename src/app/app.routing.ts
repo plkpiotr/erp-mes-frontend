@@ -83,7 +83,7 @@ export const appRoutes: Routes = [
   {path: 'emails/add', component: AddEmailComponent},
   {path: 'emails/:id', component: ConversationComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'kanban', component: KanbanComponent}
+  {path: 'kanban/:id', component: KanbanComponent}
   // {path: '**', redirectTo: 'login'}
   ];
 
