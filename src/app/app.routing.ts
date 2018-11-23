@@ -40,6 +40,7 @@ import {OutboxComponent} from './communication/emails/outbox/outbox.component';
 import {ConversationComponent} from './communication/emails/conversation/conversation.component';
 import {AddEmailComponent} from './communication/emails/add-email/add-email.component';
 import {KanbanComponent} from './production/tasks/kanban/kanban.component';
+import {SetupComponent} from "./setup.component";
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -84,6 +85,7 @@ export const appRoutes: Routes = [
   {path: 'emails/add', component: AddEmailComponent},
   {path: 'emails/:id', component: ConversationComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'setup', component: SetupComponent},
   {path: 'kanban/:id', component: KanbanComponent}
   // {path: '**', redirectTo: 'login'}
   ];

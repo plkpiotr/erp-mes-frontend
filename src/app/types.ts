@@ -120,6 +120,14 @@ export interface Employee {
   contract?: Contract;
 }
 
+export interface AdminRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  contractRequest: ContractRequest;
+}
+
 export interface EmployeeRequest {
   firstName: string;
   lastName: string;
