@@ -15,9 +15,9 @@ export interface DialogData {
 })
 export class ReplyDialogComponent {
 
-  private form: FormGroup;
-  private subject: FormControl;
-  private fullContent: FormControl;
+  form: FormGroup;
+  subject: FormControl;
+  fullContent: FormControl;
   content = [];
   emailEntityRequest: EmailEntityRequest;
   error: string;
