@@ -38,7 +38,7 @@
     </mat-tab>
 
     <mat-tab label="Done">
-      <div class="tile" *ngFor="let myTask of (tasks | tasksDoing)" (click)="seeTask(myTask.id)">
+      <div class="tile" *ngFor="let myTask of (tasks | tasksDone)" (click)="seeTask(myTask.id)">
         <p>ID: <strong>{{myTask.id}}</strong> Type: <strong>{{myTask.type ? myTask.type : 'N/A'}}</strong></p>
         <mat-divider></mat-divider>
         <p><strong>{{myTask.name}}</strong></p>
