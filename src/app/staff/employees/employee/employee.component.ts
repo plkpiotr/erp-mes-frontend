@@ -1,14 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeeService} from '../../../services/employee.service';
-import {Employee, Holiday, Role, Task} from '../../../types';
+import {Employee, Holiday, Role} from '../../../types';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HolidayService} from '../../../services/holiday.service';
-import {TaskService} from '../../../services/task.service';
 import {LoginService} from '../../../services/login.service';
-import {ReplyDialogComponent} from "../../../communication/emails/reply-dialog/reply-dialog.component";
-import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
-import {ManageHolidaysDialogComponent} from "../../holidays/manage-holidays-dialog/manage-holidays-dialog.component";
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {ReplyDialogComponent} from '../../../communication/emails/reply-dialog/reply-dialog.component';
+import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
+import {ManageHolidaysDialogComponent} from '../../holidays/manage-holidays-dialog/manage-holidays-dialog.component';
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-employee',
@@ -18,17 +17,14 @@ import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.co
 export class EmployeeComponent implements OnInit {
 
   employee: Employee;
-  tasks: Task[];
   holidays: Holiday[];
   isEmployeeLoaded = false;
-  areTasksLoaded = false;
   areHolidaysLoaded = false;
   isUserLoggedIn = false;
   endHolidayDate;
   pendingHolidayStart;
   pendingHolidayEnd;
   dataSource: MatTableDataSource<Holiday> = new MatTableDataSource([]);
-  taskDataSource: MatTableDataSource<Task> = new MatTableDataSource([]);
   paginator: any;
   loggedInUserRole: Role;
 
@@ -36,11 +32,9 @@ export class EmployeeComponent implements OnInit {
   set pagination(paginator: MatPaginator) {
     this.paginator = paginator;
     this.dataSource.paginator = this.paginator;
-    this.taskDataSource.paginator = this.paginator;
   }
 
   constructor(private employeeService: EmployeeService,
-              private taskService: TaskService,
               private holidayService: HolidayService,
               private loginService: LoginService,
               private route: ActivatedRoute,
@@ -102,20 +96,6 @@ export class EmployeeComponent implements OnInit {
     );
   }
 
-  fetchTasksByAssignee() {
-    this.taskService.fetchTasksByAssignee().subscribe(
-      res => {
-        this.tasks = res;
-      }, err => {
-        this.showError(err);
-      },
-      () => {
-        this.areTasksLoaded = true;
-        this.taskDataSource = new MatTableDataSource<Task>(this.tasks);
-      }
-    );
-  }
-
   isManager(): boolean {
     return this.employee.role.toLocaleString().includes('ADMIN');
   }
@@ -134,6 +114,10 @@ export class EmployeeComponent implements OnInit {
 
   isLoaded(): boolean {
     return this.isEmployeeLoaded && this.areHolidaysLoaded;
+  }
+
+  seeKanban() {
+    this.router.navigate(['/kanban', this.route.snapshot.params['id']]);
   }
 
   sendEmail() {

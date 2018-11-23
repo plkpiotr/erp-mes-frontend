@@ -52,6 +52,7 @@ export const appRoutes: Routes = [
   {path: 'tasks', component: TasksComponent},
   {path: 'tasks/add', component: AddTaskComponent},
   {path: 'tasks/:id', component: TaskComponent},
+  {path: 'tasks/:id/assign', component: TaskComponent},
   {path: 'reports', component: ReportsComponent},
   {path: 'reports/:id', component: ReportComponent},
   {path: 'current-report', component: CurrentReportComponent},
@@ -83,7 +84,7 @@ export const appRoutes: Routes = [
   {path: 'emails/add', component: AddEmailComponent},
   {path: 'emails/:id', component: ConversationComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'kanban', component: KanbanComponent}
+  {path: 'kanban/:id', component: KanbanComponent}
   // {path: '**', redirectTo: 'login'}
   ];
 

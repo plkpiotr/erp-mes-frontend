@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Category, Task} from '../../../types';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
-import {MatDialog} from "@angular/material";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-task',
@@ -38,8 +38,19 @@ export class TaskComponent implements OnInit {
       });
   }
 
-  submitForm() {
+  setNextCategory() {
     this.taskService.setNextCategory(this.route.snapshot.params[('id')])
+      .subscribe(res => {
+        this.task = res;
+      }, err => {
+        this.showError(err, false);
+      }, () => {
+        this.router.navigate(['/tasks']);
+      });
+  }
+
+  assignToMe() {
+    this.taskService.assignToMe(this.route.snapshot.params[('id')])
       .subscribe(res => {
         this.task = res;
       }, err => {

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Task, TaskRequest} from '../types';
-import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 
 @Injectable()
@@ -22,8 +21,8 @@ export class TaskService {
     return this.http.get<Task>('http://localhost:8080/tasks/' + id, {headers: this.httpHeaders});
   }
 
-  fetchTasksByAssignee(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>('http://localhost:8080/kanban/', {headers: this.httpHeaders});
+  fetchTasksByAssignee(id: number): Observable<Array<Task>> {
+    return this.http.get<Array<Task>>('http://localhost:8080/kanban/' + id, {headers: this.httpHeaders});
   }
 
   addTask(taskRequest: TaskRequest): Observable<Task> {
@@ -32,5 +31,9 @@ export class TaskService {
 
   setNextCategory(id: number): Observable<Task> {
     return this.http.put<Task>('http://localhost:8080/tasks/' + id, {headers: this.httpHeaders});
+  }
+
+  assignToMe(id: number): Observable<Task> {
+    return this.http.put<Task>('http://localhost:8080/tasks/' + id + '/assign', {headers: this.httpHeaders});
   }
 }

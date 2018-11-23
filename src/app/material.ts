@@ -6,7 +6,7 @@ import {
   MatIconModule, MatInputModule,
   MatListModule, MatNativeDateModule, MatSelectModule,
   MatSidenavModule, MatTableModule,
-  MatPaginatorModule, MatProgressSpinnerModule, MatTabsModule,
+  MatPaginatorModule, MatProgressSpinnerModule, MatTabsModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 

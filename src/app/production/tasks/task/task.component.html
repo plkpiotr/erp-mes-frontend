@@ -7,26 +7,11 @@
     <h4 *ngIf="task.details">{{task.details}}</h4>
     <mat-divider *ngIf="task.details"></mat-divider>
     <div class="row">
-      <form class="grid" (ngSubmit)="submitForm()">
-        <p>ID: <strong>{{task.id}}</strong></p>
-        <mat-divider></mat-divider>
-        <p>Category: <strong>{{task.category | enumeration}}</strong></p>
-        <p>Type: <strong>{{task.type | enumeration}}</strong></p>
-        <mat-divider></mat-divider>
+      <form class="grid" (ngSubmit)="assignToMe()">
         <p>Assignee: <strong>
           {{task.assignee ? (task.assignee.firstName + ' ' + task.assignee.lastName) : 'N/A'}}
         </strong></p>
         <mat-divider></mat-divider>
-        <p>Scheduled time: <strong>{{task.scheduledTime ? (task.scheduledTime | date: 'short') : 'N/A'}}</strong></p>
-        <p>Deadline: <strong>{{task.deadline | date: 'short'}}</strong></p>
-        <mat-divider></mat-divider>
-        <p>Estimated time: <strong>{{task.estimatedTime}}</strong></p>
-        <mat-divider></mat-divider>
-        <button mat-raised-button *ngIf="!(task.category === isDone)" (click)="submitForm()">
-          Next category
-        </button>
-      </form>
-      <div class="grid">
         <p>Created at:
           <strong>
             {{task.creationTime | date: 'short'}}
@@ -60,10 +45,28 @@
           </strong>
         </p>
         <mat-divider></mat-divider>
-      </div>
-      <div class="grid">
+        <button mat-raised-button *ngIf="!(task.assignee)" (click)="assignToMe()">
+          Assign to me
+        </button>
+      </form>
+      <form class="grid" (ngSubmit)="setNextCategory()">
+        <p>ID: <strong>{{task.id}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Category: <strong>{{task.category | enumeration}}</strong></p>
+        <p>Type: <strong>{{task.type | enumeration}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Scheduled time: <strong>{{task.scheduledTime ? (task.scheduledTime | date: 'short') : 'N/A'}}</strong></p>
+        <p>Deadline: <strong>{{task.deadline | date: 'short'}}</strong></p>
+        <mat-divider></mat-divider>
+        <p>Estimated time: <strong>{{task.estimatedTime}}</strong></p>
+        <mat-divider></mat-divider>
+        <button mat-raised-button *ngIf="!(task.category === isDone)" (click)="setNextCategory()">
+          Next category
+        </button>
+      </form>
+      <div *ngIf="task.precedingTaskIds.length > 0" class="grid">
         <p>Preceding task IDs:</p>
-        <div *ngIf="task.precedingTaskIds">
+        <div>
           <div class="hyperlink" *ngFor="let p of task.precedingTaskIds" (click)="seeTask(p)">
             No. {{p}}
           </div>
