@@ -17,18 +17,18 @@ export class ReturnService {
   }
 
   fetchAllReturns(): Observable<Array<Return>> {
-    return this.http.get<Array<Return>>(Global.url + 'returns', {headers: this.httpHeaders});
+    return this.http.get<Array<Return>>(Global.backendUrl + 'returns', {headers: this.httpHeaders});
   }
 
   fetchOneReturn(id: number): Observable<Return> {
-    return this.http.get<Return>(Global.url + 'returns/' + id, {headers: this.httpHeaders});
+    return this.http.get<Return>(Global.backendUrl + 'returns/' + id, {headers: this.httpHeaders});
   }
 
   addOneReturn(request: ShopServiceRequest): Observable<Return> {
-    return this.http.post<Return>(Global.url + 'returns', request, {headers: this.httpHeaders});
+    return this.http.post<Return>(Global.backendUrl + 'returns', request, {headers: this.httpHeaders});
   }
 
   updateReturnStatus(status: string, id: number): Observable<Return> {
-    return this.http.put<Return>(Global.url + 'returns/' + id, status, {headers: this.httpHeaders});
+    return this.http.put<Return>(Global.backendUrl + 'returns/' + id, status, {headers: this.httpHeaders});
   }
 }

@@ -18,15 +18,15 @@ export class EmployeeService {
   }
 
   fetchAllEmployees(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(Global.url + 'employees', {headers: this.httpHeaders});
+    return this.http.get<Array<Employee>>(Global.backendUrl + 'employees', {headers: this.httpHeaders});
   }
 
   fetchColleagues(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(Global.url + 'colleagues', {headers: this.httpHeaders});
+    return this.http.get<Array<Employee>>(Global.backendUrl + 'colleagues', {headers: this.httpHeaders});
   }
 
   fetchAllManagers(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(Global.url + 'employees', {
+    return this.http.get<Array<Employee>>(Global.backendUrl + 'employees', {
       headers: this.httpHeaders,
       params: {
         privilege: 'admin'
@@ -35,7 +35,7 @@ export class EmployeeService {
   }
 
   fetchAllNonManagers(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(Global.url + 'employees', {
+    return this.http.get<Array<Employee>>(Global.backendUrl + 'employees', {
       headers: this.httpHeaders,
       params: {
         privilege: 'user'
@@ -44,16 +44,16 @@ export class EmployeeService {
   }
 
   fetchOneEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8080/employees/' + id, {headers: this.httpHeaders});
+    return this.http.get<Employee>(Global.backendUrl + 'employees/' + id, {headers: this.httpHeaders});
   }
 
   addEmployee(request: EmployeeRequest): Observable<Employee> {
-    return this.http.post<Employee>('http://localhost:8080/employees', request,
+    return this.http.post<Employee>(Global.backendUrl + 'employees', request,
       {headers: this.httpHeaders});
   }
 
   deleteEmployee(id: number) {
-    this.http.delete('http://localhost:8080/employees/' + id, {headers: this.httpHeaders})
+    this.http.delete(Global.backendUrl + 'employees/' + id, {headers: this.httpHeaders})
       .subscribe(() => {
         },
         err => {
@@ -65,12 +65,12 @@ export class EmployeeService {
   }
 
   fetchSubordinates(id: number): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>('http://localhost:8080/employees/' + id + '/subordinates',
+    return this.http.get<Array<Employee>>(Global.backendUrl + 'employees/' + id + '/subordinates',
       {headers: this.httpHeaders});
   }
 
   fetchProfile(id: number): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8080/profiles/' + id,
+    return this.http.get<Employee>(Global.backendUrl + 'profiles/' + id,
       {headers: this.httpHeaders});
   }
 

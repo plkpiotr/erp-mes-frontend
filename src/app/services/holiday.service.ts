@@ -20,12 +20,12 @@ export class HolidayService {
   }
 
   fetchHolidays(employeeId: number): Observable<Array<Holiday>> {
-    return this.http.get<Array<Holiday>>(Global.url + 'employees/' + employeeId + '/holidays',
+    return this.http.get<Array<Holiday>>(Global.backendUrl + 'employees/' + employeeId + '/holidays',
       {headers: this.httpHeaders});
   }
 
   addHoliday(request: HolidayRequest, employeeId: number) {
-    this.http.post(Global.url + 'employees/' + employeeId + '/holidays',
+    this.http.post(Global.backendUrl + 'employees/' + employeeId + '/holidays',
       request, {headers: this.httpHeaders})
       .subscribe(() => {
         },
@@ -38,12 +38,12 @@ export class HolidayService {
   }
 
   fetchHolidaysToApprove(managerId: number): Observable<Array<Holiday>> {
-    return this.http.get<Array<Holiday>>(Global.url + 'employees/' + managerId +
+    return this.http.get<Array<Holiday>>(Global.backendUrl + 'employees/' + managerId +
       '/subordinates/holiday-requests', {headers: this.httpHeaders});
   }
 
   manageHolidays(managerId: number, employeeId: number, holidayId: number, approve: string): Observable<Holiday> {
-    return this.http.post<Holiday>(Global.url + 'employees/' + managerId + '/subordinates/'
+    return this.http.post<Holiday>(Global.backendUrl + 'employees/' + managerId + '/subordinates/'
       + employeeId + '/holidays', holidayId, {
       headers: this.httpHeaders,
       params: {

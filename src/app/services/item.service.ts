@@ -19,33 +19,33 @@ export class ItemService {
   }
 
   fetchAllItems(): Observable<Array<Item>> {
-    return this.http.get<Array<Item>>(Global.url + 'items', {headers: this.httpHeaders});
+    return this.http.get<Array<Item>>(Global.backendUrl + 'items', {headers: this.httpHeaders});
   }
 
   fetchOneItem(id: number): Observable<Item> {
-    return this.http.get<Item>(Global.url + 'items/' + id, {headers: this.httpHeaders});
+    return this.http.get<Item>(Global.backendUrl + 'items/' + id, {headers: this.httpHeaders});
   }
 
   addNewItem(request: ItemRequest): Observable<Item> {
-    return this.http.post<Item>(Global.url + 'items', request, {headers: this.httpHeaders});
+    return this.http.post<Item>(Global.backendUrl + 'items', request, {headers: this.httpHeaders});
   }
 
   setNewPrice(id: number, price: number): Observable<Item> {
-    return this.http.post<Item>(Global.url + 'items/' + id, price, {headers: this.httpHeaders});
+    return this.http.post<Item>(Global.backendUrl + 'items/' + id, price, {headers: this.httpHeaders});
   }
 
   supplyItem(id: number, quantity: number): Observable<Item> {
-    return this.http.post<Item>(Global.url + 'items/' + id + '/supply',
+    return this.http.post<Item>(Global.backendUrl + 'items/' + id + '/supply',
       quantity, {headers: this.httpHeaders});
   }
 
   buyItem(id: number, quantity: number): Observable<Item> {
-    return this.http.post<Item>(Global.url + 'items/' + id + '/buy',
+    return this.http.post<Item>(Global.backendUrl + 'items/' + id + '/buy',
       quantity, {headers: this.httpHeaders});
   }
 
   setSpecialOffer(percentOff: string, query: string): Observable<Array<Item>> {
-    return this.http.post<Array<Item>>(Global.url + 'set-special-offer', '', {
+    return this.http.post<Array<Item>>(Global.backendUrl + 'set-special-offer', '', {
       headers: this.httpHeaders,
       params: {
         percentOff: percentOff,
@@ -55,7 +55,7 @@ export class ItemService {
   }
 
   cancelSpecialOffer(): Observable<Array<Item>> {
-    return this.http.post<Array<Item>>(Global.url + 'cancel-special-offer', '',
+    return this.http.post<Array<Item>>(Global.backendUrl + 'cancel-special-offer', '',
       {headers: this.httpHeaders});
   }
 }

@@ -21,17 +21,17 @@ export class LoginService {
 
   login(email: string, password: string): Observable<any> {
     const credentials = {email: email, password: password};
-    return this.http.post<any>(Global.url + 'generate-token', credentials,
+    return this.http.post<any>(Global.backendUrl + 'generate-token', credentials,
       {headers: this.httpHeaders});
   }
 
   fetchUser(): Observable<Employee> {
-    return this.http.get<Employee>(Global.url + 'logged-in-user',
+    return this.http.get<Employee>(Global.backendUrl + 'logged-in-user',
       {headers: this.httpHeaders});
   }
 
   validateUser(id: string, password: string) {
-    this.http.post(Global.url + 'employees/' + id + '/validate-password', password,
+    this.http.post(Global.backendUrl + 'employees/' + id + '/validate-password', password,
       {headers: this.httpHeaders}).subscribe(res => {},
       err => {
         this.showError(err);

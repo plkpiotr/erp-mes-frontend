@@ -16,22 +16,22 @@ export class NotificationService {
   }
 
   fetchAllNotifications(): Observable<Array<Notification>> {
-    return this.http.get<Array<Notification>>(Global.url + 'notifications', {headers: this.httpHeaders});
+    return this.http.get<Array<Notification>>(Global.backendUrl + 'notifications', {headers: this.httpHeaders});
   }
 
   fetchOneNotification(id: number): Observable<Notification> {
-    return this.http.get<Notification>(Global.url + 'notifications/' + id, {headers: this.httpHeaders});
+    return this.http.get<Notification>(Global.backendUrl + 'notifications/' + id, {headers: this.httpHeaders});
   }
 
   fetchNotificationsByRecipient(id: number): Observable<Array<Notification>> {
-    return this.http.get<Array<Notification>>(Global.url + 'employees/' + id + '/notifications', {headers: this.httpHeaders});
+    return this.http.get<Array<Notification>>(Global.backendUrl + 'employees/' + id + '/notifications', {headers: this.httpHeaders});
   }
 
   addNotification(notificationRequest: NotificationRequest): Observable<Notification> {
-    return this.http.post<Notification>(Global.url + 'notifications', notificationRequest, {headers: this.httpHeaders});
+    return this.http.post<Notification>(Global.backendUrl + 'notifications', notificationRequest, {headers: this.httpHeaders});
   }
 
   setNextState(id: number): Observable<Notification> {
-    return this.http.put<Notification>(Global.url + 'notifications/' + id, {headers: this.httpHeaders});
+    return this.http.put<Notification>(Global.backendUrl + 'notifications/' + id, {headers: this.httpHeaders});
   }
 }

@@ -18,18 +18,18 @@ export class OrderService {
   }
 
   fetchAllOrders(): Observable<Array<Order>> {
-    return this.http.get<Array<Order>>(Global.url + 'orders', {headers: this.httpHeaders});
+    return this.http.get<Array<Order>>(Global.backendUrl + 'orders', {headers: this.httpHeaders});
   }
 
   fetchOneOrder(id: number): Observable<Order> {
-    return this.http.get<Order>(Global.url + 'orders/' + id, {headers: this.httpHeaders});
+    return this.http.get<Order>(Global.backendUrl + 'orders/' + id, {headers: this.httpHeaders});
   }
 
   addOneOrder(orderRequest: ShopServiceRequest): Observable<Order> {
-    return this.http.post<Order>(Global.url + 'orders', orderRequest, {headers: this.httpHeaders});
+    return this.http.post<Order>(Global.backendUrl + 'orders', orderRequest, {headers: this.httpHeaders});
   }
 
   updateOrderStatus(status: string, id: number): Observable<Order> {
-    return this.http.put<Order>(Global.url + 'orders/' + id, status, {headers: this.httpHeaders});
+    return this.http.put<Order>(Global.backendUrl + 'orders/' + id, status, {headers: this.httpHeaders});
   }
 }

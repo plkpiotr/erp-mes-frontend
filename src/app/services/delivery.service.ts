@@ -18,23 +18,23 @@ export class DeliveryService {
   }
 
   fetchAllDeliveries(): Observable<Array<Delivery>> {
-    return this.http.get<Array<Delivery>>(Global.url + 'deliveries', {headers: this.httpHeaders});
+    return this.http.get<Array<Delivery>>(Global.backendUrl + 'deliveries', {headers: this.httpHeaders});
   }
 
   fetchOneDelivery(id: number): Observable<Delivery> {
-    return this.http.get<Delivery>(Global.url + 'deliveries/' + id, {headers: this.httpHeaders});
+    return this.http.get<Delivery>(Global.backendUrl + 'deliveries/' + id, {headers: this.httpHeaders});
   }
 
   addNewDelivery(request: DeliveryRequest): Observable<Delivery> {
-    return this.http.post<Delivery>(Global.url + 'deliveries', request, {headers: this.httpHeaders});
+    return this.http.post<Delivery>(Global.backendUrl + 'deliveries', request, {headers: this.httpHeaders});
   }
 
   confirmDelivery(id: number): Observable<Delivery> {
-    return this.http.post<Delivery>(Global.url + 'deliveries/' + id, null, {headers: this.httpHeaders});
+    return this.http.post<Delivery>(Global.backendUrl + 'deliveries/' + id, null, {headers: this.httpHeaders});
   }
 
   getRecommendations(): Observable<Array<DeliveryItemRequest>> {
-    return this.http.get<Array<DeliveryItemRequest>>(Global.url + 'deliveries/recommended-delivery',
+    return this.http.get<Array<DeliveryItemRequest>>(Global.backendUrl + 'deliveries/recommended-delivery',
       {headers: this.httpHeaders});
   }
 }

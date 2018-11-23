@@ -15,10 +15,10 @@ export class TeamService {
   }
 
   fetchAllTeams(): Observable<Array<Team>> {
-    return this.http.get<Array<Team>>(Global.url + 'teams', {headers: this.httpHeaders});
+    return this.http.get<Array<Team>>(Global.backendUrl + 'teams', {headers: this.httpHeaders});
   }
 
   fetchOneTeam(id: number): Observable<Team> {
-    return this.http.get<Team>(Global.url + 'teams/' + id, {headers: this.httpHeaders});
+    return this.http.get<Team>(Global.backendUrl + 'teams/' + id, {headers: this.httpHeaders});
   }
 }

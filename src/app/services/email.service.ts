@@ -20,32 +20,32 @@ export class EmailService {
   }
 
   fetchReceivedEmails(): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>(Global.url + 'emails/inbox',
+    return this.http.get<Array<EmailEntity>>(Global.backendUrl + 'emails/inbox',
       {headers: this.httpHeaders});
   }
 
   fetchSentEmails(): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>(Global.url + 'emails/outbox',
+    return this.http.get<Array<EmailEntity>>(Global.backendUrl + 'emails/outbox',
       {headers: this.httpHeaders});
   }
 
   sendEmail(request: EmailEntityRequest): Observable<EmailEntity> {
-    return this.http.post<EmailEntity>(Global.url + 'emails', request,
+    return this.http.post<EmailEntity>(Global.backendUrl + 'emails', request,
       {headers: this.httpHeaders});
   }
 
   reply(request: EmailEntityRequest, id: number): Observable<EmailEntity> {
-    return this.http.post<EmailEntity>(Global.url + 'emails/' + id, request,
+    return this.http.post<EmailEntity>(Global.backendUrl + 'emails/' + id, request,
       {headers: this.httpHeaders});
   }
 
   fetchConversation(id: number): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>(Global.url + 'emails/' + id,
+    return this.http.get<Array<EmailEntity>>(Global.backendUrl + 'emails/' + id,
       {headers: this.httpHeaders});
   }
 
   removeMessage(id: number) {
-    this.http.delete(Global.url + 'emails/' + id, {headers: this.httpHeaders})
+    this.http.delete(Global.backendUrl + 'emails/' + id, {headers: this.httpHeaders})
       .subscribe(() => {
         },
         err => {
