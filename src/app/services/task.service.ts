@@ -32,4 +32,8 @@ export class TaskService {
   setNextCategory(id: number): Observable<Task> {
     return this.http.put<Task>('http://localhost:8080/tasks/' + id, {headers: this.httpHeaders});
   }
+
+  assignToMe(id: number): Observable<Task> {
+    return this.http.put<Task>('http://localhost:8080/tasks/' + id + '/assign', {headers: this.httpHeaders});
+  }
 }

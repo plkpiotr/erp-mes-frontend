@@ -52,6 +52,7 @@ export const appRoutes: Routes = [
   {path: 'tasks', component: TasksComponent},
   {path: 'tasks/add', component: AddTaskComponent},
   {path: 'tasks/:id', component: TaskComponent},
+  {path: 'tasks/:id/assign', component: TaskComponent},
   {path: 'reports', component: ReportsComponent},
   {path: 'reports/:id', component: ReportComponent},
   {path: 'current-report', component: CurrentReportComponent},

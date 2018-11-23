@@ -38,8 +38,19 @@ export class TaskComponent implements OnInit {
       });
   }
 
-  submitForm() {
+  setNextCategory() {
     this.taskService.setNextCategory(this.route.snapshot.params[('id')])
+      .subscribe(res => {
+        this.task = res;
+      }, err => {
+        this.showError(err, false);
+      }, () => {
+        this.router.navigate(['/tasks']);
+      });
+  }
+
+  assignToMe() {
+    this.taskService.assignToMe(this.route.snapshot.params[('id')])
       .subscribe(res => {
         this.task = res;
       }, err => {
