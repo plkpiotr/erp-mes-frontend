@@ -18,7 +18,6 @@ export class AddTaskComponent implements OnInit {
   form: FormGroup;
   areTasksLoaded = false;
   areAssigneesLoaded = false;
-  now = Date.now();
 
   name: FormControl;
   precedingTaskIds: FormControl;

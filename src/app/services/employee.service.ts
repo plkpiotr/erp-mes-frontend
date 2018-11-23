@@ -22,7 +22,7 @@ export class EmployeeService {
   }
 
   fetchColleagues(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(Global.backendUrl + 'colleagues', {headers: this.httpHeaders});
+    return this.http.get<Array<Employee>>(Global.backendUrl + 'employees/colleagues', {headers: this.httpHeaders});
   }
 
   fetchAllManagers(): Observable<Array<Employee>> {
