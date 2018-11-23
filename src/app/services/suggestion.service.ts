@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Suggestion, SuggestionRequest} from '../types';
 import {Observable} from 'rxjs';
+import * as Global from '../global';
 
 @Injectable()
 export class SuggestionService {
@@ -14,18 +15,18 @@ export class SuggestionService {
   }
 
   fetchAllSuggestions(): Observable<Array<Suggestion>> {
-    return this.http.get<Array<Suggestion>>('http://localhost:8080/suggestions', {headers: this.httpHeaders});
+    return this.http.get<Array<Suggestion>>(Global.url + 'suggestions', {headers: this.httpHeaders});
   }
 
   fetchOneSuggestion(id: number): Observable<Suggestion> {
-    return this.http.get<Suggestion>('http://localhost:8080/suggestions/' + id, {headers: this.httpHeaders});
+    return this.http.get<Suggestion>(Global.url + 'suggestions/' + id, {headers: this.httpHeaders});
   }
 
   addSuggestion(suggestionRequest: SuggestionRequest): Observable<Suggestion> {
-    return this.http.post<Suggestion>('http://localhost:8080/suggestions', suggestionRequest, {headers: this.httpHeaders});
+    return this.http.post<Suggestion>(Global.url + 'suggestions', suggestionRequest, {headers: this.httpHeaders});
   }
 
   setNextPhase(id: number): Observable<Suggestion> {
-    return this.http.put<Suggestion>('http://localhost:8080/suggestions/' + id, {headers: this.httpHeaders});
+    return this.http.put<Suggestion>(Global.url + 'suggestions/' + id, {headers: this.httpHeaders});
   }
 }

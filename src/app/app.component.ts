@@ -8,7 +8,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  panelOpenState = false;
   collapsedHeight = '48px';
   expandedHeight = '48px';
 

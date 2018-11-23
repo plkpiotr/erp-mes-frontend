@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Notification, NotificationRequest} from '../types';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import * as Global from '../global';
 
 @Injectable()
 export class NotificationService {
@@ -15,22 +16,22 @@ export class NotificationService {
   }
 
   fetchAllNotifications(): Observable<Array<Notification>> {
-    return this.http.get<Array<Notification>>('http://localhost:8080/notifications', {headers: this.httpHeaders});
+    return this.http.get<Array<Notification>>(Global.url + 'notifications', {headers: this.httpHeaders});
   }
 
   fetchOneNotification(id: number): Observable<Notification> {
-    return this.http.get<Notification>('http://localhost:8080/notifications/' + id, {headers: this.httpHeaders});
+    return this.http.get<Notification>(Global.url + 'notifications/' + id, {headers: this.httpHeaders});
   }
 
   fetchNotificationsByRecipient(id: number): Observable<Array<Notification>> {
-    return this.http.get<Array<Notification>>('http://localhost:8080/employees/' + id + '/notifications', {headers: this.httpHeaders});
+    return this.http.get<Array<Notification>>(Global.url + 'employees/' + id + '/notifications', {headers: this.httpHeaders});
   }
 
   addNotification(notificationRequest: NotificationRequest): Observable<Notification> {
-    return this.http.post<Notification>('http://localhost:8080/notifications', notificationRequest, {headers: this.httpHeaders});
+    return this.http.post<Notification>(Global.url + 'notifications', notificationRequest, {headers: this.httpHeaders});
   }
 
   setNextState(id: number): Observable<Notification> {
-    return this.http.put<Notification>('http://localhost:8080/notifications/' + id, {headers: this.httpHeaders});
+    return this.http.put<Notification>(Global.url + 'notifications/' + id, {headers: this.httpHeaders});
   }
 }

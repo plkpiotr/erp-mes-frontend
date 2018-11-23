@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Delivery, DeliveryItemRequest, DeliveryRequest} from '../types';
+import * as Global from '../global';
 
 @Injectable({
   providedIn: 'root'
@@ -17,23 +18,23 @@ export class DeliveryService {
   }
 
   fetchAllDeliveries(): Observable<Array<Delivery>> {
-    return this.http.get<Array<Delivery>>('http://localhost:8080/deliveries', {headers: this.httpHeaders});
+    return this.http.get<Array<Delivery>>(Global.url + 'deliveries', {headers: this.httpHeaders});
   }
 
   fetchOneDelivery(id: number): Observable<Delivery> {
-    return this.http.get<Delivery>('http://localhost:8080/deliveries/' + id, {headers: this.httpHeaders});
+    return this.http.get<Delivery>(Global.url + 'deliveries/' + id, {headers: this.httpHeaders});
   }
 
   addNewDelivery(request: DeliveryRequest): Observable<Delivery> {
-    return this.http.post<Delivery>('http://localhost:8080/deliveries', request, {headers: this.httpHeaders});
+    return this.http.post<Delivery>(Global.url + 'deliveries', request, {headers: this.httpHeaders});
   }
 
   confirmDelivery(id: number): Observable<Delivery> {
-    return this.http.post<Delivery>('http://localhost:8080/deliveries/' + id, null, {headers: this.httpHeaders});
+    return this.http.post<Delivery>(Global.url + 'deliveries/' + id, null, {headers: this.httpHeaders});
   }
 
   getRecommendations(): Observable<Array<DeliveryItemRequest>> {
-    return this.http.get<Array<DeliveryItemRequest>>('http://localhost:8080/deliveries/recommended-delivery',
+    return this.http.get<Array<DeliveryItemRequest>>(Global.url + 'deliveries/recommended-delivery',
       {headers: this.httpHeaders});
   }
 }

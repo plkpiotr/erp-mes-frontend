@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {EmailEntity, EmailEntityRequest} from '../types';
 import {ErrorDialogComponent} from "../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import * as Global from '../global';
 
 @Injectable({
   providedIn: 'root'
@@ -19,32 +20,32 @@ export class EmailService {
   }
 
   fetchReceivedEmails(): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>('http://localhost:8080/emails/inbox',
+    return this.http.get<Array<EmailEntity>>(Global.url + 'emails/inbox',
       {headers: this.httpHeaders});
   }
 
   fetchSentEmails(): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>('http://localhost:8080/emails/outbox',
+    return this.http.get<Array<EmailEntity>>(Global.url + 'emails/outbox',
       {headers: this.httpHeaders});
   }
 
   sendEmail(request: EmailEntityRequest): Observable<EmailEntity> {
-    return this.http.post<EmailEntity>('http://localhost:8080/emails', request,
+    return this.http.post<EmailEntity>(Global.url + 'emails', request,
       {headers: this.httpHeaders});
   }
 
   reply(request: EmailEntityRequest, id: number): Observable<EmailEntity> {
-    return this.http.post<EmailEntity>('http://localhost:8080/emails/' + id, request,
+    return this.http.post<EmailEntity>(Global.url + 'emails/' + id, request,
       {headers: this.httpHeaders});
   }
 
   fetchConversation(id: number): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>('http://localhost:8080/emails/' + id,
+    return this.http.get<Array<EmailEntity>>(Global.url + 'emails/' + id,
       {headers: this.httpHeaders});
   }
 
   removeMessage(id: number) {
-    this.http.delete('http://localhost:8080/emails/' + id, {headers: this.httpHeaders})
+    this.http.delete(Global.url + 'emails/' + id, {headers: this.httpHeaders})
       .subscribe(() => {
         },
         err => {

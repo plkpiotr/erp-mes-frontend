@@ -3,8 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Employee, EmployeeRequest} from '../types';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {ErrorDialogComponent} from "../custom/error-dialog/error-dialog.component";
-import {MatDialog} from "@angular/material";
+import {ErrorDialogComponent} from '../custom/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material';
+import * as Global from '../global';
 
 @Injectable()
 export class EmployeeService {
@@ -17,15 +18,15 @@ export class EmployeeService {
   }
 
   fetchAllEmployees(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>('http://localhost:8080/employees', {headers: this.httpHeaders});
+    return this.http.get<Array<Employee>>(Global.url + 'employees', {headers: this.httpHeaders});
   }
 
   fetchColleagues(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>('http://localhost:8080/employees/colleagues', {headers: this.httpHeaders});
+    return this.http.get<Array<Employee>>(Global.url + 'colleagues', {headers: this.httpHeaders});
   }
 
   fetchAllManagers(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>('http://localhost:8080/employees', {
+    return this.http.get<Array<Employee>>(Global.url + 'employees', {
       headers: this.httpHeaders,
       params: {
         privilege: 'admin'
@@ -34,7 +35,7 @@ export class EmployeeService {
   }
 
   fetchAllNonManagers(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>('http://localhost:8080/employees', {
+    return this.http.get<Array<Employee>>(Global.url + 'employees', {
       headers: this.httpHeaders,
       params: {
         privilege: 'user'

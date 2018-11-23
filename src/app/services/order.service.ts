@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Order, ShopServiceRequest} from '../types';
+import * as Global from '../global';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +18,18 @@ export class OrderService {
   }
 
   fetchAllOrders(): Observable<Array<Order>> {
-    return this.http.get<Array<Order>>('http://localhost:8080/orders', {headers: this.httpHeaders});
+    return this.http.get<Array<Order>>(Global.url + 'orders', {headers: this.httpHeaders});
   }
 
   fetchOneOrder(id: number): Observable<Order> {
-    return this.http.get<Order>('http://localhost:8080/orders/' + id, {headers: this.httpHeaders});
+    return this.http.get<Order>(Global.url + 'orders/' + id, {headers: this.httpHeaders});
   }
 
   addOneOrder(orderRequest: ShopServiceRequest): Observable<Order> {
-    return this.http.post<Order>('http://localhost:8080/orders', orderRequest, {headers: this.httpHeaders});
+    return this.http.post<Order>(Global.url + 'orders', orderRequest, {headers: this.httpHeaders});
   }
 
   updateOrderStatus(status: string, id: number): Observable<Order> {
-    return this.http.put<Order>('http://localhost:8080/orders/' + id, status, {headers: this.httpHeaders});
+    return this.http.put<Order>(Global.url + 'orders/' + id, status, {headers: this.httpHeaders});
   }
 }
