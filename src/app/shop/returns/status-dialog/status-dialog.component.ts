@@ -38,15 +38,15 @@ export class StatusDialogComponent {
       .subscribe(res => {
         if (s === 'MONEY_RETURNED') {
           this.data.r.deliveryItems.forEach(deliveryItem => {
-            this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
+            this.itemService.supplyItem(deliveryItem.item.id,
+              deliveryItem.quantity).subscribe(() => {
             });
           });
           const expenseRequest: ExpenseRequest = {
             expenseType: ExpenseType.UNEXPECTED,
             amount: this.data.r.value
           };
-          this.reportService.addExpense(expenseRequest).subscribe(res => {
-          });
+          this.reportService.addExpense(expenseRequest).subscribe(() => {});
         }
       }, err => {
         this.shouldShowError = true;

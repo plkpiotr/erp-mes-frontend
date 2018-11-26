@@ -120,13 +120,6 @@ export class EmployeeComponent implements OnInit {
     this.router.navigate(['/kanban', this.route.snapshot.params['id']]);
   }
 
-  sendEmail() {
-    this.dialog.open(ReplyDialogComponent, {
-      width: '350px',
-      data: {email: this.employee.email}
-    });
-  }
-
   checkHolidays() {
     const today = new Date();
     if (this.holidays != null) {
