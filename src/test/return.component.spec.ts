@@ -42,7 +42,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {ReturnStatus} from '../app/types';
+import {ReturnStatus} from '../app/globals';
 import {AddSuggestionComponent} from '../app/communication/suggestions/add-suggestion/add-suggestion.component';
 import {AddNotificationComponent} from '../app/communication/notifications/add-notification/add-notification.component';
 import {AddOrderComponent} from '../app/shop/orders/add-order/add-order.component';

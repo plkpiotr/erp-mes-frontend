@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/services/employee.service';
 import {HolidayService} from '../app/services/holiday.service';
 import {TeamService} from '../app/services/team.service';
 import {ReportService} from '../app/services/report.service';
-import {Status} from '../app/types';
+import {Status} from '../app/globals';
 import {DeliveriesComponent} from '../app/shop/deliveries/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/shop/items/add-item/add-item.component';
 import {ValidateComponent} from '../app/security/validate/validate.component';

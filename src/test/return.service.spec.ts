@@ -53,7 +53,7 @@ import {OrderComponent} from '../app/shop/orders/order/order.component';
 import {OrderService} from '../app/services/order.service';
 import {NotificationService} from '../app/services/notification.service';
 import {SuggestionService} from '../app/services/suggestion.service';
-import {ReturnStatus} from '../app/types';
+import {ReturnStatus} from '../app/globals';
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
 import {AddEmailComponent} from '../app/communication/emails/add-email/add-email.component';

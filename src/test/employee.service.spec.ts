@@ -10,7 +10,7 @@ import {EmployeeComponent} from '../app/staff/employees/employee/employee.compon
 import {TeamsComponent} from '../app/staff/teams/teams/teams.component';
 import {TeamComponent} from '../app/staff/teams/team/team.component';
 import {FormsModule} from '@angular/forms';
-import {Role} from '../app/types';
+import {Role} from '../app/globals';
 import {AddHolidayComponent} from '../app/staff/holidays/add-holiday/add-holiday.component';
 import {HolidayService} from '../app/services/holiday.service';
 import {TeamService} from '../app/services/team.service';

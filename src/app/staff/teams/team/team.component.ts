@@ -34,13 +34,6 @@ export class TeamComponent implements OnInit {
         });
   }
 
-  sendEmail(email: string) {
-    this.dialog.open(ReplyDialogComponent, {
-      width: '350px',
-      data: {email: email}
-    });
-  }
-
   showError(err) {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       width: '700px',

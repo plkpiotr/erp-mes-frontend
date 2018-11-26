@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Complaint, Delivery, Employee, Notification, Order, Return, Type} from '../../../types';
+import {Complaint, Delivery, Employee, Notification, Order, Return} from '../../../types';
 import {NotificationService} from '../../../services/notification.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {Type} from "../../../globals";
 
 @Component({
   selector: 'app-add-notification',

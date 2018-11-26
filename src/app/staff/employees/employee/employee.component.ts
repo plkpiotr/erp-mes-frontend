@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeeService} from '../../../services/employee.service';
-import {Employee, Holiday, Role} from '../../../types';
+import {Employee, Holiday} from '../../../types';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HolidayService} from '../../../services/holiday.service';
 import {LoginService} from '../../../services/login.service';
@@ -8,6 +8,7 @@ import {ReplyDialogComponent} from '../../../communication/emails/reply-dialog/r
 import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 import {ManageHolidaysDialogComponent} from '../../holidays/manage-holidays-dialog/manage-holidays-dialog.component';
 import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
+import {Role} from "../../../globals";
 
 @Component({
   selector: 'app-employee',

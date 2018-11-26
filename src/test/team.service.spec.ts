@@ -10,7 +10,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TeamsComponent} from '../app/staff/teams/teams/teams.component';
 import {TeamComponent} from '../app/staff/teams/team/team.component';
-import {Role} from '../app/types';
+import {Role} from '../app/globals';
 import {AddHolidayComponent} from '../app/staff/holidays/add-holiday/add-holiday.component';
 import {EmployeeService} from '../app/services/employee.service';
 import {HolidayService} from '../app/services/holiday.service';

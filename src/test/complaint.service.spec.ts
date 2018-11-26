@@ -41,7 +41,7 @@ import {appRoutes} from '../app/app.routing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {FormsModule} from '@angular/forms';
-import {ComplaintStatus, Resolution} from '../app/types';
+import {Resolution} from '../app/globals';
 import {AddSuggestionComponent} from '../app/communication/suggestions/add-suggestion/add-suggestion.component';
 import {AddNotificationComponent} from '../app/communication/notifications/add-notification/add-notification.component';
 import {AddOrderComponent} from '../app/shop/orders/add-order/add-order.component';
@@ -60,6 +60,7 @@ import {OutboxComponent} from '../app/communication/emails/outbox/outbox.compone
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {EmailService} from '../app/services/email.service';
 import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
+import {ComplaintStatus} from "../app/globals";
 
 const mockComplaints = [
   {

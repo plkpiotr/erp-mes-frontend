@@ -21,7 +21,7 @@ import {CurrentReportComponent} from '../app/production/finance/current-report/c
 import {ReportComponent} from '../app/production/finance/report/report.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {ExpenseType} from '../app/types';
+import {ExpenseType} from '../app/globals';
 import {DeliveryService} from '../app/services/delivery.service';
 import {ItemService} from '../app/services/item.service';
 import {DeliveriesComponent} from '../app/shop/deliveries/deliveries/deliveries.component';

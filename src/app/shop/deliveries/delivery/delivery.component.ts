@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Delivery, ExpenseType} from '../../../types';
+import {Delivery} from '../../../types';
 import {DeliveryService} from '../../../services/delivery.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {ExpenseType} from "../../../globals";
 
 @Component({
   selector: 'app-delivery',

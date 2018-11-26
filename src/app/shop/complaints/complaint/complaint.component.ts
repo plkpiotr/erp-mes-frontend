@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Complaint, ComplaintStatus, ExpenseRequest, ExpenseType, Resolution} from '../../../types';
+import {Complaint, ExpenseRequest} from '../../../types';
 import {ComplaintService} from '../../../services/complaint.service';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
@@ -8,6 +8,7 @@ import {ComplaintStatusDialogComponent} from "../complaint-status-dialog/complai
 import {ComplaintResolutionDialogComponent} from "../complaint-resolution-dialog/complaint-resolution-dialog.component";
 import {MatDialog} from "@angular/material";
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {ComplaintStatus, ExpenseType, Resolution} from "../../../globals";
 
 @Component({
   selector: 'app-complaint',

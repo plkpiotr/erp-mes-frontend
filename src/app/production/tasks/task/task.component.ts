@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Category, Task} from '../../../types';
+import {Task} from '../../../types';
 import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material';
+import {Category} from "../../../globals";
 
 @Component({
   selector: 'app-task',

@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Token} from './token';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SetupService} from "./services/setup.service";
 import {LoginService} from "./services/login.service";
+import {FRONTEND_URL} from "./globals";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent {
           this.router.navigate(['setup']);
         }
       });
-    } else {
+    } else if (window.location.href === FRONTEND_URL) {
       this.loginService.fetchUser().subscribe(user => {
         this.router.navigate(['employees', user.id])
       });

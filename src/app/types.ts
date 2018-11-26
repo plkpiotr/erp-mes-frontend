@@ -1,100 +1,18 @@
-export enum Role {
-  ADMIN = 'ADMIN',
-  ACCOUNTANT = 'ACCOUNTANT',
-  ADMIN_ACCOUNTANT = 'ADMIN_ACCOUNTANT',
-  ANALYST = 'ANALYST',
-  ADMIN_ANALYST = 'ADMIN_ANALYST',
-  WAREHOUSE = 'WAREHOUSE',
-  ADMIN_WAREHOUSE = 'ADMIN_WAREHOUSE'
-}
-
-export enum HolidayType {
-  VACATION = 'VACATION',
-  SICK_LEAVE = 'SICK_LEAVE',
-  PARENTAL_LEAVE = 'PARENTAL_LEAVE',
-  BEREAVEMENT = 'BEREAVEMENT',
-  EMERGENCY_CHILD_CARE = 'EMERGENCY_CHILD_CARE'
-}
-
-export enum ApprovalState {
-  APPROVED = 'APPROVED',
-  DECLINED = 'DECLINED',
-  PENDING = 'PENDING'
-}
-
-export enum Category {
-  TO_DO = 'TO_DO',
-  DOING = 'DOING',
-  DONE = 'DONE'
-}
-
-export enum ExpenseType {
-  SHIPPING = 'SHIPPING',
-  BILLS = 'BILLS',
-  RENT = 'RENT',
-  SALARIES = 'SALARIES',
-  STOCK = 'STOCK',
-  SOCIAL_FUND = 'SOCIAL_FUND',
-  UNEXPECTED = 'UNEXPECTED',
-  TAXES = 'TAXES'
-}
-
-export enum Status {
-  WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
-  IN_PROGRESS = 'IN_PROGRESS',
-  SENT = 'SENT',
-  DECLINED = 'DECLINED'
-}
-
-export enum State {
-  REPORTED = 'REPORTED',
-  IN_PROGRESS = 'IN_PROGRESS',
-  RESOLVED = 'RESOLVED'
-}
-
-export enum Phase {
-  REPORTED = 'REPORTED',
-  IN_IMPLEMENTATION = 'IN_IMPLEMENTATION',
-  IMPLEMENTED = 'IMPLEMENTED',
-}
-
-export enum Type {
-  DELIVERY = 'DELIVERY',
-  ORDER = 'ORDER',
-  COMPLAINT = 'COMPLAINT',
-  RETURN = 'RETURN',
-  OTHER = 'OTHER'
-}
-
-export enum ReturnStatus {
-  IN_PROGRESS = 'IN_PROGRESS',
-  ACCEPTED = 'ACCEPTED',
-  DECLINED = 'DECLINED',
-  MONEY_RETURNED = 'MONEY_RETURNED'
-}
-
-export enum ComplaintStatus {
-  IN_PROGRESS = 'IN_PROGRESS',
-  ACCEPTED = 'ACCEPTED',
-  DECLINED = 'DECLINED',
-  MONEY_RETURNED = 'MONEY_RETURNED',
-  NEW_ITEM_SENT = 'NEW_ITEM_SENT',
-  REPAIRING_ITEM = 'REPAIRING_ITEM',
-  REPAIRED_ITEM_SENT = 'REPAIRED_ITEM_SENT',
-  DECLINED_ITEM_SENT = 'DECLINED_ITEM_SENT'
-}
-
-export enum Resolution {
-  UNRESOLVED = 'UNRESOLVED',
-  MONEY_RETURN = 'MONEY_RETURN',
-  REPAIR = 'REPAIR',
-  EXCHANGE_FOR_NEW = 'EXCHANGE_FOR_NEW'
-}
-
-export enum EmailType {
-  SENT = 'SENT',
-  RECEIVED = 'RECEIVED'
-}
+import {
+  ApprovalState,
+  Category,
+  ComplaintStatus,
+  EmailType,
+  ExpenseType,
+  HolidayType,
+  Phase,
+  Resolution,
+  ReturnStatus,
+  Role,
+  State,
+  Status,
+  Type
+} from "./globals";
 
 export interface Contract {
   id: number;

@@ -10,8 +10,8 @@
           <mat-list-item>
             <a routerLink="/employees/{{team.manager.id}}"
                routerLinkActive="active">{{team.manager.firstName}} {{team.manager.lastName}} </a> <br>
-            <button mat-icon-button (click)="sendEmail(team.manager.email)"><mat-icon>email</mat-icon>
-               {{team.manager.email}}</button>
+            <mat-icon>email</mat-icon>
+               {{team.manager.email}}
           </mat-list-item>
         </mat-list>
       </mat-card>
@@ -23,10 +23,8 @@
           <mat-list-item *ngFor="let employee of team.employees">
             <a routerLink="/employees/{{employee.id}}"
                routerLinkActive="active">{{employee.firstName}} {{employee.lastName}} </a>
-            <button mat-icon-button (click)="sendEmail(employee.email)">
               <mat-icon>email</mat-icon>
                {{employee.email}}
-            </button>
             <mat-divider></mat-divider>
           </mat-list-item>
         </mat-list>
