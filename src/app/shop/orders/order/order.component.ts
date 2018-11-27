@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Order, Status} from '../../../types';
+import {Order} from '../../../types';
 import {OrderService} from '../../../services/order.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderStatusDialogComponent} from "../order-status-dialog/order-status-dialog.component";
 import {MatDialog} from "@angular/material";
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {Status} from "../../../globals";
 
 @Component({
   selector: 'app-order',

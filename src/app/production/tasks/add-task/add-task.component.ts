@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Task, Employee, Type} from '../../../types';
+import {Task, Employee} from '../../../types';
 import {TaskService} from '../../../services/task.service';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../../../services/employee.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {Type} from "../../../globals";
 
 @Component({
   selector: 'app-add-task',

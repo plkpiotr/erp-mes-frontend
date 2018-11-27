@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/services/employee.service';
 import {HolidayService} from '../app/services/holiday.service';
 import {TeamService} from '../app/services/team.service';
 import {ReportService} from '../app/services/report.service';
-import {Category, Role, Type} from '../app/types';
+import {Type} from '../app/globals';
 import {DeliveriesComponent} from '../app/shop/deliveries/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/shop/items/add-item/add-item.component';
 import {ValidateComponent} from '../app/security/validate/validate.component';
@@ -58,6 +58,7 @@ import {ConversationComponent} from '../app/communication/emails/conversation/co
 import {AddEmailComponent} from '../app/communication/emails/add-email/add-email.component';
 import {OutboxComponent} from '../app/communication/emails/outbox/outbox.component';
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
+import {Category, Role} from "../app/globals";
 
 const mockTasks = [
   {

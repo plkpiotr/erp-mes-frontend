@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HolidayService} from '../../../services/holiday.service';
 import {ActivatedRoute} from '@angular/router';
-import {HolidayType} from '../../../types';
+import {HolidayType} from '../../../globals';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({

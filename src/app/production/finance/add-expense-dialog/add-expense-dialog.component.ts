@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ExpenseRequest, ExpenseType} from "../../../types";
+import {ExpenseRequest} from "../../../types";
 import {MatDialogRef} from "@angular/material";
 import {ReportService} from "../../../services/report.service";
+import {ExpenseType} from "../../../globals";
 
 @Component({
   selector: 'app-add-expense-dialog',

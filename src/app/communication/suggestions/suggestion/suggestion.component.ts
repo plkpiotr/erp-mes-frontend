@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Phase, Suggestion} from '../../../types';
+import {Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material';
+import {Phase} from "../../../globals";
 
 @Component({
   selector: 'app-suggestion',

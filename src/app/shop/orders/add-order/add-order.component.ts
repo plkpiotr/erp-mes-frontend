@@ -4,7 +4,6 @@ import {
   DeliveryItemRequest,
   Item,
   Order,
-  Resolution,
   Return,
   ShopServiceRequest
 } from '../../../types';
@@ -16,6 +15,7 @@ import {ReturnService} from '../../../services/return.service';
 import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
 import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {Resolution} from "../../../globals";
 
 @Component({
   selector: 'app-add-order',
