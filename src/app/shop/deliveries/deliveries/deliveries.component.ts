@@ -54,7 +54,8 @@ export class DeliveriesComponent implements OnInit {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       width: '700px',
       data: {
-        error: err.error
+        error: err.error,
+        status: err.status
       }
     });
 

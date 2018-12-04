@@ -1,5 +1,9 @@
 <div class="decline">
-  <button mat-icon-button class="decline" (click)="cancel()">{{data.error}}
+  <button *ngIf="data.status == 403" mat-icon-button class="decline" (click)="cancel()">
+    You do not have access to this resource!
+    <mat-icon>clear</mat-icon>
+  </button>
+  <button *ngIf="data.status != 403" mat-icon-button class="decline" (click)="cancel()">{{data.error}}
     <mat-icon>clear</mat-icon>
   </button>
 </div>

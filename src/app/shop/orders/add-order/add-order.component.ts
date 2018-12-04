@@ -169,16 +169,27 @@ export class AddOrderComponent implements OnInit {
     };
     if (this.service === 'order') {
       let order: Order;
-      this.orderService.addOneOrder(this.request).subscribe(res => {
-        order = res;
-        order.deliveryItems.forEach(deliveryItem => {
-          this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {});
-        });
-      }, err => {
-        this.showError(err, false);
-      }, () => {
-        this.router.navigate(['/orders', order.id]);
+      let canPostOrder = true;
+      this.request.deliveryItemRequests.forEach(itemRequest => {
+        if (this.itemsById[itemRequest.itemId].quantity < itemRequest.quantity) {
+          canPostOrder = false;
+          this.showError({error: 'There is not enough of ' + this.itemsById[itemRequest.itemId].name
+          + '. Available amount is ' + this.itemsById[itemRequest.itemId].quantity + '.'}, false);
+        }
       });
+      if (canPostOrder) {
+        this.orderService.addOneOrder(this.request).subscribe(res => {
+          order = res;
+          order.deliveryItems.forEach(deliveryItem => {
+            this.itemService.buyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
+            });
+          });
+        }, err => {
+          this.showError(err, false);
+        }, () => {
+          this.router.navigate(['/orders', order.id]);
+        });
+      }
     } else if (this.service === 'return') {
       let r: Return;
       this.returnService.addOneReturn(this.request).subscribe(res => {
@@ -236,7 +247,8 @@ export class AddOrderComponent implements OnInit {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       width: '700px',
       data: {
-        error: err.error
+        error: err.error,
+        status: err.status
       }
     });
 

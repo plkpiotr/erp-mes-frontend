@@ -69,7 +69,8 @@ export class UpdateDailyPlanComponent {
     this.dialog.open(ErrorDialogComponent, {
       width: '700px',
       data: {
-        error: err.error
+        error: err.error,
+        status: err.status
       }
     });
   }
