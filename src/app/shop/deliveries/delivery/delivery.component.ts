@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Delivery, ExpenseType} from '../../../types';
+import {Delivery} from '../../../types';
 import {DeliveryService} from '../../../services/delivery.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ItemService} from '../../../services/item.service';
 import {ReportService} from '../../../services/report.service';
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {ExpenseType} from "../../../globals";
 
 @Component({
   selector: 'app-delivery',
@@ -48,17 +49,15 @@ export class DeliveryComponent implements OnInit {
 
   confirmDelivery() {
     this.delivery.deliveryItems.forEach(deliveryItem => {
-      this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
-      });
+      this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity)
+        .subscribe(() => {});
     });
     const expenseRequest = {
       expenseType: ExpenseType.STOCK,
       amount: this.delivery.value
     };
-    this.reportService.addExpense(expenseRequest).subscribe(res => {
-    });
-    this.deliveryService.confirmDelivery(this.delivery.id).subscribe(res => {
-      },
+    this.reportService.addExpense(expenseRequest).subscribe(() => {});
+    this.deliveryService.confirmDelivery(this.delivery.id).subscribe(() => {},
       err => this.showError(err, false),
       () => {
         this.isDeliveryLoaded = false;

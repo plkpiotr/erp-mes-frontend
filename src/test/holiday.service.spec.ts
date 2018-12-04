@@ -13,7 +13,7 @@ import {TeamComponent} from '../app/staff/teams/team/team.component';
 import {TeamsComponent} from '../app/staff/teams/teams/teams.component';
 import {EmployeeService} from '../app/services/employee.service';
 import {TeamService} from '../app/services/team.service';
-import {ApprovalState, HolidayType, Role} from '../app/types';
+import {ApprovalState} from '../app/globals';
 import {TasksComponent} from '../app/production/tasks/tasks/tasks.component';
 import {TaskService} from '../app/services/task.service';
 import {TaskComponent} from '../app/production/tasks/task/task.component';
@@ -60,6 +60,7 @@ import {OutboxComponent} from '../app/communication/emails/outbox/outbox.compone
 import {InboxComponent} from '../app/communication/emails/inbox/inbox.component';
 import {EmailService} from '../app/services/email.service';
 import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
+import {HolidayType, Role} from "../app/globals";
 
 const mockContract = {
   id: 1,

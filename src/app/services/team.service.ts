@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Team} from '../types';
 import {Observable} from 'rxjs';
-import * as Global from '../global';
+import {BACKEND_URL, FRONTEND_URL} from "../globals";
 
 @Injectable()
 export class TeamService {
@@ -11,14 +11,14 @@ export class TeamService {
 
   constructor(private http: HttpClient) {
     this.httpHeaders = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'https://localhost:4200');
+      .set('Access-Control-Allow-Origin', FRONTEND_URL);
   }
 
   fetchAllTeams(): Observable<Array<Team>> {
-    return this.http.get<Array<Team>>(Global.backendUrl + 'teams', {headers: this.httpHeaders});
+    return this.http.get<Array<Team>>(BACKEND_URL + 'teams', {headers: this.httpHeaders});
   }
 
   fetchOneTeam(id: number): Observable<Team> {
-    return this.http.get<Team>(Global.backendUrl + 'teams/' + id, {headers: this.httpHeaders});
+    return this.http.get<Team>(BACKEND_URL + 'teams/' + id, {headers: this.httpHeaders});
   }
 }

@@ -5,7 +5,7 @@ import {Employee} from '../types';
 import {Router} from '@angular/router';
 import {ErrorDialogComponent} from "../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
-import * as Global from '../global';
+import {BACKEND_URL, FRONTEND_URL} from "../globals";
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +16,22 @@ export class LoginService {
 
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
     this.httpHeaders = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'https://localhost:4200');
+      .set('Access-Control-Allow-Origin', FRONTEND_URL);
   }
 
   login(email: string, password: string): Observable<any> {
     const credentials = {email: email, password: password};
-    return this.http.post<any>(Global.backendUrl + 'generate-token', credentials,
+    return this.http.post<any>(BACKEND_URL + 'generate-token', credentials,
       {headers: this.httpHeaders});
   }
 
   fetchUser(): Observable<Employee> {
-    return this.http.get<Employee>(Global.backendUrl + 'logged-in-user',
+    return this.http.get<Employee>(BACKEND_URL + 'logged-in-user',
       {headers: this.httpHeaders});
   }
 
   validateUser(id: string, password: string) {
-    this.http.post(Global.backendUrl + 'employees/' + id + '/validate-password', password,
+    this.http.post(BACKEND_URL + 'employees/' + id + '/validate-password', password,
       {headers: this.httpHeaders}).subscribe(res => {},
       err => {
         this.showError(err);

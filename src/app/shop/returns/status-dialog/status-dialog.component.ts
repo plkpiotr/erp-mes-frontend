@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ReturnService} from "../../../services/return.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {ExpenseRequest, ExpenseType, Return} from "../../../types";
+import {ExpenseRequest, Return} from "../../../types";
 import {ItemService} from "../../../services/item.service";
 import {ReportService} from "../../../services/report.service";
+import {ExpenseType} from "../../../globals";
 
 export interface DialogData {
   status: string[];
@@ -38,15 +39,15 @@ export class StatusDialogComponent {
       .subscribe(res => {
         if (s === 'MONEY_RETURNED') {
           this.data.r.deliveryItems.forEach(deliveryItem => {
-            this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity).subscribe(res => {
+            this.itemService.supplyItem(deliveryItem.item.id,
+              deliveryItem.quantity).subscribe(() => {
             });
           });
           const expenseRequest: ExpenseRequest = {
             expenseType: ExpenseType.UNEXPECTED,
             amount: this.data.r.value
           };
-          this.reportService.addExpense(expenseRequest).subscribe(res => {
-          });
+          this.reportService.addExpense(expenseRequest).subscribe(() => {});
         }
       }, err => {
         this.shouldShowError = true;

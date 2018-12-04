@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Return, ReturnStatus, ShopServiceRequest} from '../types';
+import {Return, ShopServiceRequest} from '../types';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import * as Global from '../global';
+import {BACKEND_URL, FRONTEND_URL, ReturnStatus} from "../globals";
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +13,22 @@ export class ReturnService {
 
   constructor(private http: HttpClient) {
     this.httpHeaders = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'https://localhost:4200');
+      .set('Access-Control-Allow-Origin', FRONTEND_URL);
   }
 
   fetchAllReturns(): Observable<Array<Return>> {
-    return this.http.get<Array<Return>>(Global.backendUrl + 'returns', {headers: this.httpHeaders});
+    return this.http.get<Array<Return>>(BACKEND_URL + 'returns', {headers: this.httpHeaders});
   }
 
   fetchOneReturn(id: number): Observable<Return> {
-    return this.http.get<Return>(Global.backendUrl + 'returns/' + id, {headers: this.httpHeaders});
+    return this.http.get<Return>(BACKEND_URL + 'returns/' + id, {headers: this.httpHeaders});
   }
 
   addOneReturn(request: ShopServiceRequest): Observable<Return> {
-    return this.http.post<Return>(Global.backendUrl + 'returns', request, {headers: this.httpHeaders});
+    return this.http.post<Return>(BACKEND_URL + 'returns', request, {headers: this.httpHeaders});
   }
 
   updateReturnStatus(status: string, id: number): Observable<Return> {
-    return this.http.put<Return>(Global.backendUrl + 'returns/' + id, status, {headers: this.httpHeaders});
+    return this.http.put<Return>(BACKEND_URL + 'returns/' + id, status, {headers: this.httpHeaders});
   }
 }

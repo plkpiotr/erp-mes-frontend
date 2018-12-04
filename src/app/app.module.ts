@@ -87,6 +87,8 @@ import { SpecialPlanNoDateDialogComponent } from './production/planning/special-
 import { SpecialPlanDialogComponent } from './production/planning/special-plan-dialog/special-plan-dialog.component';
 import { ShowSpecialPlanDialogComponent } from './production/planning/show-special-plan-dialog/show-special-plan-dialog.component';
 import { ErrorDialogComponent } from './custom/error-dialog/error-dialog.component';
+import {SetupService} from "./services/setup.service";
+import { SetupComponent } from './setup/setup.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +155,7 @@ import { ErrorDialogComponent } from './custom/error-dialog/error-dialog.compone
     SpecialPlanDialogComponent,
     ShowSpecialPlanDialogComponent,
     ErrorDialogComponent,
+    SetupComponent,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,
@@ -200,6 +203,7 @@ import { ErrorDialogComponent } from './custom/error-dialog/error-dialog.compone
     Token,
     ReturnService,
     ComplaintService,
+    SetupService,
     EmailService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

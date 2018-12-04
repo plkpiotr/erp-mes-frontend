@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Return, ReturnStatus} from '../../../types';
+import {Return} from '../../../types';
 import {ReturnService} from '../../../services/return.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from "@angular/material";
 import {StatusDialogComponent} from "../status-dialog/status-dialog.component";
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {ReturnStatus} from "../../../globals";
 
 @Component({
   selector: 'app-return',

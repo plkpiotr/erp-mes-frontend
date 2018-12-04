@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {EmailEntity, EmailEntityRequest} from '../types';
 import {ErrorDialogComponent} from "../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
-import * as Global from '../global';
+import {BACKEND_URL, FRONTEND_URL} from "../globals";
 
 @Injectable({
   providedIn: 'root'
@@ -16,36 +16,36 @@ export class EmailService {
 
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
     this.httpHeaders = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', 'https://localhost:4200');
+      .set('Access-Control-Allow-Origin', FRONTEND_URL);
   }
 
   fetchReceivedEmails(): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>(Global.backendUrl + 'emails/inbox',
+    return this.http.get<Array<EmailEntity>>(BACKEND_URL + 'emails/inbox',
       {headers: this.httpHeaders});
   }
 
   fetchSentEmails(): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>(Global.backendUrl + 'emails/outbox',
+    return this.http.get<Array<EmailEntity>>(BACKEND_URL + 'emails/outbox',
       {headers: this.httpHeaders});
   }
 
   sendEmail(request: EmailEntityRequest): Observable<EmailEntity> {
-    return this.http.post<EmailEntity>(Global.backendUrl + 'emails', request,
+    return this.http.post<EmailEntity>(BACKEND_URL + 'emails', request,
       {headers: this.httpHeaders});
   }
 
   reply(request: EmailEntityRequest, id: number): Observable<EmailEntity> {
-    return this.http.post<EmailEntity>(Global.backendUrl + 'emails/' + id, request,
+    return this.http.post<EmailEntity>(BACKEND_URL + 'emails/' + id, request,
       {headers: this.httpHeaders});
   }
 
   fetchConversation(id: number): Observable<Array<EmailEntity>> {
-    return this.http.get<Array<EmailEntity>>(Global.backendUrl + 'emails/' + id,
+    return this.http.get<Array<EmailEntity>>(BACKEND_URL + 'emails/' + id,
       {headers: this.httpHeaders});
   }
 
   removeMessage(id: number) {
-    this.http.delete(Global.backendUrl + 'emails/' + id, {headers: this.httpHeaders})
+    this.http.delete(BACKEND_URL + 'emails/' + id, {headers: this.httpHeaders})
       .subscribe(() => {
         },
         err => {

@@ -21,7 +21,7 @@ import {EmployeeService} from '../app/services/employee.service';
 import {HolidayService} from '../app/services/holiday.service';
 import {TeamService} from '../app/services/team.service';
 import {ReportService} from '../app/services/report.service';
-import {Category, Role, State} from '../app/types';
+import {State} from '../app/globals';
 import {DeliveriesComponent} from '../app/shop/deliveries/deliveries/deliveries.component';
 import {AddItemComponent} from '../app/shop/items/add-item/add-item.component';
 import {ValidateComponent} from '../app/security/validate/validate.component';
@@ -59,6 +59,7 @@ import {AddEmailComponent} from '../app/communication/emails/add-email/add-email
 import {ConversationComponent} from '../app/communication/emails/conversation/conversation.component';
 import {EmailService} from '../app/services/email.service';
 import {KanbanComponent} from '../app/production/tasks/kanban/kanban.component';
+import {Category, Role} from "../app/globals";
 
 const mockNotifications = [
   {

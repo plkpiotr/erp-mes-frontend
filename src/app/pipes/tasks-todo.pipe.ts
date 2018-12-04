@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Category, Task} from '../types';
+import {Task} from '../types';
+import {Category} from "../globals";
 
 @Pipe({
   name: 'tasksTodo'

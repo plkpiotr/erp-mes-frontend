@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Notification, State} from '../../../types';
+import {Notification} from '../../../types';
 import {NotificationService} from '../../../services/notification.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {State} from "../../../globals";
 
 @Component({
   selector: 'app-notification',

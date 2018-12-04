@@ -1,9 +1,10 @@
 import {Component, Inject} from '@angular/core';
-import {Complaint, ComplaintStatus, ExpenseRequest, ExpenseType} from "../../../types";
+import {Complaint, ExpenseRequest} from "../../../types";
 import {ComplaintService} from "../../../services/complaint.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ReportService} from "../../../services/report.service";
 import {ItemService} from "../../../services/item.service";
+import {ComplaintStatus, ExpenseType} from "../../../globals";
 
 export interface DialogData {
   status: string[];
