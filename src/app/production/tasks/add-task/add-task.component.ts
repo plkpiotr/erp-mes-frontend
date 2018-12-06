@@ -4,9 +4,9 @@ import {TaskService} from '../../../services/task.service';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../../../services/employee.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
-import {MatDialog} from "@angular/material";
-import {Type} from "../../../globals";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material';
+import {Type} from '../../../globals';
 
 @Component({
   selector: 'app-add-task',
@@ -89,7 +89,6 @@ export class AddTaskComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.form.get('precedingTaskIds'));
     this.taskRequest = {
       name: this.form.get('name').value,
       precedingTaskIds: this.form.get('precedingTaskIds').value,
@@ -103,15 +102,13 @@ export class AddTaskComponent implements OnInit {
     if (this.form.get('precedingTaskIds').value.constructor !== Array) {
       this.taskRequest.precedingTaskIds = [];
     }
-    console.log(this.form.get('precedingTaskIds'));
     let task: Task;
     this.taskService.addTask(this.taskRequest)
       .subscribe(res => {
           task = res;
         }, err => {
           this.showError(err, false);
-        },
-        () => {
+        }, () => {
           this.router.navigate(['/tasks', task.id]);
         });
   }

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Task, TaskRequest} from '../types';
+import {AssignmentRequest, Task, TaskRequest} from '../types';
 import {Observable} from 'rxjs';
-import {BACKEND_URL, FRONTEND_URL} from "../globals";
+import {BACKEND_URL, FRONTEND_URL} from '../globals';
 
 @Injectable()
 export class TaskService {
@@ -26,8 +26,16 @@ export class TaskService {
     return this.http.get<Array<Task>>(BACKEND_URL + 'kanban/' + id, {headers: this.httpHeaders});
   }
 
+  fetchTasksByAssigneeIsNull(): Observable<Array<Task>> {
+    return this.http.get<Array<Task>>(BACKEND_URL + 'assignment', {headers: this.httpHeaders});
+  }
+
   addTask(taskRequest: TaskRequest): Observable<Task> {
     return this.http.post<Task>(BACKEND_URL + 'tasks', taskRequest, {headers: this.httpHeaders});
+  }
+
+  assignToEmployees(assignmentRequest: AssignmentRequest): Observable<Array<AssignmentRequest>> {
+    return this.http.put<Array<AssignmentRequest>>(BACKEND_URL + 'assignment', assignmentRequest, {headers: this.httpHeaders});
   }
 
   setNextCategory(id: number): Observable<Task> {

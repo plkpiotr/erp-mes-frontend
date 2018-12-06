@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {Token} from './token';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SetupService} from "./services/setup.service";
-import {LoginService} from "./services/login.service";
-import {FRONTEND_URL} from "./globals";
+import {Router} from '@angular/router';
+import {SetupService} from './services/setup.service';
+import {LoginService} from './services/login.service';
+import {FRONTEND_URL} from './globals';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,7 @@ export class AppComponent {
       });
     } else if (window.location.href === FRONTEND_URL) {
       this.loginService.fetchUser().subscribe(user => {
-        this.router.navigate(['employees', user.id])
+        this.router.navigate(['employees', user.id]);
       });
     }
   }

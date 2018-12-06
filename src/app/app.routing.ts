@@ -41,6 +41,7 @@ import {ConversationComponent} from './communication/emails/conversation/convers
 import {AddEmailComponent} from './communication/emails/add-email/add-email.component';
 import {KanbanComponent} from './production/tasks/kanban/kanban.component';
 import {SetupComponent} from "./setup/setup.component";
+import {AssignmentComponent} from './production/tasks/assignment/assignment.component';
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -86,7 +87,8 @@ export const appRoutes: Routes = [
   {path: 'emails/:id', component: ConversationComponent},
   {path: 'login', component: LoginComponent},
   {path: 'setup', component: SetupComponent},
-  {path: 'kanban/:id', component: KanbanComponent}
+  {path: 'kanban/:id', component: KanbanComponent},
+  {path: 'assignment', component: AssignmentComponent}
   // {path: '**', redirectTo: 'login'}
   ];
 

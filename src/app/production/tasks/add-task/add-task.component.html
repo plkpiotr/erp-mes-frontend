@@ -21,6 +21,7 @@
     <mat-form-field>
       <mat-label>Assignee</mat-label>
       <mat-select placeholder="Assignee" formControlName="assigneeId" name="assigneeId">
+        <mat-option>None</mat-option>
         <mat-option *ngFor="let a of assignees" [value]="a.id">
           {{a.firstName}} {{a.lastName}} ({{a.role | enumeration}})
         </mat-option>
@@ -35,8 +36,7 @@
 
     <mat-form-field>
       <mat-label>Deadline</mat-label>
-      <input matInput type="datetime-local" name="deadline" formControlName="deadline"
-             required>
+      <input matInput type="datetime-local" name="deadline" formControlName="deadline" required>
     </mat-form-field>
 
     <mat-form-field>
@@ -60,5 +60,6 @@
     </mat-form-field>
 
     <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add task</button>
+
   </div>
 </div>

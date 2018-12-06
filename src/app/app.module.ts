@@ -89,6 +89,7 @@ import { ShowSpecialPlanDialogComponent } from './production/planning/show-speci
 import { ErrorDialogComponent } from './custom/error-dialog/error-dialog.component';
 import {SetupService} from "./services/setup.service";
 import { SetupComponent } from './setup/setup.component';
+import { AssignmentComponent } from './production/tasks/assignment/assignment.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { SetupComponent } from './setup/setup.component';
     ShowSpecialPlanDialogComponent,
     ErrorDialogComponent,
     SetupComponent,
+    AssignmentComponent,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,

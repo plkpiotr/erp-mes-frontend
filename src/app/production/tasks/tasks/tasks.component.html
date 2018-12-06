@@ -1,11 +1,14 @@
 <mat-card>Tasks</mat-card>
 <div class="content">
+
   <mat-spinner *ngIf="!areTasksLoaded">
   </mat-spinner>
+
   <div *ngIf="areTasksLoaded">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search all tasks">
     </mat-form-field>
+
     <table mat-table [dataSource]="dataSource" matSort matSortActive="deadline" matSortDirection="desc">
 
       <ng-container matColumnDef="creationTime">
@@ -49,7 +52,16 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="seeTask(row.id)"></tr>
     </table>
+
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    <button mat-raised-button (click)="addTask()">Add task</button>
+
+    <div class="row">
+      <button mat-raised-button (click)="goToAssignment()">Assignment tasks</button>
+    </div>
+
+    <div class="row">
+      <button mat-raised-button (click)="addTask()">Add task</button>
+    </div>
+
   </div>
 </div>
