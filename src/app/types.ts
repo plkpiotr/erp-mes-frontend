@@ -110,6 +110,7 @@ export interface AssignmentRequest {
   taskIds: number[];
   assigneeIds: number[];
   startTime: Date;
+  endTime: Date;
 }
 
 export interface EstimatedCosts {

@@ -55,7 +55,7 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
-    <div class="row">
+    <div class="row" *ngIf="tasks.length > 0">
       <button mat-raised-button (click)="goToAssignment()">Assignment tasks</button>
     </div>
 
