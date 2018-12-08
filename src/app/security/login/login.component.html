@@ -8,7 +8,7 @@
 
   <mat-form-field appearance="legacy">
     <mat-label>Password</mat-label>
-    <input matInput placeholder="password" formControlName="password" required>
+    <input type="password" matInput placeholder="password" formControlName="password" required>
   </mat-form-field>
 
   <button mat-raised-button (click)="login()" [disabled]="form.invalid">Sign in</button>
