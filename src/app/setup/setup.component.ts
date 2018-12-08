@@ -76,9 +76,9 @@ export class SetupComponent implements OnInit {
         salary: this.form.get('salary').value
       }
     };
-    this.setupService.setupTeams()
+    this.setupService.setupAdmin(this.adminRequest)
       .subscribe(() => {
-          this.setupService.setupAdmin(this.adminRequest).subscribe(() => {
+          this.setupService.setupTeams().subscribe(() => {
           }, () => {
           }, () => {
           });
