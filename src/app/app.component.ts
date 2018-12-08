@@ -34,4 +34,10 @@ export class AppComponent {
   isUserLoggedIn(): boolean {
     return this.token.getToken() != null;
   }
+
+  visitMyProfile() {
+    this.loginService.fetchUser().subscribe(user => {
+      this.router.navigate(['employees', user.id]);
+    });
+  }
 }

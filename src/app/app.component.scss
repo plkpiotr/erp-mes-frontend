@@ -31,4 +31,7 @@ mat-card {
   border-radius: 0;
   padding: 15px 15px 15px 20px;
   background-color: $dark;
+  &:hover {
+    cursor: pointer;
+  }
 }
