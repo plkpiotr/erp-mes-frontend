@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AssignmentRequest, Task, TaskRequest} from '../types';
+import {AssignmentRequest, Indicators, Task, TaskRequest} from '../types';
 import {Observable} from 'rxjs';
 import {BACKEND_URL, FRONTEND_URL} from '../globals';
 
@@ -44,5 +44,9 @@ export class TaskService {
 
   assignToMe(id: number): Observable<Task> {
     return this.http.put<Task>(BACKEND_URL + 'tasks/' + id + '/assign', {headers: this.httpHeaders});
+  }
+
+  fetchIndicators(id: number): Observable<Indicators> {
+    return this.http.get<Indicators>(BACKEND_URL + 'indicators/' + id, {headers: this.httpHeaders});
   }
 }
