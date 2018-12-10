@@ -13,6 +13,7 @@ import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.co
 export class TasksComponent implements OnInit {
 
   tasks: Array<Task>;
+  tasksAssigneeIsNull: Array<Task>;
   areTasksLoaded = false;
   displayedColumns: string[] = ['creationTime', 'deadline', 'category', 'name', 'type', 'assignee', 'id'];
   dataSource: MatTableDataSource<Task> = new MatTableDataSource<Task>();
@@ -41,6 +42,7 @@ export class TasksComponent implements OnInit {
     }, () => {
       this.areTasksLoaded = true;
       this.dataSource = new MatTableDataSource<Task>(this.tasks);
+      this.tasksAssigneeIsNull = this.tasks.filter((task: Task) => task.assignee == null);
     });
   }
 
