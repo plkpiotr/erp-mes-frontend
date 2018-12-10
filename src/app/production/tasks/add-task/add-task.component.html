@@ -10,6 +10,26 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Estimated time</mat-label>
+      <input matInput placeholder="Estimated time (in minutes)" name="estimatedTime" formControlName="estimatedTime"
+             type="number" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Deadline</mat-label>
+      <input matInput type="datetime-local" name="deadline" formControlName="deadline" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select placeholder="Type" formControlName="type" name="type" required>
+        <mat-option *ngFor="let t of types" [value]="t">
+          {{t | titlecase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Preceding tasks</mat-label>
       <mat-select placeholder="Preceding tasks" formControlName="precedingTaskIds" name="precedingTaskIds" multiple>
         <mat-option *ngFor="let p of precedingTasks" [value]="p.id">
@@ -21,22 +41,11 @@
     <mat-form-field>
       <mat-label>Assignee</mat-label>
       <mat-select placeholder="Assignee" formControlName="assigneeId" name="assigneeId">
+        <mat-option>None</mat-option>
         <mat-option *ngFor="let a of assignees" [value]="a.id">
           {{a.firstName}} {{a.lastName}} ({{a.role | enumeration}})
         </mat-option>
       </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Estimated time</mat-label>
-      <input matInput placeholder="Estimated time (in minutes)" name="estimatedTime" formControlName="estimatedTime"
-             type="number" required>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Deadline</mat-label>
-      <input matInput type="datetime-local" name="deadline" formControlName="deadline"
-             required>
     </mat-form-field>
 
     <mat-form-field>
@@ -50,15 +59,7 @@
       <mat-error *ngIf="name.invalid">{{getErrorDetails()}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Type</mat-label>
-      <mat-select placeholder="Type" formControlName="type" name="type" required>
-        <mat-option *ngFor="let t of types" [value]="t">
-          {{t | titlecase}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
     <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add task</button>
+
   </div>
 </div>

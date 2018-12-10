@@ -3,7 +3,7 @@ import {TaskService} from '../../../services/task.service';
 import {Router} from '@angular/router';
 import {Task} from '../../../types';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -50,6 +50,10 @@ export class TasksComponent implements OnInit {
 
   addTask() {
     this.router.navigate(['/tasks/add']);
+  }
+
+  goToAssignment() {
+    this.router.navigate(['/assignment']);
   }
 
   applyFilter(filterValue: string) {

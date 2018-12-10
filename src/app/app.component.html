@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container">
   <mat-drawer *ngIf="isUserLoggedIn()" mode="side" [opened]="true">
-    <mat-card>ERP-MES</mat-card>
+    <mat-card (click)="visitMyProfile()">ERP-MES</mat-card>
     <mat-accordion>
 
       <mat-expansion-panel>

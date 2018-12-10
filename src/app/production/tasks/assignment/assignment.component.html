@@ -1,0 +1,36 @@
+<mat-card>Assignment tasks</mat-card>
+<div class="container">
+  <mat-spinner *ngIf="!(areAssigneesLoaded || areTasksLoaded)"></mat-spinner>
+  <div *ngIf="(areAssigneesLoaded || areTasksLoaded)" [formGroup]="form">
+
+    <mat-form-field>
+      <mat-label>Tasks</mat-label>
+      <mat-select placeholder="Tasks to assigning" formControlName="taskIds" name="taskIds" multiple>
+        <mat-option *ngFor="let p of tasks" [value]="p.id">
+          {{p.id}} {{p.name}} ({{p.category | enumeration}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Assignees</mat-label>
+      <mat-select placeholder="Assignees" formControlName="assigneeIds" name="assigneeIds" multiple>
+        <mat-option *ngFor="let a of assignees" [value]="a.id">
+          {{a.firstName}} {{a.lastName}} ({{a.role | enumeration}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Start time</mat-label>
+      <input matInput type="datetime-local" name="startTime" formControlName="startTime" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>End time</mat-label>
+      <input matInput type="datetime-local" name="endTime" formControlName="endTime" required>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Assign tasks</button>
+  </div>
+</div>

@@ -58,7 +58,7 @@
         <p>Scheduled time: <strong>{{task.scheduledTime ? (task.scheduledTime | date: 'short') : 'N/A'}}</strong></p>
         <p>Deadline: <strong>{{task.deadline | date: 'short'}}</strong></p>
         <mat-divider></mat-divider>
-        <p>Estimated time: <strong>{{task.estimatedTime}}</strong></p>
+        <p>Estimated time: <strong>{{task.estimatedTime}} minutes</strong></p>
         <mat-divider></mat-divider>
         <button mat-raised-button *ngIf="!(task.category === isDone)" (click)="setNextCategory()">
           Next category

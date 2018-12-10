@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {Token} from './token';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SetupService} from "./services/setup.service";
-import {LoginService} from "./services/login.service";
-import {FRONTEND_URL} from "./globals";
+import {Router} from '@angular/router';
+import {SetupService} from './services/setup.service';
+import {LoginService} from './services/login.service';
+import {FRONTEND_URL} from './globals';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,6 @@ import {FRONTEND_URL} from "./globals";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  panelOpenState = false;
   collapsedHeight = '48px';
   expandedHeight = '48px';
 
@@ -27,12 +26,18 @@ export class AppComponent {
       });
     } else if (window.location.href === FRONTEND_URL) {
       this.loginService.fetchUser().subscribe(user => {
-        this.router.navigate(['employees', user.id])
+        this.router.navigate(['employees', user.id]);
       });
     }
   }
 
   isUserLoggedIn(): boolean {
     return this.token.getToken() != null;
+  }
+
+  visitMyProfile() {
+    this.loginService.fetchUser().subscribe(user => {
+      this.router.navigate(['employees', user.id]);
+    });
   }
 }
