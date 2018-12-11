@@ -1,3 +1,45 @@
-<p>
-  indicators works!
-</p>
+<mat-card>Key Performance Indicators</mat-card>
+
+<div class="content">
+
+  <mat-select [(ngModel)]="currentId">
+    <mat-option *ngFor="let e of employees" [value]="e.id" (click)="seeIndicators(e.id)">
+      {{e.firstName}} {{e.lastName}} ({{e.role | enumeration}})
+    </mat-option>
+  </mat-select>
+
+  <p>my tasks:{{indicators.numberTasksEmployee}}</p>
+  <p>all tasks:{{indicators.numberTasksEverybody}}</p>
+  <hr>
+  <p>todo my tasks:{{indicators.numberTasksEmployeeToDo}}</p>
+  <p>todo all tasks:{{indicators.numberTasksEverybodyToDo}}</p>
+  <p>doing my tasks:{{indicators.numberTasksEmployeeDoing}}</p>
+  <p>doing all tasks:{{indicators.numberTasksEverybodyDoing}}</p>
+  <p>done my tasks:{{indicators.numberTasksEmployeeDone}}</p>
+  <p>done all tasks:{{indicators.numberTasksEverybodyDone}}</p>
+  <hr>
+  <p>my before deadline:{{indicators.numberTasksEmployeeDoneBeforeDeadline}}</p>
+  <p>all before deadline:{{indicators.numberTasksEverybodyDoneBeforeDeadline}}</p>
+  <hr>
+  <p>avg diff time my tasks:{{indicators.averageTimeTasksEmployeeBetweenStartTimeAndCreationTime}}</p>
+  <p>avg diff time all tasks:{{indicators.averageTimeTasksEverybodyBetweenStartTimeAndCreationTime}}</p>
+  <hr>
+  <p>sum diff time my tasks:{{indicators.sumTimeTasksEmployeeBetweenStartTimeAndCreationTime}}</p>
+  <p>sum diff time all tasks:{{indicators.sumTimeTasksEveryBodyBetweenStartTimeAndCreationTime}}</p>
+  <hr>
+  <p>notifications as transferee:{{indicators.numberNotificationsAsTransferee}}</p>
+  <p>notifications as consignee:{{indicators.numberNotificationsAsConsignee}}</p>
+  <hr>
+  <p>avg diff my notifications:{{indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime}}</p>
+  <p>avg diff all notifications:{{indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime}}</p>
+  <hr>
+  <p>my suggestions:{{indicators.numberSuggestionsEmployee}}</p>
+  <p>all suggestions:{{indicators.numberSuggestionsEverybody}}</p>
+  <hr>
+  <p>reported my suggestions:{{indicators.numberSuggestionsEmployeeReported}}</p>
+  <p>reported all suggestions:{{indicators.numberSuggestionsEverybodyReported}}</p>
+  <p>in implementation my suggestions:{{indicators.numberSuggestionsEmployeeInImplementation}}</p>
+  <p>in implementation all suggestions:{{indicators.numberSuggestionsEverybodyInImplementation}}</p>
+  <p>implemented my suggestions:{{indicators.numberSuggestionsEmployeeImplemented}}</p>
+  <p>implemented all suggestions:{{indicators.numberSuggestionsEverybodyImplemented}}</p>
+</div>

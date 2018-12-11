@@ -68,6 +68,6 @@ export class KanbanComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/tasks']));
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }
