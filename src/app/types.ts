@@ -126,12 +126,6 @@ export interface Indicators {
   numberTasksEverybodyDoneBeforeDeadline: number;
   averageTimeTasksEmployeeBetweenStartTimeAndCreationTime?: number;
   averageTimeTasksEverybodyBetweenStartTimeAndCreationTime?: number;
-  sumTimeTasksEmployeeBetweenStartTimeAndCreationTime?: number;
-  sumTimeTasksEveryBodyBetweenStartTimeAndCreationTime?: number;
-  numberNotificationsAsTransferee: number;
-  numberNotificationsAsConsignee: number;
-  averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime?: number;
-  averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime?: number;
   numberSuggestionsEmployee: number;
   numberSuggestionsEverybody: number;
   numberSuggestionsEmployeeReported: number;
@@ -140,6 +134,10 @@ export interface Indicators {
   numberSuggestionsEverybodyInImplementation: number;
   numberSuggestionsEmployeeImplemented: number;
   numberSuggestionsEverybodyImplemented: number;
+  numberNotificationsAsTransferee: number;
+  numberNotificationsAsConsignee: number;
+  averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime?: number;
+  averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime?: number;
 }
 
 export interface EstimatedCosts {

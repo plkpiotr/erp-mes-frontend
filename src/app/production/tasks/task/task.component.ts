@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Task} from '../../../types';
 import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material';
-import {Category} from "../../../globals";
+import {Category} from '../../../globals';
 
 @Component({
   selector: 'app-task',
