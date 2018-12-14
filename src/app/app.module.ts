@@ -91,6 +91,7 @@ import {SetupService} from './services/setup.service';
 import {SetupComponent} from './setup/setup.component';
 import {AssignmentComponent} from './production/tasks/assignment/assignment.component';
 import {IndicatorsComponent} from './production/tasks/indicators/indicators.component';
+import {MinuteSecondsPipe} from './pipes/minute-seconds.pipe';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import {IndicatorsComponent} from './production/tasks/indicators/indicators.comp
     SetupComponent,
     AssignmentComponent,
     IndicatorsComponent,
+    MinuteSecondsPipe,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,

@@ -75,19 +75,44 @@
   </div>
 
   <div class="row">
+    <h3>Mean times</h3>
+  </div>
+
+  <div class="row">
+    <div class="grid">
+      <canvas id="meanTimesEmployee">{{meanTimesEmployee}}</canvas>
+    </div>
     <div class="grid" *ngIf="areIndicatorsLoaded">
-      <div>my before deadline:{{indicators.numberTasksEmployeeDoneBeforeDeadline}}</div>
-      <div>all before deadline:{{indicators.numberTasksEverybodyDoneBeforeDeadline}}</div>
-      <hr>
-      <div>avg diff time my tasks:{{indicators.averageTimeTasksEmployeeBetweenStartTimeAndCreationTime}}</div>
-      <div>avg diff time all tasks:{{indicators.averageTimeTasksEverybodyBetweenStartTimeAndCreationTime}}</div>
-      <hr>
+      <p>End time | Deadline: <strong>
+        {{indicators.averageTimeTasksEmployeeBetweenDeadlineAndEndTime | minuteSeconds}}
+      </strong></p>
+      <p>Creation time | Start time: <strong>
+        {{indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime | minuteSeconds}}
+      </strong></p>
+      <p>Start time | End time: <strong>
+        {{indicators.averageTimeNotificationsEmployeeBetweenEndTimeAndStartTime | minuteSeconds}}
+      </strong></p>
+    </div>
+    <div class="grid">
+      <canvas id="meanTimesEverybody">{{meanTimesEverybody}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>End time | Deadline: <strong>
+        {{indicators.averageTimeTasksEverybodyBetweenDeadlineAndEndTime | minuteSeconds}}
+      </strong></p>
+      <p>Creation time | Start time: <strong>
+        {{indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime | minuteSeconds}}
+      </strong></p>
+      <p>Start time | End time: <strong>
+        {{indicators.averageTimeNotificationsEverybodyBetweenEndTimeAndStartTime | minuteSeconds}}
+      </strong></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="grid" *ngIf="areIndicatorsLoaded">
       <div>notifications as transferee:{{indicators.numberNotificationsAsTransferee}}</div>
       <div>notifications as consignee:{{indicators.numberNotificationsAsConsignee}}</div>
-      <hr>
-      <div>avg diff my notifications:{{indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime}}</div>
-      <div>avg diff all notifications:{{indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime}}</div>
-      <hr>
     </div>
   </div>
 

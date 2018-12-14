@@ -23,6 +23,8 @@ export class IndicatorsComponent implements OnInit {
   tasksEverybodyOnTime = [];
   suggestionsEmployee = [];
   suggestionsEverybody = [];
+  meanTimesEmployee = [];
+  meanTimesEverybody = [];
   light = '#E3F2FD';
   normal = '#BBDEFB';
   dark = '#90CAF9';
@@ -246,6 +248,74 @@ export class IndicatorsComponent implements OnInit {
                       display: false
                     }
                   }]
+                }
+              }
+            });
+            this.meanTimesEmployee = new Chart('meanTimesEmployee', {
+              type: 'bar',
+              data: {
+                labels: ['Tasks', 'Notifications', 'Notifications'],
+                datasets: [
+                  {
+                    data: [this.indicators.averageTimeTasksEmployeeBetweenDeadlineAndEndTime,
+                      this.indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime,
+                      this.indicators.averageTimeNotificationsEmployeeBetweenEndTimeAndStartTime],
+                    backgroundColor: [this.light, this.normal, this.dark]
+                  }
+                ]
+              },
+              options: {
+                legend: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: 'Employee\'s mean times between:'
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      callback: function (value) {
+                        if (value % 1 === 0) {
+                          return value;
+                        }
+                      }
+                    }
+                  }],
+                }
+              }
+            });
+            this.meanTimesEverybody = new Chart('meanTimesEverybody', {
+              type: 'bar',
+              data: {
+                labels: ['Tasks', 'Notifications', 'Notifications'],
+                datasets: [
+                  {
+                    data: [this.indicators.averageTimeTasksEverybodyBetweenDeadlineAndEndTime,
+                      this.indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime,
+                      this.indicators.averageTimeNotificationsEverybodyBetweenEndTimeAndStartTime],
+                    backgroundColor: [this.light, this.normal, this.dark]
+                  }
+                ]
+              },
+              options: {
+                legend: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: 'All mean times between:'
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      callback: function (value) {
+                        if (value % 1 === 0) {
+                          return value;
+                        }
+                      }
+                    }
+                  }],
                 }
               }
             });
