@@ -254,7 +254,7 @@ export class IndicatorsComponent implements OnInit {
             this.meanTimesEmployee = new Chart('meanTimesEmployee', {
               type: 'bar',
               data: {
-                labels: ['Tasks', 'Notifications', 'Notifications'],
+                labels: ['Tasks', 'Notif. 1', 'Notif. 2'],
                 datasets: [
                   {
                     data: [this.indicators.averageTimeTasksEmployeeBetweenDeadlineAndEndTime,
@@ -275,11 +275,7 @@ export class IndicatorsComponent implements OnInit {
                 scales: {
                   yAxes: [{
                     ticks: {
-                      callback: function (value) {
-                        if (value % 1 === 0) {
-                          return value;
-                        }
-                      }
+                      display: false
                     }
                   }],
                 }
@@ -288,7 +284,7 @@ export class IndicatorsComponent implements OnInit {
             this.meanTimesEverybody = new Chart('meanTimesEverybody', {
               type: 'bar',
               data: {
-                labels: ['Tasks', 'Notifications', 'Notifications'],
+                labels: ['Tasks', 'Notif. 1', 'Notif. 2'],
                 datasets: [
                   {
                     data: [this.indicators.averageTimeTasksEverybodyBetweenDeadlineAndEndTime,
@@ -309,11 +305,7 @@ export class IndicatorsComponent implements OnInit {
                 scales: {
                   yAxes: [{
                     ticks: {
-                      callback: function (value) {
-                        if (value % 1 === 0) {
-                          return value;
-                        }
-                      }
+                      display: false
                     }
                   }],
                 }

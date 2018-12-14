@@ -4,6 +4,41 @@
 <div class="content">
 
   <div class="row">
+    <h3>Mean times</h3>
+  </div>
+
+  <div class="row">
+    <div class="grid">
+      <canvas id="meanTimesEmployee">{{meanTimesEmployee}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>End time | Deadline: <strong>
+        {{indicators.averageTimeTasksEmployeeBetweenDeadlineAndEndTime | minuteSeconds}}
+      </strong></p>
+      <p>Creation time | Start time: <strong>
+        {{indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime | minuteSeconds}}
+      </strong></p>
+      <p>Start time | End time: <strong>
+        {{indicators.averageTimeNotificationsEmployeeBetweenEndTimeAndStartTime | minuteSeconds}}
+      </strong></p>
+    </div>
+    <div class="grid">
+      <canvas id="meanTimesEverybody">{{meanTimesEverybody}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>End time | Deadline: <strong>
+        {{indicators.averageTimeTasksEverybodyBetweenDeadlineAndEndTime | minuteSeconds}}
+      </strong></p>
+      <p>Creation time | Start time: <strong>
+        {{indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime | minuteSeconds}}
+      </strong></p>
+      <p>Start time | End time: <strong>
+        {{indicators.averageTimeNotificationsEverybodyBetweenEndTimeAndStartTime | minuteSeconds}}
+      </strong></p>
+    </div>
+  </div>
+
+  <div class="row">
     <h3>Tasks</h3>
   </div>
 
@@ -71,48 +106,6 @@
       <p>In implementation: <strong>{{indicators.numberSuggestionsEverybodyInImplementation}}</strong></p>
       <p>Implemented: <strong>{{indicators.numberSuggestionsEverybodyImplemented}}</strong></p>
       <p>Overall: <strong>{{indicators.numberSuggestionsEverybody}}</strong></p>
-    </div>
-  </div>
-
-  <div class="row">
-    <h3>Mean times</h3>
-  </div>
-
-  <div class="row">
-    <div class="grid">
-      <canvas id="meanTimesEmployee">{{meanTimesEmployee}}</canvas>
-    </div>
-    <div class="grid" *ngIf="areIndicatorsLoaded">
-      <p>End time | Deadline: <strong>
-        {{indicators.averageTimeTasksEmployeeBetweenDeadlineAndEndTime | minuteSeconds}}
-      </strong></p>
-      <p>Creation time | Start time: <strong>
-        {{indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime | minuteSeconds}}
-      </strong></p>
-      <p>Start time | End time: <strong>
-        {{indicators.averageTimeNotificationsEmployeeBetweenEndTimeAndStartTime | minuteSeconds}}
-      </strong></p>
-    </div>
-    <div class="grid">
-      <canvas id="meanTimesEverybody">{{meanTimesEverybody}}</canvas>
-    </div>
-    <div class="grid" *ngIf="areIndicatorsLoaded">
-      <p>End time | Deadline: <strong>
-        {{indicators.averageTimeTasksEverybodyBetweenDeadlineAndEndTime | minuteSeconds}}
-      </strong></p>
-      <p>Creation time | Start time: <strong>
-        {{indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime | minuteSeconds}}
-      </strong></p>
-      <p>Start time | End time: <strong>
-        {{indicators.averageTimeNotificationsEverybodyBetweenEndTimeAndStartTime | minuteSeconds}}
-      </strong></p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="grid" *ngIf="areIndicatorsLoaded">
-      <div>notifications as transferee:{{indicators.numberNotificationsAsTransferee}}</div>
-      <div>notifications as consignee:{{indicators.numberNotificationsAsConsignee}}</div>
     </div>
   </div>
 

@@ -132,8 +132,6 @@ export interface Indicators {
   numberSuggestionsEverybodyInImplementation: number;
   numberSuggestionsEmployeeImplemented: number;
   numberSuggestionsEverybodyImplemented: number;
-  numberNotificationsAsTransferee: number;
-  numberNotificationsAsConsignee: number;
   averageTimeTasksEmployeeBetweenDeadlineAndEndTime?: number;
   averageTimeTasksEverybodyBetweenDeadlineAndEndTime?: number;
   averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime?: number;
