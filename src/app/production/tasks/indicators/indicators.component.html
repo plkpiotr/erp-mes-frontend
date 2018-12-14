@@ -1,0 +1,112 @@
+<mat-card>Indicators</mat-card>
+<mat-spinner *ngIf="!areIndicatorsLoaded"></mat-spinner>
+
+<div class="content">
+
+  <div class="row">
+    <h3>Mean times</h3>
+  </div>
+
+  <div class="row">
+    <div class="grid">
+      <canvas id="meanTimesEmployee">{{meanTimesEmployee}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>End time | Deadline: <strong>
+        {{indicators.averageTimeTasksEmployeeBetweenDeadlineAndEndTime | minuteSeconds}}
+      </strong></p>
+      <p>Creation time | Start time: <strong>
+        {{indicators.averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime | minuteSeconds}}
+      </strong></p>
+      <p>Start time | End time: <strong>
+        {{indicators.averageTimeNotificationsEmployeeBetweenEndTimeAndStartTime | minuteSeconds}}
+      </strong></p>
+    </div>
+    <div class="grid">
+      <canvas id="meanTimesEverybody">{{meanTimesEverybody}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>End time | Deadline: <strong>
+        {{indicators.averageTimeTasksEverybodyBetweenDeadlineAndEndTime | minuteSeconds}}
+      </strong></p>
+      <p>Creation time | Start time: <strong>
+        {{indicators.averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime | minuteSeconds}}
+      </strong></p>
+      <p>Start time | End time: <strong>
+        {{indicators.averageTimeNotificationsEverybodyBetweenEndTimeAndStartTime | minuteSeconds}}
+      </strong></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Tasks</h3>
+  </div>
+
+  <div class="row">
+    <div class="grid">
+      <canvas id="tasksEmployee">{{tasksEmployee}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>To do: <strong>{{indicators.numberTasksEmployeeToDo}}</strong></p>
+      <p>Doing: <strong>{{indicators.numberTasksEmployeeDoing}}</strong></p>
+      <p>Done: <strong>{{indicators.numberTasksEmployeeDone}}</strong></p>
+      <p>Overall: <strong>{{indicators.numberTasksEmployee}}</strong></p>
+    </div>
+    <div class="grid">
+      <canvas id="tasksEverybody">{{tasksEverybody}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>To do: <strong>{{indicators.numberTasksEverybodyToDo}}</strong></p>
+      <p>Doing: <strong>{{indicators.numberTasksEverybodyDoing}}</strong></p>
+      <p>Done: <strong>{{indicators.numberTasksEverybodyDone}}</strong></p>
+      <p>Overall: <strong>{{indicators.numberTasksEverybody}}</strong></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="grid">
+      <canvas id="tasksEmployeeOnTime">{{tasksEmployeeOnTime}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>Before deadline: <strong>{{indicators.numberTasksEmployeeDoneBeforeDeadline}}</strong></p>
+      <p>After deadline: <strong>
+        {{indicators.numberTasksEmployeeDone - indicators.numberTasksEmployeeDoneBeforeDeadline}}
+      </strong></p>
+    </div>
+    <div class="grid">
+      <canvas id="tasksEverybodyOnTime">{{tasksEverybodyOnTime}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>Before deadline: <strong>{{indicators.numberTasksEverybodyDoneBeforeDeadline}}</strong></p>
+      <p>After deadline: <strong>
+        {{indicators.numberTasksEverybodyDone - indicators.numberTasksEverybodyDoneBeforeDeadline}}
+      </strong></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Suggestions</h3>
+  </div>
+
+  <div class="row">
+    <div class="grid">
+      <canvas id="suggestionsEmployee">{{suggestionsEmployee}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>Reported: <strong>{{indicators.numberSuggestionsEmployeeReported}}</strong></p>
+      <p>In implementation: <strong>{{indicators.numberSuggestionsEmployeeInImplementation}}</strong></p>
+      <p>Implemented: <strong>{{indicators.numberSuggestionsEmployeeImplemented}}</strong></p>
+      <p>Overall: <strong>{{indicators.numberSuggestionsEmployee}}</strong></p>
+    </div>
+    <div class="grid">
+      <canvas id="suggestionsEverybody">{{suggestionsEverybody}}</canvas>
+    </div>
+    <div class="grid" *ngIf="areIndicatorsLoaded">
+      <p>Reported: <strong>{{indicators.numberSuggestionsEverybodyReported}}</strong></p>
+      <p>In implementation: <strong>{{indicators.numberSuggestionsEverybodyInImplementation}}</strong></p>
+      <p>Implemented: <strong>{{indicators.numberSuggestionsEverybodyImplemented}}</strong></p>
+      <p>Overall: <strong>{{indicators.numberSuggestionsEverybody}}</strong></p>
+    </div>
+  </div>
+
+</div>

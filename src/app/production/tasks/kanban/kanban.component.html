@@ -9,7 +9,7 @@
     </mat-option>
   </mat-select>
 
-  <mat-tab-group dynamicHeight *ngIf="areTasksLoaded || areEmployeesLoaded">
+  <mat-tab-group dynamicHeight *ngIf="areTasksLoaded  && areEmployeesLoaded">
 
     <mat-tab label="To do">
       <div class="tile" *ngFor="let myTask of (tasks | tasksTodo)" (click)="seeTask(myTask.id)">

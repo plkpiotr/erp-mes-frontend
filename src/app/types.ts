@@ -12,7 +12,7 @@ import {
   State,
   Status,
   Type
-} from "./globals";
+} from './globals';
 
 export interface Contract {
   id: number;
@@ -111,6 +111,33 @@ export interface AssignmentRequest {
   assigneeIds: number[];
   startTime: Date;
   endTime: Date;
+}
+
+export interface Indicators {
+  numberTasksEmployee: number;
+  numberTasksEverybody: number;
+  numberTasksEmployeeToDo: number;
+  numberTasksEverybodyToDo: number;
+  numberTasksEmployeeDoing: number;
+  numberTasksEverybodyDoing: number;
+  numberTasksEmployeeDone: number;
+  numberTasksEverybodyDone: number;
+  numberTasksEmployeeDoneBeforeDeadline?: number;
+  numberTasksEverybodyDoneBeforeDeadline?: number;
+  numberSuggestionsEmployee: number;
+  numberSuggestionsEverybody: number;
+  numberSuggestionsEmployeeReported: number;
+  numberSuggestionsEverybodyReported: number;
+  numberSuggestionsEmployeeInImplementation: number;
+  numberSuggestionsEverybodyInImplementation: number;
+  numberSuggestionsEmployeeImplemented: number;
+  numberSuggestionsEverybodyImplemented: number;
+  averageTimeTasksEmployeeBetweenDeadlineAndEndTime?: number;
+  averageTimeTasksEverybodyBetweenDeadlineAndEndTime?: number;
+  averageTimeNotificationsEmployeeBetweenStartTimeAndCreationTime?: number;
+  averageTimeNotificationsEverybodyBetweenStartTimeAndCreationTime?: number;
+  averageTimeNotificationsEmployeeBetweenEndTimeAndStartTime?: number;
+  averageTimeNotificationsEverybodyBetweenEndTimeAndStartTime?: number;
 }
 
 export interface EstimatedCosts {
