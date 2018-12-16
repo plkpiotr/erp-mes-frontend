@@ -38,3 +38,5 @@ export class ChatComponent implements OnInit {
     $('#input').val('');
   }
 }
+
+// tuxcjmse

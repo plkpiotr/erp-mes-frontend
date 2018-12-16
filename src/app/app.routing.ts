@@ -92,7 +92,7 @@ export const appRoutes: Routes = [
   {path: 'kanban/:id', component: KanbanComponent},
   {path: 'assignment', component: AssignmentComponent},
   {path: 'indicators/:id', component: IndicatorsComponent},
-  {path: 'chat', component: ChatComponent}
+  {path: 'communication', component: ChatComponent}
   // {path: '**', redirectTo: 'login'}
   ];
 
