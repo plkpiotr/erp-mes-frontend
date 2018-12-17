@@ -30,7 +30,11 @@
     "core-js": "^2.5.4",
     "express": "^4.16.3",
     "hammerjs": "^2.0.8",
+    "jquery": "^3.3.1",
+    "net": "^1.0.2",
     "rxjs": "^6.3.3",
+    "sockjs-client": "^1.3.0",
+    "stompjs": "^2.3.3",
     "typescript": "~2.7.2",
     "zone.js": "^0.8.26"
   },

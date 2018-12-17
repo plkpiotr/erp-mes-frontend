@@ -2,12 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AssignmentRequest, Employee, Task} from '../../../types';
-import {FormControl} from '@angular/forms';
 import {TaskService} from '../../../services/task.service';
 import {EmployeeService} from '../../../services/employee.service';
-import {Validators} from '@angular/forms';
 
 
 @Component({
@@ -92,7 +90,8 @@ export class AssignmentComponent implements OnInit {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       width: '700px',
       data: {
-        error: err.error
+        error: err.error,
+        status: err.status
       }
     });
 

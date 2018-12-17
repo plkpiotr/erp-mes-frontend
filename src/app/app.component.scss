@@ -35,3 +35,66 @@ mat-card {
     cursor: pointer;
   }
 }
+
+.open-button {
+  background-color: $dark;
+  box-shadow: none;
+  color: black;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.send-button {
+  background-color: $dark;
+  box-shadow: none;
+  color: black;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 95px;
+  right: 30px;
+}
+
+h3 {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.popup {
+  z-index: 20;
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background-color: $normal;
+  min-width: 400px;
+  min-height: 400px;
+  max-width: 400px;
+}
+
+#chat {
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: left;
+  height: 40vh;
+  width: auto;
+  background-color: $light;
+  margin: 10px 10px 0 10px;
+}
+
+.popup textarea {
+  min-width: 300px;
+  min-height: 120px;
+  text-align: left;
+  margin: 10px;
+  border: none;
+  resize: none;
+}
+
+.popup textarea:focus {
+  background-color: $light;
+  outline: none;
+}
