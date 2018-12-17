@@ -43,7 +43,6 @@ import {KanbanComponent} from './production/tasks/kanban/kanban.component';
 import {SetupComponent} from './setup/setup.component';
 import {AssignmentComponent} from './production/tasks/assignment/assignment.component';
 import {IndicatorsComponent} from './production/tasks/indicators/indicators.component';
-import {ChatComponent} from './communication/chat/chat.component';
 
 export const appRoutes: Routes = [
   {path: 'employees', component: EmployeesComponent},
@@ -91,8 +90,7 @@ export const appRoutes: Routes = [
   {path: 'setup', component: SetupComponent},
   {path: 'kanban/:id', component: KanbanComponent},
   {path: 'assignment', component: AssignmentComponent},
-  {path: 'indicators/:id', component: IndicatorsComponent},
-  {path: 'communication', component: ChatComponent}
+  {path: 'indicators/:id', component: IndicatorsComponent}
   // {path: '**', redirectTo: 'login'}
   ];
 

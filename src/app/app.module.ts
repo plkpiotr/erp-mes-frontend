@@ -92,7 +92,6 @@ import {SetupComponent} from './setup/setup.component';
 import {AssignmentComponent} from './production/tasks/assignment/assignment.component';
 import {IndicatorsComponent} from './production/tasks/indicators/indicators.component';
 import {MinuteSecondsPipe} from './pipes/minute-seconds.pipe';
-import {ChatComponent} from './communication/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -163,7 +162,6 @@ import {ChatComponent} from './communication/chat/chat.component';
     AssignmentComponent,
     IndicatorsComponent,
     MinuteSecondsPipe,
-    ChatComponent,
   ],
   entryComponents: [
     SpecialOfferDialogComponent,

@@ -24,13 +24,6 @@
           </a>
           <mat-divider></mat-divider>
 
-          <a mat-list-item routerLink="/communication"
-             routerLinkActive="active">
-          <mat-icon matListIcon>forum</mat-icon>
-          <h4 matLine>Chat</h4>
-          </a>
-          <mat-divider></mat-divider>
-
           <a mat-list-item routerLink="/notifications"
              routerLinkActive="active">
             <mat-icon matListIcon>notifications</mat-icon>
@@ -176,8 +169,8 @@
 
           <mat-divider></mat-divider>
           <a mat-list-item>
-          <mat-icon matListIcon>cloud_off</mat-icon>
-          <h4 matLine>Sign out (off)</h4>
+            <mat-icon matListIcon>cloud_off</mat-icon>
+            <h4 matLine>Sign out (off)</h4>
           </a>
           <mat-divider></mat-divider>
 
@@ -187,6 +180,31 @@
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
-    <router-outlet></router-outlet>
+
+    <router-outlet>
+      <div *ngIf="isUserLoggedIn()">
+        <button mat-fab class="btn open-button" onclick="document.getElementById('myForm').style.display ='block';">
+          <mat-icon aria-label="Example icon-button with a heart icon">forum</mat-icon>
+        </button>
+
+        <div class="chat-popup" id="myForm">
+          <form class="form-container" (keydown.enter)="sendMessage(input.value)">
+            <h3>Chat</h3>
+            <div class="chat-container">
+              <div id="chat">
+                <div class="message"></div>
+              </div>
+            </div>
+            <textarea id="input" type="text" name="msg" maxlength="100" #input></textarea>
+
+            <button mat-fab class="open-button" onclick="document.getElementById('myForm').style.display = 'none';">
+              <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </router-outlet>
+
   </mat-drawer-content>
 </mat-drawer-container>
