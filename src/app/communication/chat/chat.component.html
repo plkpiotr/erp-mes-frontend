@@ -1,20 +1,18 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <div class="chat-container">
-    <div class="chat">
-      <div class="message"></div>
+<button class="open-button" onclick="document.getElementById('myForm').style.display ='block';">Chat</button>
+
+<div class="chat-popup" id="myForm">
+  <form class="form-container">
+    <h1>Chat</h1>
+    <div class="chat-container">
+      <div class="chat">
+        <div class="message"></div>
+      </div>
     </div>
-  </div>
-</div>
+    <textarea id="input" type="text" name="msg" #input></textarea>
 
-<div class="footer">
-  <div class="send-button">
 
-    <div class="send" (click)="sendMessage(input.value)">
-    </div>
-    <input  id="input" type="text" #input>
-  </div>
-
+    <button type="submit" class="btn" (click)="sendMessage(input.value)">Send</button>
+    <button type="button" class="btn cancel" onclick="document.getElementById('myForm').style.display = 'none';">Close
+    </button>
+  </form>
 </div>
