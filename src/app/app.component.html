@@ -13,7 +13,7 @@
           <a mat-list-item routerLink="/emails/inbox"
              routerLinkActive="active">
             <mat-icon matListIcon>drafts</mat-icon>
-            <h3 matLine>Inbox</h3>
+            <h4 matLine>Inbox</h4>
           </a>
           <mat-divider></mat-divider>
 
@@ -51,7 +51,7 @@
           <a mat-list-item routerLink="/current-report"
              routerLinkActive="active">
             <mat-icon matListIcon>today</mat-icon>
-            <h3 matLine>Current report</h3>
+            <h4 matLine>Current report</h4>
           </a>
           <mat-divider></mat-divider>
 
@@ -96,7 +96,7 @@
           <a mat-list-item routerLink="/complaints"
              routerLinkActive="active">
             <mat-icon matListIcon>sentiment_dissatisfied</mat-icon>
-            <h3 matLine>Complaints</h3>
+            <h4 matLine>Complaints</h4>
           </a>
           <mat-divider></mat-divider>
 
@@ -141,7 +141,7 @@
           <a mat-list-item routerLink="/employees"
              routerLinkActive="active">
             <mat-icon matListIcon>person</mat-icon>
-            <h3 matLine>Employees</h3>
+            <h4 matLine>Employees</h4>
           </a>
           <mat-divider></mat-divider>
 
@@ -164,7 +164,7 @@
           <a mat-list-item routerLink="/login"
              routerLinkActive="active">
             <mat-icon matListIcon>cloud_queue</mat-icon>
-            <h3 matLine>Sign in</h3>
+            <h4 matLine>Sign in</h4>
           </a>
 
           <mat-divider></mat-divider>
@@ -183,26 +183,26 @@
 
     <router-outlet>
       <div *ngIf="isUserLoggedIn()">
-        <button mat-fab class="btn open-button" onclick="document.getElementById('myForm').style.display ='block';">
-          <mat-icon aria-label="Example icon-button with a heart icon">forum</mat-icon>
+        <button mat-fab class="btn open-button" onclick="document.getElementById('popup').style.display ='block';">
+          <mat-icon>forum</mat-icon>
         </button>
 
-        <div class="chat-popup" id="myForm">
-          <form class="form-container" (keydown.enter)="sendMessage(input.value)">
-            <h3>Chat</h3>
-            <div class="chat-container">
-              <div id="chat">
-                <div class="message"></div>
-              </div>
+          <form class="popup" id="popup" (keydown.enter)="sendMessage(input.value)">
+            <h3>Messages</h3>
+            <div id="chat">
+              <div class="message"></div>
             </div>
-            <textarea id="input" type="text" name="msg" maxlength="100" #input></textarea>
+            <textarea id="input" type="text" maxlength="300" #input></textarea>
 
-            <button mat-fab class="open-button" onclick="document.getElementById('myForm').style.display = 'none';">
-              <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+            <button mat-fab class="send-button" (click)="sendMessage(input.value)">
+              <mat-icon>send</mat-icon>
+            </button>
+
+            <button mat-fab class="open-button" onclick="document.getElementById('popup').style.display = 'none';">
+              <mat-icon>clear</mat-icon>
             </button>
 
           </form>
-        </div>
       </div>
     </router-outlet>
 

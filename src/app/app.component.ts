@@ -3,7 +3,7 @@ import {Token} from './token';
 import {Router} from '@angular/router';
 import {SetupService} from './services/setup.service';
 import {LoginService} from './services/login.service';
-import {FRONTEND_URL} from './globals';
+import {BACKEND_URL, FRONTEND_URL} from './globals';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import $ from 'jquery';
@@ -16,7 +16,7 @@ import $ from 'jquery';
 export class AppComponent {
   collapsedHeight = '48px';
   expandedHeight = '48px';
-  serverUrl = 'http://localhost:8080/socket';
+  serverUrl = BACKEND_URL + 'socket';
   stompClient;
 
   constructor(private token: Token, private router: Router, private setupService: SetupService,
@@ -34,14 +34,15 @@ export class AppComponent {
         this.router.navigate(['employees', user.id]);
       });
     }
-    this.initializeWebSocketConnetion();
+    this.initializeWebSocketConnection();
   }
 
-  initializeWebSocketConnetion() {
+  initializeWebSocketConnection() {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, function () {
+      that.stompClient.debug = () => {};
       that.stompClient.subscribe('/chat', (message) => {
         if (message.body) {
           $('#chat').append('<div class="message">' + message.body + '</div>');

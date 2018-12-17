@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeliveryService} from '../../../services/delivery.service';
 import {Router} from '@angular/router';
 import {Delivery} from '../../../types';
-import {MatDialog, MatPaginator, MatTableDataSource} from "@angular/material";
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-deliveries',
