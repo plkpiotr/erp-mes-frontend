@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SetupService} from "../services/setup.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
+import {Token} from "../token";
 
 @Component({
   selector: 'app-setup',
@@ -23,19 +24,24 @@ export class SetupComponent implements OnInit {
 
   constructor(private setupService: SetupService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private token: Token) {
   }
 
   ngOnInit() {
-    this.setupFormControls();
-    this.form = new FormGroup({
-      "firstName": this.firstName,
-      "lastName": this.lastName,
-      "email": this.email,
-      "password": this.password,
-      "accountNumber": this.accountNumber,
-      "salary": this.salary
-    });
+    if (this.token.getToken() != null) {
+      this.router.navigate(['employees']);
+    } else {
+      this.setupFormControls();
+      this.form = new FormGroup({
+        "firstName": this.firstName,
+        "lastName": this.lastName,
+        "email": this.email,
+        "password": this.password,
+        "accountNumber": this.accountNumber,
+        "salary": this.salary
+      });
+    }
   }
 
   setupFormControls() {

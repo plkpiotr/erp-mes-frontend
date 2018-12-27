@@ -2,7 +2,7 @@
 <div class="content" [formGroup]="form">
   <mat-form-field appearance="legacy">
     <mat-label>Password</mat-label>
-    <input matInput placeholder="password" formControlName="password" required>
+    <input type="password" matInput placeholder="password" formControlName="password" required>
   </mat-form-field>
   <button mat-raised-button (click)="submit()" [disabled]="form.invalid">Validate</button>
 </div>
