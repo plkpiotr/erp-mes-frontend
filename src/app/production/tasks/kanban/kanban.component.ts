@@ -37,7 +37,11 @@ export class KanbanComponent implements OnInit {
       .subscribe(res => {
         this.employees = res;
       }, err => {
-        this.showError(err);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err);
+        }
       }, () => {
         this.areEmployeesLoaded = true;
       });
@@ -45,7 +49,11 @@ export class KanbanComponent implements OnInit {
       .subscribe(res => {
         this.tasks = res;
       }, err => {
-        this.showError(err);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err);
+        }
       }, () => {
         this.areTasksLoaded = true;
       });

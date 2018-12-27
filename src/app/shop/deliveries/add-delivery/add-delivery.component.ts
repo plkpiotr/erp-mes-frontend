@@ -51,12 +51,20 @@ export class AddDeliveryComponent implements OnInit {
     this.deliveryService.getRecommendations().subscribe(res => {
       this.recommendedDeliveryItems = res;
     }, err => {
-      this.showError(err, false);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, false);
+      }
     }, () => {
       this.itemService.fetchAllItems().subscribe(res => {
         this.items = res;
       }, err => {
-        this.showError(err, true);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, true);
+        }
       }, () => {
         this.areItemsLoaded = true;
         this.items.forEach(item => this.itemsById[item.id] = item);
@@ -124,7 +132,11 @@ export class AddDeliveryComponent implements OnInit {
     this.deliveryService.addNewDelivery(this.deliveryRequest).subscribe(res => {
       delivery = res;
     }, err => {
-      this.showError(err, false);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, false);
+      }
     }, () => {
       this.router.navigate(['/deliveries', delivery.id]);
     });

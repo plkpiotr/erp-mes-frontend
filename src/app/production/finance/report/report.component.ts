@@ -28,7 +28,11 @@ export class ReportComponent implements OnInit {
     this.reportService.fetchOneReport(id).subscribe(res => {
       this.report = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isReportLoaded = true;
     });

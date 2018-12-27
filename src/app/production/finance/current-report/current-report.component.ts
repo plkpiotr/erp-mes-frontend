@@ -48,7 +48,11 @@ export class CurrentReportComponent implements OnInit {
       this.socialFund = res.socialFund;
       this.unexpected = res.unexpected;
     }, err => {
-      this.showError(err, false);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, false);
+      }
     }, () => {
       this.areRecommendationsLoaded = true;
     });
@@ -58,7 +62,11 @@ export class CurrentReportComponent implements OnInit {
     this.reportService.fetchCurrentReport().subscribe(res => {
       this.currentReport = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.isReportLoaded = true;
     });

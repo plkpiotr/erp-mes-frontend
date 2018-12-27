@@ -34,7 +34,11 @@ export class DeliveryComponent implements OnInit {
     this.deliveryService.fetchOneDelivery(this.route.snapshot.params['id']).subscribe(res => {
       this.delivery = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.isDeliveryLoaded = true;
     });
@@ -50,15 +54,24 @@ export class DeliveryComponent implements OnInit {
   confirmDelivery() {
     this.delivery.deliveryItems.forEach(deliveryItem => {
       this.itemService.supplyItem(deliveryItem.item.id, deliveryItem.quantity)
-        .subscribe(() => {});
+        .subscribe(() => {
+        });
     });
     const expenseRequest = {
       expenseType: ExpenseType.STOCK,
       amount: this.delivery.value
     };
-    this.reportService.addExpense(expenseRequest).subscribe(() => {});
-    this.deliveryService.confirmDelivery(this.delivery.id).subscribe(() => {},
-      err => this.showError(err, false),
+    this.reportService.addExpense(expenseRequest).subscribe(() => {
+    });
+    this.deliveryService.confirmDelivery(this.delivery.id).subscribe(() => {
+      },
+      err => {
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, false);
+        }
+      },
       () => {
         this.isDeliveryLoaded = false;
         this.fetchDelivery();

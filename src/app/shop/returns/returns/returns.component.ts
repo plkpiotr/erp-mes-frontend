@@ -34,7 +34,11 @@ export class ReturnsComponent implements OnInit {
     this.returnService.fetchAllReturns().subscribe(res => {
       this.returns = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areReturnsLoaded = true;
       this.dataSource = new MatTableDataSource<Return>(this.returns);

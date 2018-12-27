@@ -30,7 +30,11 @@ export class ReturnComponent implements OnInit {
     this.returnService.fetchOneReturn(this.route.snapshot.params['id']).subscribe(res => {
       this.return = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isReturnLoaded = true;
       this.status = this.return.status;

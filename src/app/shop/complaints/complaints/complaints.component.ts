@@ -34,7 +34,11 @@ export class ComplaintsComponent implements OnInit {
     this.complaintService.fetchAllComplaints().subscribe(res => {
       this.complaints = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areComplaintsLoaded = true;
       this.dataSource = new MatTableDataSource<Complaint>(this.complaints);

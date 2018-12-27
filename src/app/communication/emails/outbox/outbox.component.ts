@@ -19,13 +19,13 @@ export class OutboxComponent implements OnInit {
   dataSource: MatTableDataSource<EmailEntity> = new MatTableDataSource([]);
   paginator: any;
 
+  constructor(private emailService: EmailService, private router: Router, private dialog: MatDialog) {
+  }
+
   @ViewChild(MatPaginator)
   set pagination(paginator: MatPaginator) {
     this.paginator = paginator;
     this.dataSource.paginator = this.paginator;
-  }
-
-  constructor(private emailService: EmailService, private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -34,7 +34,13 @@ export class OutboxComponent implements OnInit {
 
   fetchEmails() {
     this.emailService.fetchSentEmails().subscribe(res => this.emails = res,
-      err => this.showError(err),
+      err => {
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err);
+        }
+      },
       () => {
         this.areEmailsLoaded = true;
         this.dataSource = new MatTableDataSource(this.emails);
@@ -55,6 +61,6 @@ export class OutboxComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/emails/add']));
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

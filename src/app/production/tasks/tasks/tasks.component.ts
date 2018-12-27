@@ -20,6 +20,9 @@ export class TasksComponent implements OnInit {
   paginator: any;
   sort: any;
 
+  constructor(private taskService: TaskService, private router: Router, private dialog: MatDialog) {
+  }
+
   @ViewChild(MatPaginator)
   set pagination(paginator: MatPaginator) {
     this.paginator = paginator;
@@ -32,13 +35,15 @@ export class TasksComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  constructor(private taskService: TaskService, private router: Router, private dialog: MatDialog) { }
-
   ngOnInit() {
     this.taskService.fetchAllTasks().subscribe(res => {
       this.tasks = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areTasksLoaded = true;
       this.dataSource = new MatTableDataSource<Task>(this.tasks);

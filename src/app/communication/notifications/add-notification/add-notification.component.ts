@@ -38,7 +38,11 @@ export class AddNotificationComponent implements OnInit {
     this.employeeService.fetchColleagues().subscribe(res => {
       this.consignees = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.areEmployeesLoaded = true;
     });
@@ -80,7 +84,11 @@ export class AddNotificationComponent implements OnInit {
       .subscribe(res => {
           notification = res;
         }, err => {
-          this.showError(err, false);
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err, false);
+          }
         },
         () => {
           this.router.navigate(['/notifications', notification.id]);

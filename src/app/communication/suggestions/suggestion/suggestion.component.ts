@@ -33,7 +33,11 @@ export class SuggestionComponent implements OnInit {
       .subscribe(res => {
         this.suggestion = res;
       }, err => {
-        this.showError(err, true);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, true);
+        }
       }, () => {
         this.isSuggestionLoaded = true;
       });
@@ -44,7 +48,11 @@ export class SuggestionComponent implements OnInit {
       .subscribe(res => {
         this.suggestion = res;
       }, err => {
-        this.showError(err, false);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, false);
+        }
       }, () => {
         this.router.navigate(['/suggestions', this.route.snapshot.params[('id')]]);
       });

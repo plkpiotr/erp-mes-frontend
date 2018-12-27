@@ -54,7 +54,11 @@ export class AddItemComponent {
     this.itemService.addNewItem(this.itemRequest).subscribe(res => {
       item = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.router.navigate(['/items', item.id]);
     });

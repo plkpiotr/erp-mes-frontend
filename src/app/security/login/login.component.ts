@@ -42,7 +42,11 @@ export class LoginComponent {
     this.loginService.login(this.form.get('email').value, this.form.get('password').value).subscribe(res => {
       this.token.saveToken(res.token);
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.loginService.fetchUser().subscribe(res => {
         if (!res.passwordValid) {

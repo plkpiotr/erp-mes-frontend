@@ -31,7 +31,11 @@ export class AddSuggestionComponent implements OnInit {
     this.employeeService.fetchColleagues().subscribe(res => {
       this.recipients = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.areRecipientsLoaded = true;
     });
@@ -68,7 +72,11 @@ export class AddSuggestionComponent implements OnInit {
       .subscribe(res => {
           suggestion = res;
         }, err => {
-          this.showError(err, false);
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err, false);
+          }
         },
         () => {
           this.router.navigate(['/suggestions/', suggestion.id]);

@@ -185,7 +185,11 @@ export class AddOrderComponent implements OnInit {
             });
           });
         }, err => {
-          this.showError(err, false);
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err, false);
+          }
         }, () => {
           this.router.navigate(['/orders', order.id]);
         });
@@ -195,7 +199,11 @@ export class AddOrderComponent implements OnInit {
       this.returnService.addOneReturn(this.request).subscribe(res => {
         r = res;
       }, err => {
-        this.showError(err, false);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, false);
+        }
       }, () => {
         this.router.navigate(['/returns', r.id]);
       });
@@ -204,7 +212,11 @@ export class AddOrderComponent implements OnInit {
       this.complaintService.addOneComplaint(this.request).subscribe(res => {
         complaint = res;
       }, err => {
-        this.showError(err, false);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, false);
+        }
       }, () => {
         this.router.navigate(['/complaints', complaint.id]);
       });
@@ -215,7 +227,11 @@ export class AddOrderComponent implements OnInit {
     this.itemService.fetchAllItems().subscribe(res => {
       this.items = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.areItemsLoaded = true;
       this.items.forEach(item => this.itemsById[item.id] = item);

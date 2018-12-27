@@ -18,7 +18,8 @@ export class NotificationComponent implements OnInit {
   isResolved = State.RESOLVED;
 
   constructor(private notificationService: NotificationService, private route: ActivatedRoute,
-              private router: Router, private dialog: MatDialog) { }
+              private router: Router, private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -33,7 +34,11 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         this.notification = res;
       }, err => {
-        this.showError(err, true);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, true);
+        }
       }, () => {
         this.isNotificationLoaded = true;
       });
@@ -44,7 +49,11 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         this.notification = res;
       }, err => {
-        this.showError(err, false);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, false);
+        }
       }, () => {
         this.router.navigate(['/notifications', this.route.snapshot.params[('id')]]);
       });

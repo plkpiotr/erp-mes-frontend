@@ -37,7 +37,11 @@ export class NotificationsComponent implements OnInit {
     this.notificationService.fetchAllNotifications().subscribe(res => {
       this.notifications = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areNotificationsLoaded = true;
       this.dataSource = new MatTableDataSource<Notification>(this.notifications);

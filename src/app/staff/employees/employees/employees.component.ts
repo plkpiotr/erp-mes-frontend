@@ -32,11 +32,18 @@ export class EmployeesComponent implements OnInit {
 
   fetchEmployees() {
     this.employeeService.fetchAllEmployees().subscribe(res => this.employees = res,
-      err => this.showError(err),
+      err => {
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err);
+        }
+      },
       () => {
         this.areLoaded = true;
         this.dataSource = new MatTableDataSource<Employee>(this.employees);
-      });
+      }
+    );
   }
 
   fetchEmployee(id: number) {

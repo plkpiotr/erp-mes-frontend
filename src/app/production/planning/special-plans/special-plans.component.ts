@@ -29,7 +29,11 @@ export class SpecialPlansComponent implements OnInit {
     this.planningService.fetchSpecialPlans().subscribe(res => {
       this.specialPlans = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.arePlansLoaded = true;
       this.dataSource = new MatTableDataSource<SpecialPlan>(this.specialPlans);

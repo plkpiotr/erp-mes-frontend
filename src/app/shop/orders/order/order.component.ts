@@ -31,7 +31,11 @@ export class OrderComponent implements OnInit {
     this.orderService.fetchOneOrder(this.route.snapshot.params['id']).subscribe(res => {
       this.order = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isOrderLoaded = true;
     });

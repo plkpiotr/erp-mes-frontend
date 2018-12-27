@@ -314,7 +314,11 @@ export class IndicatorsComponent implements OnInit {
           }
         );
       }, err => {
-        this.showError(err);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err);
+        }
       }, () => {
         this.areIndicatorsLoaded = true;
       });

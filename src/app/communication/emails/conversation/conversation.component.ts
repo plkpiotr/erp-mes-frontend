@@ -1,4 +1,4 @@
-import {Component, OnInit, SecurityContext, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EmailService} from '../../../services/email.service';
 import {EmailEntity} from '../../../types';
@@ -20,14 +20,14 @@ export class ConversationComponent implements OnInit {
   dataSource: MatTableDataSource<EmailEntity> = new MatTableDataSource([]);
   paginator: any;
 
+  constructor(private emailService: EmailService, private route: ActivatedRoute,
+              private dialog: MatDialog, private router: Router) {
+  }
+
   @ViewChild(MatPaginator)
   set pagination(paginator: MatPaginator) {
     this.paginator = paginator;
     this.dataSource.paginator = this.paginator;
-  }
-
-  constructor(private emailService: EmailService, private route: ActivatedRoute,
-              private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -43,7 +43,13 @@ export class ConversationComponent implements OnInit {
   fetchEmails() {
     this.emailService.fetchConversation(this.route.snapshot.params['id'])
       .subscribe(res => this.emails = res,
-        err => this.showError(err),
+        err => {
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err);
+          }
+        },
         () => {
           this.dataSource = new MatTableDataSource(this.emails);
           this.obs = this.dataSource.connect();
@@ -70,6 +76,6 @@ export class ConversationComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/emails/add']));
+    dialogRef.afterClosed().subscribe(() => this.router.navigate(['/employees']));
   }
 }

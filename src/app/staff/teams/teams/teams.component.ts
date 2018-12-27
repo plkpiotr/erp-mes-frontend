@@ -25,13 +25,18 @@ export class TeamsComponent implements OnInit {
 
   constructor(private router: Router,
               private teamService: TeamService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.teamService.fetchAllTeams().subscribe(res => {
       this.teams = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isLoaded = true;
       this.dataSource = new MatTableDataSource<Team>(this.teams);

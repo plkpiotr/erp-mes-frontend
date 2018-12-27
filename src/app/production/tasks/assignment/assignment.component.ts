@@ -35,14 +35,22 @@ export class AssignmentComponent implements OnInit {
     this.employeeService.fetchAllEmployees().subscribe(res => {
       this.assignees = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.areAssigneesLoaded = true;
     });
     this.taskService.fetchTasksByAssigneeIsNull().subscribe(res => {
       this.tasks = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     });
     this.setupFormControls();
     this.form = new FormGroup({
@@ -80,7 +88,11 @@ export class AssignmentComponent implements OnInit {
       .subscribe(res => {
         assignmentRequests = res;
       }, err => {
-        this.showError(err, false);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err, false);
+        }
       }, () => {
         this.router.navigate(['/tasks']);
       });

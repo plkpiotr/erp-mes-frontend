@@ -30,7 +30,11 @@ export class ItemComponent implements OnInit {
     this.itemService.fetchOneItem(this.route.snapshot.params['id']).subscribe(res => {
       this.item = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isItemLoaded = true;
     });

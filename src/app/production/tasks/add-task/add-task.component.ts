@@ -40,14 +40,22 @@ export class AddTaskComponent implements OnInit {
     this.employeeService.fetchAllEmployees().subscribe(res => {
       this.assignees = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.areAssigneesLoaded = true;
     });
     this.taskService.fetchAllTasks().subscribe(res => {
       this.precedingTasks = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     });
     this.types = Object.keys(Type);
     this.setupFormControls();
@@ -107,7 +115,11 @@ export class AddTaskComponent implements OnInit {
       .subscribe(res => {
           task = res;
         }, err => {
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
           this.showError(err, false);
+        }
         }, () => {
           this.router.navigate(['/tasks', task.id]);
         });

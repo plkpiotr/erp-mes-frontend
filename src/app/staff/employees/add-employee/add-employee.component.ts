@@ -94,7 +94,11 @@ export class AddEmployeeComponent implements OnInit {
           employee = res;
         },
         err => {
-          this.showError(err);
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err);
+          }
         },
         () => {
           this.router.navigate(['/employees', employee.id]);

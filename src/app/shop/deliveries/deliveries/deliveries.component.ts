@@ -17,15 +17,16 @@ export class DeliveriesComponent implements OnInit {
   dataSource: MatTableDataSource<Delivery> = new MatTableDataSource([]);
   paginator: any;
 
+  constructor(private deliveryService: DeliveryService,
+              private router: Router,
+              private dialog: MatDialog) {
+  }
+
   @ViewChild(MatPaginator)
   set pagination(paginator: MatPaginator) {
     this.paginator = paginator;
     this.dataSource.paginator = this.paginator;
   }
-
-  constructor(private deliveryService: DeliveryService,
-              private router: Router,
-              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.fetchDeliveries();
@@ -35,7 +36,11 @@ export class DeliveriesComponent implements OnInit {
     this.deliveryService.fetchAllDeliveries().subscribe(res => {
       this.deliveries = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areDeliveriesLoaded = true;
       this.dataSource = new MatTableDataSource<Delivery>(this.deliveries);

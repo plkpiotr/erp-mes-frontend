@@ -43,11 +43,23 @@ export class PlanningComponent implements OnInit {
     const inTwoDays = new Date(today.setDate(today.getDate() + 1));
     this.planningService.fetchSpecialPlan(tomorrow.toISOString().substring(0, tomorrow.toISOString().indexOf('T')))
       .subscribe(res => this.specialPlanTomorrow = res,
-        err => this.showError(err),
+        err => {
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err);
+          }
+        },
         () => this.isTomorrowPlanLoaded = true);
     this.planningService.fetchSpecialPlan(inTwoDays.toISOString().substring(0, inTwoDays.toISOString().indexOf('T')))
       .subscribe(res => this.specialPlanInTwoDays = res,
-        err => this.showError(err),
+        err => {
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err);
+          }
+        },
         () => this.isInTwoDaysPlanLoaded = true);
     this.fetchDailyPlan();
     this.fetchOrders();
@@ -57,7 +69,11 @@ export class PlanningComponent implements OnInit {
     this.planningService.fetchDailyPlan().subscribe(res => {
       this.dailyPlan = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isDailyPlanLoaded = true;
     });
@@ -89,7 +105,11 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }, err => {
-       this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
       }, () => {
         switch (when) {
           case 'today':
@@ -120,7 +140,11 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }, err => {
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
         this.showError(err);
+      }
       }, () => {
       }
     );
@@ -140,7 +164,11 @@ export class PlanningComponent implements OnInit {
             break;
         }
       }, err => {
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
         this.showError(err);
+      }
       }, () => {
       }
     );
@@ -203,7 +231,7 @@ export class PlanningComponent implements OnInit {
       this.returnsTommorrow > this.dailyPlan.returnsPerDay ||
       this.complaintsTomorrow > this.dailyPlan.complaintsResolvedPerDay) &&
       this.specialPlanTomorrow.id === 0;
-}
+  }
 
   shouldShowPlanForTwoDays() {
     return (this.ordersInTwoDays > this.dailyPlan.ordersPerDay ||

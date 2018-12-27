@@ -40,7 +40,11 @@ export class ItemsComponent implements OnInit {
     this.itemService.fetchAllItems().subscribe(res => {
       this.items = res;
     }, err => {
-      this.showError(err, true);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, true);
+      }
     }, () => {
       this.areItemsLoaded = true;
       this.dataSource = new MatTableDataSource<Item>(this.items);
@@ -68,7 +72,11 @@ export class ItemsComponent implements OnInit {
         this.areItemsLoaded = false;
         this.itemService.setSpecialOffer(this.percentOff, this.query).subscribe(res => {
         }, err => {
-          this.showError(err, false);
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err, false);
+          }
         }, () => {
           this.fetchItems();
         });
@@ -81,7 +89,11 @@ export class ItemsComponent implements OnInit {
     this.itemService.cancelSpecialOffer().subscribe(res => {
       this.items = res;
     }, err => {
-      this.showError(err, false);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err, false);
+      }
     }, () => {
       this.areItemsLoaded = true;
       this.dataSource = new MatTableDataSource<Item>(this.items);

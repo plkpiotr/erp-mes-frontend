@@ -34,7 +34,11 @@ export class LoginService {
     this.http.post(BACKEND_URL + 'employees/' + id + '/validate-password', password,
       {headers: this.httpHeaders}).subscribe(res => {},
       err => {
-        this.showError(err);
+        if (err.status == 401) {
+          this.router.navigate(['/login']);
+        } else {
+          this.showError(err);
+        }
       }, () => {
         this.router.navigate(['employees', id]);
       });

@@ -3,7 +3,6 @@ import {TeamService} from '../../../services/team.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Team} from '../../../types';
 import {MatDialog} from "@angular/material";
-import { ReplyDialogComponent } from '../../../communication/emails/reply-dialog/reply-dialog.component';
 import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
 
 @Component({
@@ -19,18 +18,23 @@ export class TeamComponent implements OnInit {
   constructor(private teamService: TeamService,
               private route: ActivatedRoute,
               private dialog: MatDialog,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.teamService.fetchOneTeam(this.route.snapshot.params[('id')])
       .subscribe(res => {
-        this.team = res;
-      },
+          this.team = res;
+        },
         err => {
-        this.showError(err);
+          if (err.status == 401) {
+            this.router.navigate(['/login']);
+          } else {
+            this.showError(err);
+          }
         },
         () => {
-        this.isLoaded = true;
+          this.isLoaded = true;
         });
   }
 

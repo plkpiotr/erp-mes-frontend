@@ -32,7 +32,11 @@ export class ComplaintComponent implements OnInit {
     this.complaintService.fetchOneComplaint(this.route.snapshot.params['id']).subscribe(res => {
       this.complaint = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.isComplaintLoaded = true;
     });

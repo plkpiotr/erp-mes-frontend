@@ -34,7 +34,11 @@ export class OrdersComponent implements OnInit {
     this.orderService.fetchAllOrders().subscribe(res => {
       this.orders = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areOrdersLoaded = true;
       this.dataSource = new MatTableDataSource<Order>(this.orders);

@@ -38,7 +38,11 @@ export class SuggestionsComponent implements OnInit {
     this.suggestionService.fetchAllSuggestions().subscribe(res => {
       this.suggestions = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areSuggestionsLoaded = true;
       this.dataSource = new MatTableDataSource<Suggestion>(this.suggestions);

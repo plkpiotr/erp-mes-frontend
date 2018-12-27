@@ -34,7 +34,11 @@ export class ReportsComponent implements OnInit {
     this.reportService.fetchAllReports().subscribe(res => {
       this.reports = res;
     }, err => {
-      this.showError(err);
+      if (err.status == 401) {
+        this.router.navigate(['/login']);
+      } else {
+        this.showError(err);
+      }
     }, () => {
       this.areReportsLoaded = true;
       this.dataSource = new MatTableDataSource<MonthlyReport>(this.reports);
