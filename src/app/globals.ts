@@ -1,7 +1,7 @@
-export const FRONTEND_URL = 'http://localhost:4200/';
-// export const FRONTEND_URL = 'https://erp-mes-frontend.herokuapp.com/';
-export const BACKEND_URL = 'http://localhost:8080/';
-// export const BACKEND_URL = 'https://erp-mes-backend.herokuapp.com/';
+// export const FRONTEND_URL = 'http://localhost:4200/';
+export const FRONTEND_URL = 'https://erp-mes-frontend.herokuapp.com/';
+// export const BACKEND_URL = 'http://localhost:8080/';
+export const BACKEND_URL = 'https://erp-mes-backend.herokuapp.com/';
 
 export enum Role {
   ADMIN = 'ADMIN',
