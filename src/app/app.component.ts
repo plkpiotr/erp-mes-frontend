@@ -53,7 +53,7 @@ export class AppComponent {
 
   sendMessage(message) {
     this.loginService.fetchUser().subscribe(res => {
-      const name = res.firstName;
+      const name = res.firstName.charAt(0) + '. ' + res.lastName;
       this.stompClient.send('/app/send/message', {}, name + ' | ' + message);
       $('#input').val('');
       window.setInterval(function() {
