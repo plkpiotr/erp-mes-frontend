@@ -39,7 +39,7 @@ export class TasksComponent implements OnInit {
     this.taskService.fetchAllTasks().subscribe(res => {
       this.tasks = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err);

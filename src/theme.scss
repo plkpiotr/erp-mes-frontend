@@ -35,15 +35,12 @@ mat-card, mat-expansion-panel {
 
 // Spinner:
 
-mat-spinner {
+mat-spinner,
+mat-progress-spinner {
   margin: 2vh auto;
   &::ng-deep circle {
     stroke: $normal;
   }
-}
-
-mat-progress-spinner {
-  margin: auto;
 }
 
 // Table:

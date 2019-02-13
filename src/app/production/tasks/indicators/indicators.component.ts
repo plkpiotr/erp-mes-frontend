@@ -314,7 +314,7 @@ export class IndicatorsComponent implements OnInit {
           }
         );
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err);

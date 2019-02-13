@@ -33,7 +33,7 @@ export class TaskComponent implements OnInit {
       .subscribe(res => {
         this.task = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, true);
@@ -48,7 +48,7 @@ export class TaskComponent implements OnInit {
       .subscribe(res => {
         this.task = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, false);
@@ -63,7 +63,7 @@ export class TaskComponent implements OnInit {
       .subscribe(res => {
         this.task = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, false);

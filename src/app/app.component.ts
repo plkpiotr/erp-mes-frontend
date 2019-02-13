@@ -59,7 +59,7 @@ export class AppComponent {
       window.setInterval(function() {
         const elem = document.getElementById('chat');
         elem.scrollTop = elem.scrollHeight;
-      }, 500);
+      }, 300);
     });
   }
 

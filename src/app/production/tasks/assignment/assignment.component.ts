@@ -35,7 +35,7 @@ export class AssignmentComponent implements OnInit {
     this.employeeService.fetchAllEmployees().subscribe(res => {
       this.assignees = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err, true);
@@ -46,7 +46,7 @@ export class AssignmentComponent implements OnInit {
     this.taskService.fetchTasksByAssigneeIsNull().subscribe(res => {
       this.tasks = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err, true);
@@ -88,7 +88,7 @@ export class AssignmentComponent implements OnInit {
       .subscribe(res => {
         assignmentRequests = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, false);

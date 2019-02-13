@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
-import {Notification, Suggestion} from '../../../types';
+import {Notification} from '../../../types';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-notifications',
@@ -37,7 +37,7 @@ export class NotificationsComponent implements OnInit {
     this.notificationService.fetchAllNotifications().subscribe(res => {
       this.notifications = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err);
