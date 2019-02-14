@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Suggestion} from '../../../types';
 import {SuggestionService} from '../../../services/suggestion.service';
 import {Router} from '@angular/router';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-suggestions',
@@ -13,7 +13,6 @@ import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.co
 export class SuggestionsComponent implements OnInit {
 
   suggestions: Array<Suggestion>;
-  mySuggestions: Array<Suggestion>;
   areSuggestionsLoaded = false;
   displayedColumns: string[] = ['creationTime', 'phase', 'id', 'name', 'author'];
   dataSource: MatTableDataSource<Suggestion> = new MatTableDataSource<Suggestion>();
@@ -38,7 +37,7 @@ export class SuggestionsComponent implements OnInit {
     this.suggestionService.fetchAllSuggestions().subscribe(res => {
       this.suggestions = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err);

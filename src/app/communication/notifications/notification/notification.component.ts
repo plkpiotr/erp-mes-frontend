@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Notification} from '../../../types';
 import {NotificationService} from '../../../services/notification.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
-import {MatDialog} from "@angular/material";
-import {State} from "../../../globals";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material';
+import {State} from '../../../globals';
 
 @Component({
   selector: 'app-notification',
@@ -34,7 +34,7 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         this.notification = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, true);
@@ -49,7 +49,7 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         this.notification = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, false);

@@ -4,9 +4,9 @@ import {NotificationService} from '../../../services/notification.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
-import {MatDialog} from "@angular/material";
-import {Type} from "../../../globals";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material';
+import {Type} from '../../../globals';
 
 @Component({
   selector: 'app-add-notification',
@@ -38,7 +38,7 @@ export class AddNotificationComponent implements OnInit {
     this.employeeService.fetchColleagues().subscribe(res => {
       this.consignees = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err, true);
@@ -84,7 +84,7 @@ export class AddNotificationComponent implements OnInit {
       .subscribe(res => {
           notification = res;
         }, err => {
-          if (err.status == 401) {
+          if (err.status === 401) {
             this.router.navigate(['/login']);
           } else {
             this.showError(err, false);

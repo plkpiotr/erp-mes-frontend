@@ -4,7 +4,7 @@ import {SuggestionService} from '../../../services/suggestion.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material';
-import {Phase} from "../../../globals";
+import {Phase} from '../../../globals';
 
 @Component({
   selector: 'app-suggestion',
@@ -33,7 +33,7 @@ export class SuggestionComponent implements OnInit {
       .subscribe(res => {
         this.suggestion = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, true);
@@ -48,7 +48,7 @@ export class SuggestionComponent implements OnInit {
       .subscribe(res => {
         this.suggestion = res;
       }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, false);

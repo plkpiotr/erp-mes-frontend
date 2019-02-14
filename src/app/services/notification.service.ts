@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Notification, NotificationRequest} from '../types';
 import {Observable} from 'rxjs';
-import {BACKEND_URL, FRONTEND_URL} from "../globals";
+import {BACKEND_URL, FRONTEND_URL} from '../globals';
 
 @Injectable()
 export class NotificationService {
