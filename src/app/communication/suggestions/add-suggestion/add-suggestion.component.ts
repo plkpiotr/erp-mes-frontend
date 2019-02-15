@@ -84,11 +84,11 @@ export class AddSuggestionComponent implements OnInit {
   }
 
   getErrorName() {
-    return this.name.hasError('maxLength') ? '' : '0-25 characters';
+    return this.name.hasError('maxLength') ? '' : 'Maximum 25 characters';
   }
 
   getErrorDescription() {
-    return this.description.hasError('maxLength') ? '' : '0-250 characters';
+    return this.description.hasError('maxLength') ? '' : 'Maximum 250 characters';
   }
 
   showError(err, redirect: boolean) {
