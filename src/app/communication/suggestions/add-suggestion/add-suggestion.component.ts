@@ -4,8 +4,8 @@ import {SuggestionService} from '../../../services/suggestion.service';
 import {EmployeeService} from '../../../services/employee.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ErrorDialogComponent} from "../../../custom/error-dialog/error-dialog.component";
-import {MatDialog} from "@angular/material";
+import {ErrorDialogComponent} from '../../../custom/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-add-suggestion',
@@ -31,7 +31,7 @@ export class AddSuggestionComponent implements OnInit {
     this.employeeService.fetchColleagues().subscribe(res => {
       this.recipients = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err, true);
@@ -72,7 +72,7 @@ export class AddSuggestionComponent implements OnInit {
       .subscribe(res => {
           suggestion = res;
         }, err => {
-          if (err.status == 401) {
+          if (err.status === 401) {
             this.router.navigate(['/login']);
           } else {
             this.showError(err, false);

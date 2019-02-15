@@ -13,6 +13,7 @@
       <mat-label>Estimated time</mat-label>
       <input matInput placeholder="Estimated time (in minutes)" name="estimatedTime" formControlName="estimatedTime"
              type="number" required>
+      <mat-error *ngIf="estimatedTime.invalid">{{getErrorEstimatedTime()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -56,7 +57,7 @@
     <mat-form-field>
       <mat-label>Details</mat-label>
       <input matInput placeholder="Details" name="details" formControlName="details">
-      <mat-error *ngIf="name.invalid">{{getErrorDetails()}}</mat-error>
+      <mat-error *ngIf="details.invalid">{{getErrorDetails()}}</mat-error>
     </mat-form-field>
 
     <button mat-raised-button (click)="submitForm()" [disabled]="form.invalid">Add task</button>

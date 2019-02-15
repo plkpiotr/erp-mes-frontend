@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Task, Employee} from '../../../types';
+import {Employee, Task} from '../../../types';
 import {TaskService} from '../../../services/task.service';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../../../services/employee.service';
@@ -40,7 +40,7 @@ export class AddTaskComponent implements OnInit {
     this.employeeService.fetchAllEmployees().subscribe(res => {
       this.assignees = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err, true);
@@ -51,7 +51,7 @@ export class AddTaskComponent implements OnInit {
     this.taskService.fetchAllTasks().subscribe(res => {
       this.precedingTasks = res;
     }, err => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.router.navigate(['/login']);
       } else {
         this.showError(err, true);
@@ -115,7 +115,7 @@ export class AddTaskComponent implements OnInit {
       .subscribe(res => {
           task = res;
         }, err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         } else {
           this.showError(err, false);
@@ -126,11 +126,15 @@ export class AddTaskComponent implements OnInit {
   }
 
   getErrorName() {
-    return this.name.hasError('maxLength') ? '' : '0-25 characters';
+    return this.name.hasError('maxLength') ? '' : 'Maximum 25 characters';
   }
 
   getErrorDetails() {
-    return this.details.hasError('maxLength') ? '' : '0-250 characters';
+    return this.details.hasError('maxLength') ? '' : 'Maximum 250 characters';
+  }
+
+  getErrorEstimatedTime() {
+    return this.details.hasError('max') ? '' : 'Maximum 120 minutes';
   }
 
   showError(err, redirect: boolean) {
