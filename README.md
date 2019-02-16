@@ -60,22 +60,6 @@ Visualization of tasks created in the last four weeks for on person: ![kanban](h
 
 Planning and reduction of total time allowed for tasks through scheduling algorithm: ![task](https://user-images.githubusercontent.com/21959354/52904779-f7e04580-3230-11e9-8328-4e4e3657c149.png)
 
-### <a name="4.2">Instant Messenger</a> [&#8250;](#4)
-
-[one of them]
-
-### <a name="4.3">Kaizen Teian</a> [&#8250;](#4)
-
-[one of them]
-
-### <a name="4.4">Kanban Board</a> [&#8250;](#4)
-
-[one of them]
-
-### <a name="4.5">Task scheduling algorithm</a> [&#8250;](#4)
-
-[one of them]
-
 ## <a name="5">Project structure</a> [&#8250;&#8250;&#8250;](#0)
 
 ```
