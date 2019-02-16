@@ -18,7 +18,11 @@
 
 ## <a name="1">Overview</a> [&#8250;&#8250;&#8250;](#0)
 
-Front-end layer of RESTful web service created as engineering thesis by [@patsaf](https://github.com/patsaf) and [@plkpiotr](https://github.com/plkpiotr). ERP-MES is intended for management of a forwarding company. The application was equipped with functionalities typical of Enterprise Resource Planning and Manufacturing Execution System.
+Front-end layer of RESTful web service created as engineering thesis by [@patsaf](https://github.com/patsaf) and [@plkpiotr](https://github.com/plkpiotr).
+
+ERP-MES is intended for management of a forwarding company.
+
+The application was equipped with functionalities typical of Enterprise Resource Planning and Manufacturing Execution System.
 
 ## <a name="2">Front-end technologies</a> [&#8250;&#8250;&#8250;](#0)
 
@@ -194,7 +198,7 @@ Find back-end repository on Github: [plkpiotr/erp-mes-backend](https://github.co
 
 Check out ERP-MES: [erp-mes-backend.herokuapp.com](https://erp-mes-backend.herokuapp.com/) and [erp-mes-frontend.herokuapp.com](https://erp-mes-frontend.herokuapp.com/).
 
-Visit both of the links. First of them launches back-end layer and the database (if is inactive) while the second contains front-end layer with login form.
+Visit both of the links. First of them launches back-end layer and the database (if it is inactive) while the second contains front-end layer with login form.
 
 Then use one of the following data:
 
